@@ -44,4 +44,4 @@ db_reruns/
 .matplotlib/
 
 # Thesis-critical folders intentionally not ignored:
-# outputs/, logs/, souls/, db/, voter_source_of_truth/, political_agent/, events/
+# outputs/, logs/, souls/, db/, voter_source_of_truth/, political_broadcast_config/, events/

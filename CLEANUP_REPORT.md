@@ -1,30 +1,27 @@
 # Synthetic Turkey Cleanup Report
 
-This report was created before any destructive cleanup. The repository was inspected on 2026-06-12 from `/Users/abdullahkilinc/Desktop/syntetic-turkey`.
+This report records the GitHub-preparation cleanup for `/Users/abdullahkilinc/Desktop/syntetic-turkey` on 2026-06-12.
 
-## Pre-Cleanup Findings
+## Cleanup Policy
 
-- The directory is not currently initialized as a Git repository, so `git status` reports `fatal: not a git repository`.
-- The protected thesis-critical folders exist: `voter_source_of_truth/`, `political_agent/`, `events/`, `souls/`, `db/`, `outputs/`, `logs/`, `scripts/`, `validation/`, `agents/`, `simulation/`, `memory/`, and `llm/`.
-- `outputs/agent_trajectories.csv` exists and contains 11,100 data rows and 38 columns.
-- `souls/` contains 300 canonical `agent_*.json` synthetic voter-agent files.
-- `db/` contains 300 `*_beliefs_2023.json` files, 300 `*_episodic_2023.json` files, and 5 older non-`_2023` belief/episodic files for agents 001-005. These older files are kept because `db/` is protected.
-- `logs/` is about 73 MB. No individual file is larger than 20 MB. Logs are protected and were not removed.
-- `README.md` referred to `run.py`, but `run.py` was missing. A stale `__pycache__/run...pyc` suggested a local entrypoint existed previously.
-- `config.py` expects `actual_results_2023.yaml`, but that file was missing. The same actual-result constants appear in analysis scripts.
-- A real `.env` file exists and contains an `OPENAI_API_KEY` variable. The value was not printed or copied.
-- `scripts/build_results_dashboard.py` is a zero-byte file. It is kept because `scripts/` is protected and it may be an obsolete placeholder requiring thesis-owner review.
+Protected thesis-critical data were not deleted or rewritten unless the user explicitly narrowed the scope. The canonical saved simulation output was preserved:
+
+- `outputs/agent_trajectories.csv`
+- 11,100 data rows
+- 38 columns
+- 300 voter souls in `souls/`
+- 37 processed election-safe ticks from 35 raw event ticks
 
 ## A. Must Keep for Reproducibility
 
 - `voter_source_of_truth/synthetic_turkey_simulation.json`
 - `voter_source_of_truth/2018_baseline_sampling_profile.yaml`
 - `events/simulation_ticks.json`
-- `political_agent/political_agents.yaml`
-- `political_agent/political_personas.yaml`
-- `political_agent/politician_event_responses.yaml`
-- `political_agent/credibility_matrix.yaml`
-- `political_agent/movement_state_machine.yaml`
+- `political_broadcast_config/political_agents.yaml`
+- `political_broadcast_config/political_personas.yaml`
+- `political_broadcast_config/politician_event_responses.yaml`
+- `political_broadcast_config/credibility_matrix.yaml`
+- `political_broadcast_config/movement_state_machine.yaml`
 - `souls/agent_001.json` through `souls/agent_300.json`
 - `db/*_beliefs_2023.json`
 - `db/*_episodic_2023.json`
@@ -36,44 +33,32 @@ This report was created before any destructive cleanup. The repository was inspe
 - `outputs/evaluation_summary.json`
 - `outputs/first_round_vote_distribution.json`
 - `outputs/runoff_vote_distribution.json`
-- `outputs/analysis_tables/`
-- `outputs/analysis_charts/`
-- `outputs/audit_charts/`
+- `outputs/broadcast_cache/broadcasts.json`
 - `logs/*.jsonl`
 - `logs/metrics_summary.json`
 - `agents/`, `simulation/`, `memory/`, `llm/`, `loaders/`, `validation/`
 - `scripts/generate_souls_from_config.py`
-- `scripts/analyze_simulation_results.py`
-- `scripts/section_d_fresh_audit.py`
-- `scripts/section_k_generate_charts.py`
-- `scripts/tie_handling_sensitivity.py`
-- `scripts/build_deep_analysis_dashboard.py`
-- `scripts/build_deep_analysis_notebook.py`
-- `config.py`
-- `requirements.txt`
-- `README.md`
+- `config.py`, `run.py`, `requirements.txt`
+- `README.md`, `REPRODUCIBILITY.md`, `.env.example`
 - thesis documentation under `docs/`
 
 ## B. Keep but Document
 
-- `docs/thesis_resources/*.pdf`: source literature for thesis context; kept even though this folder accounts for most of `docs/`.
-- `docs/Synthetic_Turkey__a_source_grounded_generative_agent_based_simulation_of_the_2023_Turkish_presidential_election/`: manuscript/export artifacts; kept as thesis documentation.
-- `outputs/deep_analysis_300_agents.ipynb`: generated notebook artifact; kept because it is useful for thesis inspection.
-- `outputs/deep_analysis_dashboard.html` and `outputs/synthetic_turkey_results_dashboard.html`: generated inspection dashboards; kept.
-- `outputs/broadcast_cache/broadcasts.json`: generated cache/output artifact; kept because it documents broadcast frames used by the run.
-- `.python-version`: local Python version hint (`3.11.8`); kept because it helps reproduce the development environment.
-- `rag/` and `social/`: currently minimal packages containing `__init__.py`; kept as source-tree placeholders.
-- `tests/test_2023_mvp.py`: lightweight reproducibility and smoke tests; kept.
-- `scripts/build_results_dashboard.py`: zero-byte placeholder; kept because it is inside protected `scripts/`.
-- Legacy `db/agent_001_*` through `db/agent_005_*` files without `_2023`: kept because `db/` is protected.
+- `docs/`: thesis/manuscript artifacts. Some documents still reference removed analysis dashboards or the old political config folder name because they are thesis artifacts and were not rewritten during source cleanup.
+- `logs/`: about 73 MB in the initial inspection. Logs were kept for run traceability. If GitHub size becomes a concern, use Git LFS or publish logs as an external archived artifact rather than deleting them.
+- `db/`: protected memory and belief archives, including a few older non-`_2023` files for agents 001-005.
+- `social/`: minimal source package placeholder; kept because it is harmless and may be imported by future extensions.
+- `.python-version`: local Python version hint; kept because it helps reproduce the development environment.
 
-## C. Move to `archive/`
+## C. Moved or Renamed
 
-No files were moved to `archive/`. The only ambiguous candidates are protected thesis artifacts or protected data/log folders, so they were left in place.
+- `political_agent/` was renamed to `political_broadcast_config/` to clarify that these files configure broadcast speakers and message frames, not autonomous configured politician LLM agents.
+
+No files were moved to `archive/`.
 
 ## D. Safe to Delete
 
-Planned safe deletions before cleanup:
+The following local/cache/secret files were removed in the first cleanup pass:
 
 - `./__pycache__/`
 - `./agents/__pycache__/`
@@ -94,86 +79,73 @@ Planned safe deletions before cleanup:
 - `./outputs/analysis_charts/.DS_Store`
 - `./.vscode/settings.json`
 - `./.vscode/`
+
+The following simulation-unrelated or generated analysis artifacts were removed in the second cleanup pass:
+
+- `rag/`
+- `voter_source_of_truth/Synthetic-Turkey-Simulation-Framework.md`
+- `political_broadcast_config/synthetic_turkey_agent_configuration.md`
+- `outputs/deep_analysis_dashboard.html`
+- `outputs/deep_analysis_300_agents.ipynb`
+- `outputs/deep_analysis_summary.json`
+- `outputs/synthetic_turkey_results_dashboard.html`
+- `outputs/tie_handling_sensitivity.csv`
+- `outputs/tie_handling_sensitivity.md`
+- `outputs/analysis_tables/`
+- `outputs/analysis_charts/`
+- `outputs/audit_charts/`
+- `scripts/analyze_simulation_results.py`
+- `scripts/build_deep_analysis_dashboard.py`
+- `scripts/build_deep_analysis_notebook.py`
+- `scripts/build_results_dashboard.py`
+- `scripts/section_d_fresh_audit.py`
+- `scripts/section_k_generate_charts.py`
+- `scripts/tie_handling_sensitivity.py`
 
 ## E. Must Not Commit to GitHub
 
-Planned deletion before cleanup:
+The real local environment file was removed and must stay untracked:
 
-- `./.env` because it contains a real `OPENAI_API_KEY` variable.
-
-Planned Git ignore coverage:
-
-- `.env` and `.env.*` except `.env.example`
-- Python bytecode and test caches
-- virtual environments
-- OS/editor files
-- local scratch/cache folders
-- optional notebook checkpoints
-
-## Cleanup Actions Performed
-
-Removed exactly the planned local/cache/secret files:
-
-- `./__pycache__/`
-- `./agents/__pycache__/`
-- `./llm/__pycache__/`
-- `./loaders/__pycache__/`
-- `./memory/__pycache__/`
-- `./scripts/__pycache__/`
-- `./simulation/__pycache__/`
-- `./tests/__pycache__/`
-- `./validation/__pycache__/`
-- `./.DS_Store`
-- `./docs/.DS_Store`
-- `./docs/thesis_resources/.DS_Store`
-- `./souls/.DS_Store`
-- `./events/.DS_Store`
-- `./voter_source_of_truth/.DS_Store`
-- `./outputs/.DS_Store`
-- `./outputs/analysis_charts/.DS_Store`
-- `./.vscode/settings.json`
-- `./.vscode/`
 - `./.env`
 
-No thesis-critical input/output data, logs, generated agents, memory archives, analysis outputs, figures, or protected source folders were deleted.
+`.gitignore` excludes `.env`, `.env.*` except `.env.example`, Python bytecode, test caches, virtual environments, OS/editor files, local scratch/cache folders, notebook checkpoints, and rerun scratch directories.
 
-Added or updated GitHub/reproducibility files:
+## Added or Updated
 
 - Added `.gitignore`.
 - Added `.env.example`.
 - Added `actual_results_2023.yaml`.
 - Added `run.py`.
 - Added `REPRODUCIBILITY.md`.
-- Replaced `README.md` with thesis-ready repository documentation.
-- Added this `CLEANUP_REPORT.md`.
+- Rewrote `README.md` for a thesis-ready GitHub appendix.
+- Added this cleanup report.
 - Added a CLI entrypoint unit test in `tests/test_2023_mvp.py`.
-- Added `numpy` and `matplotlib` to `requirements.txt` because the audit/chart scripts import them.
-- Updated one stale comment in `scripts/section_d_fresh_audit.py` that referred to the now-restored `actual_results_2023.yaml` as missing.
+- Added `numpy` and `matplotlib` to `requirements.txt`.
+- Updated `config.py` to load political broadcast configuration from `political_broadcast_config/`.
 
 ## Files Required for Thesis Verification
 
-- `outputs/agent_trajectories.csv` with 11,100 data rows and 38 columns
+- `outputs/agent_trajectories.csv`
 - `outputs/evaluation_summary.json`
 - `outputs/aggregate_candidate_intention.csv`
 - `outputs/aggregate_party_preference.csv`
 - `outputs/reflections.jsonl`
 - `outputs/broadcasts.jsonl`
+- `outputs/first_round_vote_distribution.json`
+- `outputs/runoff_vote_distribution.json`
 - `souls/agent_001.json` through `souls/agent_300.json`
 - `db/*_beliefs_2023.json`
 - `db/*_episodic_2023.json`
 - `events/simulation_ticks.json`
 - `voter_source_of_truth/synthetic_turkey_simulation.json`
 - `voter_source_of_truth/2018_baseline_sampling_profile.yaml`
-- `political_agent/*.yaml`
-- `scripts/section_d_fresh_audit.py`
-- `scripts/section_k_generate_charts.py`
-- `scripts/tie_handling_sensitivity.py`
+- `political_broadcast_config/*.yaml`
+- `run.py`
+- `scripts/generate_souls_from_config.py`
 
-## Remaining Issues to Resolve
+## Remaining Issues
 
-- The folder is still not initialized as a Git repository. `git status` will fail until `git init` or a clone/remote workflow is used.
-- `logs/` is about 73 MB. It was kept because logs are protected. If GitHub size becomes a concern, use Git LFS or publish logs as an external archived artifact rather than deleting them.
-- `docs/thesis_resources/` contains source PDFs and accounts for most of `docs/`. Confirm redistribution rights before pushing public GitHub releases.
-- `scripts/build_results_dashboard.py` is zero bytes and appears obsolete, but it was kept because `scripts/` is protected.
-- Five legacy `db/agent_00x_*` files without `_2023` remain. They were kept because `db/` is protected.
-- Chart-generation scripts were import-checked but not executed during cleanup to avoid rewriting thesis figure files.
+- Some thesis documents in `docs/` still mention removed generated analysis artifacts and the old political config folder name. They were kept unchanged as protected thesis documentation.
+- `logs/` may be large for a public repository. Use Git LFS or an external archive if GitHub upload size becomes a concern.
+- `docs/thesis_resources/` contains source PDFs. Confirm redistribution rights before making the GitHub repository public.
+- Live OpenAI reruns can generate different values from the saved baseline because LLM sampling and model snapshots are not bitwise reproducible.

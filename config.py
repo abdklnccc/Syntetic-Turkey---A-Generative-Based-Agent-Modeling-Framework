@@ -53,23 +53,23 @@ VOTER_CONFIG_FILE = Path(os.getenv(
 ))
 POLITICAL_AGENTS_FILE = Path(os.getenv(
     "POLITICAL_AGENTS_FILE",
-    ROOT / "political_agent" / "political_agents.yaml",
+    ROOT / "political_broadcast_config" / "political_agents.yaml",
 ))
 POLITICAL_PERSONAS_FILE = Path(os.getenv(
     "POLITICAL_PERSONAS_FILE",
-    ROOT / "political_agent" / "political_personas.yaml",
+    ROOT / "political_broadcast_config" / "political_personas.yaml",
 ))
 CREDIBILITY_MATRIX_FILE = Path(os.getenv(
     "CREDIBILITY_MATRIX_FILE",
-    ROOT / "political_agent" / "credibility_matrix.yaml",
+    ROOT / "political_broadcast_config" / "credibility_matrix.yaml",
 ))
 POLITICIAN_EVENT_RESPONSES_FILE = Path(os.getenv(
     "POLITICIAN_EVENT_RESPONSES_FILE",
-    ROOT / "political_agent" / "politician_event_responses.yaml",
+    ROOT / "political_broadcast_config" / "politician_event_responses.yaml",
 ))
 MOVEMENT_STATE_MACHINE_FILE = Path(os.getenv(
     "MOVEMENT_STATE_MACHINE_FILE",
-    ROOT / "political_agent" / "movement_state_machine.yaml",
+    ROOT / "political_broadcast_config" / "movement_state_machine.yaml",
 ))
 SIMULATION_TICKS_FILE = Path(os.getenv(
     "SIMULATION_TICKS_FILE",
