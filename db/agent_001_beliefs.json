@@ -1,0 +1,134 @@
+{
+  "current": {
+    "AKP_approval": 10.0,
+    "CHP_approval": 0.0,
+    "MHP_approval": 5.0,
+    "HDP_approval": 5.0,
+    "erdogan_trust": 10.0,
+    "democracy_trust": 5.0,
+    "econ_anxiety": 8.0,
+    "vote_intent": "AKP"
+  },
+  "history": [
+    {
+      "tick": 0,
+      "key": "AKP_approval",
+      "old": 7.5,
+      "new": 9.5,
+      "delta": 2,
+      "source": "reflection"
+    },
+    {
+      "tick": 0,
+      "key": "CHP_approval",
+      "old": 3.5,
+      "new": 2.5,
+      "delta": -1,
+      "source": "reflection"
+    },
+    {
+      "tick": 0,
+      "key": "erdogan_trust",
+      "old": 7.5,
+      "new": 8.5,
+      "delta": 1,
+      "source": "reflection"
+    },
+    {
+      "tick": 0,
+      "key": "econ_anxiety",
+      "old": 5.0,
+      "new": 5.0,
+      "delta": 0,
+      "source": "reflection"
+    },
+    {
+      "tick": 0,
+      "key": "vote_intent",
+      "old": "AKP",
+      "new": "AKP",
+      "delta": null,
+      "source": "reflection"
+    },
+    {
+      "tick": 1,
+      "key": "AKP_approval",
+      "old": 9.5,
+      "new": 10.0,
+      "delta": 1,
+      "source": "reflection"
+    },
+    {
+      "tick": 1,
+      "key": "CHP_approval",
+      "old": 2.5,
+      "new": 0.5,
+      "delta": -2,
+      "source": "reflection"
+    },
+    {
+      "tick": 1,
+      "key": "erdogan_trust",
+      "old": 8.5,
+      "new": 9.5,
+      "delta": 1,
+      "source": "reflection"
+    },
+    {
+      "tick": 1,
+      "key": "econ_anxiety",
+      "old": 5.0,
+      "new": 6.0,
+      "delta": 1,
+      "source": "reflection"
+    },
+    {
+      "tick": 1,
+      "key": "vote_intent",
+      "old": "AKP",
+      "new": "AKP",
+      "delta": null,
+      "source": "reflection"
+    },
+    {
+      "tick": 2,
+      "key": "AKP_approval",
+      "old": 10.0,
+      "new": 10.0,
+      "delta": 2,
+      "source": "reflection"
+    },
+    {
+      "tick": 2,
+      "key": "CHP_approval",
+      "old": 0.5,
+      "new": 0.0,
+      "delta": -3,
+      "source": "reflection"
+    },
+    {
+      "tick": 2,
+      "key": "erdogan_trust",
+      "old": 9.5,
+      "new": 10.0,
+      "delta": 1,
+      "source": "reflection"
+    },
+    {
+      "tick": 2,
+      "key": "econ_anxiety",
+      "old": 6.0,
+      "new": 8.0,
+      "delta": 2,
+      "source": "reflection"
+    },
+    {
+      "tick": 2,
+      "key": "vote_intent",
+      "old": "AKP",
+      "new": "AKP",
+      "delta": null,
+      "source": "reflection"
+    }
+  ]
+}

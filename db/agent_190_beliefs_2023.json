@@ -1,0 +1,1449 @@
+{
+  "current": {
+    "government_approval": 1.0,
+    "institutional_trust": 1.5,
+    "opposition_trust": 6.0,
+    "party_preference": {
+      "AKP": 0.0,
+      "CHP": 1.0,
+      "MHP": 0.0,
+      "IYI": 0.0,
+      "DEM_HDP_YSP": 0.0,
+      "YRP": 0.0,
+      "Other": 0.0,
+      "Undecided": 0.0
+    },
+    "first_round_vote_intention": {
+      "Erdogan": 0.0,
+      "Kilicdaroglu": 1.0,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Other": 0.0,
+      "Undecided": 0.0
+    },
+    "runoff_vote_intention": {
+      "Erdogan": 0.0,
+      "Kilicdaroglu": 1.0,
+      "Abstain_Invalid_Undecided": 0.0
+    },
+    "turnout_probability": 0.87,
+    "current_candidate_preference": "Kilicdaroglu",
+    "current_party_preference": "CHP"
+  },
+  "history": [
+    {
+      "tick_id": "T001",
+      "sim_date": "2018-06-24",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T002",
+      "sim_date": "2018-08-10",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "economic_crisis"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T003",
+      "sim_date": "2018-11-20",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "ECHR_Demirtas"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T004",
+      "sim_date": "2019-03-31",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "local_elections",
+        "government_refusal"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T005",
+      "sim_date": "2019-05-06",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T006",
+      "sim_date": "2019-08-18",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T007",
+      "sim_date": "2020-03-15",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T008",
+      "sim_date": "2021-03-20",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "T008"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T009",
+      "sim_date": "2021-03-17",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T010",
+      "sim_date": "2021-09-23",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "economic_grievance"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T011",
+      "sim_date": "2021-12-21",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T012",
+      "sim_date": "2022-08-01",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "economic_crisis",
+        "pension_rejection"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T013",
+      "sim_date": "2022-12-14",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T014",
+      "sim_date": "2022-12-20",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T015",
+      "sim_date": "2023-01-05",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T016",
+      "sim_date": "2023-02-06",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "disaster_response"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T017",
+      "sim_date": "2023-02-07",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "disaster_response"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T018",
+      "sim_date": "2023-02-08",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T019",
+      "sim_date": "2023-02-08",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T020",
+      "sim_date": "2023-02-11",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T021",
+      "sim_date": "2023-02-12",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T022",
+      "sim_date": "2023-02-15",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "political_frustration"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T023",
+      "sim_date": "2023-03-03",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 0.5,
+        "MHP": 0.0,
+        "IYI": 0.5,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 0.5,
+        "Abstain_Invalid_Undecided": 0.5
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "opposition_crisis"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T024",
+      "sim_date": "2023-03-06",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "OPP-B"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T025",
+      "sim_date": "2023-03-09",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 0.5,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.5,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T026",
+      "sim_date": "2023-03-22",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T027",
+      "sim_date": "2023-04-28",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 0.5,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.5,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "HDP_endorsement",
+        "opposition_strength"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T028",
+      "sim_date": "2023-05-08",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "T028"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T029",
+      "sim_date": "2023-05-11",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T030A_first_round_vote_decision",
+      "sim_date": "2023-05-14",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "short_code"
+      ],
+      "confidence": "high"
+    },
+    {
+      "tick_id": "T030B_first_round_result_revealed",
+      "sim_date": "2023-05-14",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "political_frustration"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T031",
+      "sim_date": "2023-05-17",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "Kilicdaroglu_shift"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T032",
+      "sim_date": "2023-05-22",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "political_disillusionment"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T033",
+      "sim_date": "2023-05-24",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "betrayal",
+        "nationalism",
+        "frustration"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T034",
+      "sim_date": "2023-05-26",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "nationalist_concern",
+        "kurdish_voter_abstention"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T035A_runoff_vote_decision",
+      "sim_date": "2023-05-28",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "betrayal",
+        "strategic_vote"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "tick_id": "T035B_final_result_revealed",
+      "sim_date": "2023-05-28",
+      "agent_id": "agent_190",
+      "government_approval": 1.0,
+      "institutional_trust": 1.5,
+      "opposition_trust": 6.0,
+      "party_preference": {
+        "AKP": 0.0,
+        "CHP": 1.0,
+        "MHP": 0.0,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Sinan_Ogan": 0.0,
+        "Muharrem_Ince": 0.0,
+        "Other": 0.0,
+        "Undecided": 0.0
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.0,
+        "Kilicdaroglu": 1.0,
+        "Abstain_Invalid_Undecided": 0.0
+      },
+      "turnout_probability": 0.87,
+      "current_candidate_preference": "Kilicdaroglu",
+      "current_party_preference": "CHP",
+      "reason_codes": [
+        "disappointment",
+        "betrayal"
+      ],
+      "confidence": "medium"
+    }
+  ]
+}

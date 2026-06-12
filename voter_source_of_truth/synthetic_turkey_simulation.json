@@ -1,0 +1,580 @@
+{
+  "meta": {
+    "project": "Synthetic Turkey — Simulation-Ready Framework",
+    "base_document": "Synthetic-Turkey-Voter-Archetypes-for-Political-Simulation-2019-2024.md",
+    "archetype_count": 12,
+    "prototype_agent_count": 50,
+    "scale_conventions": {
+      "political_worldview": "1-10 (low to high)",
+      "emotional_baseline": "0-1",
+      "media_diet": "0-1 (share of attention; rows do NOT need to sum to 1, they reflect intensity of use)",
+      "behavioral_variables": "0-1",
+      "vote_intention": "probability distribution, sums to 1.0",
+      "trajectory_2024": "probability distribution, sums to 1.0",
+      "event_deltas": "approval/trust/anger/hope deltas on -1..+1 scale; vote_shift_probability on 0..1"
+    },
+    "epistemic_warnings": [
+      "These values are research-informed estimates, not statistically representative of the Turkish electorate.",
+      "No KONDA microdata or TÜİK individual-level data was used; values are interpretive bridges from published aggregates.",
+      "Weights are academically defensible orders of magnitude, NOT precise population shares.",
+      "Within-archetype variation is collapsed to a single mean vector; simulation runs should add Gaussian noise (sigma ~0.05-0.10 on 0-1 scales, ~0.5 on 1-10 scales) at agent instantiation.",
+      "Initial vote intention and 2024 trajectory are conditioned on the published vote-trajectory narrative in the base document, NOT on an independent reweighting of YSK results."
+    ],
+    "scale_anchors": {
+      "authoritarian_libertarian": "1 = strongly libertarian, 10 = strongly authoritarian",
+      "secular_religious": "1 = militantly secular, 10 = very devout (sofu)",
+      "nationalist_cosmopolitan": "1 = strongly cosmopolitan, 10 = strongly ethno-nationalist",
+      "economic_satisfaction": "1 = severe deprivation/anger, 10 = comfortable",
+      "institutional_trust": "1 = no trust, 10 = full trust",
+      "government_approval": "1 = total disapproval, 10 = total approval",
+      "opposition_trust": "1 = none, 10 = full",
+      "kurdish_rights_support": "1 = security-only frame, 10 = full rights-based frame",
+      "democratic_rights_priority": "1 = secondary/dismissive, 10 = paramount",
+      "refugee_anxiety": "1 = welcoming, 10 = strongly anti-refugee",
+      "corruption_sensitivity": "1 = tolerates/normalizes, 10 = primary voting driver",
+      "economic_grievance": "1 = none, 10 = existential"
+    }
+  },
+
+  "task_1_overlap_analysis": {
+    "summary": "Pairwise overlap audit. The 12 archetypes carry meaningful distinctions and should all remain separate, but six overlap clusters require explicit distinguishing variables to avoid collapsing them in simulation.",
+    "overlaps": [
+      {
+        "pair": ["A1 Devout Anatolian Loyalist", "A10 Earthquake Zone Loyalist"],
+        "overlap_description": "Both are religious, conservative, AKP-loyal voters in Anatolia. A10 is essentially A1 conditioned on living in the 11 quake-affected provinces.",
+        "decision": "Keep separate",
+        "distinguishing_variables": ["geographic_zone (quake_belt vs non_quake_belt)", "disaster_response_sensitivity", "patronage_dependency", "economic_grievance (A10 higher post-quake)"],
+        "rationale": "A10 is the empirically critical 'disaster did NOT punish incumbent' case (Kahramanmaraş 72%, Adıyaman 66%, Malatya 69%). Folding it into A1 would erase the central counter-intuitive finding of the document."
+      },
+      {
+        "pair": ["A1 Devout Anatolian Loyalist", "A8 Pious Disillusioned Islamist"],
+        "overlap_description": "Both are 'very devout' (sofu) AKP-historical voters. Religiosity is similar; the difference is whether religious identity still binds them to AKP.",
+        "decision": "Keep separate",
+        "distinguishing_variables": ["government_approval", "leader_loyalty (A1 high, A8 collapsed)", "vote intention (A1 stays AKP; A8 pivots YRP)", "milli_gorus_identification"],
+        "rationale": "A8 is the YRP defection mechanism — the entire 2024 Islamist fracture. Merging would destroy that signal."
+      },
+      {
+        "pair": ["A3 Conservative Economically Disillusioned", "A11 Retired Protest Voter"],
+        "overlap_description": "Both are economically broken former AKP voters whose 2024 defection (CHP/YRP/abstain) drove the historic CHP win.",
+        "decision": "Keep separate",
+        "distinguishing_variables": ["age (A3 35-60, A11 60-75)", "employment_status (wage-earner vs pensioner)", "economic_sensitivity (A11 more existential)", "turnout_likelihood (A11 higher, A3 lower in 2024)", "ideological residue (A3 still nationalist-religious; A11 more pragmatic)"],
+        "rationale": "Pensioners were identified by all three major polling firms (Betimar, Optimar, Sonar) as the decisive 2024 bloc — a specific causal lever. A3's defection is more likely to take the form of abstention; A11's took the form of protest voting."
+      },
+      {
+        "pair": ["A2 Secular Urban Professional", "A12 Cosmopolitan Liberal Urban Professional"],
+        "overlap_description": "Both are educated, secular, urban CHP voters. Geographic and lifestyle overlap is high.",
+        "decision": "Keep separate",
+        "distinguishing_variables": ["nationalist_cosmopolitan (A2 moderate-nationalist Kemalist; A12 strongly cosmopolitan)", "kurdish_rights_support (A2 mixed; A12 rights-based)", "international_exit_option (A12 has exit option, A2 mostly does not)", "income_level"],
+        "rationale": "A2 maps to Çevik's 'Boxer/Pragmatist' Kemalist core; A12 maps to her 'Visionary'. They diverge sharply on Kurdish rights and EU/cosmopolitan framing. Merging would lose the Kemalist-vs-Liberal axis inside CHP."
+      },
+      {
+        "pair": ["A6 Nationalist Grey Wolf", "A7 Moderate Nationalist (İYİ)"],
+        "overlap_description": "Both are Turkish nationalists with MHP heritage.",
+        "decision": "Keep separate",
+        "distinguishing_variables": ["secular_religious (A6 nationalist-religious hybrid; A7 secular)", "government_approval (A6 high via Bahçeli alliance; A7 low)", "democratic_rights_priority (A6 low; A7 high)", "pro_eu_orientation"],
+        "rationale": "The MHP/İYİ split is the defining 2017 event in nationalist politics; the Kadir Has data (74.4% of İYİ pro-EU vs MHP/Grey Wolf anti-EU) confirms a real cleavage. Keep distinct."
+      },
+      {
+        "pair": ["A5 Kurdish Political Voter", "A9 Young Urban Protest Voter"],
+        "overlap_description": "Both libertarian, anti-system, pro-Kurdish-rights. Young urban Kurdish voters in Istanbul belong to both.",
+        "decision": "Keep separate",
+        "distinguishing_variables": ["identity_salience (A5 ethnic-primary; A9 generational-primary)", "kurdish_rights_support (A5 ~10; A9 ~6-7)", "geography (A5 SE + Kurdish diaspora; A9 metro Istanbul/Ankara/Izmir/Eskişehir)", "vote intention (A5 → DEM; A9 → CHP)"],
+        "rationale": "The two share allies but not core identity. Simulation needs distinct identity_salience to model how A5 reacts to trustee removals (high) vs how A9 reacts (sympathetic but not mobilized)."
+      }
+    ],
+    "renames_or_merges_recommended": [
+      {
+        "archetype": "A6",
+        "current_name": "The Nationalist Grey Wolf Core",
+        "suggested_clarifier_tag": "MHP_core_People's_Alliance",
+        "reason": "Useful to distinguish from A7 in code; the 'Grey Wolf' label is correct but the simulation variable should reference the People's Alliance dependency."
+      },
+      {
+        "archetype": "A10",
+        "current_name": "The Earthquake Zone Loyalist",
+        "suggested_clarifier_tag": "Quake_belt_AKP_patronage",
+        "reason": "Makes the geographic conditional explicit; this is not a 'type of person' but a 'type of person × geography' interaction."
+      }
+    ],
+    "no_new_archetype_needed": true,
+    "note": "All 12 archetypes survive. The HÜDA-PAR Kurdish Islamist sub-segment mentioned in A5/A8 is too small (<2% nationally) to justify a 13th archetype at 50 agents; it is absorbed into A5 with a low-weight probability tag."
+  },
+
+  "task_2_simulation_weights_50_agents": {
+    "methodology": "Weights anchor to (a) published 2023/2024 YSK vote shares as upper bound, (b) KONDA religiosity and lifestyle distributions as identity bounds, (c) the document's narrative emphasis on each archetype's causal role. Weights are rounded to whole agents because the prototype is N=50.",
+    "validation": "Sum = 50 agents. Implied AKP-base (A1+A8+A10) = 16 agents = 32%, plausibly bracketing AKP's 2023 first-round ~35% and 2024 ~35%. Implied CHP-base (A2+A4+A9+A12) = 18 agents = 36%, plausibly bracketing CHP's 2024 37.7%. Kurdish (A5) = 5 agents = 10%, slightly above DEM's 5.7% to reflect Kurdish identity beyond party vote.",
+    "distribution": [
+      {"id": "A1", "name": "Devout Anatolian Loyalist", "agents": 7, "percent": 14, "uncertainty": "low", "reason": "Core AKP loyalist bloc. KONDA 'dindar/sofu' combined ~58% of population, of which roughly a quarter are this hard loyalist type. Largest single archetype."},
+      {"id": "A2", "name": "Secular Urban Professional", "agents": 6, "percent": 12, "uncertainty": "low", "reason": "Kemalist CHP core. Stable backbone of urban opposition vote across İzmir/Istanbul European side/Çankaya."},
+      {"id": "A3", "name": "Conservative Economically Disillusioned", "agents": 6, "percent": 12, "uncertainty": "medium", "reason": "Swing bloc the entire 2024 analysis hinges on. Pollster consensus puts the 'broken AKP voter' at 10-15% of the electorate."},
+      {"id": "A4", "name": "Alevi-CHP Loyalist", "agents": 4, "percent": 8, "uncertainty": "medium", "reason": "Alevi share of population estimated 10-25%; ~87% backed İmamoğlu (KONDA). Conservative 8% weight reflects mid-range estimate and high partisan cohesion."},
+      {"id": "A5", "name": "Kurdish Political Voter", "agents": 5, "percent": 10, "uncertainty": "medium", "reason": "Kurds ~15-20% of population, but only ~half vote for Kurdish-political parties. 10% weight reflects HDP/DEM-aligned Kurdish voter, not all Kurds."},
+      {"id": "A6", "name": "Nationalist Grey Wolf (MHP core)", "agents": 3, "percent": 6, "uncertainty": "medium", "reason": "MHP fell to ~5% by 2024 local elections. 6% captures the committed core."},
+      {"id": "A7", "name": "Moderate Nationalist (İYİ)", "agents": 2, "percent": 4, "uncertainty": "high", "reason": "İYİ collapsed from 9.9% (2023) to 3.77% (2024). Weight reflects post-collapse remnant. High uncertainty because many bled to CHP/abstain."},
+      {"id": "A8", "name": "Pious Disillusioned Islamist", "agents": 3, "percent": 6, "uncertainty": "low", "reason": "YRP got 6.19% in 2024 — a direct empirical anchor for this archetype's share."},
+      {"id": "A9", "name": "Young Urban Protest Voter", "agents": 4, "percent": 8, "uncertainty": "medium", "reason": "18-30 metropolitan opposition-leaning voters. Konrad-Adenauer 2023 + KONDA Istanbul student data suggest ~8-10% of electorate."},
+      {"id": "A10", "name": "Earthquake Zone Loyalist", "agents": 3, "percent": 6, "uncertainty": "medium", "reason": "11 quake provinces hold ~16% of population; only a sub-segment is the loyalist patronage-dependent type. 6% reflects the AKP-loyal core in that zone."},
+      {"id": "A11", "name": "Retired Protest Voter", "agents": 4, "percent": 8, "uncertainty": "low", "reason": "Pensioners ~16 million (~20% of voting-age population). 8% reflects the protest-voting sub-segment identified as 2024 kingmakers."},
+      {"id": "A12", "name": "Cosmopolitan Liberal", "agents": 3, "percent": 6, "uncertainty": "medium", "reason": "Smaller, highly-educated, internationally-mobile bloc. Concentrated in Istanbul European side/Çankaya/Alsancak. ~5-7% of electorate."}
+    ],
+    "total_agents": 50,
+    "total_percent": 100,
+    "implied_party_anchors": {
+      "AKP_core_initial_2019": "A1+A8+A10 = 13 agents = 26% (close to AKP urban + rural core)",
+      "CHP_core_initial_2019": "A2+A4+A9+A12 = 17 agents = 34%",
+      "MHP_İYİ_combined_initial": "A6+A7 = 5 agents = 10%",
+      "Kurdish_political": "A5 = 5 agents = 10%",
+      "swing_bloc_2024": "A3+A11 = 10 agents = 20%"
+    }
+  },
+
+  "task_3_archetype_variables": [
+    {
+      "id": "A1",
+      "name": "Devout Anatolian Loyalist",
+      "political_worldview": {
+        "authoritarian_libertarian": 9,
+        "secular_religious": 10,
+        "nationalist_cosmopolitan": 9,
+        "economic_satisfaction": 4,
+        "institutional_trust": 8,
+        "government_approval": 9,
+        "opposition_trust": 2,
+        "kurdish_rights_support": 2,
+        "democratic_rights_priority": 3,
+        "refugee_anxiety": 5,
+        "corruption_sensitivity": 3,
+        "economic_grievance": 5
+      },
+      "emotional_baseline": {"anger": 0.40, "fear": 0.55, "hope": 0.65, "sadness": 0.35, "political_fatigue": 0.25},
+      "media_diet": {"pro_government_media": 0.85, "opposition_media": 0.05, "social_media": 0.40, "local_family_networks": 0.85, "alternative_independent_media": 0.05},
+      "behavioral_variables": {"partisan_strength": 0.90, "openness_to_persuasion": 0.20, "protest_vote_tendency": 0.20, "turnout_likelihood": 0.85, "strategic_voting_tendency": 0.20, "boycott_tendency": 0.10, "nationalist_backlash_sensitivity": 0.65, "economic_sensitivity": 0.55, "disaster_response_sensitivity": 0.30, "identity_salience": 0.85, "leader_loyalty": 0.95},
+      "initial_vote_intention": {"AKP": 0.85, "CHP": 0.00, "MHP": 0.05, "IYI": 0.00, "HDP": 0.00, "YRP": 0.05, "Other": 0.00, "Undecided": 0.05},
+      "trajectory_2024": {"stays_same": 0.55, "shifts_to_CHP": 0.05, "shifts_to_YRP": 0.20, "shifts_to_DEM": 0.00, "abstains": 0.15, "undecided": 0.05}
+    },
+    {
+      "id": "A2",
+      "name": "Secular Urban Professional",
+      "political_worldview": {
+        "authoritarian_libertarian": 3,
+        "secular_religious": 2,
+        "nationalist_cosmopolitan": 5,
+        "economic_satisfaction": 4,
+        "institutional_trust": 3,
+        "government_approval": 2,
+        "opposition_trust": 7,
+        "kurdish_rights_support": 5,
+        "democratic_rights_priority": 9,
+        "refugee_anxiety": 6,
+        "corruption_sensitivity": 9,
+        "economic_grievance": 6
+      },
+      "emotional_baseline": {"anger": 0.80, "fear": 0.70, "hope": 0.50, "sadness": 0.70, "political_fatigue": 0.55},
+      "media_diet": {"pro_government_media": 0.05, "opposition_media": 0.80, "social_media": 0.75, "local_family_networks": 0.45, "alternative_independent_media": 0.60},
+      "behavioral_variables": {"partisan_strength": 0.85, "openness_to_persuasion": 0.30, "protest_vote_tendency": 0.40, "turnout_likelihood": 0.92, "strategic_voting_tendency": 0.70, "boycott_tendency": 0.30, "nationalist_backlash_sensitivity": 0.30, "economic_sensitivity": 0.70, "disaster_response_sensitivity": 0.85, "identity_salience": 0.80, "leader_loyalty": 0.45},
+      "initial_vote_intention": {"AKP": 0.00, "CHP": 0.85, "MHP": 0.00, "IYI": 0.08, "HDP": 0.02, "YRP": 0.00, "Other": 0.02, "Undecided": 0.03},
+      "trajectory_2024": {"stays_same": 0.85, "shifts_to_CHP": 0.05, "shifts_to_YRP": 0.00, "shifts_to_DEM": 0.02, "abstains": 0.03, "undecided": 0.05}
+    },
+    {
+      "id": "A3",
+      "name": "Conservative Economically Disillusioned",
+      "political_worldview": {
+        "authoritarian_libertarian": 6,
+        "secular_religious": 7,
+        "nationalist_cosmopolitan": 8,
+        "economic_satisfaction": 2,
+        "institutional_trust": 4,
+        "government_approval": 4,
+        "opposition_trust": 5,
+        "kurdish_rights_support": 3,
+        "democratic_rights_priority": 4,
+        "refugee_anxiety": 9,
+        "corruption_sensitivity": 7,
+        "economic_grievance": 9
+      },
+      "emotional_baseline": {"anger": 0.80, "fear": 0.70, "hope": 0.35, "sadness": 0.65, "political_fatigue": 0.60},
+      "media_diet": {"pro_government_media": 0.45, "opposition_media": 0.40, "social_media": 0.65, "local_family_networks": 0.75, "alternative_independent_media": 0.20},
+      "behavioral_variables": {"partisan_strength": 0.40, "openness_to_persuasion": 0.70, "protest_vote_tendency": 0.75, "turnout_likelihood": 0.65, "strategic_voting_tendency": 0.50, "boycott_tendency": 0.35, "nationalist_backlash_sensitivity": 0.75, "economic_sensitivity": 0.95, "disaster_response_sensitivity": 0.65, "identity_salience": 0.55, "leader_loyalty": 0.45},
+      "initial_vote_intention": {"AKP": 0.60, "CHP": 0.10, "MHP": 0.15, "IYI": 0.05, "HDP": 0.00, "YRP": 0.05, "Other": 0.00, "Undecided": 0.05},
+      "trajectory_2024": {"stays_same": 0.20, "shifts_to_CHP": 0.25, "shifts_to_YRP": 0.20, "shifts_to_DEM": 0.00, "abstains": 0.30, "undecided": 0.05}
+    },
+    {
+      "id": "A4",
+      "name": "Alevi-CHP Loyalist",
+      "political_worldview": {
+        "authoritarian_libertarian": 3,
+        "secular_religious": 2,
+        "nationalist_cosmopolitan": 5,
+        "economic_satisfaction": 4,
+        "institutional_trust": 2,
+        "government_approval": 1,
+        "opposition_trust": 8,
+        "kurdish_rights_support": 7,
+        "democratic_rights_priority": 9,
+        "refugee_anxiety": 5,
+        "corruption_sensitivity": 9,
+        "economic_grievance": 7
+      },
+      "emotional_baseline": {"anger": 0.85, "fear": 0.75, "hope": 0.55, "sadness": 0.75, "political_fatigue": 0.40},
+      "media_diet": {"pro_government_media": 0.02, "opposition_media": 0.80, "social_media": 0.70, "local_family_networks": 0.80, "alternative_independent_media": 0.65},
+      "behavioral_variables": {"partisan_strength": 0.92, "openness_to_persuasion": 0.20, "protest_vote_tendency": 0.30, "turnout_likelihood": 0.94, "strategic_voting_tendency": 0.55, "boycott_tendency": 0.15, "nationalist_backlash_sensitivity": 0.25, "economic_sensitivity": 0.75, "disaster_response_sensitivity": 0.90, "identity_salience": 0.95, "leader_loyalty": 0.65},
+      "initial_vote_intention": {"AKP": 0.00, "CHP": 0.85, "MHP": 0.00, "IYI": 0.02, "HDP": 0.10, "YRP": 0.00, "Other": 0.01, "Undecided": 0.02},
+      "trajectory_2024": {"stays_same": 0.88, "shifts_to_CHP": 0.02, "shifts_to_YRP": 0.00, "shifts_to_DEM": 0.05, "abstains": 0.02, "undecided": 0.03}
+    },
+    {
+      "id": "A5",
+      "name": "Kurdish Political Voter",
+      "political_worldview": {
+        "authoritarian_libertarian": 3,
+        "secular_religious": 4,
+        "nationalist_cosmopolitan": 4,
+        "economic_satisfaction": 3,
+        "institutional_trust": 1,
+        "government_approval": 1,
+        "opposition_trust": 6,
+        "kurdish_rights_support": 10,
+        "democratic_rights_priority": 9,
+        "refugee_anxiety": 4,
+        "corruption_sensitivity": 8,
+        "economic_grievance": 8
+      },
+      "emotional_baseline": {"anger": 0.90, "fear": 0.80, "hope": 0.45, "sadness": 0.80, "political_fatigue": 0.55},
+      "media_diet": {"pro_government_media": 0.05, "opposition_media": 0.55, "social_media": 0.80, "local_family_networks": 0.90, "alternative_independent_media": 0.85},
+      "behavioral_variables": {"partisan_strength": 0.90, "openness_to_persuasion": 0.20, "protest_vote_tendency": 0.55, "turnout_likelihood": 0.82, "strategic_voting_tendency": 0.80, "boycott_tendency": 0.25, "nationalist_backlash_sensitivity": 0.15, "economic_sensitivity": 0.70, "disaster_response_sensitivity": 0.85, "identity_salience": 0.98, "leader_loyalty": 0.55},
+      "initial_vote_intention": {"AKP": 0.05, "CHP": 0.05, "MHP": 0.00, "IYI": 0.00, "HDP": 0.80, "YRP": 0.00, "Other": 0.05, "Undecided": 0.05},
+      "trajectory_2024": {"stays_same": 0.60, "shifts_to_CHP": 0.20, "shifts_to_YRP": 0.00, "shifts_to_DEM": 0.10, "abstains": 0.05, "undecided": 0.05}
+    },
+    {
+      "id": "A6",
+      "name": "Nationalist Grey Wolf (MHP core)",
+      "political_worldview": {
+        "authoritarian_libertarian": 10,
+        "secular_religious": 7,
+        "nationalist_cosmopolitan": 10,
+        "economic_satisfaction": 4,
+        "institutional_trust": 6,
+        "government_approval": 7,
+        "opposition_trust": 2,
+        "kurdish_rights_support": 1,
+        "democratic_rights_priority": 2,
+        "refugee_anxiety": 10,
+        "corruption_sensitivity": 4,
+        "economic_grievance": 6
+      },
+      "emotional_baseline": {"anger": 0.70, "fear": 0.55, "hope": 0.50, "sadness": 0.30, "political_fatigue": 0.30},
+      "media_diet": {"pro_government_media": 0.70, "opposition_media": 0.20, "social_media": 0.60, "local_family_networks": 0.75, "alternative_independent_media": 0.20},
+      "behavioral_variables": {"partisan_strength": 0.85, "openness_to_persuasion": 0.25, "protest_vote_tendency": 0.30, "turnout_likelihood": 0.85, "strategic_voting_tendency": 0.50, "boycott_tendency": 0.15, "nationalist_backlash_sensitivity": 0.95, "economic_sensitivity": 0.55, "disaster_response_sensitivity": 0.40, "identity_salience": 0.95, "leader_loyalty": 0.75},
+      "initial_vote_intention": {"AKP": 0.25, "CHP": 0.00, "MHP": 0.65, "IYI": 0.03, "HDP": 0.00, "YRP": 0.02, "Other": 0.02, "Undecided": 0.03},
+      "trajectory_2024": {"stays_same": 0.50, "shifts_to_CHP": 0.03, "shifts_to_YRP": 0.15, "shifts_to_DEM": 0.00, "abstains": 0.22, "undecided": 0.10}
+    },
+    {
+      "id": "A7",
+      "name": "Moderate Nationalist (İYİ)",
+      "political_worldview": {
+        "authoritarian_libertarian": 5,
+        "secular_religious": 4,
+        "nationalist_cosmopolitan": 7,
+        "economic_satisfaction": 3,
+        "institutional_trust": 4,
+        "government_approval": 3,
+        "opposition_trust": 5,
+        "kurdish_rights_support": 4,
+        "democratic_rights_priority": 7,
+        "refugee_anxiety": 8,
+        "corruption_sensitivity": 7,
+        "economic_grievance": 7
+      },
+      "emotional_baseline": {"anger": 0.65, "fear": 0.55, "hope": 0.35, "sadness": 0.60, "political_fatigue": 0.75},
+      "media_diet": {"pro_government_media": 0.20, "opposition_media": 0.60, "social_media": 0.65, "local_family_networks": 0.55, "alternative_independent_media": 0.45},
+      "behavioral_variables": {"partisan_strength": 0.45, "openness_to_persuasion": 0.60, "protest_vote_tendency": 0.45, "turnout_likelihood": 0.75, "strategic_voting_tendency": 0.75, "boycott_tendency": 0.25, "nationalist_backlash_sensitivity": 0.70, "economic_sensitivity": 0.80, "disaster_response_sensitivity": 0.70, "identity_salience": 0.60, "leader_loyalty": 0.40},
+      "initial_vote_intention": {"AKP": 0.05, "CHP": 0.15, "MHP": 0.05, "IYI": 0.60, "HDP": 0.00, "YRP": 0.02, "Other": 0.05, "Undecided": 0.08},
+      "trajectory_2024": {"stays_same": 0.25, "shifts_to_CHP": 0.45, "shifts_to_YRP": 0.05, "shifts_to_DEM": 0.00, "abstains": 0.15, "undecided": 0.10}
+    },
+    {
+      "id": "A8",
+      "name": "Pious Disillusioned Islamist",
+      "political_worldview": {
+        "authoritarian_libertarian": 8,
+        "secular_religious": 10,
+        "nationalist_cosmopolitan": 7,
+        "economic_satisfaction": 2,
+        "institutional_trust": 4,
+        "government_approval": 4,
+        "opposition_trust": 3,
+        "kurdish_rights_support": 4,
+        "democratic_rights_priority": 4,
+        "refugee_anxiety": 6,
+        "corruption_sensitivity": 8,
+        "economic_grievance": 9
+      },
+      "emotional_baseline": {"anger": 0.75, "fear": 0.65, "hope": 0.50, "sadness": 0.60, "political_fatigue": 0.25},
+      "media_diet": {"pro_government_media": 0.45, "opposition_media": 0.15, "social_media": 0.60, "local_family_networks": 0.85, "alternative_independent_media": 0.35},
+      "behavioral_variables": {"partisan_strength": 0.65, "openness_to_persuasion": 0.55, "protest_vote_tendency": 0.65, "turnout_likelihood": 0.88, "strategic_voting_tendency": 0.40, "boycott_tendency": 0.20, "nationalist_backlash_sensitivity": 0.55, "economic_sensitivity": 0.90, "disaster_response_sensitivity": 0.60, "identity_salience": 0.95, "leader_loyalty": 0.45},
+      "initial_vote_intention": {"AKP": 0.55, "CHP": 0.00, "MHP": 0.02, "IYI": 0.00, "HDP": 0.00, "YRP": 0.35, "Other": 0.03, "Undecided": 0.05},
+      "trajectory_2024": {"stays_same": 0.15, "shifts_to_CHP": 0.02, "shifts_to_YRP": 0.65, "shifts_to_DEM": 0.00, "abstains": 0.10, "undecided": 0.08}
+    },
+    {
+      "id": "A9",
+      "name": "Young Urban Protest Voter",
+      "political_worldview": {
+        "authoritarian_libertarian": 2,
+        "secular_religious": 3,
+        "nationalist_cosmopolitan": 4,
+        "economic_satisfaction": 2,
+        "institutional_trust": 2,
+        "government_approval": 2,
+        "opposition_trust": 5,
+        "kurdish_rights_support": 7,
+        "democratic_rights_priority": 8,
+        "refugee_anxiety": 6,
+        "corruption_sensitivity": 8,
+        "economic_grievance": 9
+      },
+      "emotional_baseline": {"anger": 0.80, "fear": 0.65, "hope": 0.45, "sadness": 0.70, "political_fatigue": 0.65},
+      "media_diet": {"pro_government_media": 0.05, "opposition_media": 0.45, "social_media": 0.95, "local_family_networks": 0.35, "alternative_independent_media": 0.75},
+      "behavioral_variables": {"partisan_strength": 0.40, "openness_to_persuasion": 0.65, "protest_vote_tendency": 0.75, "turnout_likelihood": 0.70, "strategic_voting_tendency": 0.80, "boycott_tendency": 0.45, "nationalist_backlash_sensitivity": 0.45, "economic_sensitivity": 0.90, "disaster_response_sensitivity": 0.90, "identity_salience": 0.70, "leader_loyalty": 0.45},
+      "initial_vote_intention": {"AKP": 0.05, "CHP": 0.55, "MHP": 0.02, "IYI": 0.10, "HDP": 0.10, "YRP": 0.02, "Other": 0.06, "Undecided": 0.10},
+      "trajectory_2024": {"stays_same": 0.55, "shifts_to_CHP": 0.20, "shifts_to_YRP": 0.02, "shifts_to_DEM": 0.05, "abstains": 0.10, "undecided": 0.08}
+    },
+    {
+      "id": "A10",
+      "name": "Earthquake Zone Loyalist",
+      "political_worldview": {
+        "authoritarian_libertarian": 8,
+        "secular_religious": 9,
+        "nationalist_cosmopolitan": 8,
+        "economic_satisfaction": 2,
+        "institutional_trust": 6,
+        "government_approval": 7,
+        "opposition_trust": 3,
+        "kurdish_rights_support": 3,
+        "democratic_rights_priority": 3,
+        "refugee_anxiety": 5,
+        "corruption_sensitivity": 5,
+        "economic_grievance": 9
+      },
+      "emotional_baseline": {"anger": 0.55, "fear": 0.80, "hope": 0.55, "sadness": 0.90, "political_fatigue": 0.45},
+      "media_diet": {"pro_government_media": 0.75, "opposition_media": 0.10, "social_media": 0.55, "local_family_networks": 0.90, "alternative_independent_media": 0.15},
+      "behavioral_variables": {"partisan_strength": 0.65, "openness_to_persuasion": 0.40, "protest_vote_tendency": 0.30, "turnout_likelihood": 0.80, "strategic_voting_tendency": 0.35, "boycott_tendency": 0.10, "nationalist_backlash_sensitivity": 0.55, "economic_sensitivity": 0.85, "disaster_response_sensitivity": 0.95, "identity_salience": 0.75, "leader_loyalty": 0.80},
+      "initial_vote_intention": {"AKP": 0.70, "CHP": 0.10, "MHP": 0.05, "IYI": 0.02, "HDP": 0.02, "YRP": 0.05, "Other": 0.03, "Undecided": 0.03},
+      "trajectory_2024": {"stays_same": 0.50, "shifts_to_CHP": 0.10, "shifts_to_YRP": 0.20, "shifts_to_DEM": 0.02, "abstains": 0.13, "undecided": 0.05}
+    },
+    {
+      "id": "A11",
+      "name": "Retired Protest Voter",
+      "political_worldview": {
+        "authoritarian_libertarian": 6,
+        "secular_religious": 6,
+        "nationalist_cosmopolitan": 6,
+        "economic_satisfaction": 1,
+        "institutional_trust": 3,
+        "government_approval": 3,
+        "opposition_trust": 5,
+        "kurdish_rights_support": 3,
+        "democratic_rights_priority": 5,
+        "refugee_anxiety": 8,
+        "corruption_sensitivity": 8,
+        "economic_grievance": 10
+      },
+      "emotional_baseline": {"anger": 0.90, "fear": 0.85, "hope": 0.25, "sadness": 0.80, "political_fatigue": 0.50},
+      "media_diet": {"pro_government_media": 0.50, "opposition_media": 0.40, "social_media": 0.35, "local_family_networks": 0.85, "alternative_independent_media": 0.20},
+      "behavioral_variables": {"partisan_strength": 0.40, "openness_to_persuasion": 0.65, "protest_vote_tendency": 0.85, "turnout_likelihood": 0.90, "strategic_voting_tendency": 0.55, "boycott_tendency": 0.15, "nationalist_backlash_sensitivity": 0.55, "economic_sensitivity": 0.98, "disaster_response_sensitivity": 0.55, "identity_salience": 0.45, "leader_loyalty": 0.30},
+      "initial_vote_intention": {"AKP": 0.50, "CHP": 0.25, "MHP": 0.08, "IYI": 0.05, "HDP": 0.02, "YRP": 0.05, "Other": 0.02, "Undecided": 0.03},
+      "trajectory_2024": {"stays_same": 0.20, "shifts_to_CHP": 0.40, "shifts_to_YRP": 0.20, "shifts_to_DEM": 0.00, "abstains": 0.12, "undecided": 0.08}
+    },
+    {
+      "id": "A12",
+      "name": "Cosmopolitan Liberal",
+      "political_worldview": {
+        "authoritarian_libertarian": 1,
+        "secular_religious": 1,
+        "nationalist_cosmopolitan": 2,
+        "economic_satisfaction": 6,
+        "institutional_trust": 2,
+        "government_approval": 1,
+        "opposition_trust": 6,
+        "kurdish_rights_support": 9,
+        "democratic_rights_priority": 10,
+        "refugee_anxiety": 3,
+        "corruption_sensitivity": 10,
+        "economic_grievance": 5
+      },
+      "emotional_baseline": {"anger": 0.80, "fear": 0.75, "hope": 0.45, "sadness": 0.80, "political_fatigue": 0.70},
+      "media_diet": {"pro_government_media": 0.02, "opposition_media": 0.55, "social_media": 0.90, "local_family_networks": 0.30, "alternative_independent_media": 0.90},
+      "behavioral_variables": {"partisan_strength": 0.65, "openness_to_persuasion": 0.40, "protest_vote_tendency": 0.50, "turnout_likelihood": 0.88, "strategic_voting_tendency": 0.85, "boycott_tendency": 0.40, "nationalist_backlash_sensitivity": 0.20, "economic_sensitivity": 0.55, "disaster_response_sensitivity": 0.95, "identity_salience": 0.70, "leader_loyalty": 0.50},
+      "initial_vote_intention": {"AKP": 0.00, "CHP": 0.80, "MHP": 0.00, "IYI": 0.05, "HDP": 0.08, "YRP": 0.00, "Other": 0.04, "Undecided": 0.03},
+      "trajectory_2024": {"stays_same": 0.85, "shifts_to_CHP": 0.02, "shifts_to_YRP": 0.00, "shifts_to_DEM": 0.05, "abstains": 0.03, "undecided": 0.05}
+    }
+  ],
+
+  "task_4_event_sensitivity_matrix": {
+    "delta_scale": "approval_delta_government, trust_delta_institutions, anger_delta, hope_delta on -1.0..+1.0; vote_shift_probability on 0..1",
+    "events": [
+      "2019_istanbul_local",
+      "2019_istanbul_rerun",
+      "covid_period",
+      "lira_inflation_crisis_2021_2022",
+      "refugee_debate",
+      "hdp_closure_case",
+      "earthquake_2023",
+      "presidential_election_2023",
+      "hdp_ysp_dem_transition",
+      "local_elections_2024"
+    ],
+    "matrix": {
+      "A1": [
+        {"event": "2019_istanbul_local", "approval_delta_government": -0.05, "trust_delta_institutions": -0.05, "anger_delta": 0.15, "hope_delta": -0.10, "vote_shift_probability": 0.05, "explanation": "Reluctant acceptance of AKP loss; senses foreign meddling but loyalty intact."},
+        {"event": "2019_istanbul_rerun", "approval_delta_government": -0.10, "trust_delta_institutions": -0.05, "anger_delta": 0.20, "hope_delta": -0.15, "vote_shift_probability": 0.05, "explanation": "İmamoğlu landslide is painful but reframed as conspiracy; minimal vote shift."},
+        {"event": "covid_period", "approval_delta_government": 0.10, "trust_delta_institutions": 0.05, "anger_delta": -0.05, "hope_delta": 0.05, "vote_shift_probability": 0.02, "explanation": "AKP welfare transfers + religious framing of resilience reinforce loyalty."},
+        {"event": "lira_inflation_crisis_2021_2022", "approval_delta_government": -0.20, "trust_delta_institutions": -0.10, "anger_delta": 0.30, "hope_delta": -0.20, "vote_shift_probability": 0.10, "explanation": "Real distress but blame externalized to 'interest rate lobby'; loyalty bends but does not break."},
+        {"event": "refugee_debate", "approval_delta_government": -0.05, "trust_delta_institutions": 0.00, "anger_delta": 0.10, "hope_delta": -0.05, "vote_shift_probability": 0.05, "explanation": "AKP's 'Muslim brothers' framing partially neutralizes anti-refugee anger."},
+        {"event": "hdp_closure_case", "approval_delta_government": 0.10, "trust_delta_institutions": 0.05, "anger_delta": -0.05, "hope_delta": 0.05, "vote_shift_probability": 0.01, "explanation": "Endorses closure on national security grounds."},
+        {"event": "earthquake_2023", "approval_delta_government": -0.15, "trust_delta_institutions": -0.15, "anger_delta": 0.35, "hope_delta": -0.20, "vote_shift_probability": 0.08, "explanation": "Genuine shock at response failure, but reconstruction pledge restores trust by May."},
+        {"event": "presidential_election_2023", "approval_delta_government": 0.20, "trust_delta_institutions": 0.10, "anger_delta": -0.15, "hope_delta": 0.25, "vote_shift_probability": 0.03, "explanation": "Erdoğan victory reaffirms 'New Turkey' civilizational project."},
+        {"event": "hdp_ysp_dem_transition", "approval_delta_government": 0.05, "trust_delta_institutions": 0.00, "anger_delta": 0.05, "hope_delta": 0.00, "vote_shift_probability": 0.01, "explanation": "Views rebranding as cosmetic; security frame unchanged."},
+        {"event": "local_elections_2024", "approval_delta_government": -0.20, "trust_delta_institutions": -0.10, "anger_delta": 0.25, "hope_delta": -0.20, "vote_shift_probability": 0.30, "explanation": "Pension/cost-of-living pressure triggers YRP defection or abstention in ~30% of this archetype."}
+      ],
+      "A2": [
+        {"event": "2019_istanbul_local", "approval_delta_government": -0.10, "trust_delta_institutions": 0.10, "anger_delta": -0.20, "hope_delta": 0.50, "vote_shift_probability": 0.02, "explanation": "Euphoria; turning-point narrative."},
+        {"event": "2019_istanbul_rerun", "approval_delta_government": -0.15, "trust_delta_institutions": 0.15, "anger_delta": -0.10, "hope_delta": 0.55, "vote_shift_probability": 0.02, "explanation": "İmamoğlu landslide validates strategic mobilization."},
+        {"event": "covid_period", "approval_delta_government": -0.20, "trust_delta_institutions": -0.10, "anger_delta": 0.25, "hope_delta": -0.10, "vote_shift_probability": 0.03, "explanation": "Sees AKP central govt as incompetent; CHP municipalities competent."},
+        {"event": "lira_inflation_crisis_2021_2022", "approval_delta_government": -0.30, "trust_delta_institutions": -0.20, "anger_delta": 0.40, "hope_delta": -0.20, "vote_shift_probability": 0.05, "explanation": "Confirms long-held narrative of AKP economic mismanagement."},
+        {"event": "refugee_debate", "approval_delta_government": -0.05, "trust_delta_institutions": -0.05, "anger_delta": 0.15, "hope_delta": -0.05, "vote_shift_probability": 0.03, "explanation": "Supports managed repatriation; uncomfortable with xenophobic populism."},
+        {"event": "hdp_closure_case", "approval_delta_government": -0.20, "trust_delta_institutions": -0.25, "anger_delta": 0.30, "hope_delta": -0.20, "vote_shift_probability": 0.05, "explanation": "Sees as democratic backsliding; reinforces rule-of-law frame."},
+        {"event": "earthquake_2023", "approval_delta_government": -0.35, "trust_delta_institutions": -0.30, "anger_delta": 0.55, "hope_delta": -0.25, "vote_shift_probability": 0.08, "explanation": "Construction corruption confirms institutional rot narrative."},
+        {"event": "presidential_election_2023", "approval_delta_government": -0.20, "trust_delta_institutions": -0.20, "anger_delta": 0.45, "hope_delta": -0.50, "vote_shift_probability": 0.10, "explanation": "Deep disappointment at Kılıçdaroğlu loss; some despair, some emigration consideration."},
+        {"event": "hdp_ysp_dem_transition", "approval_delta_government": -0.05, "trust_delta_institutions": 0.00, "anger_delta": 0.05, "hope_delta": 0.05, "vote_shift_probability": 0.04, "explanation": "Mixed; some tactical openness to DEM cooperation."},
+        {"event": "local_elections_2024", "approval_delta_government": -0.25, "trust_delta_institutions": 0.15, "anger_delta": -0.15, "hope_delta": 0.55, "vote_shift_probability": 0.05, "explanation": "Re-energized by CHP historic win; renewed institutional hope."}
+      ],
+      "A3": [
+        {"event": "2019_istanbul_local", "approval_delta_government": -0.10, "trust_delta_institutions": -0.05, "anger_delta": 0.10, "hope_delta": 0.05, "vote_shift_probability": 0.10, "explanation": "Quiet discomfort; first cracks in AKP loyalty."},
+        {"event": "2019_istanbul_rerun", "approval_delta_government": -0.10, "trust_delta_institutions": -0.05, "anger_delta": 0.10, "hope_delta": 0.10, "vote_shift_probability": 0.10, "explanation": "İmamoğlu's competence message lands."},
+        {"event": "covid_period", "approval_delta_government": -0.15, "trust_delta_institutions": -0.10, "anger_delta": 0.20, "hope_delta": -0.10, "vote_shift_probability": 0.10, "explanation": "Economic shock; transfers buffer but expose vulnerability."},
+        {"event": "lira_inflation_crisis_2021_2022", "approval_delta_government": -0.45, "trust_delta_institutions": -0.25, "anger_delta": 0.65, "hope_delta": -0.35, "vote_shift_probability": 0.35, "explanation": "PIVOTAL event for this archetype; conditional loyalty breaks."},
+        {"event": "refugee_debate", "approval_delta_government": -0.20, "trust_delta_institutions": -0.05, "anger_delta": 0.40, "hope_delta": -0.10, "vote_shift_probability": 0.15, "explanation": "Syrians framed as economic competitors; Zafer Party messaging resonates."},
+        {"event": "hdp_closure_case", "approval_delta_government": 0.05, "trust_delta_institutions": 0.00, "anger_delta": 0.00, "hope_delta": 0.00, "vote_shift_probability": 0.02, "explanation": "Mild approval on security grounds; not decisive."},
+        {"event": "earthquake_2023", "approval_delta_government": -0.25, "trust_delta_institutions": -0.20, "anger_delta": 0.40, "hope_delta": -0.20, "vote_shift_probability": 0.10, "explanation": "Confirms contractor/corruption narrative; not enough to flip vote in May 2023."},
+        {"event": "presidential_election_2023", "approval_delta_government": -0.10, "trust_delta_institutions": -0.10, "anger_delta": 0.25, "hope_delta": -0.25, "vote_shift_probability": 0.15, "explanation": "Many hold nose and vote AKP again under uncertainty about opposition."},
+        {"event": "hdp_ysp_dem_transition", "approval_delta_government": 0.00, "trust_delta_institutions": -0.05, "anger_delta": 0.10, "hope_delta": -0.05, "vote_shift_probability": 0.02, "explanation": "Mild discomfort with CHP-DEM cooperation."},
+        {"event": "local_elections_2024", "approval_delta_government": -0.40, "trust_delta_institutions": -0.10, "anger_delta": 0.45, "hope_delta": -0.10, "vote_shift_probability": 0.55, "explanation": "Decisive defection — abstain (~30%) or CHP/YRP protest (~25%)."}
+      ],
+      "A4": [
+        {"event": "2019_istanbul_local", "approval_delta_government": -0.15, "trust_delta_institutions": 0.15, "anger_delta": -0.20, "hope_delta": 0.55, "vote_shift_probability": 0.02, "explanation": "87% Alevi backing for İmamoğlu per KONDA."},
+        {"event": "2019_istanbul_rerun", "approval_delta_government": -0.15, "trust_delta_institutions": 0.15, "anger_delta": -0.15, "hope_delta": 0.55, "vote_shift_probability": 0.02, "explanation": "Confirmation of strategic mobilization."},
+        {"event": "covid_period", "approval_delta_government": -0.20, "trust_delta_institutions": -0.15, "anger_delta": 0.25, "hope_delta": -0.05, "vote_shift_probability": 0.02, "explanation": "Deep distrust of Diyanet messaging; trust in CHP municipalities."},
+        {"event": "lira_inflation_crisis_2021_2022", "approval_delta_government": -0.30, "trust_delta_institutions": -0.20, "anger_delta": 0.45, "hope_delta": -0.20, "vote_shift_probability": 0.02, "explanation": "Confirms anti-AKP narrative; partisan strength absorbs shock."},
+        {"event": "refugee_debate", "approval_delta_government": -0.10, "trust_delta_institutions": -0.05, "anger_delta": 0.20, "hope_delta": -0.05, "vote_shift_probability": 0.03, "explanation": "Reads anti-refugee riots partly as Sunni-nationalist provocation."},
+        {"event": "hdp_closure_case", "approval_delta_government": -0.25, "trust_delta_institutions": -0.30, "anger_delta": 0.40, "hope_delta": -0.20, "vote_shift_probability": 0.03, "explanation": "Strong rejection; resonates with historic anti-Alevi state behavior."},
+        {"event": "earthquake_2023", "approval_delta_government": -0.40, "trust_delta_institutions": -0.30, "anger_delta": 0.60, "hope_delta": -0.30, "vote_shift_probability": 0.05, "explanation": "Hatay's Alevi communities devastated; deepens anti-AKP sentiment."},
+        {"event": "presidential_election_2023", "approval_delta_government": -0.20, "trust_delta_institutions": -0.15, "anger_delta": 0.40, "hope_delta": -0.45, "vote_shift_probability": 0.03, "explanation": "Solid Kılıçdaroğlu vote; bitter disappointment but partisan loyalty unbroken."},
+        {"event": "hdp_ysp_dem_transition", "approval_delta_government": -0.05, "trust_delta_institutions": 0.05, "anger_delta": 0.00, "hope_delta": 0.10, "vote_shift_probability": 0.05, "explanation": "Alevi-Kurdish overlap (Tunceli) accepts DEM cooperation."},
+        {"event": "local_elections_2024", "approval_delta_government": -0.25, "trust_delta_institutions": 0.20, "anger_delta": -0.20, "hope_delta": 0.55, "vote_shift_probability": 0.03, "explanation": "Strong CHP turnout; DEM wins Tunceli; energizes core."}
+      ],
+      "A5": [
+        {"event": "2019_istanbul_local", "approval_delta_government": -0.15, "trust_delta_institutions": 0.05, "anger_delta": -0.10, "hope_delta": 0.40, "vote_shift_probability": 0.05, "explanation": "90% of HDP voters backed İmamoğlu (KONDA); tactical strategic vote."},
+        {"event": "2019_istanbul_rerun", "approval_delta_government": -0.15, "trust_delta_institutions": 0.05, "anger_delta": -0.10, "hope_delta": 0.45, "vote_shift_probability": 0.05, "explanation": "Strategic vote pays off; mild trust gain."},
+        {"event": "covid_period", "approval_delta_government": -0.20, "trust_delta_institutions": -0.10, "anger_delta": 0.30, "hope_delta": -0.15, "vote_shift_probability": 0.02, "explanation": "Disproportionate economic impact; trustees suspend DEM municipal activities."},
+        {"event": "lira_inflation_crisis_2021_2022", "approval_delta_government": -0.30, "trust_delta_institutions": -0.15, "anger_delta": 0.40, "hope_delta": -0.20, "vote_shift_probability": 0.02, "explanation": "Confirms underdevelopment + marginalization narrative."},
+        {"event": "refugee_debate", "approval_delta_government": -0.10, "trust_delta_institutions": -0.05, "anger_delta": 0.20, "hope_delta": -0.05, "vote_shift_probability": 0.05, "explanation": "Nuanced; solidarity with Syrian Kurds, but economic pressure on border cities."},
+        {"event": "hdp_closure_case", "approval_delta_government": -0.40, "trust_delta_institutions": -0.40, "anger_delta": 0.70, "hope_delta": -0.30, "vote_shift_probability": 0.08, "explanation": "Existential threat; mobilization spike."},
+        {"event": "earthquake_2023", "approval_delta_government": -0.30, "trust_delta_institutions": -0.20, "anger_delta": 0.50, "hope_delta": -0.20, "vote_shift_probability": 0.05, "explanation": "Diyarbakır casualties; anger at slow response."},
+        {"event": "presidential_election_2023", "approval_delta_government": -0.20, "trust_delta_institutions": -0.10, "anger_delta": 0.40, "hope_delta": -0.45, "vote_shift_probability": 0.05, "explanation": "Near-unified Kılıçdaroğlu vote post-HDP endorsement; bitter disappointment."},
+        {"event": "hdp_ysp_dem_transition", "approval_delta_government": -0.10, "trust_delta_institutions": -0.05, "anger_delta": 0.20, "hope_delta": 0.20, "vote_shift_probability": 0.20, "explanation": "DEM rebrand consolidates the bloc; some bleed to CHP for tactical purposes."},
+        {"event": "local_elections_2024", "approval_delta_government": -0.30, "trust_delta_institutions": 0.10, "anger_delta": 0.10, "hope_delta": 0.40, "vote_shift_probability": 0.15, "explanation": "DEM wins SE provinces; controversy over 'transported voters' fuels mobilization."}
+      ],
+      "A6": [
+        {"event": "2019_istanbul_local", "approval_delta_government": -0.05, "trust_delta_institutions": -0.05, "anger_delta": 0.10, "hope_delta": -0.05, "vote_shift_probability": 0.05, "explanation": "Many MHP voters did not transfer to Yıldırım; tension with AKP visible."},
+        {"event": "2019_istanbul_rerun", "approval_delta_government": -0.10, "trust_delta_institutions": -0.05, "anger_delta": 0.15, "hope_delta": -0.05, "vote_shift_probability": 0.10, "explanation": "Per KONDA, majority of MHP voters eventually backed İmamoğlu in June."},
+        {"event": "covid_period", "approval_delta_government": 0.05, "trust_delta_institutions": 0.05, "anger_delta": -0.05, "hope_delta": 0.05, "vote_shift_probability": 0.02, "explanation": "Follows state narrative; supports government."},
+        {"event": "lira_inflation_crisis_2021_2022", "approval_delta_government": -0.15, "trust_delta_institutions": -0.05, "anger_delta": 0.20, "hope_delta": -0.10, "vote_shift_probability": 0.05, "explanation": "Subsumes in nationalist frame; tolerates more economic pain."},
+        {"event": "refugee_debate", "approval_delta_government": -0.10, "trust_delta_institutions": -0.05, "anger_delta": 0.45, "hope_delta": -0.10, "vote_shift_probability": 0.10, "explanation": "Strongest pro-deportation sentiment; reported Grey Wolf involvement in 2024 anti-refugee riots."},
+        {"event": "hdp_closure_case", "approval_delta_government": 0.20, "trust_delta_institutions": 0.10, "anger_delta": -0.10, "hope_delta": 0.15, "vote_shift_probability": 0.01, "explanation": "Endorsed enthusiastically; treated as overdue."},
+        {"event": "earthquake_2023", "approval_delta_government": -0.10, "trust_delta_institutions": -0.05, "anger_delta": 0.20, "hope_delta": -0.10, "vote_shift_probability": 0.05, "explanation": "Defers to state reconstruction narrative."},
+        {"event": "presidential_election_2023", "approval_delta_government": 0.15, "trust_delta_institutions": 0.05, "anger_delta": -0.10, "hope_delta": 0.15, "vote_shift_probability": 0.03, "explanation": "Votes Erdoğan per Bahçeli's directive."},
+        {"event": "hdp_ysp_dem_transition", "approval_delta_government": 0.05, "trust_delta_institutions": 0.00, "anger_delta": 0.15, "hope_delta": 0.00, "vote_shift_probability": 0.01, "explanation": "Reads rebrand as cosmetic; security framing unchanged."},
+        {"event": "local_elections_2024", "approval_delta_government": -0.15, "trust_delta_institutions": -0.10, "anger_delta": 0.25, "hope_delta": -0.15, "vote_shift_probability": 0.30, "explanation": "MHP loses provinces (11→8); some defect to YRP/İYİ or abstain."}
+      ],
+      "A7": [
+        {"event": "2019_istanbul_local", "approval_delta_government": -0.15, "trust_delta_institutions": 0.10, "anger_delta": -0.10, "hope_delta": 0.40, "vote_shift_probability": 0.05, "explanation": "Nation Alliance cooperation pays off."},
+        {"event": "2019_istanbul_rerun", "approval_delta_government": -0.20, "trust_delta_institutions": 0.10, "anger_delta": -0.10, "hope_delta": 0.45, "vote_shift_probability": 0.05, "explanation": "İYİ-CHP cooperation validated."},
+        {"event": "covid_period", "approval_delta_government": -0.20, "trust_delta_institutions": -0.10, "anger_delta": 0.25, "hope_delta": -0.10, "vote_shift_probability": 0.05, "explanation": "Critical of govt response; not mobilized."},
+        {"event": "lira_inflation_crisis_2021_2022", "approval_delta_government": -0.40, "trust_delta_institutions": -0.20, "anger_delta": 0.50, "hope_delta": 0.10, "vote_shift_probability": 0.10, "explanation": "Small business hit hard; İYİ rises to 15-16% in polls."},
+        {"event": "refugee_debate", "approval_delta_government": -0.20, "trust_delta_institutions": -0.05, "anger_delta": 0.45, "hope_delta": -0.10, "vote_shift_probability": 0.15, "explanation": "Strong resonance; Victory Party peels off extreme wing."},
+        {"event": "hdp_closure_case", "approval_delta_government": 0.00, "trust_delta_institutions": -0.10, "anger_delta": 0.10, "hope_delta": -0.05, "vote_shift_probability": 0.03, "explanation": "Mixed; security-first but rule-of-law concerns."},
+        {"event": "earthquake_2023", "approval_delta_government": -0.35, "trust_delta_institutions": -0.25, "anger_delta": 0.50, "hope_delta": -0.20, "vote_shift_probability": 0.10, "explanation": "Demands accountability for construction permits."},
+        {"event": "presidential_election_2023", "approval_delta_government": -0.20, "trust_delta_institutions": -0.15, "anger_delta": 0.35, "hope_delta": -0.45, "vote_shift_probability": 0.15, "explanation": "Votes Nation Alliance with discomfort about HDP endorsement; loss compounds fatigue."},
+        {"event": "hdp_ysp_dem_transition", "approval_delta_government": 0.00, "trust_delta_institutions": -0.05, "anger_delta": 0.15, "hope_delta": -0.05, "vote_shift_probability": 0.05, "explanation": "Discomfort with renewed CHP-DEM cooperation."},
+        {"event": "local_elections_2024", "approval_delta_government": -0.30, "trust_delta_institutions": -0.10, "anger_delta": 0.30, "hope_delta": -0.20, "vote_shift_probability": 0.50, "explanation": "İYİ collapses 9.9%→3.77%; mass migration to CHP tactical voting; Akşener's nationalist pivot alienates centrist base."}
+      ],
+      "A8": [
+        {"event": "2019_istanbul_local", "approval_delta_government": -0.10, "trust_delta_institutions": -0.05, "anger_delta": 0.10, "hope_delta": -0.05, "vote_shift_probability": 0.05, "explanation": "Votes AKP with reservations; Milli Görüş cadres feel under-rewarded."},
+        {"event": "2019_istanbul_rerun", "approval_delta_government": -0.10, "trust_delta_institutions": -0.05, "anger_delta": 0.10, "hope_delta": -0.05, "vote_shift_probability": 0.05, "explanation": "Quiet discontent with AKP organization."},
+        {"event": "covid_period", "approval_delta_government": -0.10, "trust_delta_institutions": -0.15, "anger_delta": 0.25, "hope_delta": -0.10, "vote_shift_probability": 0.05, "explanation": "Anti-vaccine wing aligns with YRP rhetoric."},
+        {"event": "lira_inflation_crisis_2021_2022", "approval_delta_government": -0.45, "trust_delta_institutions": -0.25, "anger_delta": 0.60, "hope_delta": -0.25, "vote_shift_probability": 0.25, "explanation": "Deepens 'AKP serves the rich' narrative; pensioner-poverty angle central."},
+        {"event": "refugee_debate", "approval_delta_government": -0.10, "trust_delta_institutions": -0.05, "anger_delta": 0.20, "hope_delta": -0.05, "vote_shift_probability": 0.05, "explanation": "Conflicted: Islamic solidarity vs economic competition."},
+        {"event": "hdp_closure_case", "approval_delta_government": 0.10, "trust_delta_institutions": 0.05, "anger_delta": 0.00, "hope_delta": 0.05, "vote_shift_probability": 0.02, "explanation": "Approves on Islamic-conservative grounds, though HÜDA-PAR sub-segment more ambivalent."},
+        {"event": "earthquake_2023", "approval_delta_government": -0.25, "trust_delta_institutions": -0.20, "anger_delta": 0.40, "hope_delta": -0.20, "vote_shift_probability": 0.10, "explanation": "Reads as moral corruption at top; YRP leader's criticism resonates."},
+        {"event": "presidential_election_2023", "approval_delta_government": 0.05, "trust_delta_institutions": -0.05, "anger_delta": 0.10, "hope_delta": 0.00, "vote_shift_probability": 0.10, "explanation": "Votes AKP through People's Alliance (YRP joined for 2023) but resentment builds."},
+        {"event": "hdp_ysp_dem_transition", "approval_delta_government": 0.05, "trust_delta_institutions": 0.00, "anger_delta": 0.05, "hope_delta": 0.00, "vote_shift_probability": 0.02, "explanation": "Limited impact; not a salient axis."},
+        {"event": "local_elections_2024", "approval_delta_government": -0.45, "trust_delta_institutions": -0.15, "anger_delta": 0.40, "hope_delta": 0.30, "vote_shift_probability": 0.65, "explanation": "PIVOTAL: YRP independent run; 6.19% nationally; wins Şanlıurfa, Yozgat; this archetype's defection is the YRP story."}
+      ],
+      "A9": [
+        {"event": "2019_istanbul_local", "approval_delta_government": -0.15, "trust_delta_institutions": 0.15, "anger_delta": -0.15, "hope_delta": 0.55, "vote_shift_probability": 0.05, "explanation": "İmamoğlu support among Istanbul youth rose from 37% to 58% (KONDA)."},
+        {"event": "2019_istanbul_rerun", "approval_delta_government": -0.15, "trust_delta_institutions": 0.15, "anger_delta": -0.15, "hope_delta": 0.60, "vote_shift_probability": 0.05, "explanation": "Maximum mobilization energy."},
+        {"event": "covid_period", "approval_delta_government": -0.25, "trust_delta_institutions": -0.15, "anger_delta": 0.30, "hope_delta": -0.20, "vote_shift_probability": 0.05, "explanation": "Economic shock; digital cohort connected but anxious; emigration intent rises."},
+        {"event": "lira_inflation_crisis_2021_2022", "approval_delta_government": -0.40, "trust_delta_institutions": -0.20, "anger_delta": 0.60, "hope_delta": -0.30, "vote_shift_probability": 0.10, "explanation": "Radicalized by personal experience; 63% want to emigrate (KAS 2023)."},
+        {"event": "refugee_debate", "approval_delta_government": -0.10, "trust_delta_institutions": -0.05, "anger_delta": 0.25, "hope_delta": -0.10, "vote_shift_probability": 0.05, "explanation": "Less nativist framing than older generations, but economic resentment present."},
+        {"event": "hdp_closure_case", "approval_delta_government": -0.20, "trust_delta_institutions": -0.20, "anger_delta": 0.30, "hope_delta": -0.15, "vote_shift_probability": 0.03, "explanation": "Reads as democratic backsliding; some rights-based mobilization."},
+        {"event": "earthquake_2023", "approval_delta_government": -0.40, "trust_delta_institutions": -0.30, "anger_delta": 0.65, "hope_delta": -0.25, "vote_shift_probability": 0.08, "explanation": "Viral social media documentation; major IRL activation moment."},
+        {"event": "presidential_election_2023", "approval_delta_government": -0.25, "trust_delta_institutions": -0.20, "anger_delta": 0.50, "hope_delta": -0.55, "vote_shift_probability": 0.15, "explanation": "High first-time voter mobilization for Kılıçdaroğlu; severe disappointment; emigration push."},
+        {"event": "hdp_ysp_dem_transition", "approval_delta_government": -0.05, "trust_delta_institutions": 0.05, "anger_delta": 0.00, "hope_delta": 0.10, "vote_shift_probability": 0.05, "explanation": "Sympathetic to Kurdish-rights rebrand."},
+        {"event": "local_elections_2024", "approval_delta_government": -0.30, "trust_delta_institutions": 0.15, "anger_delta": -0.20, "hope_delta": 0.55, "vote_shift_probability": 0.05, "explanation": "Re-energized; CHP youth activism; İmamoğlu re-election visible."}
+      ],
+      "A10": [
+        {"event": "2019_istanbul_local", "approval_delta_government": 0.00, "trust_delta_institutions": 0.00, "anger_delta": 0.00, "hope_delta": 0.00, "vote_shift_probability": 0.02, "explanation": "Distant event; minimal effect in quake belt."},
+        {"event": "2019_istanbul_rerun", "approval_delta_government": 0.00, "trust_delta_institutions": 0.00, "anger_delta": 0.05, "hope_delta": -0.05, "vote_shift_probability": 0.02, "explanation": "Marginal effect."},
+        {"event": "covid_period", "approval_delta_government": 0.10, "trust_delta_institutions": 0.05, "anger_delta": -0.05, "hope_delta": 0.05, "vote_shift_probability": 0.02, "explanation": "Government transfers reach this state-dependent population."},
+        {"event": "lira_inflation_crisis_2021_2022", "approval_delta_government": -0.20, "trust_delta_institutions": -0.10, "anger_delta": 0.35, "hope_delta": -0.20, "vote_shift_probability": 0.05, "explanation": "Hardship rising but loyalty + patronage dependence absorb shock."},
+        {"event": "refugee_debate", "approval_delta_government": -0.05, "trust_delta_institutions": 0.00, "anger_delta": 0.10, "hope_delta": -0.05, "vote_shift_probability": 0.03, "explanation": "Already absorbed Syrian refugee presence for years; lower salience."},
+        {"event": "hdp_closure_case", "approval_delta_government": 0.05, "trust_delta_institutions": 0.05, "anger_delta": 0.00, "hope_delta": 0.05, "vote_shift_probability": 0.01, "explanation": "Mild approval; not central."},
+        {"event": "earthquake_2023", "approval_delta_government": -0.30, "trust_delta_institutions": -0.30, "anger_delta": 0.70, "hope_delta": -0.40, "vote_shift_probability": 0.15, "explanation": "MASSIVE direct shock; initial anger and social media criticism."},
+        {"event": "presidential_election_2023", "approval_delta_government": 0.25, "trust_delta_institutions": 0.15, "anger_delta": -0.30, "hope_delta": 0.30, "vote_shift_probability": 0.10, "explanation": "Reconstruction-pledge dependency dominates: Kahramanmaraş 72%, Adıyaman 66%, Malatya 69% Erdoğan; Hatay narrower."},
+        {"event": "hdp_ysp_dem_transition", "approval_delta_government": 0.00, "trust_delta_institutions": 0.00, "anger_delta": 0.05, "hope_delta": 0.00, "vote_shift_probability": 0.01, "explanation": "Not salient."},
+        {"event": "local_elections_2024", "approval_delta_government": -0.20, "trust_delta_institutions": -0.10, "anger_delta": 0.25, "hope_delta": -0.10, "vote_shift_probability": 0.30, "explanation": "YRP gains in Şanlıurfa; reconstruction fatigue; partial defection."}
+      ],
+      "A11": [
+        {"event": "2019_istanbul_local", "approval_delta_government": -0.05, "trust_delta_institutions": 0.00, "anger_delta": 0.05, "hope_delta": 0.05, "vote_shift_probability": 0.05, "explanation": "Early hint of protest sentiment among urban pensioners."},
+        {"event": "2019_istanbul_rerun", "approval_delta_government": -0.10, "trust_delta_institutions": 0.05, "anger_delta": 0.05, "hope_delta": 0.10, "vote_shift_probability": 0.05, "explanation": "İmamoğlu's social services pitch resonates."},
+        {"event": "covid_period", "approval_delta_government": 0.05, "trust_delta_institutions": -0.05, "anger_delta": 0.15, "hope_delta": -0.10, "vote_shift_probability": 0.05, "explanation": "Vulnerable group; transfers buffer; wariness builds."},
+        {"event": "lira_inflation_crisis_2021_2022", "approval_delta_government": -0.55, "trust_delta_institutions": -0.30, "anger_delta": 0.85, "hope_delta": -0.50, "vote_shift_probability": 0.45, "explanation": "BREAKING POINT; pension below hunger threshold; protests of 2022-2024 begin."},
+        {"event": "refugee_debate", "approval_delta_government": -0.15, "trust_delta_institutions": -0.05, "anger_delta": 0.30, "hope_delta": -0.10, "vote_shift_probability": 0.10, "explanation": "'Why fund Syrians but not us?' framing dominant."},
+        {"event": "hdp_closure_case", "approval_delta_government": 0.00, "trust_delta_institutions": -0.05, "anger_delta": 0.05, "hope_delta": -0.05, "vote_shift_probability": 0.02, "explanation": "Not central; pension dominates."},
+        {"event": "earthquake_2023", "approval_delta_government": -0.25, "trust_delta_institutions": -0.20, "anger_delta": 0.40, "hope_delta": -0.20, "vote_shift_probability": 0.10, "explanation": "Reads as same corrupt governance; some political reorientation."},
+        {"event": "presidential_election_2023", "approval_delta_government": -0.05, "trust_delta_institutions": -0.10, "anger_delta": 0.25, "hope_delta": -0.20, "vote_shift_probability": 0.20, "explanation": "Many still voted AKP under pre-election pension hike; narrow Erdoğan win."},
+        {"event": "hdp_ysp_dem_transition", "approval_delta_government": 0.00, "trust_delta_institutions": 0.00, "anger_delta": 0.05, "hope_delta": 0.00, "vote_shift_probability": 0.01, "explanation": "Not salient."},
+        {"event": "local_elections_2024", "approval_delta_government": -0.55, "trust_delta_institutions": -0.20, "anger_delta": 0.70, "hope_delta": 0.10, "vote_shift_probability": 0.70, "explanation": "KINGMAKER event: all three major polling firms identify pensioners as decisive 2024 protest vote (Daily Sabah)."}
+      ],
+      "A12": [
+        {"event": "2019_istanbul_local", "approval_delta_government": -0.15, "trust_delta_institutions": 0.15, "anger_delta": -0.15, "hope_delta": 0.55, "vote_shift_probability": 0.02, "explanation": "Highly invested in İmamoğlu as institutional reform symbol."},
+        {"event": "2019_istanbul_rerun", "approval_delta_government": -0.20, "trust_delta_institutions": 0.20, "anger_delta": -0.20, "hope_delta": 0.60, "vote_shift_probability": 0.02, "explanation": "Landslide reaffirms institutional pathway."},
+        {"event": "covid_period", "approval_delta_government": -0.25, "trust_delta_institutions": -0.15, "anger_delta": 0.35, "hope_delta": -0.15, "vote_shift_probability": 0.02, "explanation": "Sharp criticism of govt; CHP municipality competence highlighted."},
+        {"event": "lira_inflation_crisis_2021_2022", "approval_delta_government": -0.30, "trust_delta_institutions": -0.20, "anger_delta": 0.40, "hope_delta": -0.25, "vote_shift_probability": 0.05, "explanation": "Hedges via dollar savings; brain drain anxiety; emigration considered."},
+        {"event": "refugee_debate", "approval_delta_government": -0.10, "trust_delta_institutions": -0.10, "anger_delta": 0.30, "hope_delta": -0.10, "vote_shift_probability": 0.03, "explanation": "Horror at anti-refugee riots; advocates rights-based approach."},
+        {"event": "hdp_closure_case", "approval_delta_government": -0.30, "trust_delta_institutions": -0.35, "anger_delta": 0.45, "hope_delta": -0.25, "vote_shift_probability": 0.05, "explanation": "Reads as rule-of-law collapse; central to political identity."},
+        {"event": "earthquake_2023", "approval_delta_government": -0.45, "trust_delta_institutions": -0.40, "anger_delta": 0.70, "hope_delta": -0.35, "vote_shift_probability": 0.05, "explanation": "Maximum outrage; documents on social media; funds civil society response."},
+        {"event": "presidential_election_2023", "approval_delta_government": -0.20, "trust_delta_institutions": -0.25, "anger_delta": 0.50, "hope_delta": -0.55, "vote_shift_probability": 0.10, "explanation": "Deep disappointment; emigration seriously considered by some."},
+        {"event": "hdp_ysp_dem_transition", "approval_delta_government": -0.05, "trust_delta_institutions": 0.10, "anger_delta": -0.05, "hope_delta": 0.10, "vote_shift_probability": 0.05, "explanation": "Supports rights-based rebrand; sees as positive democratic adaptation."},
+        {"event": "local_elections_2024", "approval_delta_government": -0.30, "trust_delta_institutions": 0.20, "anger_delta": -0.25, "hope_delta": 0.60, "vote_shift_probability": 0.03, "explanation": "Celebrates CHP historic win; watchful of CHP's own democratic credentials."}
+      ]
+    }
+  },
+
+  "simulation_implementation_notes": {
+    "agent_instantiation": "For each archetype, instantiate N agents (per task_2 distribution). Sample variable values from N(mean, sigma) where mean is the archetype vector and sigma is 0.05-0.10 for 0-1 scales, 0.5-0.8 for 1-10 scales. Clip to bounds.",
+    "vote_intention_sampling": "Use the initial_vote_intention distribution as a categorical prior at agent creation. Re-sample on each major event using a softmax over: (current intention prior) × (1 + event_delta_pull_toward_party).",
+    "event_application_order": "Apply events chronologically: 2019_local → 2019_rerun → covid → inflation → refugee → hdp_closure → earthquake → presidential → hdp_dem_transition → 2024_local.",
+    "delta_application_formula": "new_emotion = clip(old_emotion + anger_delta * (1 - 0.5 * political_fatigue), 0, 1); new_government_approval_1_10 = clip(old + approval_delta_government * 5, 1, 10).",
+    "vote_shift_resolution": "On each event, with probability vote_shift_probability, the agent rolls a new vote intention drawn from the appropriate trajectory_2024 weighted distribution.",
+    "validation_check": "After running all 10 events, the simulated 2024 vote share across all 50 agents should plausibly fall within: AKP 30-40%, CHP 35-42%, MHP 3-7%, İYİ 2-5%, DEM 5-9%, YRP 5-9%, Other/Abstain 5-15%."
+  }
+}

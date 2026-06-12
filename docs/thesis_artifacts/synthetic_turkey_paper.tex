@@ -1,0 +1,724 @@
+%Version 3.1 December 2024
+% Springer Nature LaTeX template adapted for:
+% Journal of Computational Social Science
+
+\documentclass[pdflatex,sn-mathphys-num,iicol]{sn-jnl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage[title]{appendix}
+\usepackage{textcomp}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage{placeins}
+
+\raggedbottom
+
+\begin{document}
+
+% Article type for submission system: Research Article / Methodology Paper
+\title[Synthetic Turkey: LLM-based voter simulation]{Synthetic Turkey: a source-grounded LLM-agent simulation of the 2023 Turkish presidential election}
+
+\author*[1]{\fnm{Abdullah} \sur{Kılınç}}\email{abdullahklnc132@gmail.com}
+% TODO before final submission: add real ORCID iD if the Springer class in Overleaf supports it, e.g. \orcid{0000-0000-0000-0000}
+
+\affil*[1]{\orgdiv{Department of Management Information Systems}, \orgname{Marmara University}, \orgaddress{\city{Istanbul}, \country{Türkiye}}}
+
+\abstract{
+Large language models (LLMs) are increasingly used to create synthetic social agents, but their ability to support electoral simulation outside Western two-party settings remains uncertain. This paper presents \textit{Synthetic Turkey}, a source-grounded LLM-agent framework developed to simulate the 2023 Turkish presidential election. The model constructs a 300-agent synthetic electorate from 12 research-informed voter archetypes anchored in the 2018 Turkish political baseline. Agents are exposed to a longitudinal 2018--2023 event timeline, filtered political broadcasts, persistent memory, social context, and election-safe decision ticks. At each tick, an LLM updates voter beliefs, affect, trust, turnout probability, candidate intention, and a short first-person reflection.
+
+The completed baseline run produces a mixed result. At the aggregate level, the simulated winner depends on how probabilistic voter intentions are converted into election outcomes. Mean-probability aggregation produces a Kılıçdaroğlu plurality in both rounds. A deterministic mode-vote rule initially produces an Erdoğan victory, but this result is sensitive to top-probability ties: 16.7\% of first-round agents and 18.0\% of runoff agents produce tied top probabilities, and alternative tie-handling rules shift the mode-vote outcome toward Kılıçdaroğlu or make the result statistically ambiguous. At the bloc level, the model reproduces several major coalition patterns, including loyalist Erdoğan support, opposition consolidation among secular and Kurdish voters, and continued Erdoğan support in earthquake-zone loyalist archetypes. However, it under-represents Sinan Oğan's nationalist-protest pathway, over-homogenizes several opposition archetypes, and shows damped numerical movement in trust and affect despite event-aware reflections. The paper therefore frames the simulation not as a validated election predictor, but as a diagnostic method-development study showing both the promise and failure modes of LLM-mediated electoral simulation.
+}
+
+\keywords{large language models, agent-based modelling, synthetic voters, electoral simulation, computational social science, Turkish politics}
+
+\maketitle
+
+
+
+\section{Introduction}\label{sec:introduction}
+
+Large language models (LLMs) have created new possibilities for computational social science by enabling synthetic agents that can reason, remember, explain preferences, and respond to complex social contexts in natural language. Recent work on generative agents shows that LLM-based agents can store experiences, retrieve relevant memories, synthesize reflections, and plan behaviour in interactive environments \cite{park2023generative}. Related work on synthetic respondents and public-opinion simulation suggests that LLMs can approximate some survey-like patterns, but also that their outputs require careful validation and should not be treated as direct substitutes for empirical data \cite{argyle2023out,aher2023simulating,qu2024performance}. These concerns become especially important in electoral simulation, where a model may reproduce a final winner while still failing to capture the mechanisms that produced the result.
+
+This paper addresses these issues through a source-grounded LLM-agent simulation of the 2023 Turkish presidential election. Türkiye is a difficult case for synthetic electoral modelling. The 2023 election followed a five-year period marked by currency crisis, inflation, institutional contestation, opposition alliance formation, Kurdish party repression and reorganization, the February 2023 earthquakes, nationalist fragmentation, and an unusually competitive presidential race. The case therefore tests whether LLM-based voter agents can respond not only to static demographic attributes, but also to a longitudinal sequence of political events and information environments.
+
+The project, called \textit{Synthetic Turkey}, builds a 300-agent synthetic electorate from 12 research-informed voter archetypes. Each agent contains a demographic identity, political worldview, media diet, affective baseline, behavioural parameters, 2018 electoral memory, and candidate-level vote intention. Agents are exposed to a 2018--2023 event timeline and to filtered political broadcasts. At each simulation tick, an LLM acts as the voter brain: it receives the agent's identity, current state, memories, visible event information, political messages, and limited social context, then returns structured updates for trust, approval, emotions, turnout, party preference, candidate probabilities, and reflection.
+
+The aim of this paper is not to claim that LLM agents can reliably predict elections. Instead, the study asks a narrower methodological question: what does a source-grounded LLM electorate reproduce, where does it fail, and what do those failures reveal about the design of LLM-mediated electoral simulation? This framing is important because the completed simulation produces both encouraging and problematic results. The model reproduces several broad political bloc patterns, but its aggregate election result depends strongly on how probabilistic candidate intentions are converted into vote shares. Under mean-probability aggregation, the simulation produces a Kılıçdaroğlu plurality. Under a deterministic mode-vote rule, the same agent outputs initially produce an Erdoğan victory. However, further analysis shows that this mode-vote result is sensitive to top-probability ties: a sizeable minority of agents express tied maximum probabilities, and alternative tie-handling rules shift the result toward Kılıçdaroğlu or produce near-indistinguishable candidate shares. This divergence is treated as a substantive finding rather than a reporting detail.
+
+The paper makes three contributions. First, it presents an LLM-first agent-based simulation framework for a non-Western, polarized electoral case. Second, it evaluates the model at multiple levels: aggregate result, scoring-rule sensitivity, tie-handling sensitivity, archetype-level voting, demographic breakdowns, and longitudinal trust/affect trajectories. Third, it diagnoses failure modes that are likely to matter for future LLM-agent electoral simulations: aggregation sensitivity, tie-handling sensitivity, missing protest-vote pathways, over-homogenization of some archetypes, latent LLM knowledge risk, and weak numerical responsiveness in state variables.
+
+\section{Related work}\label{sec:related}
+
+\subsection{From agent-based modelling to LLM-agent social simulation}
+
+Agent-based modelling has long been used in computational social science to examine how macro-level social patterns can emerge from micro-level agent behaviour \cite{epstein2006generative,macal2010tutorial}. Recent work extends this tradition by using large language models as behaviour-generating components inside agents. Park et al.'s generative-agent architecture introduced agents that store experiences as natural-language memories, retrieve relevant memories, synthesize reflections, and plan future behaviour, enabling believable social behaviour in an interactive environment \cite{park2023generative}. Surveys and reviews of LLM-powered agent-based modelling similarly describe generative agent-based models as an emerging paradigm for studying complex social systems, while emphasizing unresolved problems around prompt sensitivity, hallucination, model-specific bias, and methodological standardization \cite{gao2024llmabm,lu2024gabs}.
+
+Synthetic Turkey builds on this generative-agent tradition but applies it to a historically bounded electoral simulation rather than an open-ended social sandbox. The simulation uses persistent voter memory, event exposure, political broadcasts, and election-safe decision points. This design keeps the environment, event chronology, and aggregation rules outside the LLM, while using the LLM for voter-level reasoning.
+
+\subsection{LLMs as synthetic respondents and memory-conditioned agents}
+
+LLMs have also been studied as synthetic respondents or simulated human samples. This literature is relevant because Synthetic Turkey does not only ask agents to choose a candidate; it asks them to reason from demographic, ideological, affective, and historical context. Argyle et al. propose the use of LLMs as ``silicon samples'' for simulating human survey responses, while Aher et al. test whether LLMs can replicate findings from human-subject experiments \cite{argyle2023out,aher2023simulating}. Hwang et al. show that demographics and ideology alone are insufficient to predict user opinions, and that adding relevant past opinions improves prediction accuracy in public-opinion tasks \cite{hwang2023aligning}. This supports the methodological choice to give voter agents prior political memory and evolving state variables rather than relying only on static archetype labels.
+
+At the same time, LLM use in computational social science requires caution. Ziems et al. evaluate 13 LLMs across 25 computational social science benchmarks and conclude that LLMs can augment social-science workflows, especially in annotation and explanation tasks, but their performance remains task-dependent and does not remove the need for careful validation \cite{ziems2024css}. Therefore, Synthetic Turkey is framed as a diagnostic simulation rather than as a validated substitute for polling or survey-based electoral research.
+
+\subsection{LLM-based political and electoral simulation}
+
+A growing body of work applies LLM agents directly to political or electoral settings. FlockVote uses LLM agents with demographic profiles and dynamic contextual information to simulate the 2024 U.S. presidential election \cite{zhou2025flockvote}. ElectionSim represents a more data-intensive approach, building a million-level voter pool from social media and reporting strong state-level performance in U.S. presidential election simulation \cite{zhang2024electionsim}.
+
+However, the Turkish case differs from these U.S.-centred examples. The 2023 Turkish presidential election involved a two-round presidential system, a polarized and multi-party opposition bloc, Kurdish strategic voting, nationalist protest voting, refugee politics, earthquake-related retrospective evaluation, and a competitive-authoritarian institutional context. Comparative non-U.S. political simulation studies are therefore especially important. Kang's Korean-language electoral simulation identifies systematic failure modes, including progressive bias, regional-polarization collapse, and third-party salience collapse \cite{kang2026dynamok}. Kreutner et al. show that persona-driven LLM simulation can approximate European Parliament voting behaviour, but also evaluate prompt stability, counterfactual sensitivity, and generation-method effects \cite{kreutner2026ep}. These studies support evaluating Synthetic Turkey not only by final winner accuracy, but also by coalition structure, archetype-level behaviour, aggregation sensitivity, and failure modes.
+
+\subsection{Validity risks: bias, calibration, and aggregation}
+
+The central methodological risk in LLM electoral simulation is that plausible outputs may not correspond to calibrated behavioural probabilities. Political-bias studies show that LLMs can exhibit systematic ideological alignment patterns \cite{rettenberger2025politicalbias}. Public-opinion simulation research further shows that LLM performance varies across countries, demographic groups, and topics, raising particular concerns for non-Western and non-English contexts \cite{qu2024performance}. Comparative election-simulation studies also show that apparent winner accuracy can conceal vote-share errors and third-party collapse \cite{kang2026dynamok}.
+
+These concerns are central to this paper's evaluation strategy. Synthetic Turkey compares not only final vote shares but also aggregation rules, archetype-level behaviour, coalition structures, and failure modes. In particular, the divergence between mean-probability aggregation and mode-vote aggregation is treated as a substantive methodological finding: LLM-generated candidate probabilities should not be interpreted as calibrated vote probabilities without repeated-run validation and external calibration.
+
+\subsection{Turkey as a hard case for electoral simulation}
+
+The 2023 Turkish election provides a demanding test case for LLM-agent simulation. Erdoğan won despite economic crisis, refugee tensions, democratic backsliding, and criticism of the government response to the February 2023 earthquakes. Çarkoğlu shows that the 2023 vote was shaped not only by economic concerns but also by conservative sensitivities, security, foreign policy, satisfaction with the regime, the Kurdish question, and the secularist/pro-Islamist divide \cite{carkoglu2024unlikely}. He also finds that Kurdish and Alevi voters were negatively predisposed toward Erdoğan, while Erdoğan's vote was concentrated among right-of-centre and highly religious voters \cite{carkoglu2024unlikely}.
+
+Affective polarization further structured the electorate. Aytaç et al. find that affective polarization was especially high among AKP and HDP supporters and that polarization bolstered AKP voter loyalty in the 2023 election \cite{aytac2025polarised}. This supports modelling affect and partisan loyalty as central state variables rather than treating voters as purely economic or spatial-policy actors.
+
+The opposition side was also shaped by candidate-choice and coalition dilemmas. Baruh and Çarkoğlu show that Kılıçdaroğlu was less appealing to some İYİ Party and centre-right constituencies than alternatives such as İmamoğlu or Yavaş, but he had a likeability advantage among voters with affinity toward HDP \cite{baruh2024difficult}. This helps explain why pro-Kurdish voters could strategically coordinate behind Kılıçdaroğlu without being modelled as ordinary CHP voters. The same strategic coordination was constrained by securitization and nationalist backlash risks \cite{ilbiz2023securitization}. Finally, earthquake-zone voting cannot be reduced to automatic incumbent punishment: Sevinç and Göz argue that affected voters engaged in mediated retrospective voting, weighing support, services, and disaster-response performance \cite{sevinc2024afet}.
+
+\section{Methods}\label{sec:methods}
+
+\subsection{Overview of the framework}\label{subsec:framework}
+
+\textit{Synthetic Turkey} is a longitudinal LLM-agent simulation of the 2023 Turkish presidential election. The simulation begins from a June 2018 post-election baseline and ends after the 28 May 2023 runoff result reveal. The completed baseline run contains 300 synthetic voter agents, 37 election-safe ticks, and 11,100 voter-decision calls.
+
+Figure~\ref{fig:framework} summarizes the framework. The first stage constructs a source-grounded population from configuration files: voter archetypes, 2018 baseline profiles, political actors, event timeline, credibility matrix, and sampling profiles. The second stage turns these configurations into individual voter souls. The third stage samples a 300-agent synthetic population. During the simulation stage, each soul becomes a citizen agent with persistent beliefs, affective state, episodic memory, and access to an LLM provider. At each event tick, the system loads the relevant event, generates or retrieves controlled political broadcast inputs, filters those inputs according to each voter's media diet and credibility matrix, asks the voter LLM to reason, and stores updated memory and belief states.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{Fig1_framework.png}
+\caption{Synthetic Turkey framework. The system separates source-grounded population construction from event-driven election simulation. Deterministic code controls population generation, event order, information filtering, memory storage, and output validation, while the LLM performs the voter reasoning step.}
+\label{fig:framework}
+\end{figure*}
+
+\subsection{Source-grounded voter archetype construction}\label{subsec:sourcegrounding}
+
+The synthetic electorate was designed as a source-grounded diagnostic population rather than a statistically representative micro-sample. Each agent belongs to one of twelve voter archetypes intended to capture major political blocs and behavioural pathways in the 2023 Turkish presidential election. The goal was not to reproduce the full Turkish electorate at the individual level, but to test whether an LLM-agent system can reproduce broad coalition structures, identify sensitivity to aggregation rules, and reveal interpretable failure modes.
+
+The Erdoğan-aligned conservative archetypes were grounded in evidence that the 2023 Erdoğan vote was not driven by economic evaluations alone. Çarkoğlu shows that Erdoğan's support persisted despite negative economic conditions because conservative moral values, security, foreign policy, religiosity, right-wing identity, and regime satisfaction remained important \cite{carkoglu2024unlikely}. This supports separating strongly loyal conservative agents from economically dissatisfied but culturally anchored conservative agents.
+
+Affective polarization was included as a state variable because recent evidence shows that Turkish voters were highly affectively polarized ahead of the 2023 election, especially AKP and HDP supporters. Aytaç et al. further show that affective polarization reinforced AKP voter loyalty \cite{aytac2025polarised}. Accordingly, highly polarized agents were modelled with lower cross-bloc switching and stronger turnout resilience.
+
+The Kurdish Political Voter archetype was modelled as a strategic anti-incumbent voter rather than as a conventional CHP voter. Baruh and Çarkoğlu show that Kılıçdaroğlu had a comparative advantage among HDP-affinity voters, while nationalist-coded alternatives such as Mansur Yavaş carried a stronger penalty among this constituency \cite{baruh2024difficult}. This supports a candidate-utility structure in which Kurdish-aligned agents evaluate Kılıçdaroğlu through democratic-restoration expectations, anti-incumbent viability, and nationalist-penalty avoidance.
+
+The Earthquake Zone Loyalist archetype was grounded in mediated retrospective voting. Sevinç and Göz argue that earthquake-affected voters evaluated government aid, services, prior disaster performance, and the response to the February 2023 earthquake rather than mechanically punishing the incumbent \cite{sevinc2024afet}. Therefore, disaster exposure was not modelled as an automatic opposition shift.
+
+Political broadcasts were modelled as affective and partisan inputs rather than neutral information packets. Zeynel and Savut's analysis of the most-watched campaign advertisements of the six highest-vote parties in the 2023 election shows that emotional messaging differed according to party ideology and ruling/opposition position \cite{zeynel2024duygular}. This supports including affective framing in the event and broadcast design.
+
+Table~\ref{tab:source_grounding} summarizes the major source-grounding links between the literature and the model design.
+
+\begin{table*}[t]
+\caption{Source grounding of voter archetypes and model components}
+\label{tab:source_grounding}
+\centering
+\footnotesize
+\begin{tabular}{@{}p{0.25\textwidth}p{0.23\textwidth}p{0.43\textwidth}@{}}
+\toprule
+Model component & Key sources & Grounding role \\
+\midrule
+Devout Anatolian Loyalist & \cite{carkoglu2024unlikely,aytac2025polarised} & Conservative identity, religiosity, moral values, security, and affective loyalty \\
+Conservative Economically Disillusioned & \cite{carkoglu2024unlikely,yildirim2025sege,cinkara2025erdogan} & Economic dissatisfaction does not automatically create opposition voting \\
+Kurdish Political Voter & \cite{baruh2024difficult,aytac2025polarised,ilbiz2023securitization,yegen2022kurdish,ysp2023manifesto} & Strategic support for Kılıçdaroğlu, HDP affective polarization, informal coordination under securitization \\
+Alevi-CHP Loyalist & \cite{carkoglu2024unlikely,kuru2017religious,ozbudun2013cleavages} & Negative predisposition toward Erdoğan, secular-religious cleavage, defensive secularism \\
+Nationalist Grey Wolf / MHP core & \cite{carkoglu2024unlikely,gerim2025victory,karaca2024socialmedia} & Security, nationalism, anti-immigration salience \\
+Moderate Nationalist / İYİ voter & \cite{baruh2024difficult,demir2024iyi} & İYİ/centre-right discomfort with Kılıçdaroğlu and opposition candidate-choice tradeoff \\
+Earthquake Zone Loyalist & \cite{sevinc2024afet,carkoglu2024unlikely} & Mediated retrospective disaster voting and state-capacity evaluation \\
+Young Urban Protest Voter & \cite{hafizoglu2021z,karaca2024socialmedia,aytac2025polarised} & Social-media exposure, generational difference, lower traditional loyalty \\
+Retired Protest Voter & \cite{carkoglu2024unlikely,yildirim2025sege} & Fixed-income economic pressure and retrospective dissatisfaction; treated as exploratory due to limited direct evidence \\
+Oğan / ATA / Zafer pathway & \cite{gerim2025victory,karaca2024socialmedia,kang2026dynamok} & Anti-immigration protest voting and third-party salience-collapse risk \\
+Broadcast / media filtering & \cite{zeynel2024duygular,bozdag2022skeptical,najafi2024dataset} & Emotional campaign framing, polarized media environment, social-media event grounding \\
+Memory and prior political state & \cite{park2023generative,hwang2023aligning} & Generative-agent memory and evidence that past opinions improve LLM opinion modelling \\
+Aggregation and validation & \cite{kang2026dynamok,kreutner2026ep,qu2024performance,rettenberger2025politicalbias} & Bias, prompt sensitivity, non-Western validity risk, third-party collapse \\
+\botrule
+\end{tabular}
+\normalsize
+\end{table*}
+
+\subsection{Synthetic electorate construction}\label{subsec:electorate}
+
+The electorate consists of 300 synthetic agents distributed across 12 voter archetypes. These archetypes are designed to represent politically meaningful blocs in Turkish electoral politics rather than statistically representative survey clusters. The 12 archetypes are: Devout Anatolian Loyalist, Secular Urban Professional, Conservative Economically Disillusioned, Alevi-CHP Loyalist, Kurdish Political Voter, Nationalist Grey Wolf, Moderate Nationalist İYİ, Pious Disillusioned Islamist, Young Urban Protest Voter, Earthquake Zone Loyalist, Retired Protest Voter, and Cosmopolitan Liberal.
+
+Each agent contains structured demographic and political information: age, gender, city, region, education, income, employment, biography, worldview, media diet, emotional baseline, behavioural tendencies, 2018 party and presidential memory, and initial candidate probability distributions. The 2018 baseline is used as persona grounding and memory, not as a deterministic rule for the 2023 vote. Agents are therefore allowed to change their preferences over time through LLM reasoning.
+
+The 300-agent sampling frame is anchored in the 2018 Turkish electoral baseline. Party anchors are distributed as AKP 128 agents, CHP 68, HDP/DEM 35, MHP 33, İYİ 30, and other small parties 6. Presidential anchors are distributed as Erdoğan 158, Muharrem İnce 92, Selahattin Demirtaş 25, Meral Akşener 22, Temel Karamollaoğlu 3, and Doğu Perinçek 0. The final archetype counts are shown in Table~\ref{tab:archetypes}.
+
+\begin{table}[t]
+\caption{Synthetic electorate by archetype}
+\label{tab:archetypes}
+\centering
+\begin{tabular}{@{}p{0.72\columnwidth}r@{}}
+\toprule
+Archetype & N \\
+\midrule
+Devout Anatolian Loyalist & 58 \\
+Conservative Economically Disillusioned & 33 \\
+Secular Urban Professional & 32 \\
+Nationalist Grey Wolf (MHP core) & 30 \\
+Kurdish Political Voter & 29 \\
+Moderate Nationalist (İYİ) & 25 \\
+Alevi-CHP Loyalist & 19 \\
+Pious Disillusioned Islamist & 18 \\
+Retired Protest Voter & 16 \\
+Young Urban Protest Voter & 15 \\
+Earthquake Zone Loyalist & 14 \\
+Cosmopolitan Liberal & 11 \\
+\midrule
+Total & 300 \\
+\botrule
+\end{tabular}
+\end{table}
+
+The population should not be interpreted as a statistically representative micro-sample of Turkish voters. The ideal design would use licensed survey microdata and official demographic microdata. In this project, detailed individual-level or highly granular cross-tabulated datasets were not available as open research data. The personas are therefore research-informed synthetic archetypes, supported by secondary research synthesis and encoded into local JSON/YAML source files. This provides sociopolitical plausibility but limits claims of statistical representativeness.
+
+\subsection{Event timeline and election-safe ticks}\label{subsec:timeline}
+
+The simulation exposes agents to a longitudinal 2018--2023 event timeline. Events cover major political and social developments between the 2018 baseline and the 2023 runoff. These include currency and inflation shocks, the 2019 Istanbul mayoral election, opposition alliance formation, Kurdish political developments, campaign events, polling shifts, the February 2023 earthquakes, first-round voting, runoff campaigning, and final result reveal.
+
+A key design requirement is prevention of election-result leakage. The event timeline contains actual 2023 election results, but voters must decide before seeing those results. The engine therefore splits election events into decision and reveal phases. For the first round, voters decide at \texttt{T030A\_first\_round\_vote\_decision}; only after decisions are recorded does \texttt{T030B\_first\_round\_result\_revealed} reveal the result. For the runoff, voters decide at \texttt{T035A\_runoff\_vote\_decision}; only afterward does \texttt{T035B\_final\_result\_revealed} reveal the final outcome. The prompt also includes a temporal fence instructing the voter to use only information available up to the simulated date.
+
+\subsection{Political broadcasts and information filtering}\label{subsec:broadcasts}
+
+Political communication is represented as controlled broadcast inputs rather than as fully autonomous strategic political agents. For each event tick, the system identifies relevant political speakers and message frames from structured configuration files. These message frames include actor identity, event-specific framing, target groups, tone, and expected direction of influence. The important methodological point is that these broadcasts do not mechanically shift votes. They are visible inputs to the voter LLM, which then decides whether the message is persuasive, ignored, reinforcing, mobilizing, or backfiring.
+
+Each voter sees only a filtered subset of broadcasts. Filtering depends on media diet, political credibility, event date, and relevant source. For example, a pro-government loyalist and an opposition urban voter may receive different visible messages from the same event because their media exposure and credibility scores differ. This filtering layer is intended to make the information environment more realistic than a single common national news feed.
+
+The completed baseline run should therefore be described carefully: voter decisions are LLM-first, but political broadcasts are controlled source-grounded inputs. Future versions may make political actors more autonomous LLM agents, but that is not the claim evaluated in this paper.
+
+\subsection{Voter prompt and LLM decision loop}\label{subsec:prompt}
+
+At each tick, each voter agent receives a prompt containing the following components: temporal fence, role instruction, identity, archetype, demographic profile, biography, political identity summary, worldview, media diet, social context, 2018 baseline memory, current beliefs, current affective state, recent episodic memories, current event, visible broadcasts, limited peer reflections, and a strict JSON output schema.
+
+The model is instructed to role-play as the synthetic voter rather than as a political analyst. It must return structured values for government approval, institutional trust, opposition trust, anger, fear, hope, sadness, political fatigue, party preference, first-round vote intention, runoff vote intention, turnout probability, reason codes, confidence, and a short first-person reflection. Deterministic code validates the JSON, clamps numerical values to valid ranges, normalizes probability distributions, and stores the updated belief and memory state. It does not select the vote for the agent.
+
+The completed run used \texttt{gpt-4o-mini} with temperature 0.45 and a maximum output budget of 900 tokens per voter-decision call. The baseline run was executed in May 2026. The orchestration code was implemented in Python 3.11, using the OpenAI API for LLM calls, PyYAML for configuration loading, and pandas/numpy for analysis. Parallel voter calls were executed through Python's \texttt{concurrent.futures.ThreadPoolExecutor}. Soul sampling was deterministic, using a fixed random seed of 20230528. Trajectory data were exported as a long-format CSV table. Per-agent belief states, episodic memories, broadcast logs, reflection logs, and the canonical run log were stored as JSON or JSON Lines files.
+
+All voter calls used the same system prompt template, with event-specific and agent-specific fields filled deterministically from configuration files. If the LLM response failed JSON parsing or omitted required fields, the call was retried up to three times with linear backoff and a clarifying instruction requiring strict JSON output. Successfully parsed responses were passed through deterministic schema validation: numerical state variables were clamped to their allowed scales, candidate probability distributions were normalized to sum to one over canonical key sets, and the \texttt{confidence} and \texttt{reason\_codes} fields were sanitized to their allowed types. If a call still failed after retries, the engine could continue with a low-confidence fallback that preserved the agent's previous belief and affect state and marked the case as a provider error. In the baseline run reported here, this fallback was never triggered. Because the temperature is non-zero and the model is accessed through a hosted API, the run is a single stochastic realization rather than a deterministic artifact, and exact byte-level replication depends on provider-side model versioning.
+
+\paragraph{Resource constraint and run protocol.}
+A full 300-agent, 37-tick simulation produces 11{,}100 voter-decision LLM calls plus political-broadcast generation calls. The May 2026 baseline run required approximately 8--10 hours of wall-clock execution at the chosen concurrency level and incurred approximately 8--10 USD in API cost at the pricing available during the run. For this reason, the paper reports one fully audited baseline run rather than repeated full replications. This constraint is methodologically important: every aggregate quantity reported here is a single sample from a stochastic process at a fixed synthetic-population seed, and LLM run-to-run variance cannot be estimated from one realization. Future work should repeat the full run across model versions, temperatures, prompt variants, and population seeds.
+
+\subsection{Aggregation and scoring rules}\label{subsec:scoring}
+
+The simulation produces candidate probability distributions for each agent. These probabilities can be aggregated in at least two reasonable ways.
+
+The first rule is \textit{mean-probability aggregation}. For candidate $c$ and agents $i=1,\ldots,N$, the simulated vote share is:
+
+\begin{equation}
+S_c^{mean} = \frac{1}{N}\sum_{i=1}^{N}p_{ic},
+\end{equation}
+
+where $p_{ic}$ is agent $i$'s probability assigned to candidate $c$. This rule treats each agent's probability distribution as fractional electoral support.
+
+The second rule is \textit{mode-vote aggregation}. Each agent is assigned one vote for the candidate with the highest probability:
+
+\begin{equation}
+v_i = \arg\max_c p_{ic},
+\end{equation}
+
+and candidate shares are computed from the count of these discrete choices:
+
+\begin{equation}
+S_c^{mode} = \frac{1}{N}\sum_{i=1}^{N}\mathbb{1}(v_i=c).
+\end{equation}
+
+These rules capture different interpretations of LLM-generated probabilities. Mean-probability aggregation evaluates average probabilistic support, while mode-vote aggregation approximates a ballot-like decision in which each voter ultimately chooses one option.
+
+Aggregation was performed only after all voter-decision calls for the relevant election tick were completed and validated. Mean-probability aggregation used the normalized candidate probability distributions stored after validation. Mode-vote aggregation assigned each agent to the candidate with the highest normalized probability in their \texttt{first\_round\_vote\_intention} or \texttt{runoff\_vote\_intention} distribution.
+
+A non-trivial number of agents produced tied top probabilities. In the baseline run, 50 of 300 first-round agents (16.7\%) and 54 of 300 runoff agents (18.0\%) had two or more outcomes tied at the maximum probability. These ties were typically cases where the LLM expressed uncertainty by assigning equal probability to multiple outcomes. The primary implementation resolved ties deterministically using the canonical candidate order in the aggregation code. For the first round, this order was Erdoğan, Kılıçdaroğlu, Sinan Oğan, Muharrem İnce, Other, and Undecided. For the runoff, this order was Erdoğan, Kılıçdaroğlu, and Abstain/Invalid/Undecided. This ordering favours Erdoğan when Erdoğan is part of a top-probability tie. Therefore, this paper reports mode-vote outcomes under the canonical rule, a reverse-order rule, and a Monte Carlo random tie-break rule.
+
+The difference between aggregation rules and the sensitivity to tie handling are central to the results.
+
+\subsection{Evaluation targets}\label{subsec:evaluation}
+
+The main external comparison target is the official 2023 Turkish presidential election result. The first round is evaluated against Erdoğan 49.52\%, Kılıçdaroğlu 44.88\%, Sinan Oğan 5.17\%, and Muharrem İnce 0.43\%. The runoff is evaluated against Erdoğan 52.18\% and Kılıçdaroğlu 47.82\% \cite{ysk2023}.
+
+Evaluation is performed at five levels: aggregate candidate shares, scoring-rule sensitivity, archetype-level vote patterns, demographic breakdowns, and longitudinal trajectories of approval and trust. This multi-level evaluation is necessary because a simulation may fail at aggregate prediction while still reproducing meaningful bloc-level structure, or may match the winner while doing so for the wrong reasons.
+
+\section{Results}\label{sec:results}
+
+This section reports five layers of evaluation: aggregate vote shares (Section~\ref{subsec:two_rules}), archetype-level patterns (Section~\ref{subsec:archetypes}), the Oğan miss (Section~\ref{subsec:ogan}), demographic breakdowns (Section~\ref{subsec:demographics}), and longitudinal trajectories (Section~\ref{subsec:trajectories}).
+
+\subsection{Aggregate outcome: aggregation and tie-handling sensitivity}\label{subsec:two_rules}
+
+The completed simulation should be read as a diagnostic realization rather than as a prediction. The model produces internally coherent bloc-level behaviour, but the aggregate winner depends on how probabilistic voter intentions are converted into election-level outcomes. This distinction is central to the evaluation: under mean-probability aggregation, the model overestimates opposition consolidation and produces a Kılıçdaroğlu plurality; under the implementation's canonical deterministic mode-vote rule, the same agents produce an Erdoğan victory in both rounds. However, this mode-vote result is not robust to tie handling. Because 16.7\% of first-round agents and 18.0\% of runoff agents produce tied top probabilities, reversing the tie order or randomly resolving tied choices changes the mode-vote interpretation.
+
+Figure~\ref{fig:scoring} reports the first-round and runoff outcomes under mean-probability aggregation and the canonical mode-vote rule. In the first round, the actual result was Erdoğan 49.5\%, Kılıçdaroğlu 44.9\%, Oğan 5.2\%, and İnce 0.4\%. Mean-probability aggregation gives Erdoğan 41.5\%, Kılıçdaroğlu 49.1\%, and Oğan 1.4\%, producing a Kılıçdaroğlu plurality. The canonical mode-vote rule gives Erdoğan 54.7\% and Kılıçdaroğlu 45.3\%, identifying Erdoğan as the winner under that specific tie-breaking assumption, but misses Oğan as a discrete top choice.
+
+In the runoff, the actual result was Erdoğan 52.2\% and Kılıçdaroğlu 47.8\%. Mean-probability aggregation gives Erdoğan 41.8\% and Kılıçdaroğlu 49.1\%, with a substantial abstain/undecided component. The canonical mode-vote rule gives Erdoğan 55.3\% and Kılıçdaroğlu 44.3\%.
+
+\begin{figure*}[!ht]
+\centering
+\includegraphics[width=\textwidth]{Fig2_scoring_rules.png}
+\caption{First-round (left) and runoff (right) vote shares: actual YSK results compared with simulated mean-probability and canonical mode-vote shares on the same 300-agent population. The canonical mode-vote result is tie-break-sensitive.}
+\label{fig:scoring}
+\end{figure*}
+
+Table~\ref{tab:aggregate} summarizes the same result numerically. The model is not simply ``right'' or ``wrong''. It is winner-accurate under the canonical deterministic mode-vote rule and winner-inaccurate under mean-probability aggregation. However, Table~\ref{tab:tie_sensitivity} shows that this canonical mode-vote finding is tie-break-sensitive. Under the reverse-order rule, the first-round mode-vote result shifts to Kılıçdaroğlu 46.67\% and Erdoğan 41.00\%, with 11.67\% assigned to Undecided. Under random tie-breaking, Kılıçdaroğlu has a narrow mean advantage in the first round, 48.34\% versus Erdoğan's 46.56\%, with overlapping uncertainty intervals. The runoff shows a similar pattern: the canonical rule gives Erdoğan 55.33\%, but random tie-breaking gives nearly indistinguishable mean shares for Erdoğan and Kılıçdaroğlu. Thus, the simulation does not robustly identify the correct winner. The apparent canonical mode-vote success is partly an artifact of deterministic tie handling. This makes calibration, aggregation, and tie handling central methodological issues for LLM-based synthetic electorates.
+
+\begin{table*}[!ht]
+\caption{Actual and simulated presidential vote shares under mean-probability and canonical mode-vote aggregation}
+\label{tab:aggregate}
+\centering
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Stage & Source/rule & Erdoğan & Kılıçdaroğlu & Oğan & Other/abstain \\
+\midrule
+First round & Actual result & 49.52 & 44.88 & 5.17 & 0.43 \\
+First round & Simulated mean probability & 41.54 & 49.13 & 1.37 & 7.96 \\
+First round & Simulated mode vote & 54.67 & 45.33 & 0.00 & 0.00 \\
+\midrule
+Runoff & Actual result & 52.18 & 47.82 & -- & 0.00 \\
+Runoff & Simulated mean probability & 41.80 & 49.06 & -- & 9.14 \\
+Runoff & Simulated mode vote & 55.33 & 44.33 & -- & 0.33 \\
+\botrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[!ht]
+\caption{Mode-vote sensitivity to top-probability tie handling. Random tie-break results are based on 10,000 Monte Carlo samples.}
+\label{tab:tie_sensitivity}
+\centering
+\footnotesize
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Stage & Candidate & Actual (YSK) & Canonical & Reverse & Random mean [95\% CI] \\
+\midrule
+First round & Erdoğan & 49.52 & 54.67 & 41.00 & 46.56 [44.67, 48.67] \\
+First round & Kılıçdaroğlu & 44.88 & 45.33 & 46.67 & 48.34 [46.33, 50.33] \\
+First round & S. Oğan & 5.17 & 0.00 & 0.33 & 0.39 [0.00, 1.00] \\
+First round & M. İnce & 0.43 & 0.00 & 0.00 & 0.00 [0.00, 0.00] \\
+First round & Other & -- & 0.00 & 0.33 & 0.17 [0.00, 0.33] \\
+First round & Undecided & -- & 0.00 & 11.67 & 4.55 [2.67, 6.33] \\
+\midrule
+Runoff & Erdoğan & 52.18 & 55.33 & 40.33 & 46.45 [44.33, 48.67] \\
+Runoff & Kılıçdaroğlu & 47.82 & 44.33 & 43.33 & 46.60 [44.67, 48.67] \\
+Runoff & Abstain/Invalid/Undecided & -- & 0.33 & 16.33 & 6.95 [4.67, 9.33] \\
+\botrule
+\end{tabular}
+\normalsize
+\end{table*}
+
+\FloatBarrier
+
+\subsection{Archetype-level voting: coalition structure is stronger than aggregate prediction}\label{subsec:archetypes}
+
+Although the aggregate result is not robust across probability-to-vote conversion rules, the archetype-level mode-vote results show that the simulation captures several broad coalition structures. Figure~\ref{fig:archetype} shows first-round mode-vote by archetype.
+
+\begin{figure*}[!ht]
+\centering
+\includegraphics[width=\textwidth]{Fig3_archetype_mode_vote.png}
+\caption{First-round mode-vote by archetype: share of agents in each archetype whose top-ranked first-round candidate was the listed candidate.}
+\label{fig:archetype}
+\end{figure*}
+
+Several patterns are substantively plausible. The Devout Anatolian Loyalist, Nationalist Grey Wolf, and Earthquake Zone Loyalist archetypes vote entirely for Erdoğan. Secular Urban Professional, Alevi-CHP Loyalist, Young Urban Protest Voter, and Cosmopolitan Liberal archetypes vote entirely for Kılıçdaroğlu. Kurdish Political Voters also consolidate behind Kılıçdaroğlu, consistent with strategic opposition voting. Conservative Economically Disillusioned and Pious Disillusioned Islamist voters remain mostly Erdoğan-oriented but show some erosion. Moderate Nationalist İYİ voters lean strongly toward Kılıçdaroğlu but retain a pro-Erdoğan minority. Retired Protest Voters split evenly.
+
+This result suggests that the model performs better at reproducing broad coalition blocs than at representing internally fragmented or protest-oriented behaviour. The clearest success is the reproduction of the Erdoğan loyalist core and the opposition consolidation of secular, Kurdish, young urban, Alevi-CHP, and cosmopolitan liberal blocs. The most important failure is the absence of a discrete Oğan electorate. Although the simulation includes nationalist archetypes, it does not include a sufficiently strong nationalist-protest or ATA Alliance pathway capable of making Oğan the top first-round choice for a meaningful number of agents.
+
+The Earthquake Zone Loyalist archetype is especially important. A simple retrospective-accountability model might expect the February 2023 earthquakes to strongly punish the incumbent. The simulation instead preserves Erdoğan loyalty in this archetype, matching the broader empirical puzzle that disaster exposure did not automatically translate into opposition voting among all affected conservative communities. This is a meaningful validation success at the archetype level, even though it does not remove the aggregate calibration problems.
+
+\subsection{The Oğan miss: a representation gap rather than random noise}\label{subsec:ogan}
+
+The model underestimates Sinan Oğan's first-round support. The actual Oğan vote share was 5.17\%, while the mean-probability simulation gives 1.37\% and the mode-vote simulation gives 0\%. This is not merely a small numerical error. In a 300-agent simulation, a 5.17\% vote share corresponds to roughly 15 agents. The model produces no discrete bloc of agents for whom Oğan is the top candidate.
+
+This failure exposes a representation gap in the synthetic electorate. The framework contains nationalist voters, especially the Nationalist Grey Wolf and Moderate Nationalist İYİ archetypes. However, these archetypes are not enough to represent the specific nationalist-protest pathway that made Oğan electorally relevant in the first round. The Nationalist Grey Wolf archetype remains overwhelmingly Erdoğan-oriented, while Moderate Nationalist İYİ voters mainly consolidate behind Kılıçdaroğlu. As a result, nationalist fragmentation appears as low-probability uncertainty rather than as a distinct ballot choice.
+
+The tie analysis adds nuance to this failure. Oğan appears in a small number of tied top-probability distributions, including two first-round ties among Erdoğan, Oğan, and Undecided and one tie between Erdoğan and Oğan. However, he almost never becomes a stable top-ranked candidate. The problem is therefore not that the model assigns Oğan no salience at all; rather, it fails to convert nationalist-protest uncertainty into a discrete Oğan-supporting bloc.
+
+For future simulations, this suggests that protest-vote candidates cannot be treated as residual probabilities attached to broader ideological blocs. They may require dedicated archetypes, event sensitivities, and campaign-message pathways. In the Turkish 2023 case, a dedicated ATA Alliance or nationalist-protest archetype would likely be necessary \cite{gerim2025victory,karaca2024socialmedia}. This interpretation is consistent with non-English LLM election-simulation work showing that third-party salience can collapse into major-bloc reasoning \cite{kang2026dynamok}.
+
+\subsection{Demographic breakdowns: coherent but not independent validation}\label{subsec:demographics}
+
+Figure~\ref{fig:demographics} reports demographic breakdowns of first-round mode-vote by region, education, age bracket, and city. These outputs should be interpreted as diagnostic checks rather than independent survey estimates. Because demographics are generated through the archetype sampling process, demographic gradients partly reflect the design of the synthetic population. They should therefore not be read as causal estimates of education, age, city, or region effects.
+
+\begin{figure*}[!ht]
+\centering
+\includegraphics[width=\textwidth]{Fig5_demographic_breakdowns.png}
+\caption{Demographic breakdown of first-round mode-vote: by region (top left), education (top right), age bracket (bottom left), and city (bottom right, top ten by N).}
+\label{fig:demographics}
+\end{figure*}
+
+Despite that limitation, the breakdowns are useful for checking whether the synthetic electorate produces plausible cleavages. Urban and western contexts such as Marmara, the Aegean, Istanbul, Ankara, and Izmir lean toward Kılıçdaroğlu. Central Anatolia, the Black Sea, Kayseri, Konya, Sivas, Erzurum, Yozgat, and Mersin show stronger Erdoğan dominance in the sampled population. Younger voters lean strongly toward Kılıçdaroğlu, while older groups are more Erdoğan-oriented. Graduate and university-student categories are fully Kılıçdaroğlu in the simulation, while primary, high-school, and vocational groups lean more Erdoğan.
+
+These gradients are directionally coherent, but they also reveal over-determinism. Several groups are reported as 100\% for one candidate, and some city-level groups have small sample sizes. The demographic outputs are therefore best used to diagnose internal consistency, not to claim that the model independently validates Turkish demographic voting patterns.
+
+\subsection{Longitudinal trajectories: the damping problem}\label{subsec:trajectories}
+
+The longitudinal trust and approval trajectories show a second important diagnostic pattern. Figure~\ref{fig:trust} plots mean government approval, institutional trust, and opposition trust across simulation ticks. The model captures the direction of political movement: government approval and institutional trust decline around the earthquake period, while opposition trust rises modestly. However, the magnitude of numerical movement is small.
+
+\begin{figure*}[!ht]
+\centering
+\includegraphics[width=\textwidth]{Fig4_trust_trajectories.png}
+\caption{Mean government approval, institutional trust, and opposition trust across 37 simulation ticks. Background bands mark major event clusters for orientation rather than causal attribution.}
+\label{fig:trust}
+\end{figure*}
+
+This is the \textit{damping problem}: the LLM produces event-aware reflections and plausible qualitative reasoning, but the numerical state variables move less than expected. In other words, the agents often narrate political change more strongly than they encode it in approval, trust, or emotion scores. This matters because longitudinal simulation depends not only on final vote choice but also on state dynamics. If trust and affect remain too stable, the model may understate the cumulative effect of crises, campaigns, and institutional shocks.
+
+The damping problem is not only a limitation; it is a useful diagnostic finding. It suggests that future LLM-agent simulations should evaluate the alignment between natural-language reflection and numerical state updates. A model may appear politically responsive in text while remaining numerically inert. In this run, the qualitative narratives were more event-sensitive than the structured numerical state variables.
+
+\section{Discussion}\label{sec:discussion}
+
+The central result is that the same LLM-agent run can support different election interpretations depending on the probability-to-vote conversion rule. Mean-probability aggregation produces a Kılıçdaroğlu plurality. Canonical mode-vote aggregation produces an Erdoğan victory, but this result is sensitive to the deterministic tie-break rule used by the implementation. When tied top probabilities are resolved by reverse ordering or random tie-breaking, the mode-vote result shifts toward Kılıçdaroğlu or becomes statistically ambiguous.
+
+This matters because real elections count discrete ballots, but LLM agents often return probability distributions rather than discrete choices. Converting those distributions into votes is therefore not a neutral technical step. Mean-probability aggregation treats uncertainty as fractional electoral support. Mode-vote aggregation approximates a ballot-like decision, but tied top probabilities require an additional tie-handling rule. In this simulation, a sizeable minority of agents produced such ties. The main methodological lesson is therefore broader than the original mean-versus-mode contrast: LLM electoral simulations require explicit reporting of probability calibration, discrete-vote conversion, and tie-handling assumptions.
+
+At the bloc level, the model performs better. It reproduces the loyalist Erdoğan core, secular opposition consolidation, Kurdish strategic support for Kılıçdaroğlu, and the persistence of earthquake-zone loyalism. These results suggest that source-grounded LLM agents can encode broad political identities and respond to event sequences in interpretable ways. However, the model performs less well where the electorate is internally fragmented, strategically cross-pressured, or protest-oriented. The Oğan miss is the clearest example.
+
+The findings also show the value of diagnostic failure analysis. A conventional election-prediction framing would classify the model as either correct or incorrect. That would miss the more interesting methodological result: the simulation is bloc-plausible at the archetype level, unstable under aggregation and tie-handling choices, weak on protest-nationalist representation, and damped in numerical state trajectories. This mixed profile is exactly why LLM-agent simulations should be evaluated at multiple levels rather than only by final aggregate accuracy.
+
+\section{Limitations}\label{sec:limitations}
+
+This study has several important limitations.
+
+First, the completed simulation is a single stochastic realization. The LLM was run at temperature 0.45, so run-to-run variation is expected. The tie-handling Monte Carlo analysis estimates uncertainty only for tied top-probability conversion inside the completed run; it does not estimate full LLM run-to-run variance. Repeated full simulations across model versions, temperatures, prompt variants, and population seeds would be required to make stronger robustness claims.
+
+Second, the primary mode-vote result is sensitive to tie handling. A sizeable minority of agents produced tied top probabilities at the election decision ticks. The deterministic candidate ordering used in the baseline aggregation favours Erdoğan when Erdoğan is included in a top-probability tie. This does not invalidate the comparison between aggregation rules, but it means that the canonical mode-vote result should be interpreted as conditional on an explicit tie-breaking assumption. Future work should report random tie-breaking, candidate-order reversals, and probabilistic sampling from the candidate distribution as robustness checks.
+
+Third, the synthetic electorate is not generated from licensed survey microdata or official individual-level demographic data. The voter archetypes are research-informed and source-grounded, but they remain synthetic constructs. This limits claims of statistical representativeness.
+
+Fourth, LLM contamination is a serious concern. The model may have latent knowledge of the 2023 Turkish election from pretraining. The simulation uses temporal fencing and election-safe decision ticks, but prompt-level fencing cannot fully remove latent historical knowledge.
+
+Fifth, the model contains researcher priors. Archetype definitions, sampling weights, credibility matrices, event descriptions, broadcast frames, and prompt wording all shape the simulation. This is not unique to LLM simulations, but it must be disclosed because these priors influence outputs. The reproducibility supplement classifies input components by epistemic category, distinguishing empirical inputs, synthetic attributes, heuristic rules, and LLM-generated outputs so that the source of each modelling assumption can be audited.
+
+Sixth, the political broadcast layer in the completed baseline run is controlled rather than fully autonomous. Political actors are represented through structured broadcast inputs and filtered visibility, not as independent strategic LLM agents continuously optimizing campaign behaviour.
+
+Seventh, the model lacks a dedicated nationalist-protest pathway for Sinan Oğan. This produces a clear underestimation of Oğan support and shows that small but politically consequential blocs can disappear when they are represented only as residual probability inside broader archetypes.
+
+Eighth, causal event attribution is limited. Because there is only one run and no ablation design, the paper cannot claim that a specific event caused a specific vote shift. Event interpretation is descriptive and diagnostic rather than causal.
+
+Ninth, numerical state trajectories are damped. Trust, approval, and affect move in the expected direction around major events, but the magnitude is small. This raises concern that the LLM is more responsive in reflection text than in structured numerical updates.
+
+Tenth, subgroup analysis is limited by sample size. A 300-agent population is useful for a small-scale diagnostic simulation, but some city, education, and archetype subgroups are small. Their percentages should be read cautiously.
+
+\section{Conclusion}\label{sec:conclusion}
+
+This paper presented \textit{Synthetic Turkey}, a source-grounded LLM-agent simulation of the 2023 Turkish presidential election. The study does not demonstrate that LLM agents can reliably predict elections. Instead, it shows that a controlled LLM-mediated synthetic electorate can reproduce some coalition-level structures while exposing clear failure modes in aggregation, calibration, archetype coverage, and longitudinal state dynamics.
+
+The most important finding is that probability-to-vote conversion rules materially shape the simulated outcome. Mean-probability aggregation produces a Kılıçdaroğlu plurality, while canonical mode-vote aggregation produces an Erdoğan victory. However, the canonical mode-vote result is sensitive to top-probability tie handling: under alternative tie rules, the simulated winner shifts toward Kılıçdaroğlu or becomes ambiguous. This result shows that LLM-generated voter probabilities cannot be interpreted naively. The conversion from probabilistic intention to electoral outcome is itself a modelling choice.
+
+The simulation is strongest at reproducing broad political blocs: loyalist Erdoğan voters, secular opposition voters, Kurdish strategic opposition voters, and earthquake-zone loyalists. It is weakest at representing protest-nationalist fragmentation, especially the Oğan vote. It also shows over-homogenization in some opposition archetypes and damped numerical movement in trust and affect.
+
+The broader implication is that LLM-agent electoral simulations should be evaluated as diagnostic instruments before they are treated as predictive models. Their value lies not only in whether they match an election result, but in where they fail, which assumptions create those failures, and how those failures reveal the structure of the model.
+
+\section*{Acknowledgements}
+
+The author thanks the thesis advisor and academic reviewers who provided feedback on earlier versions of the study. Any remaining errors are the author's own.
+
+\section*{Statements and Declarations}
+
+\subsection*{Funding}
+
+No external funding was received for this study.
+
+\subsection*{Competing interests}
+
+The author declares no competing interests.
+
+\subsection*{Ethics approval}
+
+This study uses synthetic agents and publicly discussed political events. It does not involve human participants, human-subject experiments, or individual-level human-subject data.
+
+\subsection*{Consent to participate and publish}
+
+Not applicable. This study does not involve human participants, human-subject experiments, or individual-level human-subject data.
+
+\subsection*{Data availability}
+
+The main analytical dataset is the exported long-format agent trajectory table containing 300 agents across 37 simulation ticks. The dataset includes agent identifiers, archetype labels, event identifiers, belief and affect variables, turnout probability, candidate probability distributions, vote intentions, reason codes, confidence values, and short voter reflections. Per-agent belief states, episodic memories, broadcast logs, reflection logs, and the canonical run log are stored as JSON or JSON Lines files. The reproducibility package will be released in a public repository and archived with a persistent identifier after removal of development-only notes, credentials, and non-public files. Repository placeholder: \url{https://github.com/abdullahklnc132/synthetic-turkey-reproducibility}. DOI placeholder: \url{https://doi.org/10.5281/zenodo.TODO}. Official election results used for evaluation are publicly available from the Supreme Election Council of Türkiye.
+
+\subsection*{Code availability}
+
+The simulation orchestration code is implemented in Python 3.11 and includes agent generation, event-tick execution, voter prompt assembly, broadcast filtering, JSON validation, aggregation, tie-handling sensitivity analysis, and figure-generation scripts. The code, prompt template, JSON output schema, configuration files, and analysis scripts will be released as part of the reproducibility supplement (Online Resource 1) and/or in the public repository after removal of credentials, development-only notes, and non-public files. The LLM was accessed through the OpenAI API; the model identifier, temperature, token budget, and run protocol are reported in Section~\ref{subsec:prompt}.
+
+\subsection*{Supplementary information}
+
+The reproducibility supplement (Online Resource 1) includes the archetype configuration files, 2018 baseline sampling profile, 37-tick event timeline, political actor and credibility configuration files, prompt template, JSON output schema, exported agent trajectory table, canonical run log, tie-handling sensitivity outputs, and analysis scripts used to generate the tables and figures reported in this article.
+
+\subsection*{Use of generative AI}
+
+Large language models were used as part of the research object and simulation mechanism. In the completed run, an LLM generated structured voter decisions and reflections from controlled prompts. Generative AI tools were also used to support drafting and editing of manuscript text. The author reviewed and takes responsibility for the final content.
+
+\begin{appendices}
+
+\section{Summary of scoring-rule interpretation}\label{app:scoring}
+
+Mean-probability aggregation is useful when the research question concerns average probabilistic support. However, it can be misleading if LLM probabilities are not calibrated. Mode-vote aggregation is closer to the mechanics of a discrete ballot, but it discards uncertainty and requires an explicit tie-handling rule when two or more outcomes share the maximum probability. The divergence between aggregation rules and tie-handling rules in this study suggests that future LLM electoral simulations should report mean-probability shares, discrete mode-vote shares, and tie-handling sensitivity.
+
+\begin{table*}[!htbp]
+\caption{Composition of top-probability ties at election decision ticks}
+\label{tab:tie_composition}
+\centering
+\footnotesize
+\begin{tabular}{@{}llrr@{}}
+\toprule
+Stage & Tied outcomes & Tie size & Agents \\
+\midrule
+First round & Erdoğan + Kılıçdaroğlu + Undecided & 3 & 21 \\
+First round & Erdoğan + Kılıçdaroğlu & 2 & 13 \\
+First round & Kılıçdaroğlu + Undecided & 2 & 8 \\
+First round & Erdoğan + Undecided & 2 & 4 \\
+First round & Erdoğan + S. Oğan + Undecided & 3 & 2 \\
+First round & Erdoğan + S. Oğan & 2 & 1 \\
+First round & Kılıçdaroğlu + Other & 2 & 1 \\
+\midrule
+Runoff & Abstain/Invalid/Undecided + Erdoğan + Kılıçdaroğlu & 3 & 25 \\
+Runoff & Abstain/Invalid/Undecided + Erdoğan & 2 & 14 \\
+Runoff & Abstain/Invalid/Undecided + Kılıçdaroğlu & 2 & 9 \\
+Runoff & Erdoğan + Kılıçdaroğlu & 2 & 6 \\
+\botrule
+\end{tabular}
+\normalsize
+\end{table*}
+\FloatBarrier
+
+\section{Recommended future extensions}\label{app:future}
+
+Future work should include repeated simulation runs, mock-versus-LLM ablations, explicit calibration tests, a dedicated nationalist-protest archetype, stronger modelling of Oğan-like third-candidate pathways, improved numerical state-update prompting, and more empirically grounded demographic sampling. Political broadcast generation could also be extended toward autonomous but constrained LLM political agents, while preserving source control and leakage prevention.
+
+\section{Prompt and output-schema summary}\label{app:prompt_schema}
+
+Each voter prompt contained eight blocks: (1) temporal fence, (2) voter identity and archetype, (3) demographic and political biography, (4) 2018 baseline memory, (5) current belief and affect state, (6) recent episodic memories, (7) current event and visible political broadcasts, and (8) strict JSON response schema. The model was instructed to answer as the voter, not as an external political analyst.
+
+The JSON schema required structured fields for government approval, institutional trust, opposition trust, anger, fear, hope, sadness, political fatigue, turnout probability, party preference, first-round vote intention, runoff vote intention, candidate probability distribution, confidence, reason codes, and a short first-person reflection. Numerical fields were bounded on fixed scales and validated by deterministic code. Candidate probability distributions were normalized after validation.
+
+The full prompt template and JSON output schema are included in the reproducibility supplement (Online Resource 1).
+
+\section{Event timeline and leakage controls}\label{app:event_timeline}
+\setcounter{table}{0}
+
+The full event timeline is included in the reproducibility supplement (Online Resource 1). In the main run, election events were separated into decision and reveal phases. Agents made first-round decisions before the first-round result reveal and runoff decisions before the final result reveal. Each decision prompt included a temporal fence instructing the agent to reason only from information available at the simulated date. This reduces but does not eliminate the risk of latent historical knowledge in the underlying LLM.
+
+\begin{table}[!htbp]
+\caption{Summary of simulation event phases}
+\label{tab:event_phases}
+\centering
+\footnotesize
+\begin{tabular}{@{}p{0.24\linewidth}p{0.50\linewidth}p{0.18\linewidth}@{}}
+\toprule
+Phase & Content & Tick range \\
+\midrule
+2018 baseline & Post-2018 electoral memory and initial political alignment & T001--T003 \\
+Economic crisis period & Currency crisis, inflation, economic dissatisfaction, government performance updates & T004--T010 \\
+Opposition coordination & 2019 local elections, alliance formation, candidate debates, Kurdish strategic context & T011--T020 \\
+Pre-election shocks & Earthquake, campaign dynamics, polling shifts, nationalist fragmentation & T021--T029 \\
+First round & First-round decision tick followed by first-round result reveal & T030A--T030B \\
+Runoff campaign & Oğan endorsement, opposition nationalist turn, second-round mobilization & T031--T034 \\
+Runoff & Runoff decision tick followed by final result reveal & T035A--T035B \\
+Post-election & Final memory update and result interpretation & T036--T037 \\
+\botrule
+\end{tabular}
+\normalsize
+\end{table}
+\FloatBarrier
+
+\end{appendices}
+\FloatBarrier
+
+\FloatBarrier
+\begin{thebibliography}{99}
+
+\bibitem{epstein2006generative}
+Epstein, J. M.
+\textit{Generative Social Science: Studies in Agent-Based Computational Modeling}.
+Princeton University Press, 2006.
+
+\bibitem{macal2010tutorial}
+Macal, C. M., and North, M. J.
+Tutorial on agent-based modelling and simulation.
+\textit{Journal of Simulation}, 4(3), 151--162, 2010.
+\url{https://doi.org/10.1057/jos.2010.3}.
+
+\bibitem{park2023generative}
+Park, J. S., O'Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., and Bernstein, M. S.
+Generative agents: interactive simulacra of human behavior.
+In \textit{Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology}, 2023.
+\url{https://doi.org/10.1145/3586183.3606763}.
+
+\bibitem{argyle2023out}
+Argyle, L. P., Busby, E. C., Fulda, N., Gubler, J. R., Rytting, C., and Wingate, D.
+Out of one, many: using language models to simulate human samples.
+\textit{Political Analysis}, 31(3), 337--351, 2023.
+\url{https://doi.org/10.1017/pan.2023.2}.
+
+\bibitem{aher2023simulating}
+Aher, G. V., Arriaga, R. I., and Kalai, A. T.
+Using large language models to simulate multiple humans and replicate human subject studies.
+In \textit{Proceedings of the 40th International Conference on Machine Learning}, PMLR 202, 2023.
+
+\bibitem{gao2024llmabm}
+Gao, C., Lan, X., Li, N., Yuan, Y., Ding, J., Zhou, Z., Xu, F., and Li, Y.
+Large language models empowered agent-based modeling and simulation: a survey and perspectives.
+\textit{Humanities and Social Sciences Communications}, 11, 1259, 2024.
+\url{https://doi.org/10.1057/s41599-024-03611-3}.
+
+\bibitem{lu2024gabs}
+Lu, Y., Aleta, A., Du, C., Shi, L., and Moreno, Y.
+LLMs and generative agent-based models for complex systems research.
+\textit{Physics of Life Reviews}, 51, 283--293, 2024.
+\url{https://doi.org/10.1016/j.plrev.2024.10.013}.
+
+\bibitem{hwang2023aligning}
+Hwang, E., Majumder, B. P., and Tandon, N.
+Aligning language models to user opinions.
+In \textit{Findings of the Association for Computational Linguistics: EMNLP 2023}, 5906--5919, 2023.
+
+\bibitem{ziems2024css}
+Ziems, C., Held, W., Shaikh, O., Chen, J., Zhang, Z., and Yang, D.
+Can large language models transform computational social science?
+\textit{Computational Linguistics}, 50(1), 237--291, 2024.
+\url{https://doi.org/10.1162/coli_a_00502}.
+
+\bibitem{zhou2025flockvote}
+Zhou, L., Xu, Y., Wang, Z., and Wang, D.
+FlockVote: LLM-empowered agent-based modeling for simulating U.S. presidential elections.
+arXiv preprint, 2025. Add official ICAIS 2025 proceedings details or arXiv identifier before submission.
+
+\bibitem{zhang2024electionsim}
+Zhang, X., Lin, J., Sun, L., Qi, W., Yang, Y., Chen, Y., Lyu, H., Mou, X., Chen, S., Luo, J., Huang, X., Tang, S., and Wei, Z.
+ElectionSim: massive population election simulation powered by large language model driven agents.
+arXiv preprint, arXiv:2410.20746, 2024.
+
+\bibitem{kang2026dynamok}
+Kang, S.
+Diagnosing Korean-language LLM political bias via census-grounded agent simulation.
+arXiv preprint, arXiv:2605.18395, 2026.
+
+\bibitem{kreutner2026ep}
+Kreutner, M., Lutz, M., and Strohmaier, M.
+Persona-driven simulation of voting behavior in the European Parliament with large language models.
+Preprint or accepted conference paper, 2026. Verify final EACL/ACL Anthology metadata before submission.
+
+\bibitem{rettenberger2025politicalbias}
+Rettenberger, L., Reischl, M., and Schutera, M.
+Assessing political bias in large language models.
+\textit{Journal of Computational Social Science}, 8, Article 42, 2025.
+\url{https://doi.org/10.1007/s42001-025-00376-w}.
+
+\bibitem{qu2024performance}
+Qu, Y., and Wang, J.
+Performance and biases of large language models in public opinion simulation.
+\textit{Humanities and Social Sciences Communications}, 11, 1095, 2024.
+\url{https://doi.org/10.1057/s41599-024-03609-x}.
+
+\bibitem{carkoglu2024unlikely}
+Çarkoğlu, A.
+The unlikely survival of Erdoğan in Turkey's May 2023 elections.
+\textit{JCMS: Journal of Common Market Studies}, 62(S1), 162--173, 2024.
+\url{https://doi.org/10.1111/jcms.13655}.
+
+\bibitem{aytac2025polarised}
+Aytaç, S. E., Irmak, S., and Söylemez-Karakoç, B.
+The polarised electorate: affective polarisation and electoral loyalty in Turkey's 2023 critical election.
+\textit{South European Society and Politics}, advance online publication, 2025.
+\url{https://doi.org/10.1080/13608746.2025.2597287}.
+
+\bibitem{baruh2024difficult}
+Baruh, L., and Çarkoğlu, A.
+Difficult choices: choosing the candidate of the Nation Alliance in the 2023 Turkish presidential election.
+\textit{Southeast European and Black Sea Studies}, 24(2), 319--341, 2024.
+\url{https://doi.org/10.1080/14683857.2024.2324523}.
+
+\bibitem{ilbiz2023securitization}
+Ilbiz, E., and Kaunert, C.
+Securitization, fear politics, and the formation of an opposition alliance in competitive authoritarian regimes.
+\textit{Democratization}, 30(8), 1604--1624, 2023.
+\url{https://doi.org/10.1080/13510347.2023.2252346}.
+
+\bibitem{sevinc2024afet}
+Sevinç, H., and Göz, M. M.
+Doğal afetlerin seçmen davranışı üzerine etkisi: 6 Şubat Kahramanmaraş depremi örneği.
+\textit{Akademik Yaklaşımlar Dergisi}, 15(1) Deprem Özel Sayısı, 790--821, 2024.
+\url{https://doi.org/10.54688/ayd.1411908}.
+
+\bibitem{zeynel2024duygular}
+Zeynel, Ş. Ş., and Savut, E.
+Politik duyguların kültür ve parti eğilimleri ile ilişkisi: 2023 genel seçim kampanyası üzerinden nitel bir analiz.
+\textit{KMÜ Sosyal ve Ekonomik Araştırmalar Dergisi}, 26(46), 502--522, 2024.
+
+\bibitem{gerim2025victory}
+Gerim, G.
+Influence of anti-immigration attitudes on voter behavior and its limits: Turkish politics and the case of the Victory Party.
+\textit{Marmara Üniversitesi Siyasal Bilimler Dergisi}, 13(1), 181--199, 2025.
+\url{https://doi.org/10.14782/marmarasbd.1574198}.
+
+\bibitem{karaca2024socialmedia}
+Karaca, M. F.
+2023 Cumhurbaşkanlığı seçiminde sosyal medya kullanımı: Instagram ve X üzerine bir inceleme.
+\textit{İnönü Üniversitesi Uluslararası Sosyal Bilimler Dergisi}, 13(1), 136--175, 2024.
+\url{https://doi.org/10.54282/inijoss.1454160}.
+
+\bibitem{yildirim2025sege}
+Yıldırım, U. T.
+Socio-economic development and voter preferences in Türkiye: the 28 May 2023 presidential election.
+\textit{Akademik Araştırmalar ve Çalışmalar Dergisi}, 17(32), 165--180, 2025.
+\url{https://doi.org/10.20990/kilisiibfakademik.1653695}.
+
+\bibitem{cinkara2025erdogan}
+Çınkara, G., and Çoşkun, B.
+Erdoğan's electoral success: geopolitics, social class and new nationalism.
+\textit{Liberal Düşünce}, 30(117), 45--72, 2025.
+\url{https://doi.org/10.36484/liberal.1527011}.
+
+\bibitem{bozdag2022skeptical}
+Bozdağ, Ç., and Koçer, S.
+Skeptical inertia in the face of polarization: news consumption and misinformation in Turkey.
+\textit{Media and Communication}, 10(2), 222--232, 2022.
+\url{https://doi.org/10.17645/mac.v10i2.5057}.
+
+\bibitem{najafi2024dataset}
+Najafi, A., Mugurtay, N., Zouzou, Y., Demirci, E., Demirkiran, S., Karadeniz, H. A., and Varol, O.
+First public dataset to study 2023 Turkish general election.
+\textit{Scientific Reports}, 14, 8794, 2024.
+\url{https://doi.org/10.1038/s41598-024-58006-w}.
+
+\bibitem{ozbudun2013cleavages}
+Özbudun, E.
+\textit{Party Politics and Social Cleavages in Turkey}.
+Lynne Rienner Publishers, 2013.
+
+\bibitem{kuru2017religious}
+Kuru, A. T.
+Constitution-writing and religious divisions in Turkey.
+In A. Shachar, R. Hirschl, and I. Shapiro (eds.), \textit{Constitution Writing, Religion and Democracy}.
+Cambridge University Press, 2017.
+
+\bibitem{yegen2022kurdish}
+Yeğen, M.
+Erdoğan and the Turkish opposition revisit the Kurdish question.
+\textit{SWP Comment}, Stiftung Wissenschaft und Politik, 2022.
+
+\bibitem{demir2024iyi}
+Demir, O.
+Siyasal parti teorileri bağlamında bir değerlendirme: İYİ Parti.
+\textit{Uluslararası Yönetim Akademisi Dergisi}, 7(4), 1148--1162, 2024.
+\url{https://doi.org/10.33712/mana.1544435}.
+
+\bibitem{hafizoglu2021z}
+Hafızoğlu, Y.
+Z Kuşağı seçmen davranışları.
+\textit{Eğitim ve Yeni Yaklaşımlar Dergisi}, 4(2), 141--164, 2021.
+\url{https://doi.org/10.52974/jena.1035189}.
+
+\bibitem{ysp2023manifesto}
+Yeşil Sol Parti / Halkların Demokratik Partisi.
+\textit{Yeşil Sol Parti 2023 seçim bildirgesi: Burada birlikte değiştireceğiz}.
+2023. Available at: \url{https://www.hdp.org.tr/Images/UserFiles/Documents/Editor/2023/yesil-sol-parti-2023-sbildirgesi.pdf}. Accessed 23 May 2026.
+
+\bibitem{ysk2023}
+Supreme Election Council of Türkiye.
+Official results of the 2023 Turkish presidential election.
+YSK official election data, 2023. Add direct official URL before submission. Accessed 23 May 2026.
+
+\end{thebibliography}
+
+\end{document}

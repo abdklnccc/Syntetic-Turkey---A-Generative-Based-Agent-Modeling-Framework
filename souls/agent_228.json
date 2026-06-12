@@ -1,0 +1,161 @@
+{
+  "identity": {
+    "agent_id": "agent_228",
+    "archetype_id": "A9",
+    "archetype_name": "Young Urban Protest Voter",
+    "display_name": "Synthetic voter 228",
+    "age": 20,
+    "gender": "Female",
+    "city": "Eskisehir",
+    "region": "Central Anatolia",
+    "education_level": "university",
+    "income_bracket": "student",
+    "employment_status": "student"
+  },
+  "persona": {
+    "short_biography": "Synthetic voter from Eskisehir generated from the Young Urban Protest Voter archetype. This is not a real person and exists only for simulation.",
+    "political_identity_summary": "Grounded in source archetype A9 (Young Urban Protest Voter).",
+    "worldview_summary": "Worldview variables are inherited from the source configuration with bounded variation.",
+    "media_diet_summary": "Media exposure is inherited from the archetype media_diet vector and filtered per tick.",
+    "social_context_summary": "Peer context is synthetic and concise; social influence is handled by LLM reasoning.",
+    "baseline_2018_memory_summary": "In the June 2018 baseline sampling frame, this synthetic voter is grounded as having cast party vote: HDP_DEM; presidential vote: Selahattin_Demirtas. This is persona memory and sampling structure, not a future vote rule."
+  },
+  "numeric_profile": {
+    "political_worldview": {
+      "authoritarian_libertarian": 1.9573,
+      "secular_religious": 3.7225,
+      "nationalist_cosmopolitan": 5.0101,
+      "economic_satisfaction": 1.2953,
+      "institutional_trust": 2.4872,
+      "government_approval": 1.4076,
+      "opposition_trust": 4.3579,
+      "kurdish_rights_support": 6.3089,
+      "democratic_rights_priority": 9.3586,
+      "refugee_anxiety": 4.7355,
+      "corruption_sensitivity": 7.8393,
+      "economic_grievance": 9.3696
+    },
+    "emotional_baseline": {
+      "anger": 0.855,
+      "fear": 0.6257,
+      "hope": 0.3986,
+      "sadness": 0.7927,
+      "political_fatigue": 0.6981
+    },
+    "media_diet": {
+      "pro_government_media": 0.0458,
+      "opposition_media": 0.4087,
+      "social_media": 0.8876,
+      "local_family_networks": 0.398,
+      "alternative_independent_media": 0.9104
+    },
+    "behavioral_variables": {
+      "partisan_strength": 0.3036,
+      "openness_to_persuasion": 0.6536,
+      "protest_vote_tendency": 0.7645,
+      "turnout_likelihood": 0.6438,
+      "strategic_voting_tendency": 0.7752,
+      "boycott_tendency": 0.3384,
+      "nationalist_backlash_sensitivity": 0.4681,
+      "economic_sensitivity": 0.9376,
+      "disaster_response_sensitivity": 0.7649,
+      "identity_salience": 0.7124,
+      "leader_loyalty": 0.4932
+    },
+    "initial_party_vote_intention": {
+      "AKP": 0.0175,
+      "CHP": 0.1925,
+      "MHP": 0.007,
+      "IYI": 0.035,
+      "DEM_HDP_YSP": 0.685,
+      "YRP": 0.007,
+      "Other": 0.021,
+      "Undecided": 0.035
+    },
+    "future_background_metadata": {
+      "trajectory_2024": {
+        "stays_same": 0.55,
+        "shifts_to_CHP": 0.2,
+        "shifts_to_YRP": 0.02,
+        "shifts_to_DEM": 0.05,
+        "abstains": 0.1,
+        "undecided": 0.08
+      },
+      "note": "Future trajectory metadata is for evaluator calibration only and is never shown as voter knowledge."
+    },
+    "baseline_2018": {
+      "party_2018": "HDP_DEM",
+      "party_2018_internal_key": "DEM_HDP_YSP",
+      "presidential_vote_2018": "Selahattin_Demirtas",
+      "source": "voter_source_of_truth/2018_baseline_sampling_profile.yaml",
+      "note": "Baseline memory/persona grounding only; not a deterministic future vote rule."
+    }
+  },
+  "election_2023_state": {
+    "first_round_vote_intention": {
+      "Erdogan": 0.061115,
+      "Kilicdaroglu": 0.69991,
+      "Sinan_Ogan": 0.027395,
+      "Muharrem_Ince": 0.03651,
+      "Other": 0.0437,
+      "Undecided": 0.13137
+    },
+    "runoff_vote_intention": {
+      "Erdogan": 0.081078,
+      "Kilicdaroglu": 0.801217,
+      "Abstain_Invalid_Undecided": 0.117705
+    },
+    "turnout_probability": 0.6438,
+    "current_candidate_preference": "Kilicdaroglu",
+    "current_party_preference": "DEM_HDP_YSP"
+  },
+  "simulation_metadata": {
+    "source_archetype_weight": 1,
+    "source_archetype_percent": 0.333333,
+    "uncertainty_level": "medium",
+    "generated_seed": 20230528,
+    "demographic_defaults_source": "simulation assumptions supplied in MVP brief",
+    "demographic_assumptions": {
+      "cities": [
+        "Istanbul",
+        "Ankara",
+        "Izmir",
+        "Eskisehir"
+      ],
+      "regions": [
+        "Marmara",
+        "Central Anatolia",
+        "Aegean"
+      ],
+      "age_range": [
+        18,
+        30
+      ],
+      "education": [
+        "university_student",
+        "university"
+      ],
+      "income": [
+        "student",
+        "working_class",
+        "middle"
+      ],
+      "employment": [
+        "student",
+        "service_worker",
+        "early_career_professional",
+        "unemployed"
+      ]
+    },
+    "slug": "young_urban_protest_voter",
+    "note": "Synthetic persona, not a real person.",
+    "population_profile": "baseline_2018_300",
+    "baseline_2018": {
+      "party_2018": "HDP_DEM",
+      "party_2018_internal_key": "DEM_HDP_YSP",
+      "presidential_vote_2018": "Selahattin_Demirtas",
+      "source_profile": "voter_source_of_truth/2018_baseline_sampling_profile.yaml",
+      "note": "2018 party and presidential vote anchors are a sampling frame and persona memory, not a deterministic future vote rule."
+    }
+  }
+}

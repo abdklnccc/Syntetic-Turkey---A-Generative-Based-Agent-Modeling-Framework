@@ -1,0 +1,47 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*api_key*
+*apikey*
+
+# Python caches and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# OS and editor files
+.DS_Store
+._*
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Local scratch/cache artifacts
+scratch/
+tmp/
+temp/
+*.tmp
+*.bak
+.ipynb_checkpoints/
+outputs/reruns/
+logs/reruns/
+db_reruns/
+
+# Matplotlib/local runtime caches
+.matplotlib/
+
+# Thesis-critical folders intentionally not ignored:
+# outputs/, logs/, souls/, db/, voter_source_of_truth/, political_agent/, events/

@@ -1,0 +1,2 @@
+{"type": "tick_start", "tick_id": "T001", "title": "2018 Presidential & Parliamentary Elections — Erdoğan Wins First Round", "broadcast_count": 0}
+{"type": "agent_error", "tick_id": "T001", "agent_id": "agent_008", "error_type": "RuntimeError", "error": "simulated provider failure", "continued": false}

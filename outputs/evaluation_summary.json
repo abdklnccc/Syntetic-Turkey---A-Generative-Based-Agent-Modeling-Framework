@@ -1,0 +1,589 @@
+{
+  "first_round_distribution": {
+    "Erdogan": 41.539,
+    "Kilicdaroglu": 49.133,
+    "Sinan_Ogan": 1.372,
+    "Muharrem_Ince": 0.0,
+    "Other": 0.367,
+    "Undecided": 7.589
+  },
+  "runoff_distribution": {
+    "Erdogan": 41.801,
+    "Kilicdaroglu": 49.061,
+    "Abstain_Invalid_Undecided": 9.138
+  },
+  "first_round_mae": 4.25,
+  "runoff_mae": 6.175,
+  "first_round_ranking_accuracy": false,
+  "runoff_ranking_accuracy": false,
+  "archetype_vote_breakdown": {
+    "Alevi-CHP Loyalist": {
+      "count": 19,
+      "first_round_top_counts": {
+        "Kilicdaroglu": 19
+      },
+      "runoff_top_counts": {
+        "Kilicdaroglu": 19
+      }
+    },
+    "Conservative Economically Disillusioned": {
+      "count": 33,
+      "first_round_top_counts": {
+        "Erdogan": 32,
+        "Kilicdaroglu": 1
+      },
+      "runoff_top_counts": {
+        "Erdogan": 33
+      }
+    },
+    "Cosmopolitan Liberal": {
+      "count": 11,
+      "first_round_top_counts": {
+        "Kilicdaroglu": 11
+      },
+      "runoff_top_counts": {
+        "Kilicdaroglu": 11
+      }
+    },
+    "Devout Anatolian Loyalist": {
+      "count": 58,
+      "first_round_top_counts": {
+        "Erdogan": 58
+      },
+      "runoff_top_counts": {
+        "Erdogan": 58
+      }
+    },
+    "Earthquake Zone Loyalist": {
+      "count": 14,
+      "first_round_top_counts": {
+        "Erdogan": 14
+      },
+      "runoff_top_counts": {
+        "Erdogan": 14
+      }
+    },
+    "Kurdish Political Voter": {
+      "count": 29,
+      "first_round_top_counts": {
+        "Kilicdaroglu": 29
+      },
+      "runoff_top_counts": {
+        "Kilicdaroglu": 28,
+        "Abstain_Invalid_Undecided": 1
+      }
+    },
+    "Moderate Nationalist (İYİ)": {
+      "count": 25,
+      "first_round_top_counts": {
+        "Erdogan": 6,
+        "Kilicdaroglu": 19
+      },
+      "runoff_top_counts": {
+        "Erdogan": 7,
+        "Kilicdaroglu": 18
+      }
+    },
+    "Nationalist Grey Wolf (MHP core)": {
+      "count": 30,
+      "first_round_top_counts": {
+        "Erdogan": 30
+      },
+      "runoff_top_counts": {
+        "Erdogan": 30
+      }
+    },
+    "Pious Disillusioned Islamist": {
+      "count": 18,
+      "first_round_top_counts": {
+        "Erdogan": 16,
+        "Kilicdaroglu": 2
+      },
+      "runoff_top_counts": {
+        "Erdogan": 16,
+        "Kilicdaroglu": 2
+      }
+    },
+    "Retired Protest Voter": {
+      "count": 16,
+      "first_round_top_counts": {
+        "Erdogan": 8,
+        "Kilicdaroglu": 8
+      },
+      "runoff_top_counts": {
+        "Erdogan": 8,
+        "Kilicdaroglu": 8
+      }
+    },
+    "Secular Urban Professional": {
+      "count": 32,
+      "first_round_top_counts": {
+        "Kilicdaroglu": 32
+      },
+      "runoff_top_counts": {
+        "Kilicdaroglu": 32
+      }
+    },
+    "Young Urban Protest Voter": {
+      "count": 15,
+      "first_round_top_counts": {
+        "Kilicdaroglu": 15
+      },
+      "runoff_top_counts": {
+        "Kilicdaroglu": 15
+      }
+    }
+  },
+  "turnout_abstention_estimate": {
+    "mean_turnout_probability": 82.3,
+    "mean_abstention_probability": 17.7
+  },
+  "emotion_trajectories": {
+    "T001": {
+      "anger": 0.701,
+      "fear": 0.658,
+      "hope": 0.49,
+      "sadness": 0.603,
+      "political_fatigue": 0.474
+    },
+    "T002": {
+      "anger": 0.701,
+      "fear": 0.658,
+      "hope": 0.49,
+      "sadness": 0.603,
+      "political_fatigue": 0.474
+    },
+    "T003": {
+      "anger": 0.701,
+      "fear": 0.658,
+      "hope": 0.49,
+      "sadness": 0.603,
+      "political_fatigue": 0.474
+    },
+    "T004": {
+      "anger": 0.701,
+      "fear": 0.658,
+      "hope": 0.489,
+      "sadness": 0.602,
+      "political_fatigue": 0.474
+    },
+    "T005": {
+      "anger": 0.703,
+      "fear": 0.658,
+      "hope": 0.487,
+      "sadness": 0.603,
+      "political_fatigue": 0.475
+    },
+    "T006": {
+      "anger": 0.703,
+      "fear": 0.658,
+      "hope": 0.487,
+      "sadness": 0.603,
+      "political_fatigue": 0.475
+    },
+    "T007": {
+      "anger": 0.703,
+      "fear": 0.658,
+      "hope": 0.487,
+      "sadness": 0.603,
+      "political_fatigue": 0.475
+    },
+    "T008": {
+      "anger": 0.703,
+      "fear": 0.658,
+      "hope": 0.487,
+      "sadness": 0.603,
+      "political_fatigue": 0.475
+    },
+    "T009": {
+      "anger": 0.703,
+      "fear": 0.658,
+      "hope": 0.487,
+      "sadness": 0.603,
+      "political_fatigue": 0.475
+    },
+    "T010": {
+      "anger": 0.703,
+      "fear": 0.658,
+      "hope": 0.486,
+      "sadness": 0.603,
+      "political_fatigue": 0.475
+    },
+    "T011": {
+      "anger": 0.705,
+      "fear": 0.659,
+      "hope": 0.481,
+      "sadness": 0.604,
+      "political_fatigue": 0.476
+    },
+    "T012": {
+      "anger": 0.705,
+      "fear": 0.659,
+      "hope": 0.481,
+      "sadness": 0.604,
+      "political_fatigue": 0.476
+    },
+    "T013": {
+      "anger": 0.705,
+      "fear": 0.659,
+      "hope": 0.481,
+      "sadness": 0.605,
+      "political_fatigue": 0.476
+    },
+    "T014": {
+      "anger": 0.705,
+      "fear": 0.659,
+      "hope": 0.481,
+      "sadness": 0.605,
+      "political_fatigue": 0.476
+    },
+    "T015": {
+      "anger": 0.705,
+      "fear": 0.659,
+      "hope": 0.481,
+      "sadness": 0.605,
+      "political_fatigue": 0.476
+    },
+    "T016": {
+      "anger": 0.705,
+      "fear": 0.66,
+      "hope": 0.48,
+      "sadness": 0.606,
+      "political_fatigue": 0.476
+    },
+    "T017": {
+      "anger": 0.719,
+      "fear": 0.666,
+      "hope": 0.459,
+      "sadness": 0.618,
+      "political_fatigue": 0.48
+    },
+    "T018": {
+      "anger": 0.719,
+      "fear": 0.666,
+      "hope": 0.459,
+      "sadness": 0.618,
+      "political_fatigue": 0.48
+    },
+    "T019": {
+      "anger": 0.719,
+      "fear": 0.665,
+      "hope": 0.458,
+      "sadness": 0.618,
+      "political_fatigue": 0.48
+    },
+    "T020": {
+      "anger": 0.723,
+      "fear": 0.665,
+      "hope": 0.451,
+      "sadness": 0.619,
+      "political_fatigue": 0.48
+    },
+    "T021": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.449,
+      "sadness": 0.619,
+      "political_fatigue": 0.481
+    },
+    "T022": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.449,
+      "sadness": 0.619,
+      "political_fatigue": 0.481
+    },
+    "T023": {
+      "anger": 0.725,
+      "fear": 0.666,
+      "hope": 0.446,
+      "sadness": 0.619,
+      "political_fatigue": 0.481
+    },
+    "T024": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.453,
+      "sadness": 0.616,
+      "political_fatigue": 0.481
+    },
+    "T025": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.453,
+      "sadness": 0.616,
+      "political_fatigue": 0.481
+    },
+    "T026": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.453,
+      "sadness": 0.616,
+      "political_fatigue": 0.481
+    },
+    "T027": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.453,
+      "sadness": 0.616,
+      "political_fatigue": 0.481
+    },
+    "T028": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.453,
+      "sadness": 0.616,
+      "political_fatigue": 0.481
+    },
+    "T029": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.453,
+      "sadness": 0.616,
+      "political_fatigue": 0.481
+    },
+    "T030A_first_round_vote_decision": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.453,
+      "sadness": 0.616,
+      "political_fatigue": 0.481
+    },
+    "T030B_first_round_result_revealed": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.453,
+      "sadness": 0.616,
+      "political_fatigue": 0.481
+    },
+    "T031": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.453,
+      "sadness": 0.616,
+      "political_fatigue": 0.481
+    },
+    "T032": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.459,
+      "sadness": 0.616,
+      "political_fatigue": 0.481
+    },
+    "T033": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.459,
+      "sadness": 0.616,
+      "political_fatigue": 0.481
+    },
+    "T034": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.459,
+      "sadness": 0.616,
+      "political_fatigue": 0.481
+    },
+    "T035A_runoff_vote_decision": {
+      "anger": 0.725,
+      "fear": 0.665,
+      "hope": 0.459,
+      "sadness": 0.616,
+      "political_fatigue": 0.481
+    },
+    "T035B_final_result_revealed": {
+      "anger": 0.717,
+      "fear": 0.662,
+      "hope": 0.454,
+      "sadness": 0.615,
+      "political_fatigue": 0.481
+    }
+  },
+  "approval_trust_trajectories": {
+    "T001": {
+      "government_approval": 4.39,
+      "institutional_trust": 4.327,
+      "opposition_trust": 4.413
+    },
+    "T002": {
+      "government_approval": 4.389,
+      "institutional_trust": 4.325,
+      "opposition_trust": 4.407
+    },
+    "T003": {
+      "government_approval": 4.389,
+      "institutional_trust": 4.323,
+      "opposition_trust": 4.407
+    },
+    "T004": {
+      "government_approval": 4.385,
+      "institutional_trust": 4.319,
+      "opposition_trust": 4.404
+    },
+    "T005": {
+      "government_approval": 4.385,
+      "institutional_trust": 4.255,
+      "opposition_trust": 4.408
+    },
+    "T006": {
+      "government_approval": 4.385,
+      "institutional_trust": 4.255,
+      "opposition_trust": 4.408
+    },
+    "T007": {
+      "government_approval": 4.382,
+      "institutional_trust": 4.253,
+      "opposition_trust": 4.408
+    },
+    "T008": {
+      "government_approval": 4.379,
+      "institutional_trust": 4.249,
+      "opposition_trust": 4.411
+    },
+    "T009": {
+      "government_approval": 4.379,
+      "institutional_trust": 4.249,
+      "opposition_trust": 4.411
+    },
+    "T010": {
+      "government_approval": 4.375,
+      "institutional_trust": 4.243,
+      "opposition_trust": 4.41
+    },
+    "T011": {
+      "government_approval": 4.357,
+      "institutional_trust": 4.233,
+      "opposition_trust": 4.402
+    },
+    "T012": {
+      "government_approval": 4.357,
+      "institutional_trust": 4.233,
+      "opposition_trust": 4.402
+    },
+    "T013": {
+      "government_approval": 4.355,
+      "institutional_trust": 4.231,
+      "opposition_trust": 4.4
+    },
+    "T014": {
+      "government_approval": 4.355,
+      "institutional_trust": 4.231,
+      "opposition_trust": 4.4
+    },
+    "T015": {
+      "government_approval": 4.355,
+      "institutional_trust": 4.231,
+      "opposition_trust": 4.4
+    },
+    "T016": {
+      "government_approval": 4.35,
+      "institutional_trust": 4.226,
+      "opposition_trust": 4.399
+    },
+    "T017": {
+      "government_approval": 4.036,
+      "institutional_trust": 3.975,
+      "opposition_trust": 4.317
+    },
+    "T018": {
+      "government_approval": 4.015,
+      "institutional_trust": 3.958,
+      "opposition_trust": 4.311
+    },
+    "T019": {
+      "government_approval": 3.99,
+      "institutional_trust": 3.941,
+      "opposition_trust": 4.308
+    },
+    "T020": {
+      "government_approval": 3.931,
+      "institutional_trust": 3.89,
+      "opposition_trust": 4.301
+    },
+    "T021": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.862,
+      "opposition_trust": 4.414
+    },
+    "T022": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.857,
+      "opposition_trust": 4.416
+    },
+    "T023": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.857,
+      "opposition_trust": 4.364
+    },
+    "T024": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.857,
+      "opposition_trust": 4.475
+    },
+    "T025": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.857,
+      "opposition_trust": 4.475
+    },
+    "T026": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.857,
+      "opposition_trust": 4.475
+    },
+    "T027": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.857,
+      "opposition_trust": 4.475
+    },
+    "T028": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.857,
+      "opposition_trust": 4.475
+    },
+    "T029": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.857,
+      "opposition_trust": 4.475
+    },
+    "T030A_first_round_vote_decision": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.857,
+      "opposition_trust": 4.475
+    },
+    "T030B_first_round_result_revealed": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.856,
+      "opposition_trust": 4.473
+    },
+    "T031": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.856,
+      "opposition_trust": 4.47
+    },
+    "T032": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.856,
+      "opposition_trust": 4.47
+    },
+    "T033": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.856,
+      "opposition_trust": 4.47
+    },
+    "T034": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.856,
+      "opposition_trust": 4.47
+    },
+    "T035A_runoff_vote_decision": {
+      "government_approval": 3.899,
+      "institutional_trust": 3.856,
+      "opposition_trust": 4.47
+    },
+    "T035B_final_result_revealed": {
+      "government_approval": 3.905,
+      "institutional_trust": 3.85,
+      "opposition_trust": 4.462
+    }
+  }
+}

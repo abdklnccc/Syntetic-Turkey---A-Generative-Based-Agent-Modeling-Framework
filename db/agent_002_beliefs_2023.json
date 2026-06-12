@@ -1,0 +1,74 @@
+{
+  "current": {
+    "government_approval": 8.786,
+    "institutional_trust": 8.172,
+    "opposition_trust": 1.63,
+    "party_preference": {
+      "AKP": 0.9475,
+      "CHP": 0.0,
+      "MHP": 0.0175,
+      "IYI": 0.0,
+      "DEM_HDP_YSP": 0.0,
+      "YRP": 0.0175,
+      "Other": 0.0,
+      "Undecided": 0.0175
+    },
+    "first_round_vote_intention": {
+      "Erdogan": 0.929876,
+      "Kilicdaroglu": 0.009629,
+      "Sinan_Ogan": 0.034554,
+      "Muharrem_Ince": 0.006337,
+      "Other": 0.012847,
+      "Undecided": 0.006757
+    },
+    "runoff_vote_intention": {
+      "Erdogan": 0.960012,
+      "Kilicdaroglu": 0.03224,
+      "Abstain_Invalid_Undecided": 0.007748
+    },
+    "turnout_probability": 0.9188,
+    "current_candidate_preference": "Erdogan",
+    "current_party_preference": "AKP"
+  },
+  "history": [
+    {
+      "tick_id": "T001",
+      "sim_date": "2018-06-24",
+      "agent_id": "agent_002",
+      "government_approval": 8.786,
+      "institutional_trust": 8.172,
+      "opposition_trust": 1.63,
+      "party_preference": {
+        "AKP": 0.9475,
+        "CHP": 0.0,
+        "MHP": 0.0175,
+        "IYI": 0.0,
+        "DEM_HDP_YSP": 0.0,
+        "YRP": 0.0175,
+        "Other": 0.0,
+        "Undecided": 0.0175
+      },
+      "first_round_vote_intention": {
+        "Erdogan": 0.929876,
+        "Kilicdaroglu": 0.009629,
+        "Sinan_Ogan": 0.034554,
+        "Muharrem_Ince": 0.006337,
+        "Other": 0.012847,
+        "Undecided": 0.006757
+      },
+      "runoff_vote_intention": {
+        "Erdogan": 0.960012,
+        "Kilicdaroglu": 0.03224,
+        "Abstain_Invalid_Undecided": 0.007748
+      },
+      "turnout_probability": 0.9188,
+      "current_candidate_preference": "Erdogan",
+      "current_party_preference": "AKP",
+      "reason_codes": [
+        "election",
+        "A1"
+      ],
+      "confidence": "medium"
+    }
+  ]
+}

@@ -1,0 +1,760 @@
+# Synthetic Turkey — Political Agents Configuration
+# Generated for thesis simulation by Abdullah Kılınç
+# All 0-1 values are source-grounded simulation calibration parameters, not measurements.
+# No direct quotes anywhere; message frames in politician_event_responses.yaml are paraphrased.
+# Companion files:
+#   credibility_matrix.yaml
+#   politician_event_responses.yaml
+#   movement_state_machine.yaml
+
+schema_version: "1.0"
+simulation_window:
+  start_date: "2019-01-01"
+  end_date: "2024-04-30"
+
+communication_dimensions:
+  - combative
+  - nationalist
+  - populist
+  - hopeful
+  - defensive
+  - conciliatory
+  - technocratic
+  - religious_framing
+  - democratic_framing
+  - economic_framing
+  - security_framing
+  - anti_corruption_framing
+  - local_governance_framing
+  - refugee_framing
+  - legal_rights_framing
+  - identity_framing
+  - feminist_ecological_framing
+
+simulation_effect_dimensions:
+  - persuasion_strength
+  - polarization_effect
+  - mobilization_effect
+  - cross_camp_reach
+  - base_lock_in_effect
+  - backlash_risk
+  - media_amplification
+  - crisis_responsiveness
+  - institutional_continuity_signal
+
+kurdish_extension_dimensions:
+  - kurdish_rights_emphasis
+  - anti_trustee_kayyum_emphasis
+  - peace_process_emphasis
+  - strategic_voting_emphasis
+  - independent_party_identity_signal
+  - symbolic_mobilization_power
+
+agents:
+
+  # ====================================================================
+  # 1. INDIVIDUAL BROADCAST AGENTS
+  # ====================================================================
+
+  erdogan_recep_tayyip:
+    agent_kind: individual
+    party_or_movement: "AKP (People's Alliance / Cumhur Ittifaki)"
+    active_start_date: "2019-01-01"
+    active_end_date: "2024-04-30"
+    role_type: individual_politician_agent
+    role_tags: [institutional_leader]
+    ideological_family: "Turkish-Islamic synthesis, authoritarian-populist"
+    alliance_position: "People's Alliance leader (Cumhur Ittifaki)"
+    communication_profile:
+      combative: 0.85
+      nationalist: 0.80
+      populist: 0.80
+      hopeful: 0.55
+      defensive: 0.60
+      conciliatory: 0.15
+      technocratic: 0.20
+      religious_framing: 0.80
+      democratic_framing: 0.55
+      economic_framing: 0.75
+      security_framing: 0.85
+      anti_corruption_framing: 0.30
+      local_governance_framing: 0.30
+      refugee_framing: 0.65
+      legal_rights_framing: 0.25
+      identity_framing: 0.80
+      feminist_ecological_framing: 0.10
+    simulation_effects:
+      persuasion_strength: 0.58
+      polarization_effect: 0.88
+      mobilization_effect: 0.78
+      cross_camp_reach: 0.25
+      base_lock_in_effect: 0.85
+      backlash_risk: 0.75
+      media_amplification: 0.95
+      crisis_responsiveness: 0.55
+      institutional_continuity_signal: 0.70
+
+  kilicdaroglu_kemal:
+    agent_kind: individual
+    party_or_movement: "CHP (2019-01 to 2023-11); CHP backbench elder thereafter"
+    active_start_date: "2019-01-01"
+    active_end_date: "2024-04-30"
+    role_type: individual_politician_agent
+    role_tags: [institutional_leader_until_2023_11]
+    ideological_family: "social-democratic / Kemalist-coalition-builder"
+    alliance_position: "Nation Alliance leader 2019-2023; backbench post Nov 2023"
+    broadcast_power_multipliers:
+      - effective_from: "2023-11-08"
+        multiplier: 0.40
+        reason: "Lost CHP chair to Ozgur Ozel"
+    communication_profile:
+      combative: 0.45
+      nationalist: 0.35
+      populist: 0.65
+      hopeful: 0.80
+      defensive: 0.35
+      conciliatory: 0.75
+      technocratic: 0.30
+      religious_framing: 0.35
+      democratic_framing: 0.80
+      economic_framing: 0.70
+      security_framing: 0.25
+      anti_corruption_framing: 0.75
+      local_governance_framing: 0.40
+      refugee_framing: 0.50
+      legal_rights_framing: 0.65
+      identity_framing: 0.50
+      feminist_ecological_framing: 0.35
+    simulation_effects:
+      persuasion_strength: 0.52
+      polarization_effect: 0.42
+      mobilization_effect: 0.62
+      cross_camp_reach: 0.55
+      base_lock_in_effect: 0.65
+      backlash_risk: 0.35
+      media_amplification: 0.45
+      crisis_responsiveness: 0.55
+      institutional_continuity_signal: 0.55
+
+  imamoglu_ekrem:
+    agent_kind: individual
+    party_or_movement: "CHP (Istanbul Metropolitan Mayor)"
+    active_start_date: "2019-03-31"
+    active_end_date: "2024-04-30"
+    role_type: individual_politician_agent
+    role_tags: [local_democracy_figure]
+    ideological_family: "left-populist / Radical Love / social-democratic"
+    alliance_position: "Nation Alliance (2019-2023); CHP-led opposition (2024)"
+    communication_profile:
+      combative: 0.30
+      nationalist: 0.30
+      populist: 0.55
+      hopeful: 0.80
+      defensive: 0.30
+      conciliatory: 0.75
+      technocratic: 0.55
+      religious_framing: 0.40
+      democratic_framing: 0.75
+      economic_framing: 0.55
+      security_framing: 0.20
+      anti_corruption_framing: 0.70
+      local_governance_framing: 0.90
+      refugee_framing: 0.35
+      legal_rights_framing: 0.60
+      identity_framing: 0.50
+      feminist_ecological_framing: 0.40
+    simulation_effects:
+      persuasion_strength: 0.68
+      polarization_effect: 0.28
+      mobilization_effect: 0.78
+      cross_camp_reach: 0.72
+      base_lock_in_effect: 0.70
+      backlash_risk: 0.40
+      media_amplification: 0.55
+      crisis_responsiveness: 0.75
+      institutional_continuity_signal: 0.75
+
+  bahceli_devlet:
+    agent_kind: individual
+    party_or_movement: "MHP (People's Alliance)"
+    active_start_date: "2019-01-01"
+    active_end_date: "2024-04-30"
+    role_type: individual_politician_agent
+    role_tags: [institutional_leader, agenda_setter]
+    ideological_family: "Turkish ultranationalist / state-centric"
+    alliance_position: "People's Alliance pillar"
+    communication_profile:
+      combative: 0.85
+      nationalist: 0.85
+      populist: 0.55
+      hopeful: 0.40
+      defensive: 0.60
+      conciliatory: 0.20
+      technocratic: 0.05
+      religious_framing: 0.45
+      democratic_framing: 0.25
+      economic_framing: 0.20
+      security_framing: 0.95
+      anti_corruption_framing: 0.30
+      local_governance_framing: 0.20
+      refugee_framing: 0.50
+      legal_rights_framing: 0.20
+      identity_framing: 0.85
+      feminist_ecological_framing: 0.05
+    simulation_effects:
+      persuasion_strength: 0.52
+      polarization_effect: 0.78
+      mobilization_effect: 0.68
+      cross_camp_reach: 0.18
+      base_lock_in_effect: 0.85
+      backlash_risk: 0.65
+      media_amplification: 0.60
+      crisis_responsiveness: 0.40
+      institutional_continuity_signal: 0.70
+    custom_fields:
+      agenda_setting_power: 0.80  # low cadence, high impact via weekly TBMM group speech
+
+  aksener_meral:
+    agent_kind: individual
+    party_or_movement: "IYI Party"
+    active_start_date: "2019-01-01"
+    active_end_date: "2024-04-30"
+    role_type: individual_politician_agent
+    role_tags: [institutional_leader]
+    ideological_family: "Republican nationalist / center-right secular nationalist"
+    alliance_position: "Nation Alliance (2019-2023); solo strategy 2024"
+    broadcast_power_multipliers:
+      - effective_from: "2024-03-31"
+        multiplier: 0.30
+        reason: "Local election collapse; resignation trajectory"
+    communication_profile:
+      combative: 0.80
+      nationalist: 0.75
+      populist: 0.75
+      hopeful: 0.60
+      defensive: 0.55
+      conciliatory: 0.30
+      technocratic: 0.20
+      religious_framing: 0.30
+      democratic_framing: 0.55
+      economic_framing: 0.60
+      security_framing: 0.65
+      anti_corruption_framing: 0.55
+      local_governance_framing: 0.35
+      refugee_framing: 0.75
+      legal_rights_framing: 0.35
+      identity_framing: 0.65
+      feminist_ecological_framing: 0.40
+    simulation_effects:
+      persuasion_strength: 0.62
+      polarization_effect: 0.65
+      mobilization_effect: 0.58
+      cross_camp_reach: 0.40
+      base_lock_in_effect: 0.60
+      backlash_risk: 0.45
+      media_amplification: 0.45
+      crisis_responsiveness: 0.45
+      institutional_continuity_signal: 0.55
+
+  # ====================================================================
+  # 2. KURDISH MOVEMENT (single dynamic movement actor)
+  # ====================================================================
+
+  kurdish_movement_agent:
+    agent_kind: movement
+    party_or_movement: "HDP -> YSP -> HEDEP -> DEM Party (state-machine driven)"
+    active_start_date: "2019-01-01"
+    active_end_date: "2024-04-30"
+    role_type: movement_agent
+    ideological_family: "left-pluralist / Kurdish-democratic / Labour and Freedom Alliance"
+    alliance_position: "outside both formal alliances; informal anti-AKP 2019-2023; Third Way 2024"
+    state_machine_ref: "movement_state_machine.yaml"
+    # Default communication profile is a weighted blend of active internal personas in the current period.
+    # The state machine specifies which personas are active per period; the engine should recompute
+    # this profile per tick based on those personas. Default below is the cross-period average.
+    communication_profile:
+      combative: 0.50
+      nationalist: 0.10
+      populist: 0.55
+      hopeful: 0.60
+      defensive: 0.65
+      conciliatory: 0.55
+      technocratic: 0.40
+      religious_framing: 0.25
+      democratic_framing: 0.85
+      economic_framing: 0.45
+      security_framing: 0.15
+      anti_corruption_framing: 0.50
+      local_governance_framing: 0.80
+      refugee_framing: 0.45
+      legal_rights_framing: 0.85
+      identity_framing: 0.80
+      feminist_ecological_framing: 0.70
+    simulation_effects:
+      persuasion_strength: 0.55
+      polarization_effect: 0.55
+      mobilization_effect: 0.75
+      cross_camp_reach: 0.40
+      base_lock_in_effect: 0.85
+      backlash_risk: 0.70
+      media_amplification: 0.30
+      crisis_responsiveness: 0.65
+      institutional_continuity_signal: 0.55
+    kurdish_extension:
+      kurdish_rights_emphasis: 0.90
+      anti_trustee_kayyum_emphasis: 0.90
+      peace_process_emphasis: 0.65
+      strategic_voting_emphasis: 0.50
+      independent_party_identity_signal: 0.75
+      symbolic_mobilization_power: 0.85
+
+  # ====================================================================
+  # 3. INTERNAL KURDISH PERSONAS
+  # ====================================================================
+  # These are not full broadcast agents. They modulate the movement-level
+  # signal and produce event-specific frames. Activation is per-period
+  # (see movement_state_machine.yaml).
+
+  demirtas_selahattin:
+    agent_kind: symbolic_resource
+    role_type: symbolic_persona
+    role_tags: [legal_pressure_symbol]
+    operational_agency: 0.00          # locked: imprisoned since 2016-11-04
+    legitimacy_generation: 1.00
+    active_period: "2019-01 to 2024-04 (initial-condition imprisonment)"
+    invocation_mode: invoked_by_movement_only
+    communication_profile:
+      combative: 0.50
+      nationalist: 0.05
+      populist: 0.55
+      hopeful: 0.65
+      defensive: 0.55
+      conciliatory: 0.55
+      technocratic: 0.30
+      religious_framing: 0.20
+      democratic_framing: 0.95
+      economic_framing: 0.40
+      security_framing: 0.10
+      anti_corruption_framing: 0.55
+      local_governance_framing: 0.45
+      refugee_framing: 0.40
+      legal_rights_framing: 0.85
+      identity_framing: 0.75
+      feminist_ecological_framing: 0.55
+    simulation_effects:
+      persuasion_strength: 0.70
+      polarization_effect: 0.55
+      mobilization_effect: 0.85
+      cross_camp_reach: 0.65
+      base_lock_in_effect: 0.90
+      backlash_risk: 0.75
+      media_amplification: 0.45
+      crisis_responsiveness: 0.40
+      institutional_continuity_signal: 0.60
+    kurdish_extension:
+      kurdish_rights_emphasis: 0.90
+      anti_trustee_kayyum_emphasis: 0.80
+      peace_process_emphasis: 0.90
+      strategic_voting_emphasis: 0.75
+      independent_party_identity_signal: 0.55
+      symbolic_mobilization_power: 1.00
+
+  buldan_pervin:
+    agent_kind: internal_persona
+    role_type: institutional_leader
+    active_role_periods: [P1, P2, P3, P4, P5]
+    advisory_role_periods: [P6, P7]   # Imrali Delegation from Dec 2023
+    communication_profile:
+      combative: 0.45
+      nationalist: 0.10
+      populist: 0.55
+      hopeful: 0.60
+      defensive: 0.55
+      conciliatory: 0.70
+      technocratic: 0.45
+      religious_framing: 0.20
+      democratic_framing: 0.85
+      economic_framing: 0.40
+      security_framing: 0.10
+      anti_corruption_framing: 0.45
+      local_governance_framing: 0.65
+      refugee_framing: 0.40
+      legal_rights_framing: 0.70
+      identity_framing: 0.70
+      feminist_ecological_framing: 0.70
+    simulation_effects:
+      persuasion_strength: 0.60
+      polarization_effect: 0.50
+      mobilization_effect: 0.70
+      cross_camp_reach: 0.45
+      base_lock_in_effect: 0.75
+      backlash_risk: 0.50
+      media_amplification: 0.40
+      crisis_responsiveness: 0.65
+      institutional_continuity_signal: 0.90
+    kurdish_extension:
+      kurdish_rights_emphasis: 0.90
+      anti_trustee_kayyum_emphasis: 0.90
+      peace_process_emphasis: 1.00
+      strategic_voting_emphasis: 0.70
+      independent_party_identity_signal: 0.65
+      symbolic_mobilization_power: 0.70
+
+  sancar_mithat:
+    agent_kind: internal_persona
+    role_type: institutional_leader
+    active_role_periods: [P2, P3, P4, P5]   # 2020-02-23 to 2023-08-27
+    advisory_role_periods: [P6, P7]
+    communication_profile:
+      combative: 0.35
+      nationalist: 0.05
+      populist: 0.40
+      hopeful: 0.50
+      defensive: 0.55
+      conciliatory: 0.75
+      technocratic: 0.70
+      religious_framing: 0.15
+      democratic_framing: 0.90
+      economic_framing: 0.45
+      security_framing: 0.10
+      anti_corruption_framing: 0.50
+      local_governance_framing: 0.55
+      refugee_framing: 0.45
+      legal_rights_framing: 0.95
+      identity_framing: 0.60
+      feminist_ecological_framing: 0.50
+    simulation_effects:
+      persuasion_strength: 0.50
+      polarization_effect: 0.35
+      mobilization_effect: 0.50
+      cross_camp_reach: 0.55
+      base_lock_in_effect: 0.65
+      backlash_risk: 0.35
+      media_amplification: 0.35
+      crisis_responsiveness: 0.55
+      institutional_continuity_signal: 0.90
+    kurdish_extension:
+      kurdish_rights_emphasis: 0.80
+      anti_trustee_kayyum_emphasis: 0.80
+      peace_process_emphasis: 0.80
+      strategic_voting_emphasis: 0.65
+      independent_party_identity_signal: 0.60
+      symbolic_mobilization_power: 0.50
+
+  onder_sirri_sureyya:
+    agent_kind: internal_persona
+    role_type: strategic_communicator
+    role_tags: [parliamentary_voice, symbolic_persona]
+    active_role_periods: [P4, P5, P6, P7]   # post-release relevance; TBMM Deputy Speaker P6-P7
+    communication_profile:
+      combative: 0.55
+      nationalist: 0.05
+      populist: 0.55
+      hopeful: 0.65
+      defensive: 0.45
+      conciliatory: 0.60
+      technocratic: 0.45
+      religious_framing: 0.20
+      democratic_framing: 0.85
+      economic_framing: 0.55
+      security_framing: 0.10
+      anti_corruption_framing: 0.50
+      local_governance_framing: 0.50
+      refugee_framing: 0.40
+      legal_rights_framing: 0.70
+      identity_framing: 0.75
+      feminist_ecological_framing: 0.55
+    simulation_effects:
+      persuasion_strength: 0.60
+      polarization_effect: 0.55
+      mobilization_effect: 0.85
+      cross_camp_reach: 0.60
+      base_lock_in_effect: 0.70
+      backlash_risk: 0.60
+      media_amplification: 0.45
+      crisis_responsiveness: 0.60
+      institutional_continuity_signal: 0.80
+    kurdish_extension:
+      kurdish_rights_emphasis: 0.80
+      anti_trustee_kayyum_emphasis: 0.70
+      peace_process_emphasis: 1.00
+      strategic_voting_emphasis: 0.70
+      independent_party_identity_signal: 0.65
+      symbolic_mobilization_power: 0.80
+
+  hatimogullari_tulay:
+    agent_kind: internal_persona
+    role_type: institutional_leader
+    active_role_periods: [P5, P6, P7]   # DEM phase from 2023-10-15
+    background_periods: [P4]
+    faction_id: weaken_AKP
+    communication_profile:
+      combative: 0.60
+      nationalist: 0.05
+      populist: 0.55
+      hopeful: 0.55
+      defensive: 0.50
+      conciliatory: 0.55
+      technocratic: 0.45
+      religious_framing: 0.15
+      democratic_framing: 0.85
+      economic_framing: 0.50
+      security_framing: 0.10
+      anti_corruption_framing: 0.65
+      local_governance_framing: 0.85
+      refugee_framing: 0.40
+      legal_rights_framing: 0.80
+      identity_framing: 0.80
+      feminist_ecological_framing: 0.75
+    simulation_effects:
+      persuasion_strength: 0.60
+      polarization_effect: 0.55
+      mobilization_effect: 0.80
+      cross_camp_reach: 0.35
+      base_lock_in_effect: 0.85
+      backlash_risk: 0.55
+      media_amplification: 0.40
+      crisis_responsiveness: 0.85
+      institutional_continuity_signal: 0.85
+    kurdish_extension:
+      kurdish_rights_emphasis: 0.90
+      anti_trustee_kayyum_emphasis: 1.00
+      peace_process_emphasis: 0.70
+      strategic_voting_emphasis: 0.25
+      independent_party_identity_signal: 0.95
+      symbolic_mobilization_power: 0.70
+
+  bakirhan_tuncer:
+    agent_kind: internal_persona
+    role_type: institutional_leader
+    role_tags: [local_democracy_figure]
+    active_role_periods: [P5, P6, P7]   # rising P5, peak P6-P7
+    background_periods: [P2, P3]
+    communication_profile:
+      combative: 0.55
+      nationalist: 0.05
+      populist: 0.50
+      hopeful: 0.55
+      defensive: 0.50
+      conciliatory: 0.50
+      technocratic: 0.50
+      religious_framing: 0.20
+      democratic_framing: 0.75
+      economic_framing: 0.45
+      security_framing: 0.10
+      anti_corruption_framing: 0.65
+      local_governance_framing: 0.95
+      refugee_framing: 0.35
+      legal_rights_framing: 0.70
+      identity_framing: 0.70
+      feminist_ecological_framing: 0.45
+    simulation_effects:
+      persuasion_strength: 0.55
+      polarization_effect: 0.45
+      mobilization_effect: 0.75
+      cross_camp_reach: 0.30
+      base_lock_in_effect: 0.80
+      backlash_risk: 0.45
+      media_amplification: 0.30
+      crisis_responsiveness: 0.75
+      institutional_continuity_signal: 0.90
+    kurdish_extension:
+      kurdish_rights_emphasis: 0.90
+      anti_trustee_kayyum_emphasis: 1.00
+      peace_process_emphasis: 0.70
+      strategic_voting_emphasis: 0.25
+      independent_party_identity_signal: 0.95
+      symbolic_mobilization_power: 0.60
+
+  bestas_meral_danis:
+    agent_kind: internal_persona
+    role_type: parliamentary_voice
+    role_tags: [institutional_leader, legal_pressure_symbol]
+    active_role_periods: [P3, P4, P5, P6, P7]
+    communication_profile:
+      combative: 0.50
+      nationalist: 0.05
+      populist: 0.45
+      hopeful: 0.45
+      defensive: 0.55
+      conciliatory: 0.45
+      technocratic: 0.65
+      religious_framing: 0.15
+      democratic_framing: 0.90
+      economic_framing: 0.40
+      security_framing: 0.10
+      anti_corruption_framing: 0.55
+      local_governance_framing: 0.65
+      refugee_framing: 0.45
+      legal_rights_framing: 0.95
+      identity_framing: 0.60
+      feminist_ecological_framing: 0.70
+    simulation_effects:
+      persuasion_strength: 0.50
+      polarization_effect: 0.45
+      mobilization_effect: 0.70
+      cross_camp_reach: 0.40
+      base_lock_in_effect: 0.70
+      backlash_risk: 0.40
+      media_amplification: 0.35
+      crisis_responsiveness: 0.70
+      institutional_continuity_signal: 0.90
+    kurdish_extension:
+      kurdish_rights_emphasis: 0.90
+      anti_trustee_kayyum_emphasis: 0.80
+      peace_process_emphasis: 0.70
+      strategic_voting_emphasis: 0.30
+      independent_party_identity_signal: 0.85
+      symbolic_mobilization_power: 0.60
+
+  turk_ahmet:
+    agent_kind: internal_persona
+    role_type: symbolic_persona
+    role_tags: [local_democracy_figure]
+    active_role_periods: [P1, P2, P3, P4, P5, P6, P7]
+    faction_id: dialogue_first
+    communication_profile:
+      combative: 0.25
+      nationalist: 0.05
+      populist: 0.40
+      hopeful: 0.55
+      defensive: 0.45
+      conciliatory: 0.85
+      technocratic: 0.40
+      religious_framing: 0.30
+      democratic_framing: 0.75
+      economic_framing: 0.35
+      security_framing: 0.10
+      anti_corruption_framing: 0.40
+      local_governance_framing: 0.85
+      refugee_framing: 0.30
+      legal_rights_framing: 0.70
+      identity_framing: 0.85
+      feminist_ecological_framing: 0.40
+    simulation_effects:
+      persuasion_strength: 0.55
+      polarization_effect: 0.30
+      mobilization_effect: 0.65
+      cross_camp_reach: 0.55
+      base_lock_in_effect: 0.75
+      backlash_risk: 0.30
+      media_amplification: 0.40
+      crisis_responsiveness: 0.55
+      institutional_continuity_signal: 0.85
+    kurdish_extension:
+      kurdish_rights_emphasis: 1.00
+      anti_trustee_kayyum_emphasis: 1.00
+      peace_process_emphasis: 1.00
+      strategic_voting_emphasis: 0.40
+      independent_party_identity_signal: 0.70
+      symbolic_mobilization_power: 0.80
+
+  zeydan_abdullah:
+    agent_kind: internal_persona
+    role_type: local_democracy_figure
+    role_tags: [legal_pressure_symbol]
+    active_role_periods: [P6, P7]
+    communication_profile:
+      combative: 0.70
+      nationalist: 0.05
+      populist: 0.55
+      hopeful: 0.55
+      defensive: 0.50
+      conciliatory: 0.35
+      technocratic: 0.40
+      religious_framing: 0.20
+      democratic_framing: 0.85
+      economic_framing: 0.45
+      security_framing: 0.10
+      anti_corruption_framing: 0.60
+      local_governance_framing: 0.90
+      refugee_framing: 0.30
+      legal_rights_framing: 0.80
+      identity_framing: 0.75
+      feminist_ecological_framing: 0.30
+    simulation_effects:
+      persuasion_strength: 0.55
+      polarization_effect: 0.55
+      mobilization_effect: 0.90
+      cross_camp_reach: 0.35
+      base_lock_in_effect: 0.85
+      backlash_risk: 0.70
+      media_amplification: 0.55
+      crisis_responsiveness: 0.95
+      institutional_continuity_signal: 0.80
+    kurdish_extension:
+      kurdish_rights_emphasis: 0.90
+      anti_trustee_kayyum_emphasis: 1.00
+      peace_process_emphasis: 0.60
+      strategic_voting_emphasis: 0.15
+      independent_party_identity_signal: 0.90
+      symbolic_mobilization_power: 0.80
+
+  kisanak_gultan:
+    agent_kind: internal_persona
+    role_type: legal_pressure_symbol
+    role_tags: [symbolic_persona]
+    episode_active: true
+    active_role_periods: [P6]   # symbolic Ankara candidacy Jan 2024
+    communication_profile:
+      combative: 0.50
+      nationalist: 0.05
+      populist: 0.45
+      hopeful: 0.45
+      defensive: 0.55
+      conciliatory: 0.45
+      technocratic: 0.35
+      religious_framing: 0.15
+      democratic_framing: 0.85
+      economic_framing: 0.30
+      security_framing: 0.10
+      anti_corruption_framing: 0.55
+      local_governance_framing: 0.85
+      refugee_framing: 0.30
+      legal_rights_framing: 0.85
+      identity_framing: 0.85
+      feminist_ecological_framing: 0.90
+    simulation_effects:
+      persuasion_strength: 0.50
+      polarization_effect: 0.45
+      mobilization_effect: 0.70
+      cross_camp_reach: 0.45
+      base_lock_in_effect: 0.80
+      backlash_risk: 0.50
+      media_amplification: 0.55
+      crisis_responsiveness: 0.45
+      institutional_continuity_signal: 0.80
+    kurdish_extension:
+      kurdish_rights_emphasis: 1.00
+      anti_trustee_kayyum_emphasis: 1.00
+      peace_process_emphasis: 0.70
+      strategic_voting_emphasis: 0.20
+      independent_party_identity_signal: 0.85
+      symbolic_mobilization_power: 0.90
+
+context_only_personas:
+  # Recorded for completeness; do NOT broadcast independently.
+  - id: kilicgun_ucar_cigdem
+    note: "Transitional spokesperson during YSP phase"
+  - id: akin_ibrahim
+    note: "Co-spokesperson; background voice"
+  - id: tuncel_sebahat
+    note: "Movement-historical reference figure"
+  - id: basak_demirtas
+    note: "Event-trigger only: Jan-Feb 2024 Istanbul candidacy debate"
+  - id: ozcan_sultan
+    note: "HDP legal-shell co-chair after Aug 27, 2023"
+  - id: kirkazak_cahit
+    note: "HDP legal-shell co-chair after Aug 27, 2023"
+  - id: yuksekdag_figen
+    note: "Pre-window imprisoned co-chair; archival reference"
+  - id: temelli_sezai
+    note: "Pre-2020 co-chair; not a 2019+ broadcast voice"
+
+calibration_notes:
+  - "All 0-1 values are source-grounded simulation calibration parameters."
+  - "No direct quotes; message_frames in politician_event_responses.yaml are paraphrased."
+  - "Broadcast power multipliers apply globally from their effective_from date."
+  - "KurdishMovementAgent's communication_profile defaults to a cross-period blend; recompute per tick from active personas (movement_state_machine.yaml)."
+  - "Demirtas is locked (operational_agency=0): activated only when the movement invokes him."
+  - "Faction axis: hatimogullari_tulay=weaken_AKP vs turk_ahmet=dialogue_first; expose faction_weight as a tunable parameter."

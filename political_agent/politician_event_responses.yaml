@@ -1,0 +1,1421 @@
+# Synthetic Turkey — Event-Specific Behavior Matrix
+# 17 events x active agents. All message_frame values are PARAPHRASED — no direct quotes.
+# Companion to political_agents.yaml, credibility_matrix.yaml, movement_state_machine.yaml.
+
+schema_version: "1.0"
+
+confidence_levels:
+  high: "Directly supported by source profile evidence"
+  medium: "Supported by source profile interpretation"
+  low: "Primarily INTERP / SIM-ASSUME"
+
+effect_codes:
+  persuade: "Moves persuadable voters to support"
+  mobilize_base: "Activates existing supporters / raises turnout"
+  reinforce_existing_belief: "Consolidates prior orientation"
+  trigger_backlash: "Activates counter-mobilization"
+  ignored: "Below salience threshold"
+
+events:
+
+  E01_2019_istanbul_local:
+    label: "2019 Istanbul local election"
+    date: "2019-03-31"
+    movement_period_at_event: P1_HDP_2019_local_window
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "Istanbul's transformation continues with us; the opposition would return Istanbul to its dark days."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [devout_anatolian_loyalist, conservative_economically_disillusioned]
+        expected_positive_effect: mobilize_base
+        expected_backlash: "secular + young trigger"
+        vote_shift_direction: toward_AKP
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: true
+        message_frame: "Anti-corruption + service delivery alternative; opposition unity proves itself in city races."
+        emotional_tone: [hopeful, conciliatory]
+        target_voter_groups: [secular_urban_professional, alevi_chp_loyalist, retired_protest_voter]
+        expected_positive_effect: mobilize_chp_base
+        expected_backlash: "mild AKP backlash"
+        vote_shift_direction: toward_CHP
+        confidence_level: high
+      imamoglu_ekrem:
+        does_agent_broadcast: true
+        message_frame: "'Everything will be very nice' — competent and inclusive mayoral candidacy bridging cultural divisions."
+        emotional_tone: [hopeful, conciliatory]
+        target_voter_groups: [secular_urban_professional, young_urban_protest_voter, kurdish_political_voter_istanbul, conservative_economically_disillusioned]
+        expected_positive_effect: persuade_across_camps
+        expected_backlash: "AKP fear-mobilisation"
+        vote_shift_direction: toward_CHP
+        confidence_level: high
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "Vote AKP-MHP alliance to defeat terror-supporting opposition."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: mobilize_ulkucu
+        expected_backlash: "trigger backlash among Kurdish + secular"
+        vote_shift_direction: toward_AKP_MHP
+        confidence_level: high
+      aksener_meral:
+        does_agent_broadcast: true
+        message_frame: "'Winter is coming' for the AKP — alliance via non-candidacy in metros to stop one-man rule."
+        emotional_tone: [combative, hopeful]
+        target_voter_groups: [moderate_nationalist_opposition, secular_urban_professional]
+        expected_positive_effect: "mobilize IYI base + allow CHP win"
+        expected_backlash: "mild nationalist defection risk"
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: high
+      kurdish_movement_agent:
+        active_label: HDP
+        does_agent_broadcast: true
+        message_frame: "No HDP candidate in 7 metros — the vote that hurts AKP-MHP is the vote that defends democracy."
+        emotional_tone: [mobilizing]
+        target_voter_groups: [kurdish_political_voter_western_diaspora, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "secures CHP wins; mobilizes Kurdish western diaspora"
+        expected_backlash: "AKP 'PKK-CHP collusion' frame"
+        vote_shift_direction: "toward Nation Alliance metros; toward HDP southeast"
+        movement_state_effect:
+          strategy_state: hybrid
+          strategic_voting_signal: 0.90
+        confidence_level: high
+      demirtas_selahattin:
+        invocation: invoked
+        does_agent_broadcast: true
+        message_frame: "From prison: the vote that ends authoritarianism is the vote for peace."
+        emotional_tone: [hopeful, defiant]
+        target_voter_groups: [kurdish_political_voter, young_urban_protest_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "locks tactical CHP vote"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: medium
+      buldan_pervin:
+        does_agent_broadcast: true
+        message_frame: "Non-candidacy in 7 metros is a political act — choosing where the vote ends authoritarianism."
+        emotional_tone: [conciliatory, mobilizing]
+        target_voter_groups: [kurdish_political_voter, secular_urban_professional]
+        expected_positive_effect: "legitimises strategic vote"
+        expected_backlash: "internal critique re: lost leverage"
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: high
+      turk_ahmet:
+        does_agent_broadcast: true
+        message_frame: "Mardin co-mayor candidacy — the six-decade movement returns to local governance."
+        emotional_tone: [conciliatory, identity]
+        target_voter_groups: [kurdish_political_voter_mardin]
+        expected_positive_effect: "wins Mardin 56%"
+        expected_backlash: "trustee-removal vulnerability"
+        vote_shift_direction: toward_HDP_southeast
+        confidence_level: high
+
+  E02_2019_istanbul_rerun:
+    label: "2019 Istanbul rerun"
+    date: "2019-06-23"
+    movement_period_at_event: P1_HDP_2019_local_window
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "Procedural integrity is required; whoever wins Istanbul wins Turkey — patriotic vigilance demands a rerun."
+        emotional_tone: [combative, defensive]
+        target_voter_groups: [devout_anatolian_loyalist, nationalist_grey_wolf_core]
+        expected_positive_effect: base_mobilisation
+        expected_backlash: "mass backlash from secular + Kurdish + youth"
+        vote_shift_direction: net_toward_CHP_backfire
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: true
+        message_frame: "The democratic mandate must be respected; this rerun is a referendum on the rule of law itself."
+        emotional_tone: [conciliatory, hopeful]
+        target_voter_groups: [secular_urban_professional, retired_protest_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "mobilize anti-AKP coalition"
+        expected_backlash: "mild"
+        vote_shift_direction: toward_CHP
+        confidence_level: high
+      imamoglu_ekrem:
+        does_agent_broadcast: true
+        message_frame: "Radical Love — inclusion of all Istanbul, refusal of polarisation, focus on service."
+        emotional_tone: [hopeful, conciliatory]
+        target_voter_groups: [all_opposition, soft_AKP_voters]
+        expected_positive_effect: "775k vote margin; KONDA ~4% AKP switch"
+        expected_backlash: "AKP fear-mobilisation"
+        vote_shift_direction: toward_CHP
+        confidence_level: high
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "Endorse the AKP candidate; defend national unity against opposition collusion with the PKK."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: "partial base hold"
+        expected_backlash: "nationalist defections to Imamoglu (KONDA ~50% MHP switched)"
+        vote_shift_direction: toward_CHP_backfire
+        confidence_level: high
+      aksener_meral:
+        does_agent_broadcast: true
+        message_frame: "'Winter is coming' — all democrats must defend the ballot."
+        emotional_tone: [combative, hopeful]
+        target_voter_groups: [moderate_nationalist_opposition]
+        expected_positive_effect: "IYI nationalist support for Imamoglu"
+        expected_backlash: "nationalist defections"
+        vote_shift_direction: toward_CHP
+        confidence_level: high
+      kurdish_movement_agent:
+        active_label: HDP
+        does_agent_broadcast: true
+        message_frame: "Defend the vote — the rerun is a test of whether elections still mean anything."
+        emotional_tone: [mobilizing]
+        target_voter_groups: [kurdish_political_voter_istanbul]
+        expected_positive_effect: "locks Istanbul Kurdish vote behind Imamoglu"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_CHP
+        movement_state_effect:
+          strategy_state: hybrid
+          strategic_voting_signal: 0.95
+        confidence_level: high
+      demirtas_selahattin:
+        invocation: invoked
+        does_agent_broadcast: true
+        message_frame: "The choice is between continued one-man rule and a democratic restart."
+        emotional_tone: [hopeful, defiant]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "reinforces Kurdish CHP vote"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_CHP
+        confidence_level: medium
+      buldan_pervin:
+        does_agent_broadcast: true
+        message_frame: "Strategic non-candidacy was the right call; defend the result."
+        emotional_tone: [conciliatory]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "reinforces strategic vote"
+        vote_shift_direction: toward_CHP
+        confidence_level: high
+
+  E03_2019_kayyum:
+    label: "2019 trustee/kayyum appointments"
+    date: "2019-08-19"
+    movement_period_at_event: P2_HDP_kayyum_covid_ecthr
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "Trustees protect citizens from terror-linked municipalities — security overrides the ballot."
+        emotional_tone: [combative, security_framing]
+        target_voter_groups: [devout_anatolian_loyalist, nationalist_grey_wolf_core]
+        expected_positive_effect: base_mobilisation
+        expected_backlash: "secular + Kurdish + cosmopolitan trigger"
+        vote_shift_direction: toward_AKP_MHP
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: true
+        message_frame: "Removing elected mayors is not security policy — it is democratic regression."
+        emotional_tone: [hopeful, defensive]
+        target_voter_groups: [secular_urban_professional, cosmopolitan_liberal_urban_professional, kurdish_political_voter]
+        expected_positive_effect: "cross-camp solidarity signal"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_CHP
+        confidence_level: medium
+      imamoglu_ekrem:
+        does_agent_broadcast: true
+        message_frame: "The ballot must mean what it says; Istanbul stands with cities whose mandates are cancelled."
+        emotional_tone: [conciliatory]
+        target_voter_groups: [secular_urban_professional, kurdish_political_voter]
+        expected_positive_effect: "strengthens cross-camp coalition"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_CHP
+        confidence_level: medium
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "Trustees are correct because the elected officials served terror networks."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: base_reinforcement
+        expected_backlash: "maximum backlash from Kurdish + cosmopolitan"
+        vote_shift_direction: toward_AKP_MHP
+        confidence_level: high
+      aksener_meral:
+        does_agent_broadcast: true
+        message_frame: "The principle of the ballot must be defended even where one disagrees with the result."
+        emotional_tone: [conciliatory, defensive]
+        target_voter_groups: [moderate_nationalist_opposition]
+        expected_positive_effect: "partial cross-camp credibility"
+        expected_backlash: "nationalist defection risk"
+        vote_shift_direction: mixed
+        confidence_level: medium
+      kurdish_movement_agent:
+        active_label: HDP
+        does_agent_broadcast: true
+        message_frame: "A mass coordinated state operation, not three independent decisions; 418 detained across 29 provinces — defend the ballot."
+        emotional_tone: [mobilizing, defensive]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional, secular_urban_professional]
+        expected_positive_effect: "raises anti-trustee salience"
+        expected_backlash: "nationalist backlash"
+        vote_shift_direction: off_cycle
+        movement_state_effect:
+          trustee_kayyum_salience: high
+          democratic_rights_salience: high
+        confidence_level: high
+      turk_ahmet:
+        does_agent_broadcast: true
+        message_frame: "Voters chose me as Mardin's mayor; the President had other plans — is the ballot still the ballot? (Washington Post op-ed framing)"
+        emotional_tone: [conciliatory, defiant]
+        target_voter_groups: [international_audience, kurdish_political_voter]
+        expected_positive_effect: "internationalises kayyum critique"
+        expected_backlash: "nationalist backlash"
+        movement_state_effect:
+          trustee_kayyum_salience: 0.95
+        confidence_level: high
+      buldan_pervin:
+        does_agent_broadcast: true
+        message_frame: "Trustees do not erase mandates — the movement continues under any banner."
+        emotional_tone: [conciliatory, mobilizing]
+        target_voter_groups: [kurdish_political_voter]
+        expected_positive_effect: "base hold"
+        expected_backlash: "nationalist counter"
+        movement_state_effect:
+          institutional_continuity_signal: high
+        confidence_level: high
+      bakirhan_tuncer:
+        does_agent_broadcast: true
+        message_frame: "Drawing on Siirt experience: kayyum is economic-political punishment, not security policy."
+        emotional_tone: [defensive]
+        target_voter_groups: [kurdish_political_voter_provincial]
+        expected_positive_effect: "anti-trustee salience"
+        confidence_level: medium
+
+  E04_covid:
+    label: "COVID period"
+    date_range: ["2020-03-01", "2022-06-30"]
+    movement_period_at_event: P2_HDP_kayyum_covid_ecthr
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "Turkey's expert-led response is competent; opposition mayors and the medical association are politicising the crisis."
+        emotional_tone: [technocratic, combative]
+        target_voter_groups: [devout_anatolian_loyalist, conservative_economically_disillusioned]
+        expected_positive_effect: base_hold
+        expected_backlash: "secular + young trigger; underreporting controversy"
+        vote_shift_direction: "mild toward AKP early; erosion later"
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: true
+        message_frame: "Government transparency failure; CHP municipalities deliver."
+        emotional_tone: [conciliatory, technocratic]
+        target_voter_groups: [secular_urban_professional, alevi_chp_loyalist]
+        expected_positive_effect: base_mobilisation
+        vote_shift_direction: toward_CHP
+        confidence_level: medium
+      imamoglu_ekrem:
+        does_agent_broadcast: true
+        message_frame: "Istanbul's parallel data + needs-cards solidarity show competent local governance."
+        emotional_tone: [technocratic, hopeful]
+        target_voter_groups: [all_opposition, soft_AKP_defectors]
+        expected_positive_effect: high_cross_camp_credibility
+        expected_backlash: "central-govt counter-attack on donations"
+        vote_shift_direction: toward_CHP
+        confidence_level: high
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "Defend state authority; opposition mayors overstep their lane."
+        emotional_tone: [combative, security_framing]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: base_hold
+        confidence_level: medium
+      aksener_meral:
+        does_agent_broadcast: true
+        message_frame: "Field-visit politics — market visits, local pressure on central-government failure."
+        emotional_tone: [combative, hopeful]
+        target_voter_groups: [moderate_nationalist_opposition, secular_urban_professional]
+        expected_positive_effect: partial_mobilisation
+        vote_shift_direction: toward_IYI
+        confidence_level: medium
+      kurdish_movement_agent:
+        active_label: HDP
+        does_agent_broadcast: true
+        message_frame: "COVID + loss of municipal platforms = double erasure; ECtHR Grand Chamber Dec 2020 is democratic vindication."
+        emotional_tone: [defensive]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "preserves base"
+        expected_backlash: "mobilisation suppressed"
+        movement_state_effect:
+          strategy_state: strategic_silent_support
+          voter_mobilization_level: low
+        confidence_level: high
+      demirtas_selahattin:
+        invocation: "invoked Dec 2020 (Grand Chamber)"
+        does_agent_broadcast: true
+        message_frame: "The Grand Chamber ruling is a verdict on the state, not on me."
+        emotional_tone: [defiant, hopeful]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional, secular_urban_professional]
+        expected_positive_effect: "raises democratic_rights_salience to HIGH"
+        expected_backlash: "state-media reframe as foreign interference"
+        confidence_level: high
+      buldan_pervin:
+        does_agent_broadcast: true
+        message_frame: "Anti-kayyum + Demirtas-release coalition."
+        emotional_tone: [defensive]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "base hold"
+        confidence_level: medium
+
+  E05_hdp_closure_case:
+    label: "HDP closure case"
+    date: "2021-03-17"
+    movement_period_at_event: P3_HDP_closure_alliance
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "The Constitutional Court will determine — the AKP respects judicial independence (while implicitly endorsing closure)."
+        emotional_tone: [nationalist, defensive]
+        target_voter_groups: [devout_anatolian_loyalist, nationalist_grey_wolf_core]
+        expected_positive_effect: base_mobilisation
+        expected_backlash: "secular + Kurdish backlash"
+        vote_shift_direction: toward_AKP_MHP_base
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: true
+        message_frame: "Party closures are not democratic remedies; HDP is a legitimate parliamentary actor."
+        emotional_tone: [conciliatory, democratic_framing]
+        target_voter_groups: [secular_urban_professional, cosmopolitan_liberal_urban_professional, kurdish_political_voter]
+        expected_positive_effect: "builds opposition alliance bridge to HDP"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_Nation_HDP_coalition
+        confidence_level: high
+      imamoglu_ekrem:
+        does_agent_broadcast: partial
+        message_frame: "Defends democratic pluralism without becoming the primary spokesperson."
+        emotional_tone: [conciliatory]
+        target_voter_groups: [secular_urban_professional, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "mild positive signal"
+        expected_backlash: "mild AKP counter"
+        confidence_level: medium
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "HDP must be closed — it is the political wing of terror."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: mobilizes_base
+        expected_backlash: "maximum Kurdish + cosmopolitan backlash"
+        vote_shift_direction: toward_MHP_base
+        confidence_level: high
+      aksener_meral:
+        does_agent_broadcast: true
+        message_frame: "Party closures via court are wrong in principle, but HDP must distance itself from terror."
+        emotional_tone: [conditional, nationalist]
+        target_voter_groups: [moderate_nationalist_opposition]
+        expected_positive_effect: mixed
+        expected_backlash: "Kurdish backlash"
+        vote_shift_direction: mild_toward_IYI
+        confidence_level: medium
+      kurdish_movement_agent:
+        active_label: HDP
+        does_agent_broadcast: true
+        message_frame: "The case is fundamentally political, not legal — the defence is for the historical archive."
+        emotional_tone: [legalistic, defiant]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional, secular_urban_professional]
+        expected_positive_effect: "preserves base + raises international salience"
+        expected_backlash: "nationalist counter"
+        movement_state_effect:
+          closure_risk_level: critical
+          party_transition_state: preparing
+        confidence_level: high
+      sancar_mithat:
+        does_agent_broadcast: true
+        message_frame: "The indictment fails Venice Commission standards."
+        emotional_tone: [technocratic, legalistic]
+        target_voter_groups: [cosmopolitan_liberal_urban_professional, legal_academic_audience]
+        expected_positive_effect: "sustains legitimacy"
+        expected_backlash: "state-media dismissal"
+        confidence_level: high
+      buldan_pervin:
+        does_agent_broadcast: true
+        message_frame: "The movement existed before its acronyms and will exist after them."
+        emotional_tone: [conciliatory, defiant]
+        target_voter_groups: [kurdish_political_voter]
+        expected_positive_effect: "lowers rebrand anxiety"
+        expected_backlash: "state media seizes on 'continuity with closed parties'"
+        movement_state_effect:
+          institutional_continuity_signal: high
+        confidence_level: high
+      bestas_meral_danis:
+        does_agent_broadcast: true
+        message_frame: "The 843-page indictment is a political case; defence is constitutional theatre on the record."
+        emotional_tone: [technocratic, defiant]
+        target_voter_groups: [cosmopolitan_liberal_urban_professional, kurdish_political_voter]
+        expected_positive_effect: "stabilises voter confidence"
+        confidence_level: high
+
+  E06_lira_inflation:
+    label: "2021-2022 lira / inflation crisis"
+    date_range: ["2021-09-01", "2022-12-31"]
+    movement_period_at_event: P3_HDP_closure_alliance
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "Economic war of independence; the 'interest rate lobby' attacks Turkey — trust the lira."
+        emotional_tone: [combative, populist, nationalist]
+        target_voter_groups: [devout_anatolian_loyalist, working_class_welfare_recipients]
+        expected_positive_effect: "base hold via blame-shift"
+        expected_backlash: "secular + young + cosmopolitan trigger; conservative_econ_disill erosion"
+        vote_shift_direction: erosion_among_economically_disillusioned
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: true
+        message_frame: "Kitchen-table economics — inflation as lived experience; orthodox policy needed."
+        emotional_tone: [hopeful, populist_economic]
+        target_voter_groups: [conservative_economically_disillusioned, secular_urban_professional, alevi_chp_loyalist, retired_protest_voter]
+        expected_positive_effect: "persuasion among undecideds"
+        expected_backlash: "'doesn't sound like a leader' critique"
+        vote_shift_direction: toward_CHP
+        confidence_level: high
+      imamoglu_ekrem:
+        does_agent_broadcast: true
+        message_frame: "Istanbul service delivery offsets central-government economic failure; concrete cost-of-living interventions."
+        emotional_tone: [technocratic, populist]
+        target_voter_groups: [conservative_economically_disillusioned, secular_urban_professional, retired_protest_voter]
+        expected_positive_effect: "high credibility on competence"
+        expected_backlash: "central counterattack"
+        vote_shift_direction: toward_CHP
+        confidence_level: high
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "Defend national economic sovereignty; reject IMF / orthodox prescriptions."
+        emotional_tone: [nationalist, defensive]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: base_hold
+        expected_backlash: "economic_disillusioned defection"
+        vote_shift_direction: mild_toward_AKP_MHP_then_erosion
+        confidence_level: medium
+      aksener_meral:
+        does_agent_broadcast: true
+        message_frame: "The lira crisis is the bill for one-man rule."
+        emotional_tone: [combative, populist]
+        target_voter_groups: [moderate_nationalist_opposition, conservative_economically_disillusioned]
+        expected_positive_effect: partial_persuasion
+        expected_backlash: "nationalist defection (refugee pivot ahead)"
+        vote_shift_direction: toward_IYI
+        confidence_level: high
+      kurdish_movement_agent:
+        active_label: HDP
+        does_agent_broadcast: true
+        message_frame: "Economic crisis layered onto democratic crisis — both have one cause."
+        emotional_tone: [defiant, legalistic]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: base_hold
+        expected_backlash: "secondary salience vs closure"
+        movement_state_effect:
+          strategy_state: hybrid
+        confidence_level: medium
+
+  E07_refugee_debate:
+    label: "Refugee debate (escalating)"
+    date_range: ["2021-01-01", "2023-05-31"]
+    movement_period_at_event: P3_HDP_closure_alliance_to_P4_YSP
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "Voluntary and honourable return after the 2022 pivot; opposition's deportation rhetoric is un-Islamic cruelty."
+        emotional_tone: [populist, religious_framing]
+        target_voter_groups: [devout_anatolian_loyalist, refugee_skeptical_conservative]
+        expected_positive_effect: "retains base"
+        expected_backlash: "hardliner defection to YRP/Zafer"
+        vote_shift_direction: mild_erosion_to_YRP
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: true
+        message_frame: "Pre-runoff: orderly return within 2 years (runoff pivot intensified anti-refugee tone)."
+        emotional_tone: [combative_runoff, defensive]
+        target_voter_groups: [nationalist_swing_voters]
+        expected_positive_effect: "nationalist persuasion attempt"
+        expected_backlash: "Kurdish + cosmopolitan + alevi dissonance"
+        vote_shift_direction: mixed
+        confidence_level: high
+      imamoglu_ekrem:
+        does_agent_broadcast: true
+        message_frame: "Pragmatic urban management; rejects scapegoating."
+        emotional_tone: [conciliatory, technocratic]
+        target_voter_groups: [cosmopolitan_liberal_urban_professional, secular_urban_professional, conservative_economically_disillusioned]
+        expected_positive_effect: "preserves cross-camp credibility"
+        expected_backlash: "refugee-skeptical defection risk"
+        vote_shift_direction: mild_toward_imamoglu_urban
+        confidence_level: medium
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "Refugees must be controlled; nationalist sovereignty is paramount."
+        emotional_tone: [nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: base_hold
+        expected_backlash: "mild"
+        vote_shift_direction: mild_toward_MHP_aligned
+        confidence_level: medium
+      aksener_meral:
+        does_agent_broadcast: true
+        message_frame: "All refugees must return; sharp anti-refugee programme."
+        emotional_tone: [combative, nationalist, populist]
+        target_voter_groups: [moderate_nationalist_opposition, refugee_skeptical_secular]
+        expected_positive_effect: "mobilises IYI base"
+        expected_backlash: "Kurdish + cosmopolitan + alevi trigger"
+        vote_shift_direction: toward_IYI_plus_Zafer_drain
+        confidence_level: high
+      kurdish_movement_agent:
+        active_label: HDP
+        does_agent_broadcast: true
+        message_frame: "Rejects scapegoating; the refugee question is a rights question; condemns the Ozdag Protocol."
+        emotional_tone: [defiant]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "preserves base distinction"
+        expected_backlash: "nationalist counter"
+        movement_state_effect:
+          nationalist_backlash_risk: high
+        confidence_level: high
+
+  E08_2023_earthquakes:
+    label: "2023 Kahramanmaras earthquakes"
+    date: "2023-02-06"
+    movement_period_at_event: P4_YSP_2023_elections
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "It is not possible to be ready for a disaster like this; God-given; we rebuild quickly; critics are dishonourable."
+        emotional_tone: [defensive, religious_framing, combative]
+        target_voter_groups: [devout_anatolian_loyalist, earthquake_zone_loyalist]
+        expected_positive_effect: "retains 8 of 11 quake provinces in May 2023"
+        expected_backlash: "mass urban + young + cosmopolitan trigger"
+        vote_shift_direction: "partial defence in quake region; net negative urban"
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: true
+        message_frame: "Government accountability; structural critique; CHP municipalities respond effectively."
+        emotional_tone: [combative_rare, defensive]
+        target_voter_groups: [secular_urban_professional, alevi_chp_loyalist, retired_protest_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: base_mobilisation
+        expected_backlash: "mild"
+        vote_shift_direction: toward_CHP
+        confidence_level: high
+      imamoglu_ekrem:
+        does_agent_broadcast: true
+        message_frame: "IBB rescue teams deployed quickly; transparency on aid; visible field presence."
+        emotional_tone: [technocratic, hopeful]
+        target_voter_groups: [all_opposition, soft_AKP]
+        expected_positive_effect: high_credibility
+        expected_backlash: "central counter-attack on aid coordination"
+        vote_shift_direction: toward_CHP
+        confidence_level: high
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "National unity around the state; security-discipline framing."
+        emotional_tone: [nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: base_hold
+        confidence_level: low
+      aksener_meral:
+        does_agent_broadcast: true
+        message_frame: "Accountability; condemnation of building-amnesty laws."
+        emotional_tone: [combative]
+        target_voter_groups: [moderate_nationalist_opposition, secular_urban_professional]
+        expected_positive_effect: base_mobilisation
+        vote_shift_direction: toward_IYI
+        confidence_level: medium
+      kurdish_movement_agent:
+        active_label: HDP_YSP_transitional
+        does_agent_broadcast: true
+        message_frame: "Hatay/Adana victims include Arab-Alevi communities; rights-based reconstruction; trustee municipalities cannot deliver."
+        emotional_tone: [defensive, mobilizing]
+        target_voter_groups: [kurdish_political_voter_region, alevi_chp_loyalist, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: regional_credibility
+        expected_backlash: "nationalist counter"
+        movement_state_effect:
+          trustee_kayyum_salience: high
+        confidence_level: medium
+      hatimogullari_tulay:
+        does_agent_broadcast: true
+        role_phase: "pre-leadership"
+        message_frame: "Hatay Arab-Alevi victims need rights-based response; AFAD/government accountability."
+        emotional_tone: [defensive]
+        target_voter_groups: [alevi_chp_loyalist_regional, kurdish_political_voter]
+        expected_positive_effect: regional_credibility
+        vote_shift_direction: mild_positive_for_opposition
+        confidence_level: medium
+
+  E09_2023_presidential_r1:
+    label: "2023 presidential election first round"
+    date: "2023-05-14"
+    movement_period_at_event: P4_YSP_2023_elections
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "Native and national; the opposition is a PKK-FETO-Western collusion; civilisational defence."
+        emotional_tone: [combative, nationalist, populist]
+        target_voter_groups: [devout_anatolian_loyalist, nationalist_grey_wolf_core, diaspora]
+        expected_positive_effect: "49.52% R1"
+        expected_backlash: "secular + young + Kurdish + cosmopolitan trigger"
+        vote_shift_direction: toward_AKP
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: true
+        message_frame: "Helallesme; rule of law; 'Bay Kemal' relatable figure; coalition of six plus HDP/YSP."
+        emotional_tone: [hopeful, conciliatory]
+        target_voter_groups: [secular_urban_professional, alevi_chp_loyalist, kurdish_political_voter, retired_protest_voter, young_urban_protest_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "44.88% R1"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: high
+      imamoglu_ekrem:
+        does_agent_broadcast: true
+        message_frame: "Supporting figure for Kilicdaroglu; mobilises Istanbul + young + cross-camp."
+        emotional_tone: [hopeful, conciliatory]
+        target_voter_groups: [cosmopolitan_liberal_urban_professional, young_urban_protest_voter, secular_urban_professional]
+        expected_positive_effect: base_mobilisation
+        expected_backlash: "mild"
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: high
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "Nationalist defence of the state; MHP holds at 10.1%."
+        emotional_tone: [nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: base_hold
+        vote_shift_direction: toward_AKP_MHP
+        confidence_level: high
+      aksener_meral:
+        does_agent_broadcast: true
+        message_frame: "Backs Kilicdaroglu within Table of Six; nationalist legitimisation."
+        emotional_tone: [combative, hopeful]
+        target_voter_groups: [moderate_nationalist_opposition]
+        expected_positive_effect: "IYI ~10%"
+        expected_backlash: "mild"
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: high
+      kurdish_movement_agent:
+        active_label: "HDP -> YSP"
+        does_agent_broadcast: true
+        message_frame: "End the one-man regime; the YSP electoral switch is prophylactic, identity is continuous."
+        emotional_tone: [mobilizing]
+        target_voter_groups: [kurdish_political_voter]
+        expected_positive_effect: "YSP 8.82% / 61 seats; 60-75% for Kilicdaroglu in Kurdish provinces"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_Nation_Alliance
+        movement_state_effect:
+          strategy_state: full_alliance
+          party_transition_state: transitioning
+        confidence_level: high
+      demirtas_selahattin:
+        invocation: invoked
+        does_agent_broadcast: true
+        message_frame: "The choice is between continued one-man rule and a democratic restart; stay with Kilicdaroglu."
+        emotional_tone: [defiant, hopeful]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional, young_urban_protest_voter]
+        expected_positive_effect: "locks Kurdish R1 turnout"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: high
+      buldan_pervin:
+        does_agent_broadcast: true
+        message_frame: "Joint endorsement of Kilicdaroglu; YSP coalition with Labour and Freedom Alliance."
+        emotional_tone: [mobilizing]
+        target_voter_groups: [kurdish_political_voter]
+        expected_positive_effect: base_hold
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: high
+      sancar_mithat:
+        does_agent_broadcast: true
+        message_frame: "Joint endorsement of Kilicdaroglu; YSP coalition with Labour and Freedom Alliance."
+        emotional_tone: [mobilizing]
+        target_voter_groups: [kurdish_political_voter]
+        expected_positive_effect: base_hold
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: high
+      onder_sirri_sureyya:
+        does_agent_broadcast: true
+        message_frame: "Bridge figure: Istanbul + Kurdish + parliamentary peace-process horizon."
+        emotional_tone: [hopeful]
+        target_voter_groups: [cosmopolitan_liberal_urban_professional, secular_urban_professional, kurdish_political_voter]
+        expected_positive_effect: "mobilizes urban Kurdish + Gezi-generation"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: medium
+
+  E10_2023_presidential_runoff:
+    label: "2023 presidential runoff"
+    date: "2023-05-28"
+    movement_period_at_event: P4_YSP_2023_elections
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "Doubles down on PKK-collusion + refugee-management; Sinan Ogan endorsement consolidates nationalists."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core, devout_anatolian_loyalist, diaspora]
+        expected_positive_effect: "52.18% win"
+        expected_backlash: "secular + Kurdish trigger"
+        vote_shift_direction: toward_AKP
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: true
+        message_frame: "Combative pivot — anti-refugee, anti-foreign-meddling; nationalist register (Ozdag Protocol May 18)."
+        emotional_tone: [combative, nationalist_runoff]
+        target_voter_groups: [nationalist_swing_voters]
+        expected_positive_effect: "partial nationalist persuasion"
+        expected_backlash: "Kurdish + cosmopolitan + alevi demobilisation (-4 to -6% Kurdish R2 turnout)"
+        vote_shift_direction: net_inadequate
+        confidence_level: high
+      imamoglu_ekrem:
+        does_agent_broadcast: true
+        message_frame: "Continues to back Kilicdaroglu publicly; quietly distances from the refugee pivot."
+        emotional_tone: [hopeful, conciliatory]
+        target_voter_groups: [cosmopolitan_liberal_urban_professional, secular_urban_professional, kurdish_political_voter]
+        expected_positive_effect: "preserves own brand"
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: medium
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "Endorse Erdogan; mobilise nationalist runoff turnout."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: base_mobilisation
+        vote_shift_direction: toward_AKP_MHP
+        confidence_level: high
+      aksener_meral:
+        does_agent_broadcast: true
+        message_frame: "Endorse Kilicdaroglu R2; nationalist register against Erdogan."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [moderate_nationalist_opposition]
+        expected_positive_effect: "IYI R2 hold"
+        expected_backlash: "mild"
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: high
+      kurdish_movement_agent:
+        active_label: YSP
+        does_agent_broadcast: true
+        message_frame: "Stay with Kilicdaroglu R2 despite the Ozdag Protocol — name the betrayal openly but defend democracy."
+        emotional_tone: [defiant, mobilizing]
+        target_voter_groups: [kurdish_political_voter]
+        expected_positive_effect: "limits Kurdish R2 turnout drop to ~4-6%"
+        expected_backlash: "soft boycott pressure within base"
+        vote_shift_direction: mostly_toward_Nation_Alliance
+        movement_state_effect:
+          strategy_state: full_alliance
+          nationalist_backlash_risk: high
+          trustee_kayyum_salience: high
+        confidence_level: high
+      demirtas_selahattin:
+        invocation: invoked
+        does_agent_broadcast: true
+        message_frame: "Endorses Kilicdaroglu R2 from prison; names the Ozdag Protocol problem explicitly."
+        emotional_tone: [defiant, conciliatory]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional, young_urban_protest_voter]
+        expected_positive_effect: "limits R2 turnout drop"
+        expected_backlash: "base reads endorsement as capitulation (contested)"
+        vote_shift_direction: toward_Nation_Alliance_with_leakage
+        confidence_level: high
+      buldan_pervin:
+        does_agent_broadcast: true
+        message_frame: "Hold the line; the choice is still between one-man rule and democracy."
+        emotional_tone: [mobilizing]
+        target_voter_groups: [kurdish_political_voter]
+        expected_positive_effect: base_hold
+        expected_backlash: "leakage"
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: high
+
+  E11_chp_leadership_transition:
+    label: "CHP leadership transition"
+    date: "2023-11-05"
+    movement_period_at_event: P5_HDP_suspend_HEDEP
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "Opposition internal chaos signals AKP stability."
+        emotional_tone: [combative]
+        target_voter_groups: [devout_anatolian_loyalist, nationalist_grey_wolf_core]
+        expected_positive_effect: base_reinforcement
+        expected_backlash: "mild"
+        vote_shift_direction: mild_toward_AKP
+        confidence_level: medium
+      kilicdaroglu_kemal:
+        does_agent_broadcast: true
+        message_frame: "Continuity over confrontation; defends the record but loses the chair to Ozgur Ozel."
+        emotional_tone: [defensive]
+        target_voter_groups: [secular_urban_professional, alevi_chp_loyalist, retired_protest_voter]
+        expected_positive_effect: partial_base_retention
+        expected_backlash: "factional damage"
+        vote_shift_direction: mild_toward_CHP_renewal
+        confidence_level: high
+        post_event_state_effect:
+          apply_broadcast_power_multiplier: 0.40
+          effective_from: "2023-11-08"
+      imamoglu_ekrem:
+        does_agent_broadcast: true
+        message_frame: "Renewal of opposition leadership; the municipal-success generation rises."
+        emotional_tone: [hopeful]
+        target_voter_groups: [secular_urban_professional, young_urban_protest_voter, cross_camp]
+        expected_positive_effect: "mobilises CHP renewal"
+        expected_backlash: "factional tension"
+        vote_shift_direction: toward_CHP_renewal
+        confidence_level: high
+      bahceli_devlet:
+        does_agent_broadcast: false
+        confidence_level: medium
+      aksener_meral:
+        does_agent_broadcast: partial
+        message_frame: "Comments on opposition cohesion; tensions with new CHP leadership begin."
+        emotional_tone: [combative]
+        target_voter_groups: [moderate_nationalist_opposition]
+        expected_positive_effect: partial
+        expected_backlash: "IYI-CHP friction"
+        vote_shift_direction: mild_negative_for_opposition_cohesion
+        confidence_level: medium
+      kurdish_movement_agent:
+        does_agent_broadcast: false
+        message_frame: "Movement focused on HEDEP -> DEM transition; not a primary actor in the CHP race."
+        confidence_level: high
+
+  E12_hdp_to_ysp:
+    label: "HDP/YSP transition for 2023 election"
+    date: "2023-03-24"
+    movement_period_at_event: P4_YSP_2023_elections
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "YSP is HDP under a new name — the closure case must proceed."
+        emotional_tone: [combative, security_framing]
+        target_voter_groups: [devout_anatolian_loyalist, nationalist_grey_wolf_core]
+        expected_positive_effect: base_hold
+        expected_backlash: "secular + Kurdish trigger"
+        vote_shift_direction: toward_AKP_MHP
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: true
+        message_frame: "Welcomes YSP into the Labour and Freedom Alliance; coalition formalises."
+        emotional_tone: [conciliatory]
+        target_voter_groups: [secular_urban_professional, kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "mobilises broad coalition"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_Nation_Alliance
+        confidence_level: high
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "YSP is HDP's mask; the closure case must continue."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: base_hold
+        vote_shift_direction: toward_MHP
+        confidence_level: high
+      aksener_meral:
+        does_agent_broadcast: true
+        message_frame: "IYI does not formally coordinate with YSP; tactical neutrality on the closure case."
+        emotional_tone: [nationalist, defensive]
+        target_voter_groups: [moderate_nationalist_opposition]
+        expected_positive_effect: "preserves IYI identity"
+        expected_backlash: "Kurdish trigger"
+        confidence_level: medium
+      kurdish_movement_agent:
+        active_label: "HDP (institutional) / YSP (electoral)"
+        does_agent_broadcast: true
+        message_frame: "YSP is the electoral vehicle; HDP retained as the legal shell; identity is continuous."
+        emotional_tone: [legalistic, mobilizing]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional, secular_urban_professional]
+        expected_positive_effect: "electoral viability preserved"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_YSP
+        movement_state_effect:
+          party_transition_state: transitioning
+          current_party_label: "HDP_institutional_YSP_electoral"
+        confidence_level: high
+      buldan_pervin:
+        does_agent_broadcast: true
+        message_frame: "The YSP transition is institutional continuity, not surrender."
+        emotional_tone: [conciliatory]
+        target_voter_groups: [kurdish_political_voter]
+        expected_positive_effect: base_hold
+        vote_shift_direction: toward_YSP
+        confidence_level: high
+      sancar_mithat:
+        does_agent_broadcast: true
+        message_frame: "The YSP transition is institutional continuity, not surrender."
+        emotional_tone: [conciliatory]
+        target_voter_groups: [kurdish_political_voter]
+        expected_positive_effect: base_hold
+        vote_shift_direction: toward_YSP
+        confidence_level: high
+      bestas_meral_danis:
+        does_agent_broadcast: true
+        message_frame: "HDP defence continues legally; YSP is the campaign vehicle."
+        emotional_tone: [technocratic]
+        target_voter_groups: [cosmopolitan_liberal_urban_professional, kurdish_political_voter, secular_urban_professional]
+        expected_positive_effect: "preserves base"
+        vote_shift_direction: toward_YSP
+        confidence_level: high
+
+  E13_hdp_suspends:
+    label: "HDP suspends activity / transfers center to YSP"
+    date: "2023-08-27"
+    movement_period_at_event: P5_HDP_suspend_HEDEP
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: partial
+        message_frame: "The rebrand confirms the original was illegitimate."
+        emotional_tone: [combative]
+        target_voter_groups: [devout_anatolian_loyalist, nationalist_grey_wolf_core]
+        expected_positive_effect: base_reinforcement
+        expected_backlash: "secular + Kurdish trigger"
+        vote_shift_direction: mild_toward_AKP_MHP
+        confidence_level: medium
+      kilicdaroglu_kemal:
+        does_agent_broadcast: false
+        message_frame: "Post-2023 loss; CHP leadership crisis takes priority."
+        confidence_level: medium
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "Closure must still proceed regardless of the rebrand."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: base_hold
+        vote_shift_direction: toward_MHP
+        confidence_level: medium
+      aksener_meral:
+        does_agent_broadcast: partial
+        message_frame: "Tactical neutrality; IYI's own internal dynamics intensify."
+        confidence_level: medium
+      kurdish_movement_agent:
+        active_label: "HDP suspended -> YSP operative"
+        does_agent_broadcast: true
+        message_frame: "HDP suspended at the 4th Extraordinary Congress; Ozcan and Kirkazak preserve the legal shell; YSP is the operative center. Buldan announces July 1 strategy of own metro candidates in 2024."
+        emotional_tone: [legalistic, mobilizing]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "brand-discontinuity managed; Third Way doctrine activated"
+        expected_backlash: "internal critique"
+        vote_shift_direction: toward_YSP_DEM
+        movement_state_effect:
+          party_transition_state: just_completed
+          strategy_state: independent_run_announced
+          institutional_continuity_signal: high
+        confidence_level: high
+      buldan_pervin:
+        does_agent_broadcast: true
+        message_frame: "Steps down at the Aug 27 congress; the strategic announcement is the legacy."
+        emotional_tone: [conciliatory, mobilizing]
+        target_voter_groups: [kurdish_political_voter]
+        expected_positive_effect: "base hold + new strategy lock"
+        vote_shift_direction: toward_independent_run
+        confidence_level: high
+      sancar_mithat:
+        does_agent_broadcast: true
+        message_frame: "Steps down; institutional continuity through transition."
+        emotional_tone: [conciliatory]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: base_hold
+        vote_shift_direction: toward_independent_run
+        confidence_level: high
+
+  E14_ysp_to_hedep_to_dem:
+    label: "YSP -> HEDEP -> DEM transition"
+    date_range: ["2023-10-15", "2023-12-11"]
+    movement_period_at_event: P5_HDP_suspend_HEDEP_to_P6_DEM
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "Forced acronym change is judicial discipline; opposition is fragmenting."
+        emotional_tone: [combative]
+        target_voter_groups: [devout_anatolian_loyalist, nationalist_grey_wolf_core]
+        expected_positive_effect: base_hold
+        expected_backlash: "secular + Kurdish trigger"
+        vote_shift_direction: toward_AKP_MHP
+        confidence_level: medium
+      kilicdaroglu_kemal:
+        does_agent_broadcast: false
+        confidence_level: high
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "The rebrand does not change the substance; closure still warranted."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: base_hold
+        vote_shift_direction: toward_MHP
+        confidence_level: medium
+      aksener_meral:
+        does_agent_broadcast: false
+        message_frame: "Internal IYI campaign preparation dominates."
+        confidence_level: medium
+      kurdish_movement_agent:
+        active_label: "HEDEP -> DEM"
+        does_agent_broadcast: true
+        message_frame: "HEDEP congress Oct 15: Third Way doctrine, Ocalan-release demand, Kurdish-Palestinian solidarity; DEM brand finalised Dec 11."
+        emotional_tone: [symbolic, mobilizing]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "brand viability; pre-2024 mobilisation primer"
+        expected_backlash: "nationalist counter; small CHP-aligned vote-splitting concern"
+        vote_shift_direction: toward_DEM
+        movement_state_effect:
+          current_party_label: "HEDEP_to_DEM"
+          strategy_state: independent_run
+          institutional_leadership: "Hatimogullari_Bakirhan"
+        confidence_level: high
+      hatimogullari_tulay:
+        does_agent_broadcast: true
+        message_frame: "Third Way: no subordination of identity to alliance arithmetic; mandate recovery is non-negotiable."
+        emotional_tone: [mobilizing, defiant]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "locks independent-run strategy"
+        expected_backlash: "CHP-aligned vote-splitting frame"
+        vote_shift_direction: toward_DEM
+        movement_state_effect:
+          faction_active: weaken_AKP
+        confidence_level: high
+      bakirhan_tuncer:
+        does_agent_broadcast: true
+        message_frame: "Operational renewal grounded in lived trustee experience."
+        emotional_tone: [mobilizing]
+        target_voter_groups: [kurdish_political_voter_provincial]
+        expected_positive_effect: "provincial mobilisation primer"
+        vote_shift_direction: toward_DEM
+        confidence_level: high
+      turk_ahmet:
+        does_agent_broadcast: true
+        message_frame: "Dialogue-faction commentary: dialogue with the state remains the path."
+        emotional_tone: [conciliatory]
+        target_voter_groups: [kurdish_political_voter_elder, international_audience]
+        expected_positive_effect: "stabilises dialogue-faction"
+        expected_backlash: "younger base reads as accommodationist"
+        vote_shift_direction: mild
+        movement_state_effect:
+          faction_active: dialogue_first
+        confidence_level: medium
+
+  E15_2024_local_campaign:
+    label: "2024 local election campaign"
+    date_range: ["2024-01-01", "2024-03-30"]
+    movement_period_at_event: P6_HEDEP_to_DEM_2024_campaign
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "Local government is an extension of national policy; opposition municipalities serve foreign interests."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [devout_anatolian_loyalist, nationalist_grey_wolf_core]
+        expected_positive_effect: partial_base_hold
+        expected_backlash: "secular + young + earthquake_zone trigger"
+        vote_shift_direction: "toward AKP base; insufficient"
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: partial
+        message_frame: "Background CHP elder; effectively passes baton to Imamoglu/Yavas/Ozel."
+        emotional_tone: [defensive]
+        target_voter_groups: [secular_urban_professional, alevi_chp_loyalist]
+        expected_positive_effect: minor_base_hold
+        expected_backlash: "factional drag"
+        vote_shift_direction: mild_toward_CHP_renewal
+        confidence_level: high
+      imamoglu_ekrem:
+        does_agent_broadcast: true
+        message_frame: "Track record + Radical Love + service delivery; speaks directly to AKP defectors."
+        emotional_tone: [hopeful, conciliatory, populist]
+        target_voter_groups: [secular_urban_professional, young_urban_protest_voter, conservative_economically_disillusioned, alevi_chp_loyalist, kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "51.14% reelection landslide"
+        expected_backlash: "AKP fear-mobilisation"
+        vote_shift_direction: toward_CHP
+        confidence_level: high
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "Defend the alliance; nationalist discipline."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: partial_base_hold
+        vote_shift_direction: "mild toward MHP base; net erosion in MHP"
+        confidence_level: high
+      aksener_meral:
+        does_agent_broadcast: true
+        message_frame: "Solo strategy — IYI contests independently."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [moderate_nationalist_opposition]
+        expected_positive_effect: "IYI identity preserved"
+        expected_backlash: "catastrophic mobilisation loss; vote share halves"
+        vote_shift_direction: net_negative_for_IYI
+        confidence_level: high
+      kurdish_movement_agent:
+        active_label: DEM
+        does_agent_broadcast: true
+        message_frame: "Free cities + local democracy; resounding response to the trustee regime; mandate recovery campaign."
+        emotional_tone: [mobilizing]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional, alevi_chp_loyalist_hatay]
+        expected_positive_effect: "recovers 10 provincial capitals; 78 municipalities"
+        expected_backlash: "nationalist counter; soft internal boycott concern"
+        vote_shift_direction: toward_DEM_independently
+        movement_state_effect:
+          strategy_state: independent_run
+          voter_mobilization_level: high
+          trustee_kayyum_salience: high
+        confidence_level: high
+      hatimogullari_tulay:
+        does_agent_broadcast: true
+        message_frame: "Free cities; refuse to trade mandates for alliance arithmetic."
+        emotional_tone: [mobilizing, defiant]
+        target_voter_groups: [kurdish_political_voter]
+        expected_positive_effect: "mobilises southeast"
+        expected_backlash: "CHP-aligned vote-splitting frame"
+        vote_shift_direction: toward_DEM
+        confidence_level: high
+      bakirhan_tuncer:
+        does_agent_broadcast: true
+        message_frame: "Concrete local-democracy programme; restore services + councils."
+        emotional_tone: [mobilizing]
+        target_voter_groups: [kurdish_political_voter_provincial]
+        expected_positive_effect: "10/10 provincial capital recovery"
+        vote_shift_direction: toward_DEM
+        confidence_level: high
+      bestas_meral_danis:
+        does_agent_broadcast: true
+        message_frame: "Accepts DEM Istanbul co-candidacy Feb 9 — identity assertion, not arithmetic."
+        emotional_tone: [conciliatory]
+        target_voter_groups: [kurdish_political_voter_istanbul, cosmopolitan_liberal_urban_professional, women_voters]
+        expected_positive_effect: "2.12% Istanbul vote (by design)"
+        expected_backlash: "CHP-aligned vote-splitting frame"
+        vote_shift_direction: toward_DEM_identity_preservation
+        confidence_level: high
+      kisanak_gultan:
+        does_agent_broadcast: true
+        episode_scope: P6_only
+        message_frame: "Symbolic Ankara candidacy from prison — continued imprisonment is the political content."
+        emotional_tone: [defiant]
+        target_voter_groups: [kurdish_women, cosmopolitan_liberal_urban_professional, international_audience]
+        expected_positive_effect: "maximises legal_pressure_symbol salience (Le Monde etc.)"
+        expected_backlash: "nationalist counter"
+        confidence_level: high
+      zeydan_abdullah:
+        does_agent_broadcast: true
+        message_frame: "Van: reverse the 2019 trustee, restore municipal services."
+        emotional_tone: [mobilizing]
+        target_voter_groups: [kurdish_political_voter_van]
+        expected_positive_effect: "55.48% landslide"
+        expected_backlash: "pre-election Justice Ministry letter"
+        vote_shift_direction: toward_DEM_van
+        confidence_level: high
+      turk_ahmet:
+        does_agent_broadcast: partial
+        message_frame: "Declines to run again (Jan 2024); dialogue-faction commentary continues."
+        emotional_tone: [conciliatory]
+        target_voter_groups: [kurdish_political_voter_elder]
+        expected_positive_effect: factional_balance
+        vote_shift_direction: mild
+        confidence_level: high
+      onder_sirri_sureyya:
+        does_agent_broadcast: true
+        message_frame: "Bridge figure for Istanbul Kurdish + Gezi-generation; peace-process horizon."
+        emotional_tone: [hopeful]
+        target_voter_groups: [cosmopolitan_liberal_urban_professional, young_urban_protest_voter, kurdish_political_voter]
+        expected_positive_effect: "partial Istanbul mobilisation"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_DEM
+        confidence_level: medium
+
+  E16_2024_local_result:
+    label: "2024 local election result"
+    date: "2024-03-31"
+    movement_period_at_event: P6_HEDEP_to_DEM_2024_campaign
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "First defeat since 2002 acknowledged; 'we will compensate for our mistakes' — unusually conciliatory balcony speech."
+        emotional_tone: [conciliatory_rare, defensive]
+        target_voter_groups: [devout_anatolian_loyalist, AKP_base]
+        expected_positive_effect: base_damage_control
+        expected_backlash: "low"
+        vote_shift_direction: net_negative_for_AKP
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: partial
+        message_frame: "Background commentary; CHP victory is institutional vindication."
+        emotional_tone: [defensive]
+        target_voter_groups: [secular_urban_professional_residual]
+        expected_positive_effect: mild_positive
+        expected_backlash: "factional irrelevance"
+        vote_shift_direction: mild_positive_for_CHP
+        confidence_level: medium
+      imamoglu_ekrem:
+        does_agent_broadcast: true
+        message_frame: "51.14% reelection; CHP wins all 5 largest cities + 80% of municipal revenue."
+        emotional_tone: [hopeful]
+        target_voter_groups: [all_opposition, AKP_defectors]
+        expected_positive_effect: maximum_cross_camp_mobilisation
+        expected_backlash: "mild"
+        vote_shift_direction: toward_CHP_nationally
+        confidence_level: high
+      bahceli_devlet:
+        does_agent_broadcast: partial
+        message_frame: "MHP losses; defence of alliance integrity."
+        emotional_tone: [nationalist, defensive]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: partial_base_hold
+        vote_shift_direction: mild_negative_for_MHP
+        confidence_level: medium
+      aksener_meral:
+        does_agent_broadcast: true
+        message_frame: "IYI collapse — vote share halved. Begin resignation trajectory."
+        emotional_tone: [defensive]
+        target_voter_groups: [IYI_base_declining]
+        expected_positive_effect: none_meaningful
+        expected_backlash: "factional revolt"
+        vote_shift_direction: catastrophic_for_IYI
+        confidence_level: high
+        post_event_state_effect:
+          apply_broadcast_power_multiplier: 0.30
+          effective_from: "2024-03-31"
+      kurdish_movement_agent:
+        active_label: DEM
+        does_agent_broadcast: true
+        message_frame: "10 provincial capitals + 78 municipalities; Third Way validated; trustee-regime answered."
+        emotional_tone: [mobilizing]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "structural victory in southeast"
+        expected_backlash: "nationalist + AKP retaliation primed"
+        vote_shift_direction: toward_DEM
+        movement_state_effect:
+          strategy_state: hybrid_post_victory
+          trustee_kayyum_salience: critical
+        confidence_level: high
+      hatimogullari_tulay:
+        does_agent_broadcast: true
+        message_frame: "Resounding response to the trustee regime."
+        emotional_tone: [mobilizing]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: base_mobilisation
+        vote_shift_direction: toward_DEM
+        confidence_level: high
+      zeydan_abdullah:
+        does_agent_broadcast: true
+        message_frame: "The Van mandate belongs to the voters; defend it."
+        emotional_tone: [mobilizing]
+        target_voter_groups: [kurdish_political_voter_van]
+        expected_positive_effect: "55.48% lock"
+        expected_backlash: "Justice Ministry letter (Mar 29) primes contestation"
+        vote_shift_direction: toward_DEM_van
+        confidence_level: high
+
+  E17_van_zeydan_crisis:
+    label: "Van / Abdullah Zeydan mandate crisis"
+    date_range: ["2024-04-02", "2024-04-03"]
+    movement_period_at_event: P7_2024_post_local_Van_crisis
+    responses:
+      erdogan_recep_tayyip:
+        does_agent_broadcast: true
+        message_frame: "Protesters are 'provocateurs' and 'terrorists'; YSK is the lawful arbiter."
+        emotional_tone: [combative, security_framing, defensive]
+        target_voter_groups: [devout_anatolian_loyalist, nationalist_grey_wolf_core]
+        expected_positive_effect: base_mobilisation
+        expected_backlash: "mass urban + Kurdish + cosmopolitan + alevi trigger; international censure"
+        vote_shift_direction: net_negative_for_AKP_credibility
+        confidence_level: high
+      kilicdaroglu_kemal:
+        does_agent_broadcast: partial
+        message_frame: "Background voice; CHP under Ozel joins protests."
+        emotional_tone: [defensive, conciliatory]
+        target_voter_groups: [secular_urban_professional_residual]
+        expected_positive_effect: mild_positive
+        expected_backlash: "factional irrelevance"
+        vote_shift_direction: mild_positive_for_opposition_cohesion
+        confidence_level: medium
+      imamoglu_ekrem:
+        does_agent_broadcast: true
+        message_frame: "The ballot must mean what it says — Istanbul stands with Van."
+        emotional_tone: [conciliatory, defiant]
+        target_voter_groups: [secular_urban_professional, cosmopolitan_liberal_urban_professional, kurdish_political_voter, young_urban_protest_voter]
+        expected_positive_effect: high_cross_camp_mobilisation
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_CHP_DEM_convergence
+        confidence_level: high
+      bahceli_devlet:
+        does_agent_broadcast: true
+        message_frame: "Defend the YSK process; protesters are challenging the state."
+        emotional_tone: [combative, nationalist]
+        target_voter_groups: [nationalist_grey_wolf_core]
+        expected_positive_effect: base_hold
+        vote_shift_direction: toward_MHP
+        confidence_level: medium
+      aksener_meral:
+        does_agent_broadcast: partial
+        message_frame: "Defends the ballot-principle in principle, but cautious on DEM specifically."
+        emotional_tone: [nationalist, defensive]
+        target_voter_groups: [moderate_nationalist_opposition_residual]
+        expected_positive_effect: mild
+        expected_backlash: "mixed"
+        confidence_level: medium
+      kurdish_movement_agent:
+        active_label: DEM
+        does_agent_broadcast: true
+        message_frame: "'Coup in Van'; the mandate belongs to Van's voters; YSK must reverse; defend the mandate through legal channels and visible protest."
+        emotional_tone: [defensive, mobilizing]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional, alevi_chp_loyalist, secular_urban_professional, young_urban_protest_voter]
+        expected_positive_effect: "YSK 7-4 reversal Apr 3; Zeydan inaugurated"
+        expected_backlash: "high nationalist_backlash_risk; subsequent kayyum wave (Hakkari Jun 2024 onward — post-window note)"
+        vote_shift_direction: toward_DEM_legitimacy
+        movement_state_effect:
+          strategy_state: hybrid
+          legal_pressure_state: critical
+          trustee_kayyum_salience: critical
+          mandate_contestation_state: "mandate_revoked -> protest_triggered -> YSK_reversal -> mandate_restored"
+        confidence_level: high
+      hatimogullari_tulay:
+        does_agent_broadcast: true
+        message_frame: "The provincial board decision is a coup against the ballot; YSK must uphold electoral law."
+        emotional_tone: [defensive, defiant]
+        target_voter_groups: [kurdish_political_voter, cosmopolitan_liberal_urban_professional, women_voters]
+        expected_positive_effect: "catalyses YSK reversal; mobilisation_strength surges"
+        expected_backlash: "Erdogan 'provocateurs' label"
+        vote_shift_direction: toward_DEM
+        confidence_level: high
+      bakirhan_tuncer:
+        does_agent_broadcast: true
+        message_frame: "Joint co-leadership of the YSK appeal."
+        emotional_tone: [technocratic, defensive]
+        target_voter_groups: [kurdish_political_voter]
+        expected_positive_effect: "reinforces legal + protest channels"
+        vote_shift_direction: toward_DEM
+        confidence_level: high
+      zeydan_abdullah:
+        does_agent_broadcast: true
+        message_frame: "The mandate belongs to Van's voters; defend it through legal channels and visible protest."
+        emotional_tone: [defiant, mobilizing]
+        target_voter_groups: [kurdish_political_voter_van, cosmopolitan_liberal_urban_professional]
+        expected_positive_effect: "mass protest mobilisation; YSK reversal"
+        expected_backlash: "nationalist backlash; future kayyum risk (Feb 2025 — post-window)"
+        vote_shift_direction: toward_DEM_legitimacy
+        confidence_level: high
+      sancar_mithat:
+        does_agent_broadcast: true
+        message_frame: "The provincial board's reversal is a textbook violation of electoral law and a stress test of YSK independence."
+        emotional_tone: [technocratic, legalistic]
+        target_voter_groups: [cosmopolitan_liberal_urban_professional, secular_urban_professional, international_audience]
+        expected_positive_effect: "reinforces legal framing"
+        vote_shift_direction: toward_DEM
+        confidence_level: high
+      bestas_meral_danis:
+        does_agent_broadcast: true
+        message_frame: "Legal defence coordination."
+        emotional_tone: [technocratic]
+        target_voter_groups: [cosmopolitan_liberal_urban_professional, kurdish_political_voter]
+        expected_positive_effect: "reinforces legal framing"
+        vote_shift_direction: toward_DEM
+        confidence_level: high
+      onder_sirri_sureyya:
+        does_agent_broadcast: true
+        message_frame: "Institutional defender of the Van mandate; Deputy Speaker leverage."
+        emotional_tone: [hopeful, defiant]
+        target_voter_groups: [cosmopolitan_liberal_urban_professional, secular_urban_professional, kurdish_political_voter]
+        expected_positive_effect: "parliamentary amplification"
+        expected_backlash: "nationalist counter"
+        vote_shift_direction: toward_DEM
+        confidence_level: medium
+      turk_ahmet:
+        does_agent_broadcast: true
+        message_frame: "Dialogue-faction commentary: defend the ballot while preserving the peace-process horizon."
+        emotional_tone: [conciliatory, defiant]
+        target_voter_groups: [kurdish_political_voter_elder, international_audience]
+        expected_positive_effect: factional_balance
+        expected_backlash: "younger base reads as soft"
+        vote_shift_direction: toward_DEM
+        confidence_level: medium
+
+calibration_notes:
+  - "All message_frame values are paraphrased — no direct quotes anywhere."
+  - "broadcast=partial means low-cadence or background commentary; engines should weight by media_amplification."
+  - "broadcast=false means the agent stays silent on this event; do not generate utterances."
+  - "movement_state_effect blocks indicate values written to the state machine when the event fires."
+  - "post_event_state_effect blocks indicate global multipliers that take effect after the event."

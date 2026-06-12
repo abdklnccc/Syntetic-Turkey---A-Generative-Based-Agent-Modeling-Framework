@@ -1,0 +1,1576 @@
+[
+  {
+    "tick_id": "T001",
+    "date": "2018-06-24",
+    "date_range": null,
+    "title": "2018 Presidential & Parliamentary Elections — Erdoğan Wins First Round",
+    "category": "election",
+    "summary": "Erdoğan wins the presidential election outright with 52.59% in the first round. The People's Alliance (AKP-MHP) secures 344/600 seats in parliament. HDP's Demirtaş campaigns from prison, wins 8.4%. New presidential system with executive powers takes effect.",
+    "date_fence": "Only information available up to 2018-06-24 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.4,
+      "opposition_trust": -0.2,
+      "institutional_trust": -0.3,
+      "economic_anxiety": 0.2,
+      "nationalist_salience": 0.3,
+      "kurdish_rights_salience": 0.5,
+      "religious_identity_salience": 0.2,
+      "corruption_salience": 0.1,
+      "turnout_probability": 0.3
+    },
+    "emotional_impact": {
+      "anger": 0.3,
+      "fear": 0.2,
+      "hope": 0.4,
+      "sadness": 0.2,
+      "political_fatigue": 0.1
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.8,
+      "Kilicdaroglu": -0.3,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": -0.1,
+      "Undecided_Abstain": -0.2
+    },
+    "affected_archetypes": [
+      "Devout Anatolian Loyalist",
+      "Nationalist Grey Wolf Core",
+      "Kurdish Political Voter",
+      "Alevi-CHP Loyalist",
+      "Secular Urban Professional"
+    ],
+    "notes_for_llm_agents": "Erdoğan has just won a full executive presidency. The new system concentrates power. Opposition voters feel institutional trust eroded. Kurdish voters note Demirtaş is imprisoned yet earned 8.4%. AKP-MHP coalition has parliamentary majority. No elections until 2023.",
+    "sources": [
+      "https://www.aljazeera.com/news/2018/6/25/erdogan-wins-re-election-in-historic-turkish-polls",
+      "https://www.csis.org/programs/europe-russia-and-eurasia-program/projects/european-election-watch/2018-elections/turkey"
+    ]
+  },
+  {
+    "tick_id": "T002",
+    "date": "2018-08-10",
+    "date_range": "2018-08-10/2018-08-20",
+    "title": "Turkish Lira Currency Crisis — US-Turkey Brunson Sanctions",
+    "category": "economy",
+    "summary": "US doubles tariffs on Turkish steel/aluminium after Turkey refuses to release pastor Andrew Brunson. The lira crashes from ~4.5 to over 7 per dollar — a 40%+ collapse in 2018 alone. Inflation surges. Erdoğan calls it an 'economic war' against Turkey, framing it as nationalist resistance.",
+    "date_fence": "Only information available up to 2018-08-20 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.3,
+      "opposition_trust": 0.1,
+      "institutional_trust": -0.2,
+      "economic_anxiety": 0.9,
+      "nationalist_salience": 0.6,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.2,
+      "corruption_salience": 0.0,
+      "turnout_probability": 0.0
+    },
+    "emotional_impact": {
+      "anger": 0.7,
+      "fear": 0.8,
+      "hope": -0.3,
+      "sadness": 0.3,
+      "political_fatigue": 0.2
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.2,
+      "Kilicdaroglu": 0.2,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.1,
+      "Undecided_Abstain": 0.2
+    },
+    "affected_archetypes": [
+      "Conservative Economically Disillusioned",
+      "Retired Protest Voter",
+      "Secular Urban Professional",
+      "Devout Anatolian Loyalist",
+      "Young Urban Protest Voter"
+    ],
+    "notes_for_llm_agents": "Citizens holding lira savings and mortgages are experiencing severe purchasing power loss. Erdoğan frames US sanctions as external attack, which consolidates some nationalist sympathy. However, cost-of-living shock begins to erode AKP loyalist base.",
+    "sources": [
+      "https://www.npr.org/2018/08/17/639511112/u-s-threatens-further-sanctions-against-turkey-over-detained-pastor",
+      "https://www.businessinsider.com/trump-usa-sanctions-against-turkey-2018-8"
+    ]
+  },
+  {
+    "tick_id": "T003",
+    "date": "2018-11-20",
+    "date_range": null,
+    "title": "ECHR Orders Demirtaş Release — Turkey Refuses",
+    "category": "Kurdish_politics",
+    "summary": "European Court of Human Rights rules that Demirtaş's extended detention violates his rights and was politically motivated to suppress pluralism. Turkish courts refuse to comply. Demirtaş remains imprisoned since November 2016.",
+    "date_fence": "Only information available up to 2018-11-30 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.2,
+      "opposition_trust": 0.1,
+      "institutional_trust": -0.5,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.1,
+      "kurdish_rights_salience": 0.8,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.1,
+      "turnout_probability": 0.0
+    },
+    "emotional_impact": {
+      "anger": 0.7,
+      "fear": 0.4,
+      "hope": -0.2,
+      "sadness": 0.5,
+      "political_fatigue": 0.3
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.3,
+      "Kilicdaroglu": 0.1,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.1
+    },
+    "affected_archetypes": [
+      "Kurdish Political Voter",
+      "Alevi-CHP Loyalist",
+      "Secular Urban Professional",
+      "Cosmopolitan Liberal Urban Professional"
+    ],
+    "notes_for_llm_agents": "Kurdish voters see Demirtaş's continued imprisonment despite ECHR ruling as proof that Turkey's institutions operate outside rule of law. This deepens distrust in government and fuels Kurdish political motivation.",
+    "sources": [
+      "https://web.archive.org/web/20190821043015/https://www.aljazeera.com/news/2018/11/turkish-court-selahattin-demirtas-jail-echr-1812",
+      "https://www.hrw.org/news/2020/11/19/turkey-opposition-politicians-detained-four-years"
+    ]
+  },
+  {
+    "tick_id": "T004",
+    "date": "2019-03-31",
+    "date_range": null,
+    "title": "March 2019 Local Elections — AKP Loses Ankara and Istanbul",
+    "category": "election",
+    "summary": "In municipal elections AKP loses Ankara to CHP's Mansur Yavaş and Istanbul to Ekrem İmamoğlu by ~13,000 votes. AKP-MHP still wins nationwide plurality (44%), but key urban losses are seen as a political earthquake. Erdoğan contests Istanbul results.",
+    "date_fence": "Only information available up to 2019-04-15 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.4,
+      "opposition_trust": 0.5,
+      "institutional_trust": -0.1,
+      "economic_anxiety": 0.3,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.1,
+      "turnout_probability": 0.2
+    },
+    "emotional_impact": {
+      "anger": 0.2,
+      "fear": 0.1,
+      "hope": 0.7,
+      "sadness": 0.1,
+      "political_fatigue": -0.1
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.4,
+      "Kilicdaroglu": 0.3,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.2,
+      "Undecided_Abstain": 0.0
+    },
+    "affected_archetypes": [
+      "Secular Urban Professional",
+      "Alevi-CHP Loyalist",
+      "Young Urban Protest Voter",
+      "Conservative Economically Disillusioned",
+      "Cosmopolitan Liberal Urban Professional"
+    ],
+    "notes_for_llm_agents": "The AKP's 17-year urban dominance is ending. Opposition voters see proof that change is possible. Economic anxiety is the main driver. YSK is about to annul Istanbul result — which will trigger a major legitimacy crisis.",
+    "sources": [
+      "https://studies.aljazeera.net/en/positionpapers/2019/04/turkish-municipal-elections-akp-victory-tastes-defeat-major-cities-19040",
+      "https://carnegieendowment.org/sada/2019/04/a-turning-point-for-turkeys-opposition"
+    ]
+  },
+  {
+    "tick_id": "T005",
+    "date": "2019-05-06",
+    "date_range": "2019-05-06/2019-06-23",
+    "title": "YSK Annuls Istanbul Election — Rerun Ordered, İmamoğlu Wins by Landslide",
+    "category": "legal_institutional",
+    "summary": "Supreme Electoral Council annuls Istanbul March result on technical grounds. Rerun is held June 23. İmamoğlu wins by ~775,000 votes (54% vs 45%) — a landslide that reverses the narrative. His 'fools' statement targeting YSK members becomes a future criminal case.",
+    "date_fence": "Only information available up to 2019-06-25 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.5,
+      "opposition_trust": 0.7,
+      "institutional_trust": -0.6,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.1,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.3,
+      "turnout_probability": 0.3
+    },
+    "emotional_impact": {
+      "anger": 0.5,
+      "fear": 0.2,
+      "hope": 0.8,
+      "sadness": 0.1,
+      "political_fatigue": -0.2
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.6,
+      "Kilicdaroglu": 0.4,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": -0.1
+    },
+    "affected_archetypes": [
+      "Secular Urban Professional",
+      "Young Urban Protest Voter",
+      "Alevi-CHP Loyalist",
+      "Conservative Economically Disillusioned",
+      "Cosmopolitan Liberal Urban Professional",
+      "Moderate Nationalist Opposition"
+    ],
+    "notes_for_llm_agents": "The annulment backfired massively. İmamoğlu's landslide win made him a national hero and the most credible opposition presidential candidate. Institutional trust in YSK collapses among opposition voters. Erdoğan's congratulation tweet signals acceptance but deep anger.",
+    "sources": [
+      "https://www.aljazeera.com/news/2019/6/24/turkeys-opposition-wins-rerun-of-istanbul-mayoral-vote",
+      "https://www.bbc.com/news/world-europe-48739256"
+    ]
+  },
+  {
+    "tick_id": "T006",
+    "date": "2019-08-18",
+    "date_range": "2019-08-18/2019-09-01",
+    "title": "Emine Bulut Femicide — '#OlmekIstemiyorum' Goes Viral",
+    "category": "gender_violence",
+    "summary": "Emine Bulut is stabbed to death by her ex-husband in Kırıkkale in front of her 10-year-old daughter. Her dying words 'I don't want to die' are captured on video, go viral, and spark nationwide women's protests under #ÖlmekIstemiyorum. Debate reignites over femicide statistics and government response.",
+    "date_fence": "Only information available up to 2019-09-01 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.3,
+      "opposition_trust": 0.1,
+      "institutional_trust": -0.3,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": -0.1,
+      "corruption_salience": 0.1,
+      "turnout_probability": 0.1
+    },
+    "emotional_impact": {
+      "anger": 0.9,
+      "fear": 0.7,
+      "hope": -0.1,
+      "sadness": 0.9,
+      "political_fatigue": 0.1
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.3,
+      "Kilicdaroglu": 0.2,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.0
+    },
+    "affected_archetypes": [
+      "Secular Urban Professional",
+      "Young Urban Protest Voter",
+      "Cosmopolitan Liberal Urban Professional",
+      "Alevi-CHP Loyalist",
+      "Devout Anatolian Loyalist"
+    ],
+    "notes_for_llm_agents": "Femicide discourse has become a major political flashpoint. Women voters across ideological lines are mobilized by grief and anger. Government is seen as failing to protect women. This accumulates toward broader opposition mobilization over the next years.",
+    "sources": [
+      "https://bianet.org/haber/last-words-of-emine-bulut-on-social-media-i-don-t-want-to-die-212129",
+      "https://tr.wikipedia.org/wiki/Emine_Bulut_cinayeti"
+    ]
+  },
+  {
+    "tick_id": "T007",
+    "date": "2020-03-15",
+    "date_range": "2020-03-15/2020-06-30",
+    "title": "COVID-19 Pandemic — Partial Lockdowns, Economic Shock",
+    "category": "other",
+    "summary": "Turkey confirms first COVID-19 case March 11. Erdoğan imposes partial lockdowns, prioritizing economic continuity. GDP contracts 9.9% in Q2 2020. Government provides limited social support compared to peers. Lira depreciates further during pandemic. National solidarity initially boosts government approval.",
+    "date_fence": "Only information available up to 2020-06-30 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.1,
+      "opposition_trust": -0.1,
+      "institutional_trust": -0.1,
+      "economic_anxiety": 0.6,
+      "nationalist_salience": 0.2,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.1,
+      "corruption_salience": 0.1,
+      "turnout_probability": -0.1
+    },
+    "emotional_impact": {
+      "anger": 0.3,
+      "fear": 0.8,
+      "hope": 0.1,
+      "sadness": 0.4,
+      "political_fatigue": 0.3
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.1,
+      "Kilicdaroglu": -0.1,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.1
+    },
+    "affected_archetypes": [
+      "Retired Protest Voter",
+      "Conservative Economically Disillusioned",
+      "Young Urban Protest Voter",
+      "Devout Anatolian Loyalist"
+    ],
+    "notes_for_llm_agents": "Initial crisis produces rally-around-flag effect but Turkey's limited welfare response leaves low-income and retired groups exposed. The pandemic accelerates pre-existing economic anxiety.",
+    "sources": [
+      "https://www.iemed.org/publication/turkey-and-the-corona-crisis-the-instrumentalization-of-the-pandemic-for-domestic-and-foreign-",
+      "https://books.openedition.org/ifeagd/3827"
+    ]
+  },
+  {
+    "tick_id": "T008",
+    "date": "2021-03-20",
+    "date_range": "2021-03-20/2021-07-01",
+    "title": "Turkey Withdraws from Istanbul Convention on Women's Rights",
+    "category": "gender_violence",
+    "summary": "Erdoğan signs decree in March 2021 withdrawing Turkey from the Istanbul Convention on preventing violence against women, claiming it undermines family values. Formal exit takes effect July 1. Mass protests by women's groups across Turkey. Government argues domestic law is sufficient.",
+    "date_fence": "Only information available up to 2021-07-05 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.3,
+      "opposition_trust": 0.2,
+      "institutional_trust": -0.2,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.3,
+      "corruption_salience": 0.0,
+      "turnout_probability": 0.2
+    },
+    "emotional_impact": {
+      "anger": 0.8,
+      "fear": 0.5,
+      "hope": -0.2,
+      "sadness": 0.4,
+      "political_fatigue": 0.1
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.4,
+      "Kilicdaroglu": 0.3,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.1,
+      "Undecided_Abstain": 0.1
+    },
+    "affected_archetypes": [
+      "Secular Urban Professional",
+      "Young Urban Protest Voter",
+      "Cosmopolitan Liberal Urban Professional",
+      "Alevi-CHP Loyalist",
+      "Devout Anatolian Loyalist"
+    ],
+    "notes_for_llm_agents": "This decision deeply mobilizes secular and liberal women voters against Erdoğan. Conservative-religious segments are divided — some support it on 'family values' grounds, others are uncomfortable with state failure on femicide. It accumulates as a women's voter issue through 2023.",
+    "sources": [
+      "https://www.dw.com/en/turkey-women-rally-ahead-of-rights-treaty-official-exit/a-57969132",
+      "https://www.dw.com/en/turkeys-istanbul-convention-exit-sparks-more-protests/a-58129917",
+      "https://www.aljazeera.com/news/2021/3/27/thousands-protest-turkey-exit-domestic-violence-treaty"
+    ]
+  },
+  {
+    "tick_id": "T009",
+    "date": "2021-03-17",
+    "date_range": null,
+    "title": "HDP Closure Case Filed — Party Under Existential Legal Threat",
+    "category": "Kurdish_politics",
+    "summary": "Chief Public Prosecutor Bekir Şahin files closure case against HDP at the Constitutional Court, citing alleged organic ties to the PKK. Case hangs over the party, chilling candidate recruitment, fundraising, and coalition negotiations. HDP considers running candidates under a surrogate party.",
+    "date_fence": "Only information available up to 2021-04-01 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.1,
+      "opposition_trust": 0.0,
+      "institutional_trust": -0.5,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.3,
+      "kurdish_rights_salience": 0.9,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.1,
+      "turnout_probability": -0.1
+    },
+    "emotional_impact": {
+      "anger": 0.7,
+      "fear": 0.6,
+      "hope": -0.3,
+      "sadness": 0.4,
+      "political_fatigue": 0.4
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.1,
+      "Kilicdaroglu": 0.0,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.2
+    },
+    "affected_archetypes": [
+      "Kurdish Political Voter",
+      "Alevi-CHP Loyalist",
+      "Cosmopolitan Liberal Urban Professional"
+    ],
+    "notes_for_llm_agents": "Kurdish voters interpret the closure case as state persecution. It increases abstention risk among HDP base while pushing the party toward a strategy of supporting Kılıçdaroğlu in 2023. The threat of closure also shapes Kurdish voter strategy away from voting HDP presidential.",
+    "sources": [
+      "https://en.wikipedia.org/wiki/Peoples%27_Democratic_Party_closure_case_(2021%E2%80%93present)",
+      "https://www.bbc.com/news/world-europe-64179858"
+    ]
+  },
+  {
+    "tick_id": "T010",
+    "date": "2021-09-23",
+    "date_range": "2021-09-01/2021-12-31",
+    "title": "Lira Free-Fall — 60% Devaluation in 2021 After Central Bank Rate Cuts",
+    "category": "economy",
+    "summary": "Erdoğan fires three central bank governors in one year and enforces unorthodox low interest rate policy. Lira loses 44-60% of value through 2021, hitting 18.5 to the dollar by December. Inflation surges past 20%. Citizens scramble to convert savings to dollars/gold.",
+    "date_fence": "Only information available up to 2021-12-31 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.5,
+      "opposition_trust": 0.2,
+      "institutional_trust": -0.4,
+      "economic_anxiety": 0.95,
+      "nationalist_salience": 0.1,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.2,
+      "turnout_probability": 0.1
+    },
+    "emotional_impact": {
+      "anger": 0.8,
+      "fear": 0.9,
+      "hope": -0.5,
+      "sadness": 0.5,
+      "political_fatigue": 0.4
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.6,
+      "Kilicdaroglu": 0.3,
+      "Sinan_Ogan": 0.1,
+      "Muharrem_Ince": 0.2,
+      "Undecided_Abstain": 0.3
+    },
+    "affected_archetypes": [
+      "Conservative Economically Disillusioned",
+      "Retired Protest Voter",
+      "Young Urban Protest Voter",
+      "Pious Disillusioned Islamist",
+      "Secular Urban Professional",
+      "Moderate Nationalist Opposition"
+    ],
+    "notes_for_llm_agents": "This is the defining economic shock of the simulation period. Citizens across all income levels feel real income collapse. Even AKP-leaning conservative voters begin to question economic management. This event is the primary driver of 'Conservative Economically Disillusioned' archetype formation.",
+    "sources": [
+      "https://studies.aljazeera.net/sites/default/files/articles/documents/2021-12/The%20crisis%20of%20the%20Turkish%20lira%20Toward%20economic%20collapse%20or%20a%20new%20",
+      "https://wikipedia.nucleos.com/viewer/wikipedia_en_all_maxi_2025-08/Turkish_economic_crisis_(2018%E2%80%93current)"
+    ]
+  },
+  {
+    "tick_id": "T011",
+    "date": "2021-12-21",
+    "date_range": null,
+    "title": "Parliament Rejects Pension Hike to Minimum Wage — Pensioner Anger",
+    "category": "economy",
+    "summary": "AKP deputies vote down opposition bill to raise lowest pensions to minimum wage level. 70% of retirees are below minimum wage. Minimum wage itself is set to rise 50% (to 4,250 lira) in January 2022, deepening the pension inequality. Pensioner protests grow.",
+    "date_fence": "Only information available up to 2022-01-10 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.4,
+      "opposition_trust": 0.1,
+      "institutional_trust": -0.2,
+      "economic_anxiety": 0.7,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.2,
+      "turnout_probability": 0.2
+    },
+    "emotional_impact": {
+      "anger": 0.8,
+      "fear": 0.5,
+      "hope": -0.3,
+      "sadness": 0.6,
+      "political_fatigue": 0.3
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.5,
+      "Kilicdaroglu": 0.3,
+      "Sinan_Ogan": 0.1,
+      "Muharrem_Ince": 0.2,
+      "Undecided_Abstain": 0.2
+    },
+    "affected_archetypes": [
+      "Retired Protest Voter",
+      "Conservative Economically Disillusioned",
+      "Devout Anatolian Loyalist"
+    ],
+    "notes_for_llm_agents": "Retired voters — including many former AKP loyalists — feel betrayed. This event plants seeds of defection. Pensioner anger will be a crucial swing factor through 2023 elections.",
+    "sources": [
+      "https://bianet.org/haber/parliament-rejects-bill-to-increase-pensions-to-minimum-wage-level-255178"
+    ]
+  },
+  {
+    "tick_id": "T012",
+    "date": "2022-08-01",
+    "date_range": "2022-06-01/2022-10-31",
+    "title": "Inflation Peaks at 80%+ — Worst Cost-of-Living Crisis in 24 Years",
+    "category": "economy",
+    "summary": "Official CPI inflation peaks at 83-85% in August-October 2022 (independent estimates suggest 170%+). Food and energy prices spiral. Minimum wage raised three times in 2022 but real purchasing power continues to fall. Exchange rate stabilizes via FX-protected deposits but at enormous fiscal cost.",
+    "date_fence": "Only information available up to 2022-11-01 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.7,
+      "opposition_trust": 0.2,
+      "institutional_trust": -0.5,
+      "economic_anxiety": 1.0,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.3,
+      "turnout_probability": 0.2
+    },
+    "emotional_impact": {
+      "anger": 0.9,
+      "fear": 0.9,
+      "hope": -0.6,
+      "sadness": 0.7,
+      "political_fatigue": 0.5
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.7,
+      "Kilicdaroglu": 0.4,
+      "Sinan_Ogan": 0.1,
+      "Muharrem_Ince": 0.2,
+      "Undecided_Abstain": 0.3
+    },
+    "affected_archetypes": [
+      "Conservative Economically Disillusioned",
+      "Retired Protest Voter",
+      "Young Urban Protest Voter",
+      "Pious Disillusioned Islamist",
+      "Devout Anatolian Loyalist",
+      "Kurdish Political Voter"
+    ],
+    "notes_for_llm_agents": "This is the most acute economic moment in the simulation. All voter archetypes feel severe cost-of-living pain regardless of political identity. This is the economic context against which all 2023 campaign promises are evaluated.",
+    "sources": [
+      "https://www.phenomenalworld.org/analysis/the-falling-lira/",
+      "https://www.osw.waw.pl/en/publikacje/analyses/2025-07-09/turbulent-stabilisation-turkeys-economy-under-simseks-supervision"
+    ]
+  },
+  {
+    "tick_id": "T013",
+    "date": "2022-12-14",
+    "date_range": null,
+    "title": "İmamoğlu Sentenced to 2.5 Years — Opposition Rallies Around Him",
+    "category": "legal_institutional",
+    "summary": "Istanbul court sentences Mayor Ekrem İmamoğlu to 2 years 7 months for calling YSK members 'fools' after the 2019 Istanbul annulment. He also faces a potential political ban. The verdict is appealed and not immediately final. Opposition voters erupt in anger — İmamoğlu becomes a martyr figure.",
+    "date_fence": "Only information available up to 2022-12-20 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.4,
+      "opposition_trust": 0.5,
+      "institutional_trust": -0.7,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.3,
+      "turnout_probability": 0.3
+    },
+    "emotional_impact": {
+      "anger": 0.9,
+      "fear": 0.4,
+      "hope": 0.3,
+      "sadness": 0.3,
+      "political_fatigue": 0.1
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.5,
+      "Kilicdaroglu": 0.1,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": -0.2
+    },
+    "affected_archetypes": [
+      "Secular Urban Professional",
+      "Young Urban Protest Voter",
+      "Alevi-CHP Loyalist",
+      "Cosmopolitan Liberal Urban Professional",
+      "Moderate Nationalist Opposition"
+    ],
+    "notes_for_llm_agents": "This verdict directly shapes the 2023 presidential candidate debate. If İmamoğlu is banned from politics, he cannot run. The sentence triggers CHP internal debate on whether İmamoğlu or Kılıçdaroğlu should be the joint candidate. Opposition mobilization surges.",
+    "sources": [
+      "https://www.cats-network.eu/publication/the-conviction-of-ekrem-i%CC%87mamoglu-and-the-prospects-for-democracy-in-turkey",
+      "https://www.dailysabah.com/politics/legislation/imamoglu-receives-prison-sentence-for-insulting-ysk"
+    ]
+  },
+  {
+    "tick_id": "T014",
+    "date": "2022-12-20",
+    "date_range": null,
+    "title": "Erdoğan Announces Mandatory Retirement Elimination — 2 Million Workers Eligible",
+    "category": "economy",
+    "summary": "Erdoğan announces removal of mandatory retirement age threshold, allowing over 2 million Turkish workers to retire immediately. Also announces the third minimum wage hike of 2022 (55% increase to 8,500 lira). Measures are widely seen as pre-election vote-buying amid falling polls.",
+    "date_fence": "Only information available up to 2022-12-31 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.2,
+      "opposition_trust": -0.1,
+      "institutional_trust": 0.0,
+      "economic_anxiety": -0.2,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.1,
+      "turnout_probability": 0.1
+    },
+    "emotional_impact": {
+      "anger": -0.1,
+      "fear": -0.1,
+      "hope": 0.3,
+      "sadness": -0.1,
+      "political_fatigue": 0.0
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.3,
+      "Kilicdaroglu": -0.1,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": -0.1
+    },
+    "affected_archetypes": [
+      "Retired Protest Voter",
+      "Conservative Economically Disillusioned",
+      "Devout Anatolian Loyalist"
+    ],
+    "notes_for_llm_agents": "Government distributes economic relief selectively. Workers who can now retire feel temporary relief. Critics call it a fiscal time bomb and election gimmick. Some AKP loyalists are partially reassured.",
+    "sources": [
+      "https://www.bbc.com/news/world-europe-64413620",
+      "https://turkishminute.com/2023/03/23/erdogan-raise-pensions-run-up-to-elections-amid-falling-popularity/"
+    ]
+  },
+  {
+    "tick_id": "T015",
+    "date": "2023-01-05",
+    "date_range": null,
+    "title": "Constitutional Court Freezes HDP Treasury Aid",
+    "category": "Kurdish_politics",
+    "summary": "Upon prosecutor's request in the ongoing closure case, the Constitutional Court blocks HDP's 539 million lira (~$28.7M) in state election funding just months before the election. The decision is taken 8-7, with HDP calling it unconstitutional and politically motivated.",
+    "date_fence": "Only information available up to 2023-01-15 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.0,
+      "opposition_trust": 0.0,
+      "institutional_trust": -0.6,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.2,
+      "kurdish_rights_salience": 0.9,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.4,
+      "turnout_probability": -0.2
+    },
+    "emotional_impact": {
+      "anger": 0.8,
+      "fear": 0.6,
+      "hope": -0.4,
+      "sadness": 0.4,
+      "political_fatigue": 0.5
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.1,
+      "Kilicdaroglu": 0.0,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.3
+    },
+    "affected_archetypes": [
+      "Kurdish Political Voter",
+      "Alevi-CHP Loyalist",
+      "Cosmopolitan Liberal Urban Professional"
+    ],
+    "notes_for_llm_agents": "Kurdish voters see this as a direct attempt to cripple HDP before elections. It pushes HDP toward its YSP surrogate strategy. Abstention risk rises among HDP base unless a compelling reason to vote for opposition candidate is provided.",
+    "sources": [
+      "https://www.bbc.com/news/world-europe-64179858",
+      "https://www.hdp.org.tr/en/turkey-s-constitutional-court-suspends-payment-of-treasury-funds-to-the-hdp/17044"
+    ]
+  },
+  {
+    "tick_id": "T016",
+    "date": "2023-02-06",
+    "date_range": "2023-02-06/2023-02-06",
+    "title": "EQ-A: Kahramanmaraş Earthquake Day — 7.8 and 7.7 Magnitude Double Strike",
+    "category": "disaster",
+    "summary": "At 04:17 local time, a 7.8 magnitude earthquake strikes Pazarcık, Kahramanmaraş. A second 7.7 quake follows at 13:24. Both are among the deadliest in Turkish history. Ten provinces affected: Kahramanmaraş, Hatay, Gaziantep, Şanlıurfa, Diyarbakır, Adana, Adıyaman, Kilis, Malatya, Osmaniye. Initial death toll estimates begin rising rapidly.",
+    "date_fence": "Only information available up to 2023-02-06 23:59 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.1,
+      "opposition_trust": 0.0,
+      "institutional_trust": -0.2,
+      "economic_anxiety": 0.3,
+      "nationalist_salience": 0.1,
+      "kurdish_rights_salience": 0.1,
+      "religious_identity_salience": 0.2,
+      "corruption_salience": 0.1,
+      "turnout_probability": 0.0
+    },
+    "emotional_impact": {
+      "anger": 0.3,
+      "fear": 1.0,
+      "hope": 0.0,
+      "sadness": 1.0,
+      "political_fatigue": 0.0
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.1,
+      "Kilicdaroglu": 0.0,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.0
+    },
+    "affected_archetypes": [
+      "Earthquake Zone Loyalist",
+      "Devout Anatolian Loyalist",
+      "Kurdish Political Voter"
+    ],
+    "notes_for_llm_agents": "The earthquake has just struck. Deaths are being counted in real time. Citizens are in shock. People trapped under rubble are calling for help via Twitter. Government response is not yet visible. Agents should simulate shock, grief, and fear — not political calculation.",
+    "sources": [
+      "https://en.wikipedia.org/wiki/2023_Turkey%E2%80%93Syria_earthquakes",
+      "https://reliefweb.int/report/turkiye/unhcr-turkiye-emergency-response-earthquake-9-february-2023"
+    ]
+  },
+  {
+    "tick_id": "T017",
+    "date": "2023-02-07",
+    "date_range": "2023-02-07/2023-02-09",
+    "title": "EQ-B: AFAD Response Chaos — Rescue Teams Delayed, Deaths Mount",
+    "category": "disaster",
+    "summary": "AFAD disaster level 4 declared. Death toll crosses 17,000 within 72 hours. Rescue teams struggle with road damage, winter storms, and coordination failures. Survivors cry for help as survivors can be heard under rubble without rescue arriving. Social media fills with desperate rescue calls. International teams begin arriving.",
+    "date_fence": "Only information available up to 2023-02-09 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.5,
+      "opposition_trust": 0.1,
+      "institutional_trust": -0.6,
+      "economic_anxiety": 0.2,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.1,
+      "corruption_salience": 0.3,
+      "turnout_probability": -0.1
+    },
+    "emotional_impact": {
+      "anger": 0.8,
+      "fear": 0.9,
+      "hope": -0.3,
+      "sadness": 1.0,
+      "political_fatigue": 0.2
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.5,
+      "Kilicdaroglu": 0.1,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.1
+    },
+    "affected_archetypes": [
+      "Earthquake Zone Loyalist",
+      "Devout Anatolian Loyalist",
+      "Young Urban Protest Voter",
+      "Secular Urban Professional"
+    ],
+    "notes_for_llm_agents": "Citizens are dying while awaiting rescue that has not arrived. Social media documents the government's failure in real time. Anger at AFAD coordination, road infrastructure failures, and absence of senior officials is growing rapidly.",
+    "sources": [
+      "https://japannews.yomiuri.co.jp/news-services/reuters/20230209-89925/",
+      "https://nhess.copernicus.org/articles/25/2031/2025/"
+    ]
+  },
+  {
+    "tick_id": "T018",
+    "date": "2023-02-08",
+    "date_range": "2023-02-08/2023-02-09",
+    "title": "EQ-C: Twitter/TikTok Banned During Earthquake Rescue — Public Outcry",
+    "category": "social_media",
+    "summary": "BTK blocks Twitter and TikTok for approximately 9 hours on February 8, two days after the earthquake, as people use Twitter to share survivor locations and coordinate rescue. Block lifted after massive backlash. Government cites 'disinformation.' Minister later defends the block but offers no specific justification.",
+    "date_fence": "Only information available up to 2023-02-09 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.6,
+      "opposition_trust": 0.0,
+      "institutional_trust": -0.7,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.4,
+      "turnout_probability": 0.0
+    },
+    "emotional_impact": {
+      "anger": 1.0,
+      "fear": 0.5,
+      "hope": -0.4,
+      "sadness": 0.6,
+      "political_fatigue": 0.3
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.7,
+      "Kilicdaroglu": 0.2,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.1
+    },
+    "affected_archetypes": [
+      "Young Urban Protest Voter",
+      "Secular Urban Professional",
+      "Cosmopolitan Liberal Urban Professional",
+      "Earthquake Zone Loyalist"
+    ],
+    "notes_for_llm_agents": "Banning the main rescue coordination platform during an earthquake is one of the most politically damaging acts. Even government loyalists express anger. This tick has outsized impact on democratic rights and media freedom salience.",
+    "sources": [
+      "https://www.nytimes.com/2023/02/08/world/europe/turkey-earthquake-twitter-blocked.html",
+      "https://nordicmonitor.com/2023/02/turkish-police-chase-down-social-media-users-who-shared-critical-messages-after-massive-earthquake"
+    ]
+  },
+  {
+    "tick_id": "T019",
+    "date": "2023-02-08",
+    "date_range": "2023-02-08/2023-02-10",
+    "title": "EQ-D: Erdoğan Admits Response Problems, Visits Disaster Zone",
+    "category": "disaster",
+    "summary": "Erdoğan visits Kahramanmaraş on February 8 and admits 'problems' in initial response. He promises no one will be left homeless and announces a state of emergency in 10 provinces. Some local anger persists — survivors confront officials. Death toll at 17,000+ by February 9.",
+    "date_fence": "Only information available up to 2023-02-10 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.2,
+      "opposition_trust": 0.0,
+      "institutional_trust": -0.3,
+      "economic_anxiety": 0.1,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.2,
+      "corruption_salience": 0.2,
+      "turnout_probability": 0.0
+    },
+    "emotional_impact": {
+      "anger": 0.5,
+      "fear": 0.6,
+      "hope": 0.1,
+      "sadness": 0.8,
+      "political_fatigue": 0.2
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.2,
+      "Kilicdaroglu": 0.1,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.1
+    },
+    "affected_archetypes": [
+      "Earthquake Zone Loyalist",
+      "Devout Anatolian Loyalist"
+    ],
+    "notes_for_llm_agents": "The admission of failure is unusual for Erdoğan. Devout loyalists may accept it as honest leadership. Others — especially earthquake zone voters — remain furious. State of emergency in ten provinces silences some protest.",
+    "sources": [
+      "https://japannews.yomiuri.co.jp/news-services/reuters/20230209-89925/"
+    ]
+  },
+  {
+    "tick_id": "T020",
+    "date": "2023-02-11",
+    "date_range": "2023-02-11/2023-03-20",
+    "title": "EQ-E: Contractors Arrested — Construction Amnesty and Building Safety Scandal",
+    "category": "corruption",
+    "summary": "Over 113 arrest warrants issued for contractors linked to collapsed buildings within five days. By March, 298 arrested, 1,325 suspects identified. Critics point to government 'construction amnesties' that allowed developers to bypass safety codes for fees, even in earthquake-prone zones. The amnesty policy is directly linked to AKP governance.",
+    "date_fence": "Only information available up to 2023-03-20 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.5,
+      "opposition_trust": 0.1,
+      "institutional_trust": -0.5,
+      "economic_anxiety": 0.1,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.9,
+      "turnout_probability": 0.2
+    },
+    "emotional_impact": {
+      "anger": 0.9,
+      "fear": 0.4,
+      "hope": -0.1,
+      "sadness": 0.7,
+      "political_fatigue": 0.3
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.6,
+      "Kilicdaroglu": 0.3,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.2
+    },
+    "affected_archetypes": [
+      "Earthquake Zone Loyalist",
+      "Conservative Economically Disillusioned",
+      "Young Urban Protest Voter",
+      "Pious Disillusioned Islamist",
+      "Secular Urban Professional"
+    ],
+    "notes_for_llm_agents": "The discovery that government-issued amnesties directly enabled the deaths of 53,000+ people makes this the most corruption-salient event of the simulation. It is simultaneously a disaster, corruption, and legal-institutional tick.",
+    "sources": [
+      "https://www.bbc.com/news/world-middle-east-64615349",
+      "https://edition.cnn.com/2023/02/26/europe/turkey-earthquake-arrests-intl",
+      "https://bianet.org/haber/arrests-over-turkey-quakes-increase-to-298-276012"
+    ]
+  },
+  {
+    "tick_id": "T021",
+    "date": "2023-02-12",
+    "date_range": "2023-02-12/2023-02-20",
+    "title": "EQ-F: Opposition Mayors Respond — CHP Aid vs. Government Aid Narrative Battle",
+    "category": "opposition_alliance",
+    "summary": "CHP-run Istanbul and Ankara municipalities rapidly deploy aid trucks and volunteers to earthquake zones. İmamoğlu and Yavaş arrive in affected areas. A narrative emerges that opposition-run municipalities are outperforming the central government response. Government tries to block unauthorized aid at some checkpoints.",
+    "date_fence": "Only information available up to 2023-02-20 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.3,
+      "opposition_trust": 0.5,
+      "institutional_trust": -0.2,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.2,
+      "turnout_probability": 0.1
+    },
+    "emotional_impact": {
+      "anger": 0.5,
+      "fear": 0.3,
+      "hope": 0.3,
+      "sadness": 0.6,
+      "political_fatigue": 0.0
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.3,
+      "Kilicdaroglu": 0.5,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": -0.1
+    },
+    "affected_archetypes": [
+      "Earthquake Zone Loyalist",
+      "Devout Anatolian Loyalist",
+      "Conservative Economically Disillusioned",
+      "Pious Disillusioned Islamist"
+    ],
+    "notes_for_llm_agents": "This is a key narrative battle. If earthquake zone voters perceive that opposition municipalities are more competent and caring, it can shift loyalists who would otherwise vote AKP. Opposition use of earthquake aid as demonstration of governance is significant.",
+    "sources": [
+      "https://www.bbc.com/news/world-europe-64413620"
+    ]
+  },
+  {
+    "tick_id": "T022",
+    "date": "2023-02-15",
+    "date_range": "2023-02-15/2023-02-28",
+    "title": "EQ-G: National Mourning, Reconstruction Promises, and Electoral Rescheduling Debate",
+    "category": "disaster",
+    "summary": "Final death toll in Turkey exceeds 53,500. An estimated 1.5 million people are displaced. Erdoğan promises rapid reconstruction — 200,000 new homes in one year. Debate erupts over whether to delay May elections. Opposition opposes delay. Earthquake zone remains politically traumatized.",
+    "date_fence": "Only information available up to 2023-02-28 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.2,
+      "opposition_trust": 0.2,
+      "institutional_trust": -0.3,
+      "economic_anxiety": 0.3,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.1,
+      "religious_identity_salience": 0.3,
+      "corruption_salience": 0.4,
+      "turnout_probability": -0.2
+    },
+    "emotional_impact": {
+      "anger": 0.6,
+      "fear": 0.5,
+      "hope": 0.0,
+      "sadness": 0.9,
+      "political_fatigue": 0.6
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.3,
+      "Kilicdaroglu": 0.2,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.2
+    },
+    "affected_archetypes": [
+      "Earthquake Zone Loyalist",
+      "Devout Anatolian Loyalist",
+      "Retired Protest Voter",
+      "Kurdish Political Voter"
+    ],
+    "notes_for_llm_agents": "Earthquake zone voters face reduced turnout probability due to displacement, trauma, and ongoing rescue/recovery. The question of electoral delay affects all voter groups. Reconstruction promises are evaluated skeptically given the building amnesty scandal.",
+    "sources": [
+      "https://en.wikipedia.org/wiki/2023_Turkey%E2%80%93Syria_earthquakes",
+      "https://reliefweb.int/report/turkiye/unhcr-turkiye-emergency-response-earthquake-13-february-2023"
+    ]
+  },
+  {
+    "tick_id": "T023",
+    "date": "2023-03-03",
+    "date_range": "2023-03-03/2023-03-06",
+    "title": "OPP-A: Akşener Leaves Table of Six — Opposition Crisis",
+    "category": "opposition_alliance",
+    "summary": "İYİ Party leader Meral Akşener walks out of the Table of Six on March 3, refusing to accept Kılıçdaroğlu's candidacy. She demands either İmamoğlu or Yavaş as candidate — both polling significantly higher against Erdoğan. Her departure triggers fears of opposition split just months before elections.",
+    "date_fence": "Only information available up to 2023-03-05 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.1,
+      "opposition_trust": -0.5,
+      "institutional_trust": 0.0,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.2,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.0,
+      "turnout_probability": -0.2
+    },
+    "emotional_impact": {
+      "anger": 0.4,
+      "fear": 0.5,
+      "hope": -0.5,
+      "sadness": 0.3,
+      "political_fatigue": 0.6
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.3,
+      "Kilicdaroglu": -0.4,
+      "Sinan_Ogan": 0.1,
+      "Muharrem_Ince": 0.1,
+      "Undecided_Abstain": 0.4
+    },
+    "affected_archetypes": [
+      "Moderate Nationalist Opposition",
+      "Secular Urban Professional",
+      "Young Urban Protest Voter",
+      "Conservative Economically Disillusioned"
+    ],
+    "notes_for_llm_agents": "The opposition fracture is the biggest single risk to defeating Erdoğan. Moderate nationalist voters who were considering switching feel uncertain. Erdoğan's camp is energized. Voters supporting İmamoğlu or Yavaş feel their preference is being ignored.",
+    "sources": [
+      "https://toronto.citynews.ca/2023/03/03/turkish-opposition-bloc-faces-split-over-joint-candidate/",
+      "https://bianet.org/haber/to-write-history-or-to-be-history-iyi-parti-seems-to-have-chosen-the-latter-275249"
+    ]
+  },
+  {
+    "tick_id": "T024",
+    "date": "2023-03-06",
+    "date_range": null,
+    "title": "OPP-B: Opposition Reunites — Kılıçdaroğlu Nominated with İmamoğlu/Yavaş VP Formula",
+    "category": "opposition_alliance",
+    "summary": "After 72 hours of intense negotiations, Akşener returns to the Table of Six. Kılıçdaroğlu is confirmed as joint presidential candidate. The deal includes naming İmamoğlu and Yavaş as future vice-presidents, satisfying İYİ Party demand. HDP signals it will not run its own presidential candidate and hints at Kılıçdaroğlu support.",
+    "date_fence": "Only information available up to 2023-03-08 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": -0.1,
+      "opposition_trust": 0.5,
+      "institutional_trust": 0.0,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.2,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.0,
+      "turnout_probability": 0.2
+    },
+    "emotional_impact": {
+      "anger": -0.2,
+      "fear": -0.2,
+      "hope": 0.6,
+      "sadness": -0.1,
+      "political_fatigue": -0.2
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.2,
+      "Kilicdaroglu": 0.5,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": -0.1,
+      "Undecided_Abstain": -0.3
+    },
+    "affected_archetypes": [
+      "Secular Urban Professional",
+      "Moderate Nationalist Opposition",
+      "Alevi-CHP Loyalist",
+      "Young Urban Protest Voter",
+      "Kurdish Political Voter"
+    ],
+    "notes_for_llm_agents": "Opposition unity is restored. Kılıçdaroğlu — seen as less charismatic but more centrist than İmamoğlu — is now the official candidate. The İmamoğlu/Yavaş VP promise helps nationalist opposition voters accept Kılıçdaroğlu. HDP's implied support will later complicate nationalist appeal.",
+    "sources": [
+      "https://www.aljazeera.com/news/2023/3/6/turkeys-opposition-names-kilicdaroglu-as-presidential-candidate",
+      "https://www.bbc.com/news/world-europe-64867467",
+      "https://www.lemonde.fr/en/elections/article/2023/03/07/turkish-opposition-finally-unites-against-erdogan-ahead-of-may-presidential-elections"
+    ]
+  },
+  {
+    "tick_id": "T025",
+    "date": "2023-03-09",
+    "date_range": null,
+    "title": "Constitutional Court Lifts HDP Treasury Aid Freeze",
+    "category": "Kurdish_politics",
+    "summary": "Two months after freezing HDP funds, the Constitutional Court reverses the decision and restores HDP's treasury aid ahead of elections. Also announces HDP closure case plea date postponed to April 11. HDP receives partial funding to run its campaign — as YSP — in the elections.",
+    "date_fence": "Only information available up to 2023-03-12 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.0,
+      "opposition_trust": 0.0,
+      "institutional_trust": 0.2,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.5,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": -0.1,
+      "turnout_probability": 0.1
+    },
+    "emotional_impact": {
+      "anger": -0.2,
+      "fear": -0.2,
+      "hope": 0.4,
+      "sadness": -0.1,
+      "political_fatigue": -0.1
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.0,
+      "Kilicdaroglu": 0.1,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": -0.1
+    },
+    "affected_archetypes": [
+      "Kurdish Political Voter"
+    ],
+    "notes_for_llm_agents": "The reversal reduces one source of Kurdish voter fury, but the underlying closure case continues. HDP can now better support Kılıçdaroğlu. Kurdish turnout probability slightly improves.",
+    "sources": [
+      "https://bianet.org/haber/constitutional-court-lifts-blocking-of-treasury-aid-to-hdp-275440"
+    ]
+  },
+  {
+    "tick_id": "T026",
+    "date": "2023-03-22",
+    "date_range": null,
+    "title": "Erdoğan Announces Pension Increase to 7,500 Lira — Pre-Election Largesse",
+    "category": "economy",
+    "summary": "Erdoğan announces minimum pension raised to 7,500 lira (~$393), a 2,000 lira increase. It follows December's mandatory retirement reform. Widely characterized as pre-election vote-buying. Still below minimum wage (8,500 lira). Opposition notes gap between pensions and inflation.",
+    "date_fence": "Only information available up to 2023-03-25 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.2,
+      "opposition_trust": -0.1,
+      "institutional_trust": 0.0,
+      "economic_anxiety": -0.2,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.1,
+      "turnout_probability": 0.0
+    },
+    "emotional_impact": {
+      "anger": -0.1,
+      "fear": -0.1,
+      "hope": 0.2,
+      "sadness": -0.1,
+      "political_fatigue": 0.0
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.2,
+      "Kilicdaroglu": -0.1,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": -0.1
+    },
+    "affected_archetypes": [
+      "Retired Protest Voter",
+      "Devout Anatolian Loyalist"
+    ],
+    "notes_for_llm_agents": "Pre-election pension hike is a classic AKP strategy. Some retired voters respond positively. However, given 80%+ inflation, the real-terms value is deeply negative. Retired protest voters may be partially mollified but remain angry.",
+    "sources": [
+      "https://turkishminute.com/2023/03/23/erdogan-raise-pensions-run-up-to-elections-amid-falling-popularity/"
+    ]
+  },
+  {
+    "tick_id": "T027",
+    "date": "2023-04-28",
+    "date_range": null,
+    "title": "HDP/YSP Formally Endorses Kılıçdaroğlu — Kurdish Vote Behind Opposition",
+    "category": "Kurdish_politics",
+    "summary": "HDP co-leader Mithat Sancar and the Labour and Freedom Alliance formally call on Kurdish voters to vote for Kılıçdaroğlu in the presidential race, while supporting YSP in parliamentary elections. This is HDP's most direct pre-election opposition endorsement. It adds an estimated 5-6 million Kurdish votes to Kılıçdaroğlu's coalition — but also gives ammunition to nationalist opposition critics.",
+    "date_fence": "Only information available up to 2023-04-30 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.0,
+      "opposition_trust": 0.2,
+      "institutional_trust": 0.0,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.3,
+      "kurdish_rights_salience": 0.5,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.0,
+      "turnout_probability": 0.2
+    },
+    "emotional_impact": {
+      "anger": 0.1,
+      "fear": 0.1,
+      "hope": 0.5,
+      "sadness": 0.0,
+      "political_fatigue": -0.1
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.1,
+      "Kilicdaroglu": 0.4,
+      "Sinan_Ogan": 0.1,
+      "Muharrem_Ince": -0.1,
+      "Undecided_Abstain": -0.1
+    },
+    "affected_archetypes": [
+      "Kurdish Political Voter",
+      "Moderate Nationalist Opposition",
+      "Nationalist Grey Wolf Core",
+      "Devout Anatolian Loyalist"
+    ],
+    "notes_for_llm_agents": "HDP endorsement energizes Kurdish voters but gives Erdoğan a gift to frame Kılıçdaroğlu as 'supported by terrorists.' Moderate nationalists in the opposition feel uncomfortable. This is the central tension of Kılıçdaroğlu's campaign coalition.",
+    "sources": [
+      "https://www.aljazeera.com/news/2023/4/28/turkeys-pro-kurdish-party-backs-erdogans-rival-for-president",
+      "https://carnegieendowment.org/sada/2023/04/the-kurdish-vote-and-the-turkish-election"
+    ]
+  },
+  {
+    "tick_id": "T028",
+    "date": "2023-05-08",
+    "date_range": null,
+    "title": "Erdoğan Raises Civil Servant Salaries 45% — Five Days Before Election",
+    "category": "campaign",
+    "summary": "Erdoğan announces 45% pay raise for public workers five days before elections, raising lowest public wage to 15,000 lira. He also promises a further July adjustment for inflation. Opposition calls it vote-buying. Citizens note the raise comes amid 60%+ inflation still eroding real wages.",
+    "date_fence": "Only information available up to 2023-05-10 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.2,
+      "opposition_trust": -0.1,
+      "institutional_trust": 0.0,
+      "economic_anxiety": -0.15,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.2,
+      "turnout_probability": 0.0
+    },
+    "emotional_impact": {
+      "anger": 0.1,
+      "fear": -0.1,
+      "hope": 0.2,
+      "sadness": 0.0,
+      "political_fatigue": 0.0
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.2,
+      "Kilicdaroglu": -0.1,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": -0.1
+    },
+    "affected_archetypes": [
+      "Devout Anatolian Loyalist",
+      "Conservative Economically Disillusioned",
+      "Retired Protest Voter"
+    ],
+    "notes_for_llm_agents": "Last-minute economic announcements are a signature AKP tactic. Some undecided voters respond to direct financial benefit. Cynical voters discount it as unsustainable. Context: this comes just days before election and just months after the earthquake.",
+    "sources": [
+      "https://www.aljazeera.com/news/2023/5/9/turkey-raises-public-worker-salaries-by-45-days-before-elections"
+    ]
+  },
+  {
+    "tick_id": "T029",
+    "date": "2023-05-11",
+    "date_range": null,
+    "title": "CAND-A: Muharrem İnce Withdraws — Citing Smear Campaign / Deepfake Video",
+    "category": "campaign",
+    "summary": "Homeland Party leader Muharrem İnce withdraws from the presidential race 3 days before the election, citing a doctored video campaign suggesting sexual impropriety. He calls it FETÖ-orchestrated. His name remains on the ballot (overseas votes already cast). His withdrawal is expected to benefit Kılıçdaroğlu as the main anti-Erdoğan candidate.",
+    "date_fence": "Only information available up to 2023-05-12 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.0,
+      "opposition_trust": -0.1,
+      "institutional_trust": -0.2,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.3,
+      "turnout_probability": 0.0
+    },
+    "emotional_impact": {
+      "anger": 0.5,
+      "fear": 0.3,
+      "hope": 0.1,
+      "sadness": 0.2,
+      "political_fatigue": 0.4
+    },
+    "candidate_effect_hint": {
+      "Erdogan": -0.1,
+      "Kilicdaroglu": 0.3,
+      "Sinan_Ogan": 0.1,
+      "Muharrem_Ince": -1.0,
+      "Undecided_Abstain": -0.1
+    },
+    "affected_archetypes": [
+      "Young Urban Protest Voter",
+      "Secular Urban Professional",
+      "Conservative Economically Disillusioned"
+    ],
+    "notes_for_llm_agents": "İnce's withdrawal is widely seen as benefitting Kılıçdaroğlu by consolidating the anti-Erdoğan vote. The smear campaign and deepfake video scandal also highlights social media manipulation in Turkish politics. İnce's name stays on ballot — some votes may still go to him.",
+    "sources": [
+      "https://www.aljazeera.com/news/2023/5/11/days-ahead-of-vote-ince-withdraws-from-turkey-presidential-race",
+      "https://www.dailysabah.com/politics/turkish-opposition-candidate-muharrem-ince-drops-out-of-election-race/news"
+    ]
+  },
+  {
+    "tick_id": "T030",
+    "date": "2023-05-14",
+    "date_range": null,
+    "title": "ROUND1: First Round — Erdoğan 49.52%, Kılıçdaroğlu 44.88%, Oğan 5.17%",
+    "category": "election",
+    "summary": "First round presidential result: Erdoğan 49.52%, Kılıçdaroğlu 44.88%, Sinan Oğan 5.17%, İnce 0.44% (despite withdrawal). Turnout: 88.84%. No candidate clears 50% — runoff required May 28. AKP-MHP People's Alliance wins parliamentary majority. Nation Alliance underperforms in parliament. HDP/YSP wins ~8.8% in parliament.",
+    "date_fence": "Only information available up to 2023-05-15 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.2,
+      "opposition_trust": -0.3,
+      "institutional_trust": 0.0,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.3,
+      "kurdish_rights_salience": 0.1,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.0,
+      "turnout_probability": 0.0
+    },
+    "emotional_impact": {
+      "anger": 0.4,
+      "fear": 0.4,
+      "hope": 0.2,
+      "sadness": 0.4,
+      "political_fatigue": 0.5
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.3,
+      "Kilicdaroglu": -0.2,
+      "Sinan_Ogan": 0.5,
+      "Muharrem_Ince": -0.5,
+      "Undecided_Abstain": 0.0
+    },
+    "affected_archetypes": [
+      "Devout Anatolian Loyalist",
+      "Moderate Nationalist Opposition",
+      "Secular Urban Professional",
+      "Young Urban Protest Voter",
+      "Kurdish Political Voter",
+      "Earthquake Zone Loyalist"
+    ],
+    "notes_for_llm_agents": "Erdoğan exceeded most polls. Kılıçdaroğlu underperformed. Sinan Oğan's 5.17% is higher than expected and makes him kingmaker. The parliamentary result gives AKP-MHP control even if the opposition wins the presidency. Oğan's voters — mostly nationalist — become the key prize.",
+    "sources": [
+      "https://www.aljazeera.com/news/2023/5/28/follow-the-vote-turkey-election-run-off-results-2023",
+      "https://www.aljazeera.com/news/2023/5/15/whats-a-runoff-everything-to-know-about-turkey-election-results"
+    ]
+  },
+  {
+    "tick_id": "T031",
+    "date": "2023-05-17",
+    "date_range": "2023-05-17/2023-05-20",
+    "title": "RUN-A: Kılıçdaroğlu's Nationalist Turn — Anti-Refugee Rhetoric Intensifies",
+    "category": "campaign",
+    "summary": "After the first-round result, Kılıçdaroğlu pivots sharply toward nationalist and anti-immigrant messaging. He releases a video accusing Erdoğan of allowing '10 million irregular migrants' and pledges to return all Syrians within two years. This is a major shift from his centrist/democratic campaign tone.",
+    "date_fence": "Only information available up to 2023-05-21 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.0,
+      "opposition_trust": -0.2,
+      "institutional_trust": 0.0,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.6,
+      "kurdish_rights_salience": -0.3,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.0,
+      "turnout_probability": -0.1
+    },
+    "emotional_impact": {
+      "anger": 0.4,
+      "fear": 0.2,
+      "hope": -0.1,
+      "sadness": 0.2,
+      "political_fatigue": 0.4
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.0,
+      "Kilicdaroglu": 0.1,
+      "Sinan_Ogan": -0.1,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": -0.1
+    },
+    "affected_archetypes": [
+      "Moderate Nationalist Opposition",
+      "Kurdish Political Voter",
+      "Cosmopolitan Liberal Urban Professional",
+      "Alevi-CHP Loyalist",
+      "Young Urban Protest Voter"
+    ],
+    "notes_for_llm_agents": "Kılıçdaroğlu's shift toward anti-refugee nationalism is strategically aimed at Oğan and Özdağ nationalist voters. But it risks alienating Kurdish voters and liberal supporters. HDP base feels betrayed. The dilemma is mathematically stark: he needs both groups.",
+    "sources": [
+      "https://www.aljazeera.com/news/2023/5/17/kilicdaroglu-turns-to-anti-migrant-fears-before-turkey-run-off"
+    ]
+  },
+  {
+    "tick_id": "T032",
+    "date": "2023-05-22",
+    "date_range": null,
+    "title": "RUN-B: Sinan Oğan Endorses Erdoğan",
+    "category": "polling_shift",
+    "summary": "Sinan Oğan, who received 5.17% in the first round, endorses Erdoğan at a nationally televised press conference, citing his anti-terrorism stance. He says 'nationalists are now key players' and demands a strict no-PKK policy. This is a major blow to Kılıçdaroğlu's runoff chances.",
+    "date_fence": "Only information available up to 2023-05-23 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.3,
+      "opposition_trust": -0.3,
+      "institutional_trust": 0.0,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.5,
+      "kurdish_rights_salience": 0.0,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.0,
+      "turnout_probability": 0.0
+    },
+    "emotional_impact": {
+      "anger": 0.3,
+      "fear": 0.3,
+      "hope": -0.3,
+      "sadness": 0.3,
+      "political_fatigue": 0.3
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.4,
+      "Kilicdaroglu": -0.4,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.1
+    },
+    "affected_archetypes": [
+      "Nationalist Grey Wolf Core",
+      "Moderate Nationalist Opposition",
+      "Devout Anatolian Loyalist"
+    ],
+    "notes_for_llm_agents": "Oğan's endorsement sends approximately 3 million nationalist voters toward Erdoğan. Not all his voters will follow — some were protest voters against both alliances. But the endorsement signal strongly favors Erdoğan in the runoff math.",
+    "sources": [
+      "https://www.aljazeera.com/news/2023/5/22/sinan-ogan-endorses-erdogan-in-turkey-election-run-off",
+      "https://www.dw.com/en/turkey-election-third-place-finisher-endorses-erdogan/a-65701274"
+    ]
+  },
+  {
+    "tick_id": "T033",
+    "date": "2023-05-24",
+    "date_range": null,
+    "title": "RUN-C: Kılıçdaroğlu Signs Özdağ Protocol — '13 Million Refugees' Pledge",
+    "category": "campaign",
+    "summary": "Kılıçdaroğlu signs a 7-article protocol with Victory Party's Ümit Özdağ, pledging to expel all refugees (claimed as '13 million') within one year. Özdağ endorses Kılıçdaroğlu. HDP/YSP express deep discomfort but maintain support. Kurdish voters in Diyarbakır begin voicing anger. UNHCR official count is ~3.9 million.",
+    "date_fence": "Only information available up to 2023-05-25 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.0,
+      "opposition_trust": -0.2,
+      "institutional_trust": 0.0,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.5,
+      "kurdish_rights_salience": -0.4,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.0,
+      "turnout_probability": -0.1
+    },
+    "emotional_impact": {
+      "anger": 0.5,
+      "fear": 0.2,
+      "hope": -0.2,
+      "sadness": 0.2,
+      "political_fatigue": 0.4
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.1,
+      "Kilicdaroglu": 0.0,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.1
+    },
+    "affected_archetypes": [
+      "Kurdish Political Voter",
+      "Cosmopolitan Liberal Urban Professional",
+      "Moderate Nationalist Opposition",
+      "Alevi-CHP Loyalist"
+    ],
+    "notes_for_llm_agents": "The Özdağ protocol is ethically and legally controversial. It may gain some far-right nationalist votes but risks suppressing Kurdish turnout — a Kılıçdaroğlu core constituency. The protocol equates anti-terrorist language with anti-Kurdish sentiment in Kurdish voter perception.",
+    "sources": [
+      "https://www.dw.com/en/turkey-election-anti-migration-party-backs-erdogan-rival/a-65718474",
+      "https://www.turkishminute.com/2023/05/24/kilicdaroglu-secured-far-right-support-for-presidential-runoff-vows-to-expel-13-million-refugees"
+    ]
+  },
+  {
+    "tick_id": "T034",
+    "date": "2023-05-26",
+    "date_range": "2023-05-26/2023-05-27",
+    "title": "RUN-D: Kurdish Voter Reluctance — HDP Maintains Support Despite Protocol",
+    "category": "Kurdish_politics",
+    "summary": "HDP/YSP formally reaffirms support for Kılıçdaroğlu despite the Özdağ protocol, noting the trustee policy (kayyum) replacement promise as their core reason. However Kurdish voters in Diyarbakır, Mardin, and Van express public anger — some declare they will abstain. BBC Turkish interviews show Kurdish voters torn.",
+    "date_fence": "Only information available up to 2023-05-28 00:00 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.0,
+      "opposition_trust": -0.1,
+      "institutional_trust": 0.0,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.0,
+      "kurdish_rights_salience": 0.3,
+      "religious_identity_salience": 0.0,
+      "corruption_salience": 0.0,
+      "turnout_probability": -0.2
+    },
+    "emotional_impact": {
+      "anger": 0.5,
+      "fear": 0.3,
+      "hope": -0.2,
+      "sadness": 0.3,
+      "political_fatigue": 0.5
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 0.1,
+      "Kilicdaroglu": -0.1,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.2
+    },
+    "affected_archetypes": [
+      "Kurdish Political Voter"
+    ],
+    "notes_for_llm_agents": "Kurdish voter abstention risk in the runoff is the most critical swing factor. If 10-15% of Kurdish voters abstain rather than vote Kılıçdaroğlu, it changes the mathematical outcome. HDP's continued support is insufficient if ground-level Kurdish voters defect.",
+    "sources": [
+      "https://www.middleeasteye.net/news/turkey-elections-kilicdaroglu-dilemma-keeping-support-ultranationalists-kurds",
+      "https://www.wsws.org/en/articles/2023/05/26/byfs-m26.html"
+    ]
+  },
+  {
+    "tick_id": "T035",
+    "date": "2023-05-28",
+    "date_range": null,
+    "title": "FINAL: Presidential Runoff — Erdoğan Wins 52.18% vs Kılıçdaroğlu 47.82%",
+    "category": "election",
+    "summary": "In the runoff, Erdoğan wins 52.18% to Kılıçdaroğlu's 47.82%. Erdoğan secures his third presidential term. Turnout remains very high. The margin exceeds first round expectation. Kılıçdaroğlu concedes. Oğan's voters appear to have heavily favored Erdoğan. Kurdish turnout in key provinces appears to have declined relative to first round.",
+    "date_fence": "Only information available up to 2023-05-29 should be visible to agents.",
+    "affected_dimensions": {
+      "government_approval": 0.5,
+      "opposition_trust": -0.5,
+      "institutional_trust": -0.1,
+      "economic_anxiety": 0.0,
+      "nationalist_salience": 0.2,
+      "kurdish_rights_salience": -0.2,
+      "religious_identity_salience": 0.3,
+      "corruption_salience": 0.0,
+      "turnout_probability": 0.0
+    },
+    "emotional_impact": {
+      "anger": 0.5,
+      "fear": 0.3,
+      "hope": -0.5,
+      "sadness": 0.6,
+      "political_fatigue": 0.7
+    },
+    "candidate_effect_hint": {
+      "Erdogan": 1.0,
+      "Kilicdaroglu": -1.0,
+      "Sinan_Ogan": 0.0,
+      "Muharrem_Ince": 0.0,
+      "Undecided_Abstain": 0.0
+    },
+    "affected_archetypes": [
+      "Devout Anatolian Loyalist",
+      "Secular Urban Professional",
+      "Young Urban Protest Voter",
+      "Alevi-CHP Loyalist",
+      "Kurdish Political Voter",
+      "Earthquake Zone Loyalist",
+      "Conservative Economically Disillusioned"
+    ],
+    "notes_for_llm_agents": "Erdoğan wins his third term. The simulation ends here. Final state: AKP-MHP controls parliament and presidency. Opposition fails despite historic coalition. Kurdish voters show signs of reduced runoff participation. Economic crisis continues. Earthquake reconstruction begins.",
+    "sources": [
+      "https://www.aljazeera.com/news/2023/5/28/follow-the-vote-turkey-election-run-off-results-2023",
+      "https://www.npr.org/2023/05/28/1178660299/erdogan-has-claimed-victory-in-turkeys-presidential-runoff-election",
+      "https://www.aa.com.tr/en/politics/turkish-supreme-election-council-officially-declares-erdogan-winner-of-presidential-runoff/291"
+    ]
+  }
+]

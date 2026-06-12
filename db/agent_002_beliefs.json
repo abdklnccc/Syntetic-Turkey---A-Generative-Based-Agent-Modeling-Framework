@@ -1,0 +1,102 @@
+{
+  "current": {
+    "AKP_approval": 0.0,
+    "CHP_approval": 7.5,
+    "MHP_approval": 5.0,
+    "HDP_approval": 5.0,
+    "erdogan_trust": 0.0,
+    "democracy_trust": 5.0,
+    "econ_anxiety": 5.0,
+    "vote_intent": "CHP"
+  },
+  "history": [
+    {
+      "tick": 0,
+      "key": "AKP_approval",
+      "old": 3.5,
+      "new": 1.5,
+      "delta": -2,
+      "source": "reflection"
+    },
+    {
+      "tick": 0,
+      "key": "erdogan_trust",
+      "old": 3.0,
+      "new": 1.0,
+      "delta": -2,
+      "source": "reflection"
+    },
+    {
+      "tick": 0,
+      "key": "econ_anxiety",
+      "old": 5.0,
+      "new": 5.0,
+      "delta": 0,
+      "source": "reflection"
+    },
+    {
+      "tick": 0,
+      "key": "vote_intent",
+      "old": "CHP",
+      "new": "CHP",
+      "delta": null,
+      "source": "reflection"
+    },
+    {
+      "tick": 1,
+      "key": "AKP_approval",
+      "old": 1.5,
+      "new": 0.0,
+      "delta": -3,
+      "source": "reflection"
+    },
+    {
+      "tick": 1,
+      "key": "erdogan_trust",
+      "old": 1.0,
+      "new": 0.0,
+      "delta": -3,
+      "source": "reflection"
+    },
+    {
+      "tick": 1,
+      "key": "vote_intent",
+      "old": "CHP",
+      "new": "CHP",
+      "delta": null,
+      "source": "reflection"
+    },
+    {
+      "tick": 2,
+      "key": "AKP_approval",
+      "old": 0.0,
+      "new": 0.0,
+      "delta": -3,
+      "source": "reflection"
+    },
+    {
+      "tick": 2,
+      "key": "erdogan_trust",
+      "old": 0.0,
+      "new": 0.0,
+      "delta": -3,
+      "source": "reflection"
+    },
+    {
+      "tick": 2,
+      "key": "econ_anxiety",
+      "old": 5.0,
+      "new": 5.0,
+      "delta": 0,
+      "source": "reflection"
+    },
+    {
+      "tick": 2,
+      "key": "vote_intent",
+      "old": "CHP",
+      "new": "CHP",
+      "delta": null,
+      "source": "reflection"
+    }
+  ]
+}

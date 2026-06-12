@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Synthetic Turkey 2023 Simulation Dashboard</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --ink: #111827;
+      --muted: #64748b;
+      --line: #d8dee8;
+      --accent: #2563eb;
+      --danger: #d24b3a;
+      --ok: #0f766e;
+      --warn: #b45309;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+    header {
+      background: #111827;
+      color: white;
+      padding: 34px 42px 28px;
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      letter-spacing: 0;
+    }
+    header p {
+      max-width: 980px;
+      margin: 0;
+      color: #d1d5db;
+      font-size: 16px;
+    }
+    main {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+    section {
+      margin-bottom: 22px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .kpi {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .kpi span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 7px;
+    }
+    .kpi strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.1;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 0 0 14px;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+    .note {
+      color: var(--muted);
+      margin: 8px 0 0;
+    }
+    .callout {
+      border-left: 4px solid var(--accent);
+      padding: 10px 14px;
+      background: #eff6ff;
+      border-radius: 4px;
+    }
+    .warning {
+      border-left-color: var(--warn);
+      background: #fffbeb;
+    }
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .chart-title {
+      font-weight: 700;
+      font-size: 16px;
+      fill: var(--ink);
+    }
+    .axis-label, .legend {
+      font-size: 11px;
+      fill: var(--muted);
+    }
+    .grid {
+      stroke: #e5e7eb;
+      stroke-width: 1;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 9px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      color: #334155;
+      background: #f8fafc;
+      font-weight: 700;
+    }
+    .stacked-list {
+      display: grid;
+      gap: 10px;
+    }
+    .stacked-row {
+      display: grid;
+      grid-template-columns: 270px minmax(220px, 1fr) 140px;
+      gap: 12px;
+      align-items: center;
+    }
+    .stacked-label strong, .stacked-label span {
+      display: block;
+    }
+    .stacked-label span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .stacked-bar {
+      height: 18px;
+      display: flex;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #eef2f7;
+      border: 1px solid #e2e8f0;
+    }
+    .stacked-bar span { height: 100%; display: block; }
+    .stacked-top {
+      color: #334155;
+      font-size: 12px;
+      text-align: right;
+    }
+    .legend-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      margin-top: 14px;
+      color: #334155;
+      font-size: 12px;
+    }
+    .legend-pills span::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      margin-right: 6px;
+      background: var(--c);
+    }
+    footer {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 28px 36px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    @media (max-width: 900px) {
+      header { padding: 28px 22px; }
+      main { padding: 18px; }
+      .grid-2, .kpis { grid-template-columns: 1fr; }
+      .stacked-row { grid-template-columns: 1fr; }
+      .stacked-top { text-align: left; }
+    }
+    @media print {
+      body { background: white; }
+      header { background: white; color: var(--ink); border-bottom: 2px solid var(--ink); }
+      header p { color: #334155; }
+      .panel, .kpi { box-shadow: none; break-inside: avoid; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <h1>Synthetic Turkey 2023 Simulation Dashboard</h1>
+    <p>LLM-first voter-agent simulation from the June 2018 baseline to the 28 May 2023 presidential runoff. This dashboard summarizes the completed run and highlights where the MVP needs calibration.</p>
+  </header>
+  <main>
+    <section class="kpis">
+      <div class="kpi"><span>Agents</span><strong>300</strong></div>
+      <div class="kpi"><span>Ticks</span><strong>37</strong></div>
+      <div class="kpi"><span>Decisions</span><strong>11100</strong></div>
+      <div class="kpi"><span>First-Round MAE</span><strong>4.2</strong></div>
+      <div class="kpi"><span>Runoff MAE</span><strong>6.2</strong></div>
+      <div class="kpi"><span>Fallbacks</span><strong>0</strong></div>
+    </section>
+
+    <section class="panel">
+      <h2>Executive Reading</h2>
+      <div class="callout warning">
+        <strong>The run is complete and technically clean, but behaviorally over-opposition.</strong>
+        The simulated electorate puts Kılıçdaroğlu ahead in both rounds, while the actual election favored Erdoğan. The largest model gaps are weak Erdoğan retention among ambiguous conservative/protest voters and almost no Sinan Oğan pathway.
+      </div>
+      <p class="note">Broadcast activity appeared in 14 event ticks. All final outputs are based on 11100 structured voter decisions.</p>
+    </section>
+
+    <section class="grid-2">
+      <div class="panel"><svg viewBox="0 0 920 320" role="img" aria-label="First Round: Valid Candidate Comparison">
+<text x="70" y="24" class="chart-title">First Round: Valid Candidate Comparison</text>
+<line x1="70" x2="892" y1="248.0" y2="248.0" class="grid"/>
+<text x="58" y="252.0" class="axis-label" text-anchor="end">0</text>
+<line x1="70" x2="892" y1="196.5" y2="196.5" class="grid"/>
+<text x="58" y="200.5" class="axis-label" text-anchor="end">25</text>
+<line x1="70" x2="892" y1="145.0" y2="145.0" class="grid"/>
+<text x="58" y="149.0" class="axis-label" text-anchor="end">50</text>
+<line x1="70" x2="892" y1="93.5" y2="93.5" class="grid"/>
+<text x="58" y="97.5" class="axis-label" text-anchor="end">75</text>
+<line x1="70" x2="892" y1="42.0" y2="42.0" class="grid"/>
+<text x="58" y="46.0" class="axis-label" text-anchor="end">100</text>
+<rect x="82.0" y="155.0" width="87.8" height="93.0" rx="3" fill="#2563eb"><title>Erdogan: 45.13%</title></rect>
+<rect x="174.8" y="146.0" width="87.8" height="102.0" rx="3" fill="#111827"><title>Erdogan: 49.52%</title></rect>
+<text x="172.8" y="286" class="axis-label" text-anchor="middle">Erdoğan</text>
+<rect x="287.5" y="138.0" width="87.8" height="110.0" rx="3" fill="#2563eb"><title>Kilicdaroglu: 53.38%</title></rect>
+<rect x="380.2" y="155.5" width="87.8" height="92.5" rx="3" fill="#111827"><title>Kilicdaroglu: 44.88%</title></rect>
+<text x="378.2" y="286" class="axis-label" text-anchor="middle">Kılıçdaroğlu</text>
+<rect x="493.0" y="244.9" width="87.8" height="3.1" rx="3" fill="#2563eb"><title>Sinan_Ogan: 1.49%</title></rect>
+<rect x="585.8" y="237.3" width="87.8" height="10.7" rx="3" fill="#111827"><title>Sinan_Ogan: 5.17%</title></rect>
+<text x="583.8" y="286" class="axis-label" text-anchor="middle">Oğan</text>
+<rect x="698.5" y="248.0" width="87.8" height="0.0" rx="3" fill="#2563eb"><title>Muharrem_Ince: 0.00%</title></rect>
+<rect x="791.2" y="247.1" width="87.8" height="0.9" rx="3" fill="#111827"><title>Muharrem_Ince: 0.43%</title></rect>
+<text x="789.2" y="286" class="axis-label" text-anchor="middle">İnce</text>
+<rect x="70" y="302" width="10" height="10" rx="2" fill="#2563eb"/>
+<text x="86" y="311" class="legend">Simulation</text>
+<rect x="220" y="302" width="10" height="10" rx="2" fill="#111827"/>
+<text x="236" y="311" class="legend">Actual 2023</text>
+</svg></div>
+      <div class="panel"><svg viewBox="0 0 920 320" role="img" aria-label="Runoff: Valid Vote Comparison">
+<text x="70" y="24" class="chart-title">Runoff: Valid Vote Comparison</text>
+<line x1="70" x2="892" y1="248.0" y2="248.0" class="grid"/>
+<text x="58" y="252.0" class="axis-label" text-anchor="end">0</text>
+<line x1="70" x2="892" y1="196.5" y2="196.5" class="grid"/>
+<text x="58" y="200.5" class="axis-label" text-anchor="end">25</text>
+<line x1="70" x2="892" y1="145.0" y2="145.0" class="grid"/>
+<text x="58" y="149.0" class="axis-label" text-anchor="end">50</text>
+<line x1="70" x2="892" y1="93.5" y2="93.5" class="grid"/>
+<text x="58" y="97.5" class="axis-label" text-anchor="end">75</text>
+<line x1="70" x2="892" y1="42.0" y2="42.0" class="grid"/>
+<text x="58" y="46.0" class="axis-label" text-anchor="end">100</text>
+<rect x="82.0" y="153.2" width="190.5" height="94.8" rx="3" fill="#2563eb"><title>Erdogan: 46.00%</title></rect>
+<rect x="277.5" y="140.5" width="190.5" height="107.5" rx="3" fill="#111827"><title>Erdogan: 52.18%</title></rect>
+<text x="275.5" y="286" class="axis-label" text-anchor="middle">Erdoğan</text>
+<rect x="493.0" y="136.8" width="190.5" height="111.2" rx="3" fill="#2563eb"><title>Kilicdaroglu: 54.00%</title></rect>
+<rect x="688.5" y="149.5" width="190.5" height="98.5" rx="3" fill="#111827"><title>Kilicdaroglu: 47.82%</title></rect>
+<text x="686.5" y="286" class="axis-label" text-anchor="middle">Kılıçdaroğlu</text>
+<rect x="70" y="302" width="10" height="10" rx="2" fill="#2563eb"/>
+<text x="86" y="311" class="legend">Simulation</text>
+<rect x="220" y="302" width="10" height="10" rx="2" fill="#111827"/>
+<text x="236" y="311" class="legend">Actual 2023</text>
+</svg></div>
+    </section>
+
+    <section class="grid-2">
+      <div class="panel">
+        <h2>First-Round Gap</h2>
+        <table class=""><thead><tr><th>Candidate</th><th>Simulation</th><th>Actual</th><th>Gap</th></tr></thead><tbody><tr><td>Erdoğan</td><td>45.1%</td><td>49.5%</td><td>-4.4 pts</td></tr>
+<tr><td>Kılıçdaroğlu</td><td>53.4%</td><td>44.9%</td><td>+8.5 pts</td></tr>
+<tr><td>Oğan</td><td>1.5%</td><td>5.2%</td><td>-3.7 pts</td></tr>
+<tr><td>İnce</td><td>0.0%</td><td>0.4%</td><td>-0.4 pts</td></tr></tbody></table>
+        <p class="note">Simulation values are normalized across the four named first-round candidates to compare with official valid-vote results.</p>
+      </div>
+      <div class="panel">
+        <h2>Runoff Gap</h2>
+        <table class=""><thead><tr><th>Candidate</th><th>Simulation</th><th>Actual</th><th>Gap</th></tr></thead><tbody><tr><td>Erdoğan</td><td>46.0%</td><td>52.2%</td><td>-6.2 pts</td></tr>
+<tr><td>Kılıçdaroğlu</td><td>54.0%</td><td>47.8%</td><td>+6.2 pts</td></tr></tbody></table>
+        <p class="note">Raw simulated runoff includes 9.1% abstain/invalid/undecided.</p>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <div class="panel"><svg viewBox="0 0 920 360" role="img" aria-label="Candidate Intention Across Timeline">
+<text x="70" y="26" class="chart-title">Candidate Intention Across Timeline</text>
+<line x1="70" x2="890" y1="272.0" y2="272.0" class="grid"/>
+<text x="58" y="276.0" class="axis-label" text-anchor="end">0</text>
+<line x1="70" x2="890" y1="215.5" y2="215.5" class="grid"/>
+<text x="58" y="219.5" class="axis-label" text-anchor="end">25</text>
+<line x1="70" x2="890" y1="159.0" y2="159.0" class="grid"/>
+<text x="58" y="163.0" class="axis-label" text-anchor="end">50</text>
+<line x1="70" x2="890" y1="102.5" y2="102.5" class="grid"/>
+<text x="58" y="106.5" class="axis-label" text-anchor="end">75</text>
+<line x1="70" x2="890" y1="46.0" y2="46.0" class="grid"/>
+<text x="58" y="50.0" class="axis-label" text-anchor="end">100</text>
+<polyline points="70.0,157.9 92.8,153.4 115.6,149.6 138.3,176.1 161.1,175.0 183.9,162.0 206.7,167.1 229.4,161.3 252.2,155.7 275.0,168.3 297.8,175.1 320.6,161.1 343.3,174.7 366.1,170.0 388.9,156.4 411.7,171.7 434.4,175.2 457.2,186.2 480.0,169.6 502.8,180.8 525.6,188.6 548.3,192.0 571.1,177.1 593.9,175.6 616.7,167.6 639.4,170.5 662.2,167.5 685.0,170.8 707.8,171.9 730.6,178.1 753.3,182.0 776.1,173.6 798.9,180.8 821.7,179.9 844.4,179.9 867.2,175.8 890.0,169.4" fill="none" stroke="#d24b3a" stroke-width="3"/>
+<circle cx="70.0" cy="157.9" r="4" fill="#d24b3a"/>
+<circle cx="890.0" cy="169.4" r="4" fill="#d24b3a"/>
+<polyline points="70.0,220.2 92.8,215.5 115.6,215.4 138.3,197.8 161.1,194.1 183.9,194.5 206.7,189.2 229.4,195.9 252.2,196.5 275.0,194.1 297.8,192.4 320.6,195.4 343.3,185.1 366.1,192.3 388.9,197.4 411.7,185.6 434.4,189.6 457.2,175.2 480.0,190.0 502.8,184.9 525.6,174.1 548.3,171.3 571.1,183.5 593.9,162.0 616.7,161.1 639.4,163.4 662.2,160.6 685.0,160.8 707.8,161.3 730.6,161.0 753.3,158.1 776.1,165.8 798.9,166.0 821.7,166.3 844.4,167.5 867.2,161.4 890.0,166.5" fill="none" stroke="#3b82f6" stroke-width="3"/>
+<circle cx="70.0" cy="220.2" r="4" fill="#3b82f6"/>
+<circle cx="890.0" cy="166.5" r="4" fill="#3b82f6"/>
+<polyline points="70.0,269.3 92.8,269.4 115.6,269.9 138.3,269.5 161.1,270.0 183.9,270.6 206.7,271.4 229.4,270.9 252.2,270.8 275.0,270.9 297.8,270.2 320.6,270.8 343.3,271.5 366.1,270.9 388.9,271.2 411.7,271.0 434.4,270.1 457.2,271.2 480.0,270.8 502.8,271.2 525.6,271.4 548.3,271.0 571.1,271.5 593.9,271.6 616.7,271.8 639.4,271.0 662.2,271.7 685.0,271.4 707.8,271.5 730.6,268.9 753.3,260.6 776.1,267.4 798.9,267.2 821.7,267.2 844.4,269.4 867.2,268.5 890.0,265.2" fill="none" stroke="#7c3aed" stroke-width="3"/>
+<circle cx="70.0" cy="269.3" r="4" fill="#7c3aed"/>
+<circle cx="890.0" cy="265.2" r="4" fill="#7c3aed"/>
+<polyline points="70.0,258.8 92.8,263.4 115.6,266.6 138.3,255.8 161.1,252.2 183.9,260.7 206.7,258.1 229.4,261.0 252.2,263.6 275.0,252.4 297.8,249.8 320.6,258.2 343.3,253.5 366.1,251.9 388.9,259.8 411.7,256.5 434.4,248.3 457.2,247.2 480.0,250.3 502.8,245.0 525.6,244.5 548.3,243.6 571.1,243.8 593.9,257.3 616.7,261.9 639.4,258.2 662.2,262.6 685.0,259.2 707.8,259.0 730.6,254.8 753.3,261.5 776.1,256.0 798.9,248.8 821.7,249.9 844.4,246.7 867.2,257.1 890.0,262.6" fill="none" stroke="#f59e0b" stroke-width="3"/>
+<circle cx="70.0" cy="258.8" r="4" fill="#f59e0b"/>
+<circle cx="890.0" cy="262.6" r="4" fill="#f59e0b"/>
+<text x="70.0" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 70.0 308)">T001</text>
+<text x="161.1" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 161.1 308)">T005</text>
+<text x="252.2" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 252.2 308)">T009</text>
+<text x="343.3" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 343.3 308)">T013</text>
+<text x="434.4" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 434.4 308)">T017</text>
+<text x="525.6" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 525.6 308)">T021</text>
+<text x="616.7" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 616.7 308)">T025</text>
+<text x="707.8" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 707.8 308)">T029</text>
+<text x="753.3" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 753.3 308)">T030B result</text>
+<text x="798.9" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 798.9 308)">T032</text>
+<text x="844.4" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 844.4 308)">T034</text>
+<text x="890.0" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 890.0 308)">T035B result</text>
+<rect x="70" y="340" width="10" height="10" rx="2" fill="#d24b3a"/>
+<text x="86" y="349" class="legend">Erdoğan</text>
+<rect x="235" y="340" width="10" height="10" rx="2" fill="#3b82f6"/>
+<text x="251" y="349" class="legend">Kılıçdaroğlu</text>
+<rect x="400" y="340" width="10" height="10" rx="2" fill="#7c3aed"/>
+<text x="416" y="349" class="legend">Oğan</text>
+<rect x="565" y="340" width="10" height="10" rx="2" fill="#f59e0b"/>
+<text x="581" y="349" class="legend">Undecided</text>
+</svg></div>
+      <div class="panel"><svg viewBox="0 0 920 360" role="img" aria-label="Runoff Intention Across Timeline">
+<text x="70" y="26" class="chart-title">Runoff Intention Across Timeline</text>
+<line x1="70" x2="890" y1="272.0" y2="272.0" class="grid"/>
+<text x="58" y="276.0" class="axis-label" text-anchor="end">0</text>
+<line x1="70" x2="890" y1="215.5" y2="215.5" class="grid"/>
+<text x="58" y="219.5" class="axis-label" text-anchor="end">25</text>
+<line x1="70" x2="890" y1="159.0" y2="159.0" class="grid"/>
+<text x="58" y="163.0" class="axis-label" text-anchor="end">50</text>
+<line x1="70" x2="890" y1="102.5" y2="102.5" class="grid"/>
+<text x="58" y="106.5" class="axis-label" text-anchor="end">75</text>
+<line x1="70" x2="890" y1="46.0" y2="46.0" class="grid"/>
+<text x="58" y="50.0" class="axis-label" text-anchor="end">100</text>
+<polyline points="70.0,159.7 92.8,155.8 115.6,150.7 138.3,174.4 161.1,175.7 183.9,160.2 206.7,166.0 229.4,159.6 252.2,154.8 275.0,167.9 297.8,174.1 320.6,159.6 343.3,173.5 366.1,168.2 388.9,154.1 411.7,169.2 434.4,173.2 457.2,185.7 480.0,168.0 502.8,177.2 525.6,186.8 548.3,190.8 571.1,175.2 593.9,173.8 616.7,165.9 639.4,168.3 662.2,166.6 685.0,169.1 707.8,170.6 730.6,175.5 753.3,181.1 776.1,173.0 798.9,173.1 821.7,172.9 844.4,175.4 867.2,177.5 890.0,154.4" fill="none" stroke="#d24b3a" stroke-width="3"/>
+<circle cx="70.0" cy="159.7" r="4" fill="#d24b3a"/>
+<circle cx="890.0" cy="154.4" r="4" fill="#d24b3a"/>
+<polyline points="70.0,170.9 92.8,171.0 115.6,172.1 138.3,153.3 161.1,158.5 183.9,166.5 206.7,166.0 229.4,168.7 252.2,171.4 275.0,168.0 297.8,161.9 320.6,168.0 343.3,157.7 366.1,165.3 388.9,172.3 411.7,163.6 434.4,162.1 457.2,160.2 480.0,166.6 502.8,164.0 525.6,146.2 548.3,152.5 571.1,167.3 593.9,156.4 616.7,158.3 639.4,160.9 662.2,156.9 685.0,156.7 707.8,152.8 730.6,161.4 753.3,152.7 776.1,162.8 798.9,166.1 821.7,165.1 844.4,176.1 867.2,161.1 890.0,192.9" fill="none" stroke="#3b82f6" stroke-width="3"/>
+<circle cx="70.0" cy="170.9" r="4" fill="#3b82f6"/>
+<circle cx="890.0" cy="192.9" r="4" fill="#3b82f6"/>
+<polyline points="70.0,259.3 92.8,263.2 115.6,267.2 138.3,262.2 161.1,255.9 183.9,263.3 206.7,258.0 229.4,261.7 252.2,263.8 275.0,254.1 297.8,254.0 320.6,262.4 343.3,258.8 366.1,256.6 388.9,263.6 411.7,257.2 434.4,254.6 457.2,244.1 480.0,255.4 502.8,248.8 525.6,257.1 548.3,246.7 571.1,247.4 593.9,259.7 616.7,265.7 639.4,260.9 662.2,266.5 685.0,264.3 707.8,266.6 730.6,253.1 753.3,256.2 776.1,254.2 798.9,250.8 821.7,252.0 844.4,238.5 867.2,251.3 890.0,242.7" fill="none" stroke="#f59e0b" stroke-width="3"/>
+<circle cx="70.0" cy="259.3" r="4" fill="#f59e0b"/>
+<circle cx="890.0" cy="242.7" r="4" fill="#f59e0b"/>
+<text x="70.0" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 70.0 308)">T001</text>
+<text x="161.1" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 161.1 308)">T005</text>
+<text x="252.2" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 252.2 308)">T009</text>
+<text x="343.3" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 343.3 308)">T013</text>
+<text x="434.4" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 434.4 308)">T017</text>
+<text x="525.6" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 525.6 308)">T021</text>
+<text x="616.7" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 616.7 308)">T025</text>
+<text x="707.8" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 707.8 308)">T029</text>
+<text x="753.3" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 753.3 308)">T030B result</text>
+<text x="798.9" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 798.9 308)">T032</text>
+<text x="844.4" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 844.4 308)">T034</text>
+<text x="890.0" y="308" class="axis-label" text-anchor="middle" transform="rotate(-35 890.0 308)">T035B result</text>
+<rect x="70" y="340" width="10" height="10" rx="2" fill="#d24b3a"/>
+<text x="86" y="349" class="legend">Erdoğan</text>
+<rect x="235" y="340" width="10" height="10" rx="2" fill="#3b82f6"/>
+<text x="251" y="349" class="legend">Kılıçdaroğlu</text>
+<rect x="400" y="340" width="10" height="10" rx="2" fill="#f59e0b"/>
+<text x="416" y="349" class="legend">Abstain/Invalid</text>
+</svg></div>
+    </section>
+
+    <section class="panel">
+      <h3>First-Round Archetype Breakdown</h3>
+<div class="stacked-list">
+<div class="stacked-row">
+<div class="stacked-label"><strong>Alevi-CHP Loyalist</strong><span>n=19</span></div>
+<div class="stacked-bar">
+<span style="width:100.000%; background:#3b82f6" title="Kılıçdaroğlu: 100.0%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 100.0%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Conservative Economically Disillusioned</strong><span>n=33</span></div>
+<div class="stacked-bar">
+<span style="width:54.899%; background:#d24b3a" title="Erdoğan: 54.9%"></span>
+<span style="width:26.717%; background:#3b82f6" title="Kılıçdaroğlu: 26.7%"></span>
+<span style="width:1.667%; background:#7c3aed" title="Oğan: 1.7%"></span>
+<span style="width:16.717%; background:#f59e0b" title="Undecided: 16.7%"></span>
+</div>
+<div class="stacked-top">Erdoğan 54.9%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Cosmopolitan Liberal</strong><span>n=11</span></div>
+<div class="stacked-bar">
+<span style="width:100.000%; background:#3b82f6" title="Kılıçdaroğlu: 100.0%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 100.0%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Devout Anatolian Loyalist</strong><span>n=58</span></div>
+<div class="stacked-bar">
+<span style="width:95.230%; background:#d24b3a" title="Erdoğan: 95.2%"></span>
+<span style="width:0.747%; background:#3b82f6" title="Kılıçdaroğlu: 0.7%"></span>
+<span style="width:0.086%; background:#7c3aed" title="Oğan: 0.1%"></span>
+<span style="width:3.937%; background:#f59e0b" title="Undecided: 3.9%"></span>
+</div>
+<div class="stacked-top">Erdoğan 95.2%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Earthquake Zone Loyalist</strong><span>n=14</span></div>
+<div class="stacked-bar">
+<span style="width:85.952%; background:#d24b3a" title="Erdoğan: 86.0%"></span>
+<span style="width:9.524%; background:#3b82f6" title="Kılıçdaroğlu: 9.5%"></span>
+<span style="width:4.524%; background:#f59e0b" title="Undecided: 4.5%"></span>
+</div>
+<div class="stacked-top">Erdoğan 86.0%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Kurdish Political Voter</strong><span>n=29</span></div>
+<div class="stacked-bar">
+<span style="width:87.931%; background:#3b82f6" title="Kılıçdaroğlu: 87.9%"></span>
+<span style="width:1.724%; background:#64748b" title="Other: 1.7%"></span>
+<span style="width:10.345%; background:#f59e0b" title="Undecided: 10.3%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 87.9%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Moderate Nationalist (İYİ)</strong><span>n=25</span></div>
+<div class="stacked-bar">
+<span style="width:12.333%; background:#d24b3a" title="Erdoğan: 12.3%"></span>
+<span style="width:71.333%; background:#3b82f6" title="Kılıçdaroğlu: 71.3%"></span>
+<span style="width:0.800%; background:#7c3aed" title="Oğan: 0.8%"></span>
+<span style="width:15.533%; background:#f59e0b" title="Undecided: 15.5%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 71.3%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Nationalist Grey Wolf (MHP core)</strong><span>n=30</span></div>
+<div class="stacked-bar">
+<span style="width:78.389%; background:#d24b3a" title="Erdoğan: 78.4%"></span>
+<span style="width:1.667%; background:#3b82f6" title="Kılıçdaroğlu: 1.7%"></span>
+<span style="width:10.056%; background:#7c3aed" title="Oğan: 10.1%"></span>
+<span style="width:1.667%; background:#64748b" title="Other: 1.7%"></span>
+<span style="width:8.222%; background:#f59e0b" title="Undecided: 8.2%"></span>
+</div>
+<div class="stacked-top">Erdoğan 78.4%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Pious Disillusioned Islamist</strong><span>n=18</span></div>
+<div class="stacked-bar">
+<span style="width:49.537%; background:#d24b3a" title="Erdoğan: 49.5%"></span>
+<span style="width:27.037%; background:#3b82f6" title="Kılıçdaroğlu: 27.0%"></span>
+<span style="width:1.111%; background:#7c3aed" title="Oğan: 1.1%"></span>
+<span style="width:0.556%; background:#64748b" title="Other: 0.6%"></span>
+<span style="width:21.759%; background:#f59e0b" title="Undecided: 21.8%"></span>
+</div>
+<div class="stacked-top">Erdoğan 49.5%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Retired Protest Voter</strong><span>n=16</span></div>
+<div class="stacked-bar">
+<span style="width:23.229%; background:#d24b3a" title="Erdoğan: 23.2%"></span>
+<span style="width:69.479%; background:#3b82f6" title="Kılıçdaroğlu: 69.5%"></span>
+<span style="width:0.625%; background:#7c3aed" title="Oğan: 0.6%"></span>
+<span style="width:6.667%; background:#f59e0b" title="Undecided: 6.7%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 69.5%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Secular Urban Professional</strong><span>n=32</span></div>
+<div class="stacked-bar">
+<span style="width:100.000%; background:#3b82f6" title="Kılıçdaroğlu: 100.0%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 100.0%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Young Urban Protest Voter</strong><span>n=15</span></div>
+<div class="stacked-bar">
+<span style="width:100.000%; background:#3b82f6" title="Kılıçdaroğlu: 100.0%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 100.0%</div>
+</div>
+</div>
+      <div class="legend-pills">
+        <span style="--c:#d24b3a">Erdoğan</span><span style="--c:#3b82f6">Kılıçdaroğlu</span><span style="--c:#7c3aed">Oğan</span><span style="--c:#14b8a6">İnce</span><span style="--c:#64748b">Other</span><span style="--c:#f59e0b">Undecided</span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h3>Runoff Archetype Breakdown</h3>
+<div class="stacked-list">
+<div class="stacked-row">
+<div class="stacked-label"><strong>Alevi-CHP Loyalist</strong><span>n=19</span></div>
+<div class="stacked-bar">
+<span style="width:97.368%; background:#3b82f6" title="Kılıçdaroğlu: 97.4%"></span>
+<span style="width:2.632%; background:#f59e0b" title="Abstain/Invalid: 2.6%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 97.4%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Conservative Economically Disillusioned</strong><span>n=33</span></div>
+<div class="stacked-bar">
+<span style="width:52.384%; background:#d24b3a" title="Erdoğan: 52.4%"></span>
+<span style="width:25.202%; background:#3b82f6" title="Kılıçdaroğlu: 25.2%"></span>
+<span style="width:22.414%; background:#f59e0b" title="Abstain/Invalid: 22.4%"></span>
+</div>
+<div class="stacked-top">Erdoğan 52.4%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Cosmopolitan Liberal</strong><span>n=11</span></div>
+<div class="stacked-bar">
+<span style="width:100.000%; background:#3b82f6" title="Kılıçdaroğlu: 100.0%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 100.0%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Devout Anatolian Loyalist</strong><span>n=58</span></div>
+<div class="stacked-bar">
+<span style="width:90.661%; background:#d24b3a" title="Erdoğan: 90.7%"></span>
+<span style="width:0.575%; background:#3b82f6" title="Kılıçdaroğlu: 0.6%"></span>
+<span style="width:8.764%; background:#f59e0b" title="Abstain/Invalid: 8.8%"></span>
+</div>
+<div class="stacked-top">Erdoğan 90.7%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Earthquake Zone Loyalist</strong><span>n=14</span></div>
+<div class="stacked-bar">
+<span style="width:70.714%; background:#d24b3a" title="Erdoğan: 70.7%"></span>
+<span style="width:9.286%; background:#3b82f6" title="Kılıçdaroğlu: 9.3%"></span>
+<span style="width:20.000%; background:#f59e0b" title="Abstain/Invalid: 20.0%"></span>
+</div>
+<div class="stacked-top">Erdoğan 70.7%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Kurdish Political Voter</strong><span>n=29</span></div>
+<div class="stacked-bar">
+<span style="width:86.207%; background:#3b82f6" title="Kılıçdaroğlu: 86.2%"></span>
+<span style="width:13.793%; background:#f59e0b" title="Abstain/Invalid: 13.8%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 86.2%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Moderate Nationalist (İYİ)</strong><span>n=25</span></div>
+<div class="stacked-bar">
+<span style="width:16.733%; background:#d24b3a" title="Erdoğan: 16.7%"></span>
+<span style="width:76.533%; background:#3b82f6" title="Kılıçdaroğlu: 76.5%"></span>
+<span style="width:6.733%; background:#f59e0b" title="Abstain/Invalid: 6.7%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 76.5%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Nationalist Grey Wolf (MHP core)</strong><span>n=30</span></div>
+<div class="stacked-bar">
+<span style="width:83.167%; background:#d24b3a" title="Erdoğan: 83.2%"></span>
+<span style="width:7.667%; background:#3b82f6" title="Kılıçdaroğlu: 7.7%"></span>
+<span style="width:9.167%; background:#f59e0b" title="Abstain/Invalid: 9.2%"></span>
+</div>
+<div class="stacked-top">Erdoğan 83.2%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Pious Disillusioned Islamist</strong><span>n=18</span></div>
+<div class="stacked-bar">
+<span style="width:65.093%; background:#d24b3a" title="Erdoğan: 65.1%"></span>
+<span style="width:25.093%; background:#3b82f6" title="Kılıçdaroğlu: 25.1%"></span>
+<span style="width:9.815%; background:#f59e0b" title="Abstain/Invalid: 9.8%"></span>
+</div>
+<div class="stacked-top">Erdoğan 65.1%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Retired Protest Voter</strong><span>n=16</span></div>
+<div class="stacked-bar">
+<span style="width:29.896%; background:#d24b3a" title="Erdoğan: 29.9%"></span>
+<span style="width:64.271%; background:#3b82f6" title="Kılıçdaroğlu: 64.3%"></span>
+<span style="width:5.833%; background:#f59e0b" title="Abstain/Invalid: 5.8%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 64.3%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Secular Urban Professional</strong><span>n=32</span></div>
+<div class="stacked-bar">
+<span style="width:98.438%; background:#3b82f6" title="Kılıçdaroğlu: 98.4%"></span>
+<span style="width:1.562%; background:#f59e0b" title="Abstain/Invalid: 1.6%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 98.4%</div>
+</div>
+<div class="stacked-row">
+<div class="stacked-label"><strong>Young Urban Protest Voter</strong><span>n=15</span></div>
+<div class="stacked-bar">
+<span style="width:100.000%; background:#3b82f6" title="Kılıçdaroğlu: 100.0%"></span>
+</div>
+<div class="stacked-top">Kılıçdaroğlu 100.0%</div>
+</div>
+</div>
+      <div class="legend-pills">
+        <span style="--c:#d24b3a">Erdoğan</span><span style="--c:#3b82f6">Kılıçdaroğlu</span><span style="--c:#f59e0b">Abstain/Invalid</span>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <div class="panel">
+        <h2>Decision Reason Codes</h2>
+        <table class=""><thead><tr><th>Reason code</th><th>Count</th><th>Decision tick</th></tr></thead><tbody><tr><td>short_code</td><td>84</td><td>First-round decision</td></tr>
+<tr><td>political_fatigue</td><td>58</td><td>First-round decision</td></tr>
+<tr><td>political_disillusionment</td><td>29</td><td>First-round decision</td></tr>
+<tr><td>loyalty</td><td>24</td><td>First-round decision</td></tr>
+<tr><td>disillusionment</td><td>22</td><td>First-round decision</td></tr>
+<tr><td>anger</td><td>15</td><td>First-round decision</td></tr>
+<tr><td>political_frustration</td><td>13</td><td>First-round decision</td></tr>
+<tr><td>fear_of_opposition</td><td>10</td><td>First-round decision</td></tr>
+<tr><td>loyalty</td><td>76</td><td>Runoff decision</td></tr>
+<tr><td>nationalism</td><td>57</td><td>Runoff decision</td></tr>
+<tr><td>betrayal</td><td>52</td><td>Runoff decision</td></tr>
+<tr><td>nationalism_concern</td><td>30</td><td>Runoff decision</td></tr>
+<tr><td>political_fatigue</td><td>26</td><td>Runoff decision</td></tr>
+<tr><td>short_code</td><td>20</td><td>Runoff decision</td></tr>
+<tr><td>disillusionment</td><td>19</td><td>Runoff decision</td></tr>
+<tr><td>nationalist_shift</td><td>16</td><td>Runoff decision</td></tr></tbody></table>
+      </div>
+      <div class="panel">
+        <h2>Political Broadcast Coverage</h2>
+        <table class=""><thead><tr><th>Tick</th><th>Broadcast frames</th></tr></thead><tbody><tr><td>T030A_first_round_vote_decision</td><td>10</td></tr>
+<tr><td>T030B_first_round_result_revealed</td><td>10</td></tr>
+<tr><td>T004</td><td>9</td></tr>
+<tr><td>T007</td><td>9</td></tr>
+<tr><td>T005</td><td>8</td></tr>
+<tr><td>T031</td><td>8</td></tr>
+<tr><td>T032</td><td>8</td></tr>
+<tr><td>T033</td><td>8</td></tr>
+<tr><td>T034</td><td>8</td></tr>
+<tr><td>T035A_runoff_vote_decision</td><td>8</td></tr>
+<tr><td>T035B_final_result_revealed</td><td>8</td></tr>
+<tr><td>T016</td><td>7</td></tr>
+<tr><td>T018</td><td>7</td></tr>
+<tr><td>T022</td><td>7</td></tr></tbody></table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Calibration Priorities</h2>
+      <table>
+        <thead><tr><th>Issue</th><th>Evidence in this run</th><th>Likely next work</th></tr></thead>
+        <tbody>
+          <tr><td>Opposition overfit</td><td>Kılıçdaroğlu is +17.8 pts above actual first round after valid-vote normalization.</td><td>Rebalance conservative disillusioned, retired protest, earthquake-zone, and nationalist persuasion prompts.</td></tr>
+          <tr><td>Missing Oğan pathway</td><td>Sinan Oğan receives only 1.4% raw first-round intention.</td><td>Add stronger nationalist protest-vote grounding and force candidate-specific consideration in first-round decision prompts.</td></tr>
+          <tr><td>Runoff abstention risk</td><td>Abstain/invalid/undecided reaches 9.1% in the runoff decision.</td><td>Separate abstention from invalid/undecided and calibrate turnout against observed 2023 participation.</td></tr>
+          <tr><td>Flat structured states</td><td>Emotion and turnout aggregates move little even when reflections change.</td><td>Tighten output instructions so numeric updates must reflect event salience and prior state.</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <footer>
+    Generated 2026-05-16 20:22 from Synthetic Turkey output files. This is a research simulation artifact, not a prediction claim.
+  </footer>
+</body>
+</html>

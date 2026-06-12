@@ -1,0 +1,127 @@
+meta:
+  name: "Synthetic Turkey 2018 Baseline Sampling Profile"
+  purpose: >
+    A thesis-facing electorate profile for generating a more representative
+    post-June-2018 baseline. This profile anchors the synthetic voter pool to
+    the 24 June 2018 parliamentary and presidential election results while
+    preserving LLM-first voter reasoning.
+  recommended_sample_size: 300
+  recommended_use: >
+    Use N=300 for thesis calibration and final reported runs. Keep N=50 only
+    for quick MVP/debug runs. N=300 gives roughly 0.33 percentage-point
+    resolution per agent and keeps small blocs such as Saadet/Felicity visible.
+  important_note: >
+    Counts are a sampling frame, not deterministic vote rules. Agents should
+    receive 2018 party/candidate anchors as memory/persona grounding; the LLM
+    must still reason through subsequent 2018-2023 events.
+
+sources:
+  ysk_domestic_presidential_pdf: "https://www.ysk.gov.tr/doc/dosyalar/Ingilizce/ElectionResults/2018CB-416A_en.pdf"
+  osce_odihr_final_report: "https://www.osce.org/files/f/documents/9/4/397046_0.pdf"
+  ysk_decision_reference: "SBE/YSK decision no. 953, 4 July 2018, as reproduced in OSCE/ODIHR Annex I"
+
+sample_size_tiers:
+  prototype:
+    agents: 50
+    use: "Fast prompt/debug runs only."
+    limitation: "One agent equals 2 percentage points; small parties and Ogan-like nationalist protest pathways disappear easily."
+  calibration:
+    agents: 200
+    use: "Lower-cost OpenAI calibration runs."
+    limitation: "Still weak for sub-1% and highly cross-pressured groups."
+  thesis_recommended:
+    agents: 300
+    use: "Recommended final thesis simulation size."
+    limitation: "Costs about 11,100 voter-decision calls for 37 ticks."
+  high_resolution:
+    agents: 500
+    use: "Best if budget allows or if using batched/cheaper models."
+    limitation: "Costs about 18,500 voter-decision calls for 37 ticks."
+
+official_2018_vote_shares:
+  parliamentary_valid_vote_percent:
+    AKP: 42.56
+    CHP: 22.65
+    HDP_DEM: 11.70
+    MHP: 11.10
+    IYI: 9.96
+    Other_small_parties: 2.03
+  presidential_valid_vote_percent:
+    Erdogan: 52.59
+    Muharrem_Ince: 30.64
+    Selahattin_Demirtas: 8.40
+    Meral_Aksener: 7.29
+    Temel_Karamollaoglu: 0.89
+    Dogu_Perincek: 0.20
+
+recommended_300_agent_party_distribution:
+  AKP: 128
+  CHP: 68
+  HDP_DEM: 35
+  MHP: 33
+  IYI: 30
+  Other_small_parties: 6
+
+recommended_300_agent_presidential_distribution:
+  Erdogan: 158
+  Muharrem_Ince: 92
+  Selahattin_Demirtas: 25
+  Meral_Aksener: 22
+  Temel_Karamollaoglu: 3
+  Dogu_Perincek: 0
+
+recommended_300_agent_party_to_archetype_matrix:
+  AKP:
+    Devout_Anatolian_Loyalist: 56
+    Conservative_Economically_Disillusioned: 28
+    Pious_Disillusioned_Islamist: 14
+    Earthquake_Zone_Loyalist: 14
+    Retired_Protest_Voter: 10
+    Nationalist_Grey_Wolf_MHP_core: 6
+  CHP:
+    Secular_Urban_Professional: 28
+    Alevi_CHP_Loyalist: 16
+    Young_Urban_Protest_Voter: 10
+    Cosmopolitan_Liberal: 8
+    Retired_Protest_Voter: 6
+  HDP_DEM:
+    Kurdish_Political_Voter: 28
+    Alevi_CHP_Loyalist: 3
+    Young_Urban_Protest_Voter: 2
+    Cosmopolitan_Liberal: 2
+  MHP:
+    Nationalist_Grey_Wolf_MHP_core: 24
+    Moderate_Nationalist_IYI: 5
+    Devout_Anatolian_Loyalist: 2
+    Conservative_Economically_Disillusioned: 2
+  IYI:
+    Moderate_Nationalist_IYI: 20
+    Secular_Urban_Professional: 4
+    Young_Urban_Protest_Voter: 3
+    Conservative_Economically_Disillusioned: 3
+  Other_small_parties:
+    Pious_Disillusioned_Islamist: 4
+    Kurdish_Political_Voter: 1
+    Cosmopolitan_Liberal: 1
+
+recommended_300_agent_archetype_totals:
+  Devout_Anatolian_Loyalist: 58
+  Secular_Urban_Professional: 32
+  Conservative_Economically_Disillusioned: 33
+  Alevi_CHP_Loyalist: 19
+  Kurdish_Political_Voter: 29
+  Nationalist_Grey_Wolf_MHP_core: 30
+  Moderate_Nationalist_IYI: 25
+  Pious_Disillusioned_Islamist: 18
+  Young_Urban_Protest_Voter: 15
+  Earthquake_Zone_Loyalist: 14
+  Retired_Protest_Voter: 16
+  Cosmopolitan_Liberal: 11
+
+modeling_guidance:
+  - "Use party_2018 and presidential_vote_2018 as fixed baseline memory, not as future vote rules."
+  - "Add cross-pressured voters inside each party bloc; do not make every AKP voter an Erdogan maximalist or every CHP voter a secular professional."
+  - "Preserve 2018 HDP party > Demirtas presidential gap; this matters for later Kurdish opposition alignment."
+  - "Preserve 2018 MHP and IYI separately; their divergence is necessary for a realistic 2023 Sinan Ogan pathway."
+  - "Other_small_parties mostly means Saadet/Felicity, HUDA PAR, Vatan/Patriotic, independents, and tiny parties; current archetypes do not perfectly represent all of them."
+  - "If Perincek/Vatan voters need explicit representation, use N=500 or weighted agents; N=300 rounds them to zero."

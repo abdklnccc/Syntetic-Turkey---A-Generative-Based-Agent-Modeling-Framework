@@ -1,0 +1,226 @@
+# Synthetic Turkey — Credibility Matrix
+# (agent_id, voter_archetype) -> credibility, likely_effect, explanation
+# Companion to political_agents.yaml.
+# All credibility values are source-grounded simulation calibration parameters in [0,1].
+
+schema_version: "1.0"
+
+voter_archetypes:
+  - id: devout_anatolian_loyalist
+    label: "Devout Anatolian Loyalist"
+  - id: secular_urban_professional
+    label: "Secular Urban Professional"
+  - id: conservative_economically_disillusioned
+    label: "Conservative Economically Disillusioned"
+  - id: alevi_chp_loyalist
+    label: "Alevi-CHP Loyalist"
+  - id: kurdish_political_voter
+    label: "Kurdish Political Voter"
+  - id: nationalist_grey_wolf_core
+    label: "Nationalist Grey Wolf Core"
+  - id: moderate_nationalist_opposition
+    label: "Moderate Nationalist Opposition"
+  - id: pious_disillusioned_islamist
+    label: "Pious Disillusioned Islamist"
+  - id: young_urban_protest_voter
+    label: "Young Urban Protest Voter"
+  - id: earthquake_zone_loyalist
+    label: "Earthquake Zone Loyalist"
+  - id: retired_protest_voter
+    label: "Retired Protest Voter"
+  - id: cosmopolitan_liberal_urban_professional
+    label: "Cosmopolitan Liberal Urban Professional"
+
+effect_codes:
+  persuade: "Moves persuadable voters to support"
+  mobilize_base: "Activates existing supporters / raises turnout"
+  reinforce_existing_belief: "Consolidates prior orientation"
+  trigger_backlash: "Activates counter-mobilization"
+  ignored: "Below salience threshold"
+
+credibility:
+
+  erdogan_recep_tayyip:
+    devout_anatolian_loyalist:           {credibility: 0.85, likely_effect: mobilize_base,            explanation: "Foundational base; religion + civilisational restoration frame."}
+    secular_urban_professional:          {credibility: 0.10, likely_effect: trigger_backlash,         explanation: "Net disapproval -20 to -30 (MetroPOLL 2021-22)."}
+    conservative_economically_disillusioned: {credibility: 0.48, likely_effect: reinforce_existing_belief, explanation: "Welfare clientelism vs inflation; fragile loyalty."}
+    alevi_chp_loyalist:                  {credibility: 0.05, likely_effect: trigger_backlash,         explanation: "Sectarian framing of Kilicdaroglu read as direct threat."}
+    kurdish_political_voter:             {credibility: 0.15, likely_effect: trigger_backlash,         explanation: "Peace-process collapse + kayyum; minority conservative Kurds reachable."}
+    nationalist_grey_wolf_core:          {credibility: 0.70, likely_effect: reinforce_existing_belief, explanation: "People's Alliance structural; YRP/Zafer slight leakage."}
+    moderate_nationalist_opposition:     {credibility: 0.30, likely_effect: trigger_backlash,         explanation: "IYI-aligned voters view him as authoritarian."}
+    pious_disillusioned_islamist:        {credibility: 0.45, likely_effect: reinforce_existing_belief, explanation: "Some leakage to YRP/Saadet but cultural pull holds."}
+    young_urban_protest_voter:           {credibility: 0.20, likely_effect: trigger_backlash,         explanation: "OyMoyYok generation; 25% youth unemployment."}
+    earthquake_zone_loyalist:            {credibility: 0.55, likely_effect: reinforce_existing_belief, explanation: "AKP won 8 of 11 quake provinces in May 2023 despite criticism."}
+    retired_protest_voter:               {credibility: 0.40, likely_effect: reinforce_existing_belief, explanation: "Pension erosion vs religious-identity loyalty; bifurcated."}
+    cosmopolitan_liberal_urban_professional: {credibility: 0.06, likely_effect: trigger_backlash,     explanation: "Near-total alienation; democratic-rights frame."}
+
+  kilicdaroglu_kemal:
+    # Apply broadcast_power_multiplier_after_2023_11=0.40 to all cells post 2023-11-08.
+    devout_anatolian_loyalist:           {credibility: 0.18, likely_effect: ignored,                  explanation: "Helallesme partially heard; sectarian counter-frame dominates."}
+    secular_urban_professional:          {credibility: 0.80, likely_effect: mobilize_base,            explanation: "Historic CHP base; rule-of-law frame."}
+    conservative_economically_disillusioned: {credibility: 0.42, likely_effect: persuade,             explanation: "Kitchen-table inflation video resonated; uptake partial."}
+    alevi_chp_loyalist:                  {credibility: 0.92, likely_effect: mobilize_base,            explanation: "Identity congruence; Alevi disclosure video."}
+    kurdish_political_voter:             {credibility: 0.63, likely_effect: persuade,                 explanation: "Tactical-not-enthusiastic; runoff refugee pivot eroded."}
+    nationalist_grey_wolf_core:          {credibility: 0.10, likely_effect: trigger_backlash,         explanation: "AKP deepfake PKK frame stuck."}
+    moderate_nationalist_opposition:     {credibility: 0.35, likely_effect: persuade,                 explanation: "Through Table of Six and IYI partnership."}
+    pious_disillusioned_islamist:        {credibility: 0.30, likely_effect: persuade,                 explanation: "Headscarf apology + Saadet inclusion = limited inroads."}
+    young_urban_protest_voter:           {credibility: 0.60, likely_effect: persuade,                 explanation: "~50% first-round 18-24 support per pre-2023 polls."}
+    earthquake_zone_loyalist:            {credibility: 0.40, likely_effect: persuade,                 explanation: "Accountability frame; AKP welfare network held."}
+    retired_protest_voter:               {credibility: 0.65, likely_effect: mobilize_base,            explanation: "Pension/inflation anger; secular cohort core."}
+    cosmopolitan_liberal_urban_professional: {credibility: 0.72, likely_effect: mobilize_base,        explanation: "Rule-of-law / EU orientation."}
+
+  imamoglu_ekrem:
+    devout_anatolian_loyalist:           {credibility: 0.32, likely_effect: persuade,                 explanation: "Religious outreach (mosque visits) opened ceiling."}
+    secular_urban_professional:          {credibility: 0.87, likely_effect: mobilize_base,            explanation: "Core constituency; service delivery + Radical Love."}
+    conservative_economically_disillusioned: {credibility: 0.62, likely_effect: persuade,             explanation: "2024 peripheral-Istanbul AKP defections."}
+    alevi_chp_loyalist:                  {credibility: 0.82, likely_effect: mobilize_base,            explanation: "High but slightly below Kilicdaroglu identity affinity."}
+    kurdish_political_voter:             {credibility: 0.58, likely_effect: persuade,                 explanation: "HDP tactical non-candidacy 2019; multicultural framing."}
+    nationalist_grey_wolf_core:          {credibility: 0.25, likely_effect: reinforce_existing_belief, explanation: "Won >50% of 2018 MHP voters in June 2019 rerun; core MHP largely resistant."}
+    moderate_nationalist_opposition:     {credibility: 0.55, likely_effect: persuade,                 explanation: "IYI-aligned reachable via inclusive frame."}
+    pious_disillusioned_islamist:        {credibility: 0.45, likely_effect: persuade,                 explanation: "Respectful religious register; ceiling on direct credibility."}
+    young_urban_protest_voter:           {credibility: 0.80, likely_effect: mobilize_base,            explanation: "Core youth credibility per MEI 2023."}
+    earthquake_zone_loyalist:            {credibility: 0.55, likely_effect: persuade,                 explanation: "IBB earthquake response visible."}
+    retired_protest_voter:               {credibility: 0.70, likely_effect: mobilize_base,            explanation: "Service-delivery record + Istanbul pensioners."}
+    cosmopolitan_liberal_urban_professional: {credibility: 0.88, likely_effect: mobilize_base,        explanation: "Highest cross-camp credibility in opposition."}
+
+  bahceli_devlet:
+    devout_anatolian_loyalist:           {credibility: 0.50, likely_effect: reinforce_existing_belief, explanation: "Turkish-Islamic synthesis overlap; not primary affinity."}
+    secular_urban_professional:          {credibility: 0.10, likely_effect: trigger_backlash,         explanation: "Anti-democratic, anti-rights framing rejected."}
+    conservative_economically_disillusioned: {credibility: 0.28, likely_effect: ignored,              explanation: "Minimal economic content."}
+    alevi_chp_loyalist:                  {credibility: 0.05, likely_effect: trigger_backlash,         explanation: "Hard nationalist register read as direct threat."}
+    kurdish_political_voter:             {credibility: 0.05, likely_effect: trigger_backlash,         explanation: "Closure demands + trustee endorsement."}
+    nationalist_grey_wolf_core:          {credibility: 0.85, likely_effect: mobilize_base,            explanation: "Ulkucu organizational network identity."}
+    moderate_nationalist_opposition:     {credibility: 0.20, likely_effect: trigger_backlash,         explanation: "IYI defined itself against him."}
+    pious_disillusioned_islamist:        {credibility: 0.30, likely_effect: reinforce_existing_belief, explanation: "Religion-nation overlap but state-centric distance."}
+    young_urban_protest_voter:           {credibility: 0.10, likely_effect: trigger_backlash,         explanation: "Anti-youth-protest record."}
+    earthquake_zone_loyalist:            {credibility: 0.30, likely_effect: ignored,                  explanation: "Low local resonance."}
+    retired_protest_voter:               {credibility: 0.35, likely_effect: reinforce_existing_belief, explanation: "Nationalist retirees retain affinity."}
+    cosmopolitan_liberal_urban_professional: {credibility: 0.04, likely_effect: trigger_backlash,     explanation: "Maximally rejected."}
+
+  aksener_meral:
+    # Apply broadcast_power_multiplier_after_2024_03_31=0.30 to all cells post 2024-03-31.
+    devout_anatolian_loyalist:           {credibility: 0.32, likely_effect: ignored,                  explanation: "Cultural fluency (yemeni) softens; Kemalist frame caps."}
+    secular_urban_professional:          {credibility: 0.70, likely_effect: mobilize_base,            explanation: "EU-supportive Kemalist coalition."}
+    conservative_economically_disillusioned: {credibility: 0.50, likely_effect: persuade,             explanation: "Economic populism; partial AKP defection target."}
+    alevi_chp_loyalist:                  {credibility: 0.40, likely_effect: reinforce_existing_belief, explanation: "Coalition-via-CHP affinity; identity distance."}
+    kurdish_political_voter:             {credibility: 0.10, likely_effect: trigger_backlash,         explanation: "1990s Interior Ministry record; refugee rhetoric."}
+    nationalist_grey_wolf_core:          {credibility: 0.45, likely_effect: persuade,                 explanation: "Recaptured ~10% from MHP in 2018, 2023 cycles."}
+    moderate_nationalist_opposition:     {credibility: 0.78, likely_effect: mobilize_base,            explanation: "Core electoral mandate."}
+    pious_disillusioned_islamist:        {credibility: 0.30, likely_effect: ignored,                  explanation: "Limited religious register."}
+    young_urban_protest_voter:           {credibility: 0.48, likely_effect: persuade,                 explanation: "Exam/education grievances; declining force post-2022."}
+    earthquake_zone_loyalist:            {credibility: 0.40, likely_effect: persuade,                 explanation: "Accountability frame heard partially."}
+    retired_protest_voter:               {credibility: 0.55, likely_effect: persuade,                 explanation: "Nationalist-secular retirees reachable."}
+    cosmopolitan_liberal_urban_professional: {credibility: 0.50, likely_effect: persuade,             explanation: "Pro-EU + secular but nationalist register caps it."}
+
+  kurdish_movement_agent:
+    # Period-modulated. Apply modifiers below to each cell.
+    devout_anatolian_loyalist:           {credibility: 0.05, likely_effect: trigger_backlash,         explanation: "Nationalist counter-mobilization."}
+    secular_urban_professional:          {credibility: 0.45, likely_effect: persuade,                 explanation: "Cross-camp reach via Demirtas + Onder + Bestas."}
+    conservative_economically_disillusioned: {credibility: 0.15, likely_effect: ignored,              explanation: "Identity barrier dominates."}
+    alevi_chp_loyalist:                  {credibility: 0.45, likely_effect: persuade,                 explanation: "Hatay/Adana Arab-Alevi reach via Hatimogullari."}
+    kurdish_political_voter:             {credibility: 0.88, likely_effect: mobilize_base,            explanation: "Movement-base affinity; near-ceiling."}
+    nationalist_grey_wolf_core:          {credibility: 0.02, likely_effect: trigger_backlash,         explanation: "Maximum backlash channel."}
+    moderate_nationalist_opposition:     {credibility: 0.10, likely_effect: trigger_backlash,         explanation: "IYI explicitly defines itself against."}
+    pious_disillusioned_islamist:        {credibility: 0.25, likely_effect: persuade,                 explanation: "Some pious Kurds reachable via legal-rights frame."}
+    young_urban_protest_voter:           {credibility: 0.55, likely_effect: mobilize_base,            explanation: "Demirtas + feminist-ecological register."}
+    earthquake_zone_loyalist:            {credibility: 0.35, likely_effect: persuade,                 explanation: "Hatay quake region overlaps Hatimogullari base."}
+    retired_protest_voter:               {credibility: 0.30, likely_effect: reinforce_existing_belief, explanation: "Pension salience low; democratic-rights frame heard."}
+    cosmopolitan_liberal_urban_professional: {credibility: 0.65, likely_effect: persuade,             explanation: "Democratic-rights + international-rights audience."}
+
+  demirtas_selahattin:
+    # Locked symbolic; only operates when invoked by the movement.
+    devout_anatolian_loyalist:           {credibility: 0.10, likely_effect: trigger_backlash,         explanation: "Terrorist counter-frame."}
+    secular_urban_professional:          {credibility: 0.60, likely_effect: persuade,                 explanation: "Cross-camp legitimacy; rights symbol."}
+    conservative_economically_disillusioned: {credibility: 0.20, likely_effect: ignored,              explanation: "Identity barrier."}
+    alevi_chp_loyalist:                  {credibility: 0.65, likely_effect: persuade,                 explanation: "Strong democratic-rights resonance."}
+    kurdish_political_voter:             {credibility: 0.95, likely_effect: mobilize_base,            explanation: "Highest credibility figure of the movement."}
+    nationalist_grey_wolf_core:          {credibility: 0.02, likely_effect: trigger_backlash,         explanation: "Strongest backlash target."}
+    moderate_nationalist_opposition:     {credibility: 0.15, likely_effect: trigger_backlash,         explanation: "IYI rejection."}
+    pious_disillusioned_islamist:        {credibility: 0.30, likely_effect: persuade,                 explanation: "Pious Kurds + some young pious reachable."}
+    young_urban_protest_voter:           {credibility: 0.75, likely_effect: mobilize_base,            explanation: "Generational symbol."}
+    earthquake_zone_loyalist:            {credibility: 0.35, likely_effect: persuade,                 explanation: "Limited local resonance."}
+    retired_protest_voter:               {credibility: 0.35, likely_effect: persuade,                 explanation: "Saturday Mothers / rights generation."}
+    cosmopolitan_liberal_urban_professional: {credibility: 0.80, likely_effect: mobilize_base,        explanation: "International rights symbol."}
+
+# Period multipliers for kurdish_movement_agent credibility cells.
+# Apply these to the movement row above as multiplicative modifiers.
+kurdish_movement_period_multipliers:
+  HDP_phase:
+    period_ids: [P1, P2, P3, P4]
+    end_date: "2023-08-27"
+    multipliers:
+      all_cells: 1.00   # baseline
+  YSP_phase:
+    period_ids: [P4_electoral]
+    date_range: ["2023-03-24", "2023-10-15"]
+    multipliers:
+      kurdish_political_voter_recognition: 0.85
+      cross_camp_reach: 1.05
+  HEDEP_phase:
+    period_ids: [P5]
+    date_range: ["2023-10-15", "2023-12-11"]
+    multipliers:
+      all_recognition: 0.80
+  DEM_phase:
+    period_ids: [P6, P7]
+    effective_from: "2023-12-11"
+    multipliers:
+      all_recognition: 0.95
+      mobilization_effect_modifier: 1.10   # Third Way mobilisation boost
+
+# Internal personas inherit the kurdish_movement_agent credibility row and
+# apply selective deltas when invoked. Engines should cap final values at [0,1].
+internal_persona_credibility_deltas:
+
+  buldan_pervin:
+    cosmopolitan_liberal_urban_professional: +0.05
+    notes: "+0.05 women_voters where the model exposes that segment"
+
+  sancar_mithat:
+    cosmopolitan_liberal_urban_professional: +0.10
+    secular_urban_professional: +0.05
+    notes: "Legalistic register"
+
+  onder_sirri_sureyya:
+    secular_urban_professional: +0.10
+    young_urban_protest_voter: +0.05
+    cosmopolitan_liberal_urban_professional: +0.05
+    notes: "Gezi-generation Istanbul reach"
+
+  hatimogullari_tulay:
+    alevi_chp_loyalist: +0.10
+    kurdish_political_voter: +0.05
+    notes: "Hatay Arab-Alevi base"
+
+  bakirhan_tuncer:
+    kurdish_political_voter: +0.05
+    notes: "DEHAP-to-DEM provincial continuity"
+
+  bestas_meral_danis:
+    cosmopolitan_liberal_urban_professional: +0.05
+    secular_urban_professional: +0.05
+    notes: "Legal register"
+
+  turk_ahmet:
+    young_urban_protest_voter: -0.05
+    retired_protest_voter: +0.10
+    devout_anatolian_loyalist: +0.05
+    notes: "Elder-statesman dialogue posture; younger base reads as accommodationist"
+
+  zeydan_abdullah:
+    kurdish_political_voter: +0.07
+    cosmopolitan_liberal_urban_professional: +0.05
+    notes: "Post-Van mandate defence"
+
+  kisanak_gultan:
+    cosmopolitan_liberal_urban_professional: +0.05
+    young_urban_protest_voter: +0.07
+    period_scope: [P6]
+    notes: "Feminist symbol; P6 only"
+
+calibration_notes:
+  - "Credibility values are simulation calibration parameters, not measured public-opinion percentages."
+  - "Apply broadcast_power_multipliers from political_agents.yaml in addition to these credibility values."
+  - "kurdish_movement_agent credibility cells are period-modulated: multiply by the active phase modifier."
+  - "Demirtas only operates when invoked by the movement; treat his row as conditional, not continuous broadcast."
+  - "Internal persona deltas cap at [0,1] after addition to the movement row."

@@ -1,0 +1,58 @@
+{
+  "T035::erdogan_recep_tayyip": {
+    "message": "[mock broadcast from erdogan_recep_tayyip at T035]",
+    "emotional_tone": [
+      "neutral"
+    ],
+    "vote_shift_direction": "unspecified"
+  },
+  "T035::kilicdaroglu_kemal": {
+    "message": "[mock broadcast from kilicdaroglu_kemal at T035]",
+    "emotional_tone": [
+      "neutral"
+    ],
+    "vote_shift_direction": "unspecified"
+  },
+  "T035::imamoglu_ekrem": {
+    "message": "[mock broadcast from imamoglu_ekrem at T035]",
+    "emotional_tone": [
+      "neutral"
+    ],
+    "vote_shift_direction": "unspecified"
+  },
+  "T035::bahceli_devlet": {
+    "message": "[mock broadcast from bahceli_devlet at T035]",
+    "emotional_tone": [
+      "neutral"
+    ],
+    "vote_shift_direction": "unspecified"
+  },
+  "T035::aksener_meral": {
+    "message": "[mock broadcast from aksener_meral at T035]",
+    "emotional_tone": [
+      "neutral"
+    ],
+    "vote_shift_direction": "unspecified"
+  },
+  "T035::kurdish_movement_agent": {
+    "message": "[mock broadcast from kurdish_movement_agent at T035]",
+    "emotional_tone": [
+      "neutral"
+    ],
+    "vote_shift_direction": "unspecified"
+  },
+  "T035::demirtas_selahattin": {
+    "message": "[mock broadcast from demirtas_selahattin at T035]",
+    "emotional_tone": [
+      "neutral"
+    ],
+    "vote_shift_direction": "unspecified"
+  },
+  "T035::buldan_pervin": {
+    "message": "[mock broadcast from buldan_pervin at T035]",
+    "emotional_tone": [
+      "neutral"
+    ],
+    "vote_shift_direction": "unspecified"
+  }
+}

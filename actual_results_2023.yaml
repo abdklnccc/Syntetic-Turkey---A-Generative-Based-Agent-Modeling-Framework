@@ -1,0 +1,12 @@
+first_round:
+  Erdogan: 49.52
+  Kilicdaroglu: 44.88
+  Sinan_Ogan: 5.17
+  Muharrem_Ince: 0.43
+runoff:
+  Erdogan: 52.18
+  Kilicdaroglu: 47.82
+notes:
+  unit: "percent of valid votes"
+  election: "2023 Turkish presidential election"
+  purpose: "reference values used by validation metrics and thesis audit scripts"

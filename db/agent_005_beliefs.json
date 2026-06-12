@@ -1,0 +1,118 @@
+{
+  "current": {
+    "AKP_approval": 5.5,
+    "CHP_approval": 3.5,
+    "MHP_approval": 5.0,
+    "HDP_approval": 5.0,
+    "erdogan_trust": 5.5,
+    "democracy_trust": 5.0,
+    "econ_anxiety": 5.0,
+    "vote_intent": "AKP"
+  },
+  "history": [
+    {
+      "tick": 0,
+      "key": "AKP_approval",
+      "old": 7.5,
+      "new": 7.5,
+      "delta": 0,
+      "source": "reflection"
+    },
+    {
+      "tick": 0,
+      "key": "CHP_approval",
+      "old": 3.5,
+      "new": 3.5,
+      "delta": 0,
+      "source": "reflection"
+    },
+    {
+      "tick": 0,
+      "key": "erdogan_trust",
+      "old": 7.5,
+      "new": 7.5,
+      "delta": 0,
+      "source": "reflection"
+    },
+    {
+      "tick": 0,
+      "key": "econ_anxiety",
+      "old": 5.0,
+      "new": 5.0,
+      "delta": 0,
+      "source": "reflection"
+    },
+    {
+      "tick": 0,
+      "key": "vote_intent",
+      "old": "AKP",
+      "new": "AKP",
+      "delta": null,
+      "source": "reflection"
+    },
+    {
+      "tick": 1,
+      "key": "AKP_approval",
+      "old": 7.5,
+      "new": 6.5,
+      "delta": -1,
+      "source": "reflection"
+    },
+    {
+      "tick": 1,
+      "key": "CHP_approval",
+      "old": 3.5,
+      "new": 3.5,
+      "delta": 0,
+      "source": "reflection"
+    },
+    {
+      "tick": 1,
+      "key": "erdogan_trust",
+      "old": 7.5,
+      "new": 6.5,
+      "delta": -1,
+      "source": "reflection"
+    },
+    {
+      "tick": 1,
+      "key": "vote_intent",
+      "old": "AKP",
+      "new": "AKP",
+      "delta": null,
+      "source": "reflection"
+    },
+    {
+      "tick": 2,
+      "key": "AKP_approval",
+      "old": 6.5,
+      "new": 5.5,
+      "delta": -1,
+      "source": "reflection"
+    },
+    {
+      "tick": 2,
+      "key": "CHP_approval",
+      "old": 3.5,
+      "new": 3.5,
+      "delta": 0,
+      "source": "reflection"
+    },
+    {
+      "tick": 2,
+      "key": "erdogan_trust",
+      "old": 6.5,
+      "new": 5.5,
+      "delta": -1,
+      "source": "reflection"
+    },
+    {
+      "tick": 2,
+      "key": "vote_intent",
+      "old": "AKP",
+      "new": "AKP",
+      "delta": null,
+      "source": "reflection"
+    }
+  ]
+}

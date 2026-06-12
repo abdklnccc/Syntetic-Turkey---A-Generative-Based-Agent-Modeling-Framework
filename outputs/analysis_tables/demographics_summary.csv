@@ -1,0 +1,83 @@
+category,value
+age_min,19
+age_median,49.0
+age_mean,48.6
+age_max,77
+education_high_school,96
+education_university,92
+education_primary,75
+education_graduate,18
+education_vocational,11
+education_university_student,8
+gender_Female,151
+gender_Male,149
+region_Central Anatolia,86
+region_Marmara,65
+region_Eastern Anatolia,58
+region_Mediterranean,29
+region_Aegean,26
+region_Southeast Anatolia,22
+region_Black Sea,8
+region_Earthquake Zone,6
+income_middle,136
+income_lower_middle,95
+income_upper_middle,30
+income_working_class,21
+income_pensioner_low,7
+income_upper,6
+income_student,5
+employment_worker,49
+employment_retired,46
+employment_small_business_owner,40
+employment_public_sector,25
+employment_farmer,22
+employment_professional,19
+employment_tradesperson,16
+employment_manager,13
+employment_academic,12
+employment_service_worker,11
+employment_student,11
+employment_driver,9
+employment_security,8
+employment_early_career_professional,7
+employment_imam_or_religious_worker,6
+employment_teacher,3
+employment_creative_worker,2
+employment_unemployed,1
+city_Istanbul,56
+city_Ankara,29
+city_Izmir,27
+city_Kayseri,24
+city_Konya,24
+city_Sivas,17
+city_Bursa,15
+city_Erzurum,14
+city_Yozgat,11
+city_Mersin,8
+city_Malatya,7
+city_Antalya,7
+city_Eskisehir,7
+city_Kahramanmaras,6
+city_Mardin,6
+city_Diyarbakir,6
+city_Gaziantep,5
+city_Osmaniye,5
+city_Tunceli,5
+city_Van,5
+city_Karabuk,5
+city_Hatay,4
+city_Batman,3
+city_Sakarya,2
+city_Adiyaman,2
+archetype_Devout Anatolian Loyalist,58
+archetype_Conservative Economically Disillusioned,33
+archetype_Secular Urban Professional,32
+archetype_Nationalist Grey Wolf (MHP core),30
+archetype_Kurdish Political Voter,29
+archetype_Moderate Nationalist (İYİ),25
+archetype_Alevi-CHP Loyalist,19
+archetype_Pious Disillusioned Islamist,18
+archetype_Retired Protest Voter,16
+archetype_Young Urban Protest Voter,15
+archetype_Earthquake Zone Loyalist,14
+archetype_Cosmopolitan Liberal,11

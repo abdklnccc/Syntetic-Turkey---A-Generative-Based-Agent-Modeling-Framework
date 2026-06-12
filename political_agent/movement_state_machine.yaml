@@ -1,0 +1,402 @@
+# Synthetic Turkey — Kurdish Movement State Machine
+# State machine for kurdish_movement_agent. Seven periods + initial conditions + faction config.
+# All 0-1 values are source-grounded simulation calibration parameters.
+
+schema_version: "1.0"
+
+agent_ref: kurdish_movement_agent
+
+state_variables:
+  # Categorical
+  - id: current_party_label
+    type: categorical
+    values: [HDP, "HDP_YSP_dual", YSP, "HDP_suspended_YSP", HEDEP, DEM]
+  - id: primary_strategy_state
+    type: categorical
+    values: [hybrid, strategic_silent_support, full_alliance, independent_run, independent_run_announced, hybrid_post_victory]
+  - id: communication_mode
+    type: categorical
+    values: [mobilizing, defensive, legalistic, symbolic]
+  - id: party_transition_state
+    type: categorical
+    values: [stable, preparing, transitioning, just_completed]
+  - id: mandate_contestation_state
+    type: categorical
+    values: [stable, mandate_won, mandate_revoked, protest_triggered, YSK_reversal, mandate_restored]
+  - id: symbolic_leader_status
+    type: categorical
+    values: [imprisoned, imprisoned_invoked, imprisoned_silent]
+
+  # Bounded numeric [0,1]
+  - id: legal_pressure_state         # categorical labels also accepted: high, critical
+  - id: closure_risk_level
+  - id: trustee_threat_level
+  - id: organizational_capacity
+  - id: voter_recognition
+  - id: strategic_voting_signal
+  - id: opposition_alignment_signal
+  - id: independent_identity_signal
+  - id: boycott_signal
+  - id: nationalist_backlash_risk
+  - id: democratic_rights_salience
+  - id: kurdish_identity_salience
+  - id: peace_process_salience
+
+initial_conditions:
+  simulation_start_date: "2019-01-01"
+  symbolic_leader: demirtas_selahattin
+  symbolic_leader_status: imprisoned    # since 2016-11-04 — initial condition, NOT a 2019+ event
+  notes:
+    - "Demirtas's imprisonment is an initial condition, not a 2019-2024 event."
+    - "The simulation begins inside Period 1 (P1_HDP_2019_local_window)."
+
+faction_config:
+  faction_axis: kurdish_movement_internal_factions
+  factions:
+    weaken_AKP:
+      lead_persona: hatimogullari_tulay
+      description: "Defeat AKP through Third Way + independent identity; refuse alliance subordination."
+      activated_from_period: P5
+    dialogue_first:
+      lead_persona: turk_ahmet
+      description: "Preserve dialogue with the state; elder-statesman posture."
+      activated_from_period: P5
+  tunable_parameters:
+    faction_weight:
+      type: float
+      range: [0.0, 1.0]
+      default: 0.65   # weaken_AKP dominant from P5
+      description: "Weight on weaken_AKP vs dialogue_first (1.0 = pure weaken_AKP, 0.0 = pure dialogue_first)."
+
+periods:
+
+  P1_HDP_2019_local_window:
+    period_id: P1_HDP_2019_local_window
+    start_date: "2019-01-01"
+    end_date: "2019-03-31"
+    current_party_label: HDP
+    active_leadership: [buldan_pervin]
+    context_only_leadership: [temelli_sezai]
+    symbolic_leader: demirtas_selahattin
+    symbolic_leader_status: imprisoned
+    state:
+      legal_pressure_state: high
+      closure_risk_level: 0.45
+      trustee_threat_level: 0.85
+      organizational_capacity: 0.70
+      voter_recognition: 0.85
+      strategic_voting_signal: 0.90
+      opposition_alignment_signal: 0.45
+      independent_identity_signal: 0.75
+      boycott_signal: 0.05
+      nationalist_backlash_risk: 0.55
+      democratic_rights_salience: 0.85
+      kurdish_identity_salience: 0.90
+      peace_process_salience: 0.55
+      primary_strategy_state: hybrid
+      communication_mode: mobilizing
+    active_internal_personas:
+      - buldan_pervin
+      - demirtas_selahattin_invoked
+      - turk_ahmet
+    transition_trigger: "end of March 2019 local elections"
+    expected_voter_effect: "Secures Istanbul/Ankara CHP wins via Kurdish western tactical vote; consolidates Kurdish southeast base under HDP banner."
+    notes:
+      - "82/102 DBP municipalities under trustees at simulation start."
+      - "Explicit non-candidacy in 7 metros drives strategic_voting_signal = 0.90."
+
+  P2_HDP_kayyum_covid_ecthr:
+    period_id: P2_HDP_kayyum_covid_ecthr
+    start_date: "2019-04-01"
+    end_date: "2020-12-31"
+    current_party_label: HDP
+    active_leadership: [buldan_pervin, sancar_mithat]
+    leadership_changes:
+      - persona: sancar_mithat
+        joins_from: "2020-02-23"
+    symbolic_leader: demirtas_selahattin
+    symbolic_leader_status: imprisoned
+    state:
+      legal_pressure_state: high
+      closure_risk_level: 0.50
+      trustee_threat_level: 0.95
+      organizational_capacity: 0.45
+      voter_recognition: 0.85
+      strategic_voting_signal: 0.10
+      opposition_alignment_signal: 0.35
+      independent_identity_signal: 0.75
+      boycott_signal: 0.05
+      nationalist_backlash_risk: 0.50
+      democratic_rights_salience: 0.90
+      kurdish_identity_salience: 0.65
+      peace_process_salience: 0.45
+      primary_strategy_state: strategic_silent_support
+      communication_mode: defensive
+    active_internal_personas:
+      - buldan_pervin
+      - sancar_mithat
+      - bakirhan_tuncer
+      - demirtas_selahattin_invoked
+      - turk_ahmet
+    transition_trigger: "HDP closure indictment filed 2021-03-17"
+    expected_voter_effect: "Preserves base but mobilisation suppressed by COVID + municipal-platform loss."
+    notes:
+      - "48/65 HDP municipalities seized by Oct 2020."
+      - "ECtHR Grand Chamber Demirtas ruling 2020-12-22 (defied) raises democratic_rights_salience."
+
+  P3_HDP_closure_alliance:
+    period_id: P3_HDP_closure_alliance
+    start_date: "2021-03-17"
+    end_date: "2022-12-31"
+    current_party_label: HDP
+    active_leadership: [buldan_pervin, sancar_mithat]
+    symbolic_leader: demirtas_selahattin
+    symbolic_leader_status: imprisoned
+    state:
+      legal_pressure_state: critical
+      closure_risk_level: 0.90
+      trustee_threat_level: 0.85
+      organizational_capacity: 0.55
+      voter_recognition: 0.80
+      strategic_voting_signal: 0.40
+      opposition_alignment_signal: 0.55
+      independent_identity_signal: 0.80
+      boycott_signal: 0.20
+      nationalist_backlash_risk: 0.75
+      democratic_rights_salience: 0.90
+      kurdish_identity_salience: 0.85
+      peace_process_salience: 0.65
+      primary_strategy_state: hybrid
+      communication_mode: legalistic
+    active_internal_personas:
+      - buldan_pervin
+      - sancar_mithat
+      - bakirhan_tuncer
+      - bestas_meral_danis
+      - turk_ahmet
+      - demirtas_selahattin_invoked
+    transition_trigger: "AYM rejects HDP delay request 2023-01-26; treasury freeze 2023-01-05; YSP decision Mar 24"
+    expected_voter_effect: "Institutional-continuity signal stabilises base under existential pressure; soft alliance prep with Nation Alliance."
+    notes:
+      - "PKK pressure from Kandil; HDP resisted boycott calls."
+      - "Semra Guzel episode raises nationalist_backlash_risk."
+      - "11-article declaration intensifies Kurdish identity salience."
+
+  P4_YSP_2023_elections:
+    period_id: P4_YSP_2023_elections
+    start_date: "2023-01-01"
+    end_date: "2023-05-31"
+    current_party_label: "HDP_YSP_dual"
+    current_party_label_detail: "HDP (institutional shell) + YSP (electoral)"
+    active_leadership: [buldan_pervin, sancar_mithat]
+    symbolic_leader: demirtas_selahattin
+    symbolic_leader_status: imprisoned_invoked
+    state:
+      legal_pressure_state: critical
+      closure_risk_level: 0.95
+      trustee_threat_level: 0.80
+      organizational_capacity: 0.65
+      voter_recognition: 0.65
+      strategic_voting_signal: 1.00
+      opposition_alignment_signal: 0.90
+      independent_identity_signal: 0.50
+      boycott_signal: 0.05
+      nationalist_backlash_risk: 0.90
+      democratic_rights_salience: 0.90
+      kurdish_identity_salience: 0.65
+      peace_process_salience: 0.60
+      primary_strategy_state: full_alliance
+      communication_mode: mobilizing
+    active_internal_personas:
+      - buldan_pervin
+      - sancar_mithat
+      - bestas_meral_danis
+      - onder_sirri_sureyya
+      - hatimogullari_tulay   # background MP
+      - demirtas_selahattin_invoked
+    context_only_personas:
+      - kilicgun_ucar_cigdem  # transitional
+    transition_trigger: "HDP suspends Aug 27, 2023"
+    expected_voter_effect: "8.82% YSP / 61 seats; 60-75% R1 for Kilicdaroglu in Kurdish provinces; -4 to -6% R2 Kurdish turnout drop after Ozdag Protocol."
+    notes:
+      - "Treasury freeze + verbal-defence refusal push closure_risk_level to 0.95."
+      - "AKP deepfake + Ozdag Protocol push nationalist_backlash_risk to 0.90."
+      - "Demirtas publicly endorses Kilicdaroglu R2; announces withdrawal from active politics."
+
+  P5_HDP_suspend_HEDEP:
+    period_id: P5_HDP_suspend_HEDEP
+    start_date: "2023-06-01"
+    end_date: "2023-10-15"
+    current_party_label: "HDP_suspended_YSP"
+    current_party_label_transition_to: HEDEP
+    transition_event:
+      date: "2023-10-15"
+      to_label: HEDEP
+    active_leadership_hdp_shell: [ozcan_sultan, kirkazak_cahit]   # from Aug 27
+    active_leadership_hedep: [hatimogullari_tulay, bakirhan_tuncer]   # from Oct 15
+    symbolic_leader: demirtas_selahattin
+    symbolic_leader_status: imprisoned_silent
+    symbolic_leader_note: "Reduced personal voice after May 2023 withdrawal statement"
+    state:
+      legal_pressure_state: high
+      closure_risk_level: 0.55
+      trustee_threat_level: 0.65
+      organizational_capacity: 0.55
+      voter_recognition: 0.55
+      strategic_voting_signal: 0.05
+      opposition_alignment_signal: 0.40
+      independent_identity_signal: 0.85
+      boycott_signal: 0.05
+      nationalist_backlash_risk: 0.30
+      democratic_rights_salience: 0.80
+      kurdish_identity_salience: 0.85
+      peace_process_salience: 0.70
+      primary_strategy_state: independent_run_announced
+      communication_mode: symbolic
+    active_internal_personas:
+      - buldan_pervin    # final HDP role
+      - sancar_mithat    # final HDP role
+      - hatimogullari_tulay   # rising
+      - bakirhan_tuncer  # rising
+      - demirtas_selahattin_invoked
+    transition_trigger: "HEDEP -> DEM brand change forced by Yargitay; Dec 11, 2023"
+    expected_voter_effect: "Brand-discontinuity managed; Third Way doctrine consolidated; pre-2024 base mobilisation primer."
+    notes:
+      - "HEDEP structurally separate -> closure_risk_level drops to 0.55."
+      - "Ocalan-interlocutor demand keeps kurdish_identity_salience high."
+
+  P6_HEDEP_to_DEM_2024_campaign:
+    period_id: P6_HEDEP_to_DEM_2024_campaign
+    start_date: "2023-10-15"
+    end_date: "2024-03-30"
+    current_party_label: HEDEP
+    current_party_label_transition_to: DEM
+    transition_event:
+      date: "2023-12-11"
+      to_label: DEM
+    active_leadership: [hatimogullari_tulay, bakirhan_tuncer]
+    symbolic_leader: demirtas_selahattin
+    symbolic_leader_status: imprisoned_invoked
+    symbolic_leader_note: "Popularity exceeds DEM brand"
+    state:
+      legal_pressure_state: high
+      closure_risk_level: 0.45
+      trustee_threat_level: 0.70
+      organizational_capacity: 0.85
+      voter_recognition: 0.75
+      strategic_voting_signal: 0.05
+      opposition_alignment_signal: 0.10
+      independent_identity_signal: 0.95
+      boycott_signal: 0.20
+      nationalist_backlash_risk: 0.55
+      democratic_rights_salience: 0.85
+      kurdish_identity_salience: 0.85
+      peace_process_salience: 0.60
+      primary_strategy_state: independent_run
+      communication_mode: mobilizing
+    active_internal_personas:
+      - hatimogullari_tulay
+      - bakirhan_tuncer
+      - bestas_meral_danis   # DEM Istanbul co-candidate
+      - zeydan_abdullah      # Van candidacy
+      - onder_sirri_sureyya  # TBMM Deputy Speaker
+      - kisanak_gultan       # symbolic Ankara candidacy Jan 2024 (P6-only)
+      - buldan_pervin        # Imrali Delegation from Dec 2023
+      - sancar_mithat        # Imrali Delegation
+      - turk_ahmet           # dialogue-faction commentary
+      - demirtas_selahattin_invoked
+    event_trigger_personas:
+      - basak_demirtas       # Jan-Feb 2024 candidacy debate
+    transition_trigger: "March 31, 2024 local election; Van crisis Apr 2-3"
+    expected_voter_effect: "78 municipalities incl. Diyarbakir, Van, Mardin metros; 10 provincial-capital recovery; nationalist counter mobilised."
+    notes:
+      - "DEM brand established by Mar 2024 -> voter_recognition rises to 0.75."
+      - "Boycott_signal 0.20 is soft and contested; sensitivity-test at 0.05 (none)."
+      - "Independent_identity_signal peaks at 0.95 — defining feature of P6."
+
+  P7_2024_post_local_Van_crisis:
+    period_id: P7_2024_post_local_Van_crisis
+    start_date: "2024-04-01"
+    end_date: "2024-04-30"
+    current_party_label: DEM
+    active_leadership: [hatimogullari_tulay, bakirhan_tuncer]
+    symbolic_leader: demirtas_selahattin
+    symbolic_leader_status: imprisoned
+    symbolic_leader_note: "May 16 Kobane verdict (42 years) — POST-WINDOW event"
+    state:
+      legal_pressure_state: critical
+      closure_risk_level: 0.55
+      closure_risk_level_contested: true
+      trustee_threat_level: 0.90
+      organizational_capacity: 0.85
+      voter_recognition: 0.80
+      strategic_voting_signal: 0.05
+      opposition_alignment_signal: 0.45
+      independent_identity_signal: 0.90
+      boycott_signal: 0.05
+      nationalist_backlash_risk: 0.55
+      democratic_rights_salience: 0.90
+      kurdish_identity_salience: 0.90
+      peace_process_salience: 0.55
+      mandate_contestation_state: "mandate_won -> mandate_revoked -> protest_triggered -> YSK_reversal -> mandate_restored"
+      primary_strategy_state: hybrid
+      communication_mode: defensive
+    active_internal_personas:
+      - hatimogullari_tulay
+      - bakirhan_tuncer
+      - zeydan_abdullah          # peak
+      - sancar_mithat            # legal commentary
+      - bestas_meral_danis       # legal defence
+      - onder_sirri_sureyya      # parliamentary defender
+      - turk_ahmet               # dialogue-faction commentary
+    transition_trigger: "Window closes; subsequent kayyum wave is out-of-window"
+    expected_voter_effect: "Van victory defended via YSK 7-4 reversal; movement reaches a legitimacy peak immediately followed by structural pressure return."
+    post_window_notes:
+      - "Hakkari kayyum June 2024."
+      - "Multi-city kayyum wave November 2024."
+      - "Van Feb 2025 — full cascade primed."
+      - "Bahceli October 2024 Ocalan-to-parliament proposal — cross-pressure."
+      - "Demirtas May 16, 2024 Kobane verdict (42 years)."
+
+transitions:
+  # Discrete period transitions with their triggering events.
+  - from: P1_HDP_2019_local_window
+    to: P2_HDP_kayyum_covid_ecthr
+    trigger_event: "Aug 19, 2019 trustee/kayyum appointments"
+    trigger_date: "2019-08-19"
+  - from: P2_HDP_kayyum_covid_ecthr
+    to: P3_HDP_closure_alliance
+    trigger_event: "HDP closure indictment filed"
+    trigger_date: "2021-03-17"
+  - from: P3_HDP_closure_alliance
+    to: P4_YSP_2023_elections
+    trigger_event: "AYM rejects delay request; YSP decision"
+    trigger_date: "2023-03-24"
+  - from: P4_YSP_2023_elections
+    to: P5_HDP_suspend_HEDEP
+    trigger_event: "HDP 4th Extraordinary Congress; suspension"
+    trigger_date: "2023-08-27"
+  - from: P5_HDP_suspend_HEDEP
+    to: P6_HEDEP_to_DEM_2024_campaign
+    trigger_event: "HEDEP -> DEM brand change forced by Yargitay"
+    trigger_date: "2023-12-11"
+  - from: P6_HEDEP_to_DEM_2024_campaign
+    to: P7_2024_post_local_Van_crisis
+    trigger_event: "Mar 31 local election complete; Van mandate revoked Apr 2"
+    trigger_date: "2024-04-01"
+
+contested_claims:
+  - field: closure_risk_level (P7)
+    value: 0.55
+    note: "Contested: HDP case formally pending; DEM buffered. Expose as a tunable parameter band [0.45, 0.70]."
+  - field: boycott_signal (P6)
+    value: 0.20
+    note: "Soft and contested; sensitivity-test at 0.05 (none)."
+
+calibration_notes:
+  - "All 0-1 values are source-grounded simulation calibration parameters, not measurements."
+  - "Demirtas's imprisonment is an INITIAL CONDITION, not a 2019+ event."
+  - "Co-chair pairs (buldan_pervin, sancar_mithat) in P2-P4 and (hatimogullari_tulay, bakirhan_tuncer) in P5-P7 can be collapsed to a single leadership_signal in low-resolution runs."
+  - "DEM's 2024 strategy is structurally different from HDP's 2019: strategic_voting_signal drops from 0.90 (P1) to 0.05 (P6); independent_identity_signal rises from 0.75 to 0.95."
+  - "The two faction axes (weaken_AKP vs dialogue_first) operate from P5 onward; expose faction_weight as a tunable parameter."
+  - "The communication_profile of kurdish_movement_agent should be recomputed each tick as a weighted blend of the active_internal_personas of the current period (weights = simulation_effects.media_amplification x base_lock_in_effect, or as the engine prefers)."
