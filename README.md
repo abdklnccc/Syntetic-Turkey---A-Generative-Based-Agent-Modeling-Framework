@@ -1,231 +1,206 @@
-# Synthetic Turkey
+# Synthetic Turkey 🇹🇷
 
-Synthetic Turkey is a source-grounded LLM-agent simulation pipeline applied to the 2023 Turkish presidential election as a methodological test. It is not an election prediction model.
+**A source-grounded, multi-agent LLM simulation that models how 300 synthetic voters update their beliefs and vote across the 2023 Turkish presidential election.**
 
-## Repository Purpose
+<p align="left">
+  <img alt="Python" src="https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white">
+  <img alt="OpenAI" src="https://img.shields.io/badge/LLM-OpenAI%20gpt--4o--mini-412991?logo=openai&logoColor=white">
+  <img alt="Agents" src="https://img.shields.io/badge/Agents-300-2ea44f">
+  <img alt="Status" src="https://img.shields.io/badge/Status-Research%20prototype-blue">
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-lightgrey"></a>
+</p>
 
-This repository supports the Bachelor’s thesis and contains the simulation source code, configuration files, synthetic voter-agent files, saved baseline outputs, and reproducibility instructions needed to inspect the reported run or launch a new run.
+> ⚠️ **What this is and isn't.** This is a *methodological* study of generative agent-based modeling — can LLM agents, grounded in real demographic and event data, reproduce plausible electorate dynamics? It is **not** an election prediction tool, and the entire voter population is **synthetic** (no human-subject data).
 
-## Important Disclaimer
+---
 
-- The dataset is fully synthetic.
-- No human-subject data are included.
-- The saved output comes from the reported OpenAI baseline run.
-- Live reruns may not reproduce identical values because LLM outputs can vary and provider model snapshots may change.
-- This repository supports inspection and methodological reproducibility, not validated election prediction.
+## 🧠 The idea in one picture
 
-## Repository Structure
+Each synthetic voter is an LLM-driven agent with demographics, a worldview, an emotional state, a media diet, and a memory. Time advances tick by tick: real campaign events are turned into political broadcasts, each agent is shown only the messages its media diet would expose it to, and then it decides who to vote for. Beliefs and emotions are updated and stored, so every future decision depends on the agent's own history.
 
-- `voter_source_of_truth/`: voter archetype definitions and the 2018 baseline sampling profile.
-- `political_broadcast_config/`: political speaker, broadcast-frame, credibility, persona, and movement-state configuration. These files configure political messages; they are not autonomous politician LLM agents.
-- `events/`: raw 2018-2023 event timeline.
-- `souls/`: 300 generated synthetic voter-agent JSON files.
-- `db/`: saved belief and episodic memory archives.
-- `outputs/`: canonical saved baseline output tables and JSONL files.
-- `logs/`: JSONL run logs and metrics summaries.
-- `agents/`: citizen-agent and political-broadcast-agent logic.
-- `simulation/`: tick engine, election-safe timeline expansion, parallel execution, resume handling.
-- `llm/`: mock and OpenAI provider adapters.
-- `memory/`: affective, belief, and episodic memory stores.
-- `validation/`: output export and evaluation metrics.
-- `scripts/`: synthetic voter soul generation utility.
-- `loaders/`: JSON/YAML config loading and validation.
-- `docs/`: thesis notes, manuscript artifacts, and source literature.
+![System architecture: data sources → population construction → event simulation → agent reasoning → outputs, with a memory & belief-update feedback loop](assets/framework.jpg)
 
-## Data and Configuration
+---
 
-The repository includes 12 voter archetypes, 300 synthetic agents, a 2018 baseline sampling profile, 35 raw event ticks expanded to 37 processed ticks, controlled political broadcasts, a credibility matrix, memory and belief archives, and the output trajectory table.
+## ❓ Why I built it
 
-The core configuration files are:
+LLMs are increasingly used to "simulate" people for social-science research, but most demos are toy prompts with no grounding and no guards against leakage. I wanted to build a **realistic, reproducible pipeline** that takes the idea seriously as an engineering problem:
 
-- `voter_source_of_truth/synthetic_turkey_simulation.json`
-- `voter_source_of_truth/2018_baseline_sampling_profile.yaml`
-- `events/simulation_ticks.json`
-- `political_broadcast_config/political_agents.yaml`
-- `political_broadcast_config/political_personas.yaml`
-- `political_broadcast_config/politician_event_responses.yaml`
-- `political_broadcast_config/credibility_matrix.yaml`
-- `political_broadcast_config/movement_state_machine.yaml`
-- `actual_results_2023.yaml`
-- `config.py`
+- **Grounding** — every agent is built from real 2018 baseline demographics and a curated 2018–2023 event timeline, not invented from thin air.
+- **No hindsight cheating** — agents must never "know" the future. The engine enforces strict temporal **leakage prevention** so a voter on tick 5 cannot see events or outcomes from tick 30.
+- **Reproducibility** — fixed population seed, pinned model/temperature/token budget, and saved canonical outputs so results can be inspected without spending a cent on API calls.
+- **Evaluation** — the simulated vote distribution is scored against the real 2023 first-round and runoff results.
 
-## Reported Baseline Run
+---
 
-- Provider: OpenAI
-- Model: `gpt-4o-mini`
-- Temperature: `0.45`
-- Token budget: `900`
-- Population seed: `20230528`
-- Agents: `300`
-- Processed ticks: `37`
-- Expected analytical output: `11,100` rows
-- Primary output: `outputs/agent_trajectories.csv`
+## ✨ Highlights
 
-The committed `outputs/` files are the canonical saved baseline artifacts for this appendix. Post-hoc dashboards, notebooks, generated figures, and one-off analysis scripts were removed to keep the GitHub repository focused on the simulation pipeline and core saved outputs.
+| Area | What it demonstrates |
+|------|----------------------|
+| 🤖 **Multi-agent LLM system** | 300 stateful agents, each with belief / affective / episodic memory that persists and feeds back into reasoning. |
+| 🧩 **Prompt & context engineering** | Per-agent context assembly (current event, exposed broadcasts, beliefs, emotions, memory, social signals) → structured JSON decisions (vote intention, turnout probability, confidence). |
+| 🔒 **Temporal leakage prevention** | An "election-safe" timeline expander guarantees agents only ever see information available at the current tick. |
+| ⚡ **Production-minded engineering** | Concurrent agent execution within a tick, configurable workers, resume-from-log after interruption, and per-agent error isolation so one failed call can't sink a run. |
+| 🧪 **Deterministic mock provider** | A mock LLM backend lets the whole pipeline run offline for tests and smoke checks — no API key, no cost. |
+| 📊 **Evaluation pipeline** | Exports a panel dataset and aggregate tables, then scores the simulation against real 2023 results. |
+| 🔁 **Reproducibility** | Seeded population, pinned model config, and committed baseline outputs. |
 
-## Installation
+---
+
+## 🏗️ Architecture
+
+```
+Data sources ─► Population ─► Event simulation ─► Agent reasoning ─► Outputs
+ (archetypes,   (300 agent    (tick loop:          (LLM decision     (panel data,
+  2018 profile,  JSON souls)   build event →        per agent →       aggregates,
+  events,                      broadcasts →         vote + turnout    evaluation)
+  credibility)                 filter exposure →    + confidence)
+                               ask voter)                 │
+                                     ▲                     │
+                                     └──── memory & belief update ◄──┘
+```
+
+1. **Data sources** — voter archetypes, a 2018 baseline sampling profile, political actors, an event timeline, and a credibility matrix.
+2. **Population construction** — 300 synthetic "souls", each a JSON agent with demographics, archetype, baseline beliefs/emotions, media diet, and a 2018 memory seed.
+3. **Event simulation** — an event-driven tick loop builds the event, generates political broadcasts, filters exposure per agent's media diet, and asks each voter to decide.
+4. **Agent reasoning** — an LLM-based decision model consumes the agent's full context and returns a structured vote intention, turnout probability, and confidence.
+5. **Outputs & analysis** — population results, trend trajectories, and a distribution-aligned voter pool.
+6. **Memory & belief update** — beliefs and emotions are updated and episodic experiences stored, so future decisions depend on past ones.
+
+---
+
+## 🛠️ Tech stack
+
+- **Language:** Python 3.11
+- **LLM:** OpenAI `gpt-4o-mini` (pluggable provider layer; deterministic mock backend included)
+- **Data & analysis:** pandas, NumPy, matplotlib
+- **Config:** YAML + JSON, validated on load
+- **Concurrency:** thread-pool agent execution with resume + error isolation
+
+---
+
+## 📈 Reported baseline run
+
+| Parameter | Value |
+|-----------|-------|
+| Provider / model | OpenAI `gpt-4o-mini` |
+| Temperature | `0.45` |
+| Token budget | `900` |
+| Population seed | `20230528` |
+| Agents | `300` |
+| Processed ticks | `37` |
+| Output panel | `11,100` rows × `38` columns |
+| Primary artifact | `outputs/agent_trajectories.csv` |
+
+> A single full run costs roughly **$8–10** and takes **8–10 hours**, so this repo ships the **saved canonical outputs** — you can inspect every result below without an API key. Live reruns may differ: LLM completions are stochastic and provider model snapshots change over time.
+
+---
+
+## 🚀 Quickstart
+
+### 1. Install
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-On Windows PowerShell:
-
-```powershell
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-## API Configuration
-
-Copy the example environment file and add your own key:
+### 2. Inspect the saved results (no API key needed)
 
 ```bash
-cp .env.example .env
-```
-
-Then edit `.env`:
-
-```bash
-OPENAI_API_KEY=your_api_key_here
-```
-
-Never commit `.env`.
-
-## How to Inspect the Reported Results
-
-The saved thesis baseline can be inspected without rerunning OpenAI calls. The key saved file is `outputs/agent_trajectories.csv`.
-
-Verify the reported panel shape:
-
-```bash
+# Verify the panel shape: expect 38 columns and 11100 data rows
 awk -F, 'NR==1 {print NF}' outputs/agent_trajectories.csv
-awk -F, 'END {print NR-1}' outputs/agent_trajectories.csv
+awk -F, 'END {print NR-1}'  outputs/agent_trajectories.csv
 ```
 
-Expected values:
-
-- Columns: `38`
-- Data rows: `11100`
-
-Inspect the aggregate saved outputs directly:
+Then explore the aggregate outputs directly:
 
 - `outputs/aggregate_candidate_intention.csv`
 - `outputs/aggregate_party_preference.csv`
-- `outputs/evaluation_summary.json`
 - `outputs/first_round_vote_distribution.json`
 - `outputs/runoff_vote_distribution.json`
-- `outputs/broadcasts.jsonl`
-- `outputs/reflections.jsonl`
+- `outputs/evaluation_summary.json`
+- `outputs/broadcasts.jsonl`, `outputs/reflections.jsonl`
 
-These files do not require an OpenAI API key.
-
-## How to Rerun the Simulation
-
-First ensure the 300-agent baseline population exists or regenerate it:
+### 3. Run the offline smoke test (deterministic mock LLM)
 
 ```bash
-python3 scripts/generate_souls_from_config.py --population-profile baseline_2018_300
-```
-
-The default runtime paths are `outputs/`, `logs/`, `db/`, and `outputs/broadcast_cache/`. A full rerun can overwrite saved output and memory files if those defaults are used. For thesis-safe reruns, use separate directories:
-
-```bash
-mkdir -p outputs/reruns/openai_baseline/broadcast_cache
-mkdir -p logs/reruns/openai_baseline
-mkdir -p db_reruns/openai_baseline
-
-OUTPUTS_DIR=outputs/reruns/openai_baseline \
-BROADCAST_CACHE_DIR=outputs/reruns/openai_baseline/broadcast_cache \
-LOGS_DIR=logs/reruns/openai_baseline \
-DB_DIR=db_reruns/openai_baseline \
-NUM_AGENTS=300 \
-python3 run.py \
-  --provider openai \
-  --population-profile baseline_2018_300 \
-  --parallel-agents \
-  --max-workers 5 \
-  --continue-on-agent-error \
-  --output-dir outputs/reruns/openai_baseline
-```
-
-Useful mock-mode smoke test:
-
-```bash
-mkdir -p outputs/reruns/mock_smoke/broadcast_cache
-mkdir -p logs/reruns/mock_smoke
-mkdir -p db_reruns/mock_smoke
-
-OUTPUTS_DIR=outputs/reruns/mock_smoke \
-BROADCAST_CACHE_DIR=outputs/reruns/mock_smoke/broadcast_cache \
-LOGS_DIR=logs/reruns/mock_smoke \
-DB_DIR=db_reruns/mock_smoke \
 python3 run.py --mock --max-agents 5 --max-ticks 5 --output-dir outputs/reruns/mock_smoke
 ```
 
-Resume a compatible interrupted OpenAI run by adding the original log path:
+### 4. Run a full simulation (requires OpenAI key)
 
 ```bash
-OUTPUTS_DIR=outputs/reruns/openai_baseline \
-BROADCAST_CACHE_DIR=outputs/reruns/openai_baseline/broadcast_cache \
-LOGS_DIR=logs/reruns/openai_baseline \
-DB_DIR=db_reruns/openai_baseline \
-NUM_AGENTS=300 \
+cp .env.example .env          # then add OPENAI_API_KEY=...
+
+# Regenerate the 300-agent population if needed
+python3 scripts/generate_souls_from_config.py --population-profile baseline_2018_300
+
+# Run into separate directories so saved baseline artifacts stay intact
 python3 run.py \
   --provider openai \
   --population-profile baseline_2018_300 \
-  --parallel-agents \
-  --max-workers 5 \
+  --parallel-agents --max-workers 5 \
   --continue-on-agent-error \
-  --resume-from-log logs/reruns/openai_baseline/run_2023_YYYYMMDD_HHMMSS.jsonl \
   --output-dir outputs/reruns/openai_baseline
 ```
 
-`--continue-on-agent-error` records a low-confidence fallback row if an agent call fails after retries. `--parallel-agents` runs agents within a tick concurrently. `--max-workers` controls worker count.
+A run can be resumed after an interruption with `--resume-from-log <run_log.jsonl>`.
 
-## Expected Output
+---
 
-A successful 300-agent run with 37 processed ticks should produce:
+## 📂 Project structure
 
-- `outputs/agent_trajectories.csv`
-- `11,100` data rows
-- `outputs/aggregate_candidate_intention.csv`
-- `outputs/aggregate_party_preference.csv`
-- `outputs/reflections.jsonl`
-- `outputs/broadcasts.jsonl`
-- `outputs/evaluation_summary.json`
-- `outputs/first_round_vote_distribution.json`
-- `outputs/runoff_vote_distribution.json`
-- run logs under `logs/`
+```
+voter_source_of_truth/     Voter archetypes + 2018 baseline sampling profile
+political_broadcast_config/ Speakers, broadcast frames, credibility & persona config
+events/                    Raw 2018–2023 event timeline
+souls/                     300 generated synthetic voter-agent JSON files
+agents/                    Citizen-agent and political-broadcast-agent logic
+simulation/                Tick engine, leakage-safe timeline, parallelism, resume
+llm/                       Mock + OpenAI provider adapters
+memory/                    Affective, belief, and episodic memory stores
+social/                    Peer / social-context signals
+validation/                Output export + evaluation metrics
+loaders/                   JSON/YAML config loading and validation
+outputs/  logs/  db/       Saved baseline outputs, run logs, memory archives
+scripts/                   Synthetic voter-soul generation utility
+```
 
-If rerun directories are used, the same filenames are written under the selected output directory, while logs and memory files are written under the configured `LOGS_DIR` and `DB_DIR`.
+---
 
-## Using the Pipeline With Your Own Data
+## 🔬 Engineering decisions worth calling out
 
-To adapt the pipeline, create or modify:
+- **Leakage prevention as a first-class feature.** The hardest correctness problem in event-based LLM simulation is hindsight bias. The timeline expander is built so an agent's context window can only contain information available at its current tick.
+- **A pluggable provider layer.** Swapping the real OpenAI backend for a deterministic mock makes the pipeline testable and free to develop against — the same code path runs in CI-style smoke tests and in the full run.
+- **Resilience over a 10-hour job.** Per-agent error isolation records a low-confidence fallback instead of crashing, and `--resume-from-log` continues a partial run, so a single bad API call doesn't waste hours of compute.
+- **Reproducibility by construction.** A fixed population seed and pinned model config mean the population is regenerable and the run is documented end to end.
 
-1. Voter archetype configuration.
-2. Baseline sampling profile.
-3. Event timeline.
-4. Political broadcast configuration.
-5. Credibility matrix.
-6. Broadcast response frames.
-7. Optional movement/state-machine configuration.
-8. Output schema and downstream analysis code if needed.
+---
 
-At a high level, archetypes need numeric worldview, emotion, media, and behaviour vectors. The baseline profile must map population counts to archetypes. The event timeline must include dated events. Candidate keys must match the JSON schema. Party and runoff keys must remain consistent across configs, prompts, validators, memory stores, and output metrics.
+## 🔁 Reusing the pipeline for your own scenario
 
-## Reproducibility Notes
+The pipeline is data-driven. To model a different population or election, edit the configs rather than the code:
 
-Saved outputs reproduce the reported thesis baseline table and aggregate summaries in this repository. Live OpenAI reruns may differ because completions are stochastic and model snapshots can change. Repeated full runs would be needed to estimate run-to-run variance.
+1. Voter archetypes (numeric worldview, emotion, media, behavior vectors)
+2. Baseline sampling profile (population counts → archetypes)
+3. Event timeline (dated events)
+4. Political broadcast config + credibility matrix
+5. Candidate / party / runoff keys (must stay consistent across configs, prompts, validators, memory, and metrics)
 
-See `REPRODUCIBILITY.md` for a shorter verification checklist.
+See `REPRODUCIBILITY.md` for a short verification checklist.
 
-## Citation
+---
 
-If you use this repository, please cite:
+## 📌 Limitations
 
-Abdullah Kılınç, “Synthetic Turkey: A Source-Grounded Generative Agent-Based Simulation of the 2023 Turkish Presidential Election,” Bachelor’s thesis, Marmara University, 2026.
+- The population is fully synthetic and not a statistically validated sample of the real electorate.
+- A single run cannot characterize run-to-run variance; repeated runs would be needed for that.
+- This is a research prototype demonstrating a method, **not** a forecasting product.
+
+---
+
+## 📄 Citation
+
+Abdullah Kılınç, *“Synthetic Turkey: A Source-Grounded Generative Agent-Based Simulation of the 2023 Turkish Presidential Election,”* Bachelor’s thesis, Marmara University, 2026.
