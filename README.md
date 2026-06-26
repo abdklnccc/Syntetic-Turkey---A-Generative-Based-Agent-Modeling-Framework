@@ -24,12 +24,12 @@ Each synthetic voter is an LLM-driven agent with demographics, a worldview, an e
 
 ## ❓ Why I built it
 
-LLMs are increasingly used to "simulate" people for social-science research, but most demos are toy prompts with no grounding and no guards against leakage. I wanted to build a **realistic, reproducible pipeline** that takes the idea seriously as an engineering problem:
+LLMs are increasingly used to "simulate" people for research, but many demos are one-off prompts with no real data behind the agents. I wanted to treat it as an engineering problem: a grounded, reproducible pipeline rather than a single clever prompt.
 
-- **Grounding** — every agent is built from real 2018 baseline demographics and a curated 2018–2023 event timeline, not invented from thin air.
-- **No hindsight cheating** — agents must never "know" the future. The engine enforces strict temporal **leakage prevention** so a voter on tick 5 cannot see events or outcomes from tick 30.
-- **Reproducibility** — fixed population seed, pinned model/temperature/token budget, and saved canonical outputs so results can be inspected without spending a cent on API calls.
-- **Evaluation** — the simulated vote distribution is scored against the real 2023 first-round and runoff results.
+- **Grounded** — agents are built from real 2018 baseline demographics and a curated 2018–2023 event timeline, not invented on the spot.
+- **Time-aware** — events run in chronological order, and the two election ticks are split into a *decide* step and a separate *result-reveal* step so an outcome can't show up in the same tick an agent votes. (This reduces hindsight leakage — it doesn't fully eliminate it; see [Limitations](#-limitations).)
+- **Reproducible** — fixed population seed and pinned model/temperature/token budget, with saved canonical outputs you can inspect at zero API cost.
+- **Evaluated** — the simulated first-round and runoff vote distributions are scored against the real 2023 results.
 
 ---
 
@@ -39,8 +39,8 @@ LLMs are increasingly used to "simulate" people for social-science research, but
 |------|----------------------|
 | 🤖 **Multi-agent LLM system** | 300 stateful agents, each with belief / affective / episodic memory that persists and feeds back into reasoning. |
 | 🧩 **Prompt & context engineering** | Per-agent context assembly (current event, exposed broadcasts, beliefs, emotions, memory, social signals) → structured JSON decisions (vote intention, turnout probability, confidence). |
-| 🔒 **Temporal leakage prevention** | An "election-safe" timeline expander guarantees agents only ever see information available at the current tick. |
-| ⚡ **Production-minded engineering** | Concurrent agent execution within a tick, configurable workers, resume-from-log after interruption, and per-agent error isolation so one failed call can't sink a run. |
+| 🕓 **Time-aware event flow** | Events run in chronological order; election ticks are split into a *decide* step and a *result-reveal* step, and each agent prompt is pinned to the current date with a "no future knowledge" instruction. |
+| ⚡ **Robust long-running execution** | Concurrent agent execution within a tick, configurable workers, resume-from-log after interruption, and per-agent error isolation so one failed call doesn't sink a multi-hour run. |
 | 🧪 **Deterministic mock provider** | A mock LLM backend lets the whole pipeline run offline for tests and smoke checks — no API key, no cost. |
 | 📊 **Evaluation pipeline** | Exports a panel dataset and aggregate tables, then scores the simulation against real 2023 results. |
 | 🔁 **Reproducibility** | Seeded population, pinned model config, and committed baseline outputs. |
@@ -172,10 +172,10 @@ scripts/                   Synthetic voter-soul generation utility
 
 ## 🔬 Engineering decisions worth calling out
 
-- **Leakage prevention as a first-class feature.** The hardest correctness problem in event-based LLM simulation is hindsight bias. The timeline expander is built so an agent's context window can only contain information available at its current tick.
+- **Handling hindsight bias honestly.** The trickiest correctness issue in event-based LLM simulation is keeping agents from "knowing" the future. I tackle it with two concrete measures — processing events in order with the election result split into a separate reveal step, and a per-prompt instruction pinning each agent to the current date — while being upfront that a pretrained model may still carry outcome knowledge it was never explicitly given. The goal was to reduce leakage and document the boundary, not to claim it's solved.
 - **A pluggable provider layer.** Swapping the real OpenAI backend for a deterministic mock makes the pipeline testable and free to develop against — the same code path runs in CI-style smoke tests and in the full run.
 - **Resilience over a 10-hour job.** Per-agent error isolation records a low-confidence fallback instead of crashing, and `--resume-from-log` continues a partial run, so a single bad API call doesn't waste hours of compute.
-- **Reproducibility by construction.** A fixed population seed and pinned model config mean the population is regenerable and the run is documented end to end.
+- **Reproducible setup.** A fixed population seed and pinned model config mean the population is regenerable and the run is documented end to end.
 
 ---
 
@@ -196,6 +196,7 @@ See `REPRODUCIBILITY.md` for a short verification checklist.
 ## 📌 Limitations
 
 - The population is fully synthetic and not a statistically validated sample of the real electorate.
+- **Leakage is reduced, not eliminated.** The underlying model was trained on text that includes the real 2023 outcome, so the temporal-fence prompt and decide-then-reveal split are mitigations, not guarantees — a pretrained model can still draw on knowledge it was never explicitly given in-context.
 - A single run cannot characterize run-to-run variance; repeated runs would be needed for that.
 - This is a research prototype demonstrating a method, **not** a forecasting product.
 
